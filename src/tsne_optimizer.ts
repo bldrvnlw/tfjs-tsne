@@ -347,29 +347,42 @@ export class TSNEOptimizer {
                       `(${shape.numPoints},${this.numPoints})`);
     }
 
+    this.log('Create distribution params texture');
     // contains the beta and the sum of the gaussian weighted vector
     // used to compute the probability distributions
     const distributionParameters = gl_util.createAndConfigureTexture(
         this.gpgpu.gl, shape.pointsPerRow, shape.numRows, 2);
 
+    this.log('Create zeroed distribution tensor');
     // contains the per-point probability vectors
     const gaussianDistributions =
         tf.zeros([ shape.numRows, shape.pointsPerRow * shape.pixelsPerPoint ]);
 
     const perplexity = shape.pixelsPerPoint / 3;
     // Computation of the per-point probability vectors
+    this.gpgpu.enableAutomaticDebugValidation(true);
+    this.log('Computing distribution params');
     this.computeDistributionParameters(distributionParameters, shape,
                                        perplexity, knnGraph);
+    this.log('Computing Gaussian distn');
     this.computeGaussianDistributions(gaussianDistributions,
                                       distributionParameters, shape, knnGraph);
-    const gaussianDistributionsData = await gaussianDistributions.data();
+    this.log('Retrieve Gaussian distn');
+    let gaussianDistributionsData;
+    try {
+      gaussianDistributionsData = await gaussianDistributions.data();
+    } catch(e) {
+      this.log('Error: ', e.toString());
+    }
     this.log('Gaussian distributions', gaussianDistributions);
 
     // Contains the per-point probability vectors
     const knnIndices =
         tf.zeros([ shape.numRows, shape.pointsPerRow * shape.pixelsPerPoint ]);
     // Computation of the per-point probability vectors
+    this.log('Create copy indices program', knnIndices.shape);
     const copyIndicesProgram = knn_util.createCopyIndicesProgram(this.gpgpu);
+    this.log('Execute copy indices program', knnIndices.shape);
     knn_util.executeCopyIndicesProgram(
         this.gpgpu, copyIndicesProgram, knnGraph, shape,
         this.backend.getTexture(knnIndices.dataId));
@@ -794,20 +807,31 @@ export class TSNEOptimizer {
                                         shape: RearrangedData,
                                         perplexity: number,
                                         knnGraph: WebGLTexture) {
-    tsne_util.executeDistributionParametersComputationProgram(
-        this.gpgpu, this.distributionParameterssComputationProgram, knnGraph,
-        shape.numPoints, shape.pixelsPerPoint, shape.pointsPerRow,
-        shape.numRows, perplexity, distributionParameters);
+    try {
+      tsne_util.executeDistributionParametersComputationProgram(
+          this.gpgpu, this.distributionParameterssComputationProgram, knnGraph,
+          shape.numPoints, shape.pixelsPerPoint, shape.pointsPerRow,
+          shape.numRows, perplexity, distributionParameters);
+    } catch(e) {
+      console.log('Error in executeDistributionParametersComputationProgram' +
+        e.toString());
+    }
   }
 
   private computeGaussianDistributions(distributions: tf.Tensor,
                                        distributionParameters: WebGLTexture,
                                        shape: RearrangedData,
                                        knnGraph: WebGLTexture) {
-    tsne_util.executeGaussiaDistributionsFromDistancesProgram(
+    try {
+      const distTexture = this.backend.getTexture(distributions.dataId);
+      tsne_util.executeGaussiaDistributionsFromDistancesProgram(
         this.gpgpu, this.gaussiaDistributionsFromDistancesProgram, knnGraph,
         distributionParameters, shape.numPoints, shape.pixelsPerPoint,
         shape.pointsPerRow, shape.numRows,
-        this.backend.getTexture(distributions.dataId));
+        distTexture);
+    } catch(e) {
+      console.log('Error in executeGaussiaDistributionsFromDistancesProgram' +
+        e.toString());
+    }
   }
 }

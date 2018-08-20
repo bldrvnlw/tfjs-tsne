@@ -158,7 +158,7 @@ export class TSNE {
         this.packedData.texture, this.packedData.shape, this.numPoints,
         this.numDimensions, this.numNeighbors, this.verbose);
 
-    this.optimizer = new TSNEOptimizer(this.numPoints, false);
+    this.optimizer = new TSNEOptimizer(this.numPoints, this.verbose);
     const exaggerationPolyline = [
       {iteration: exaggerationIter, value: exaggeration},
       {iteration: exaggerationIter + exaggerationDecayIter, value: 1}
@@ -328,6 +328,9 @@ export class TSNE {
     await this.optimizer.initializeNeighborsFromKNNTexture(
         this.knnEstimator.knnShape, this.knnEstimator.knn());
 
+    if (this.verbose) {
+      console.log(`Initialized probabilities from kNN Texture`);
+    }
     this.probabilitiesInitialized = true;
   }
 }

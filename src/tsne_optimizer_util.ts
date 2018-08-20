@@ -703,40 +703,45 @@ export function executeDistributionParametersComputationProgram(
     numPoints: number, numNeighs: number, pntsPerRow: number, numRows: number,
     perplexity: number, targetTex?: WebGLTexture) {
   const gl = gpgpu.gl;
-  if (targetTex != null) {
-    gpgpu.setOutputMatrixTexture(targetTex, numRows, pntsPerRow);
-  } else {
-    tf.webgl.webgl_util.bindCanvasToFramebuffer(gpgpu.gl);
+  try {
+    if (targetTex != null) {
+      gpgpu.setOutputMatrixTexture(targetTex, numRows, pntsPerRow);
+    } else {
+      tf.webgl.webgl_util.bindCanvasToFramebuffer(gpgpu.gl);
+    }
+
+    gpgpu.setProgram(program);
+
+    const knnGraphLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'knn_graph_tex');
+    gpgpu.setInputMatrixTexture(knnGraph, knnGraphLoc, 0);
+
+    const numRowsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'num_rows');
+    gl.uniform1f(numRowsLoc, numRows);
+
+    const numPointsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'num_points');
+    gl.uniform1f(numPointsLoc, numPoints);
+
+    const pntsPerRowLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'points_per_row');
+    gl.uniform1f(pntsPerRowLoc, pntsPerRow);
+
+    const numNeighsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'num_neighs');
+    gl.uniform1f(numNeighsLoc, numNeighs);
+
+    const perplexityLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'perplexity');
+    // TODO PASS AS A PARAMETER
+    gl.uniform1f(perplexityLoc, perplexity);
+
+    gpgpu.executeProgram();
+  } catch(e) {
+    console.log('Error in executeDistributionParametersComputationProgram' +
+      e.toString());
   }
-
-  gpgpu.setProgram(program);
-
-  const knnGraphLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'knn_graph_tex');
-  gpgpu.setInputMatrixTexture(knnGraph, knnGraphLoc, 0);
-
-  const numRowsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'num_rows');
-  gl.uniform1f(numRowsLoc, numRows);
-
-  const numPointsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'num_points');
-  gl.uniform1f(numPointsLoc, numPoints);
-
-  const pntsPerRowLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'points_per_row');
-  gl.uniform1f(pntsPerRowLoc, pntsPerRow);
-
-  const numNeighsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'num_neighs');
-  gl.uniform1f(numNeighsLoc, numNeighs);
-
-  const perplexityLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'perplexity');
-  // TODO PASS AS A PARAMETER
-  gl.uniform1f(perplexityLoc, perplexity);
-
-  gpgpu.executeProgram();
 }
 
 ///////////////////////////////////////////////////////////
@@ -794,37 +799,44 @@ export function executeGaussiaDistributionsFromDistancesProgram(
     parameters: WebGLTexture, numPoints: number, numNeighs: number,
     pntsPerRow: number, numRows: number, targetTex?: WebGLTexture) {
   const gl = gpgpu.gl;
-  if (targetTex != null) {
-    gpgpu.setOutputMatrixTexture(targetTex, numRows, pntsPerRow * numNeighs);
-  } else {
-    tf.webgl.webgl_util.bindCanvasToFramebuffer(gpgpu.gl);
+  try {
+    gpgpu.enableAutomaticDebugValidation(true);
+    if (targetTex != null) {
+      gpgpu.setOutputMatrixTexture(targetTex, numRows, pntsPerRow * numNeighs);
+    } else {
+      tf.webgl.webgl_util.bindCanvasToFramebuffer(gpgpu.gl);
+    }
+
+    gpgpu.setProgram(program);
+
+    const knnGraphLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'knn_graph_tex');
+    gpgpu.setInputMatrixTexture(knnGraph, knnGraphLoc, 0);
+
+    const parametersLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'parameters_tex');
+    gpgpu.setInputMatrixTexture(parameters, parametersLoc, 1);
+
+    const numRowsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'num_rows');
+    gl.uniform1f(numRowsLoc, numRows);
+
+    const numPointsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'num_points');
+    gl.uniform1f(numPointsLoc, numPoints);
+
+    const pntsPerRowLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'points_per_row');
+    gl.uniform1f(pntsPerRowLoc, pntsPerRow);
+
+    const numNeighsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
+        gl, program, 'num_neighs');
+    gl.uniform1f(numNeighsLoc, numNeighs);
+
+    console.log('Execute Gaussion Dist from Distances');
+    gpgpu.executeProgram();
+  } catch(e) {
+    console.log('Error executing Gaussian Dist From Distances Program ' +
+      e.toString());
   }
-
-  gpgpu.setProgram(program);
-
-  const knnGraphLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'knn_graph_tex');
-  gpgpu.setInputMatrixTexture(knnGraph, knnGraphLoc, 0);
-
-  const parametersLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'parameters_tex');
-  gpgpu.setInputMatrixTexture(parameters, parametersLoc, 1);
-
-  const numRowsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'num_rows');
-  gl.uniform1f(numRowsLoc, numRows);
-
-  const numPointsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'num_points');
-  gl.uniform1f(numPointsLoc, numPoints);
-
-  const pntsPerRowLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'points_per_row');
-  gl.uniform1f(pntsPerRowLoc, pntsPerRow);
-
-  const numNeighsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(
-      gl, program, 'num_neighs');
-  gl.uniform1f(numNeighsLoc, numNeighs);
-
-  gpgpu.executeProgram();
 }
