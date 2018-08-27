@@ -270,6 +270,23 @@ export class KNNEstimator {
     });
   }
 
+  /**
+   * This forces the CPU and GPU to sync (at least I think so...)
+   * Tried gl.finish() etc but they made no difference perhaps the new WbGL2
+   * fenceSync would work?
+   */
+  forceSync() {
+      // neither this.gpgpu.gl.flush() pr finish() work;
+      const mat0 = this.downloadTextureToMatrix(this.knnTexture0);
+      console.log(`Length of knn mat is ${mat0.length}`);
+  }
+
+  private downloadTextureToMatrix(texture: WebGLTexture): Float32Array {
+      return this.gpgpu.downloadMatrixFromTexture(texture,
+          this.knnDataShape.numRows,
+          this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
+  }
+
   private iterateGPU(dataTexture: WebGLTexture, _iteration: number,
                      startingKNNTexture: WebGLTexture,
                      targetTexture?: WebGLTexture) {

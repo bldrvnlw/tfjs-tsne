@@ -304,6 +304,15 @@ export class TSNEOptimizer {
     this.probNeighIdTexture = neighIds;
   }
 
+  private downloadTensor(tensor: tf.Tensor,
+                         numRows: number,
+                         pointsPerRow: number): Float32Array {
+      const texture = this.backend.getTexture(tensor.dataId);
+      return this.gpgpu.downloadMatrixFromTexture(texture,
+          pointsPerRow,
+          numRows);
+  }
+
   async initializeNeighborsFromKNNGraph(numPoints: number, numNeighbors: number,
                                         distances: Float32Array,
                                         indices: Uint32Array): Promise<void> {
@@ -347,10 +356,11 @@ export class TSNEOptimizer {
                       `(${shape.numPoints},${this.numPoints})`);
     }
 
-    this.log('Create distribution params texture');
+    this.log(`Create distribution params texture: 
+        ${shape.pointsPerRow} x ${shape.numRows}`);
     // contains the beta and the sum of the gaussian weighted vector
     // used to compute the probability distributions
-    const distributionParameters = gl_util.createAndConfigureTexture(
+    const distParamTexture = gl_util.createAndConfigureTexture(
         this.gpgpu.gl, shape.pointsPerRow, shape.numRows, 2);
 
     this.log('Create zeroed distribution tensor');
@@ -362,12 +372,20 @@ export class TSNEOptimizer {
     // Computation of the per-point probability vectors
     this.gpgpu.enableAutomaticDebugValidation(true);
     this.log('Computing distribution params');
-    this.computeDistributionParameters(distributionParameters, shape,
+
+    this.computeDistributionParameters(distParamTexture, shape,
                                        perplexity, knnGraph);
+
     this.log('Computing Gaussian distn');
+
     this.computeGaussianDistributions(gaussianDistributions,
-                                      distributionParameters, shape, knnGraph);
+        distParamTexture, shape, knnGraph);
     this.log('Retrieve Gaussian distn');
+    const gaussianDistArray: Float32Array =
+        this.downloadTensor(gaussianDistributions,
+            shape.pointsPerRow,
+            shape.numRows);
+    console.log(`gaussian length: ${gaussianDistArray.length}`);
     let gaussianDistributionsData;
     try {
       gaussianDistributionsData = await gaussianDistributions.data();
@@ -452,7 +470,6 @@ export class TSNEOptimizer {
       this.probOffsetTexture = gl_util.createAndConfigureTexture(
           this.gpgpu.gl, this.pointsPerRow, this.numRows, 3, offsets);
     }
-
     // Probabilities && Indices
     {
       const probabilities =
@@ -478,18 +495,16 @@ export class TSNEOptimizer {
           probabilities[symMatrixIndirectId] = probability;
           neighIds[symMatrixDirectId] = pointId;
           neighIds[symMatrixIndirectId] = i;
-
           ++assignedNeighborCounter[pointId];
         }
       }
 
-      this.log('Probabilities', probabilities);
-      this.log('Neighbors', neighIds);
+      //this.log('Probabilities', probabilities);
+      //this.log('Neighbors', neighIds);
 
       this.probTexture = gl_util.createAndConfigureTexture(
           this.gpgpu.gl, this.numNeighPerRow, this.numNeighPerRow, 1,
           probabilities);
-
       this.probNeighIdTexture = gl_util.createAndConfigureTexture(
           this.gpgpu.gl, this.numNeighPerRow, this.numNeighPerRow, 1, neighIds);
     }

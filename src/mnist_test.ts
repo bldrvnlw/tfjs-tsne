@@ -102,7 +102,8 @@ async function loadMnist() {
 describe('TSNE loading MNIST', () => {
 
   it('works', async (done) => {
-
+    const plotCtx = initCanvas();
+    await sleep(1);
     let dataSet = await loadMnist();
     const allMnistTensor = tf.tensor(dataSet as Float32Array).
       reshape([65000, 784]);
@@ -113,15 +114,15 @@ describe('TSNE loading MNIST', () => {
     // subset and downsample the images
     // Chrome fails >= 19000 , 10, 10,
     // Firefox works up to 60000
-    const numberData = 18000;
+    const numberData = 21000;
     const subTensor = subsampleTensorImages(shuffledValue,
       28,
       28,
-      10,
-      10,
+      14,
+      14,
       numberData);
 
-    console.log(`calculati0ng on: ${subTensor.shape}`);
+    console.log(`calculating on: ${subTensor.shape}`);
 
     const testOpt = tf_tsne.tsne(subTensor, {
       perplexity : 30,
@@ -133,13 +134,10 @@ describe('TSNE loading MNIST', () => {
     for(let i=0; i<knnIterations;
         i+=(50 < knnIterations-i)?knnIterations-i:50) {
       await testOpt.iterateKnn((50 < knnIterations-i)?knnIterations-i:50);
-      await sleep(1);
+      await sleep(10);
     }
 
     // get the image data and access the data buffer to overwrite
-    const plotCtx = initCanvas();
-    await sleep(1);
-
     for(let i=0; i<1000; i+=1) {
       await testOpt.iterate(1);
       const coordData = await testOpt.coordinates().data();
