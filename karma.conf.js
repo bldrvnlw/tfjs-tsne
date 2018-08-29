@@ -21,25 +21,20 @@
  */
 module.exports = function(config) {
   config.set({
-    basePath: '.',
     frameworks: ['jasmine', 'karma-typescript'],
     files: [
-      './src/*.ts',  // *.tsx for React Jsx
-      {pattern: './images/*.png', watched: false, included: false, served: true, nocache: false}
+      './src/*.ts'  // *.tsx for React Jsx
     ],
-    proxies: {
-      "/images/": "/base/images/"
-    },
     preprocessors: {
       '**/*.ts': 'karma-typescript'  // *.tsx for React Jsx
     },
     reporters: ['progress', 'karma-typescript'],
-    browsers: ['Chrome'], // Chrome, Chromium or Firefox
+    browsers: ['Chrome'],
     karmaTypescriptConfig: {
       tsconfig: './tsconfig-es2017.json',
       compilerOptions: {module: 'commonjs', sourceMap: true}
     },
-    browserNoActivityTimeout: 3000000,
+    browserNoActivityTimeout: 30000,
     client: {args: ['--grep', config.grep || '']}
   });
 };

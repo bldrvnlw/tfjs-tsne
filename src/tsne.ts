@@ -186,6 +186,7 @@ export class TSNE {
       this.optimizer.eta = minimumEta +
           (maximumEta - minimumEta) * (this.numPoints / numPointsMaximumEta);
     }
+    this.initialized = true;
   }
 
   /**
@@ -220,15 +221,17 @@ export class TSNE {
     }
     this.probabilitiesInitialized = false;
     for (let iter = 0; iter < iterations; ++iter) {
-      this.knnEstimator.iterateBruteForce();
-      //this.knnEstimator.iterateKNNDescent();
+      //this.knnEstimator.iterateBruteForce();
+      //const syncCounter = 15;
+      this.knnEstimator.iterateKNNDescent();
+      const syncCounter = 10;
       //this.knnEstimator.iterateRandomSampling();
       if ((this.knnEstimator.iteration % 100) === 0 && this.verbose) {
         console.log(`Iteration KNN:\t${this.knnEstimator.iteration}`);
       }
-      if (this.knnEstimator.iteration % 20 === 0) {
+      if (this.knnEstimator.iteration % syncCounter === 0) {
         // To ensure stability (in Chrome)
-        this.knnEstimator.forceSync();
+        this.knnEstimator.forceFlush();
       }
     }
   }
@@ -321,11 +324,6 @@ export class TSNE {
     });
     return (await sum.data())[0];
   }
-
-  //private async getKnnArray() : Float32Array {
-  //    const arr = await backend.read(this.knnEstimator);
-  //    return arr;
-  //}
 
   /**
    * Initialize the joint probability distribution from the computed KNN graph.
