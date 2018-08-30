@@ -27,6 +27,9 @@ function sleep(time) {
   return new Promise(resolve => setTimeout(resolve, time));
 }
 
+const MNIST_IMAGES_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png';
+const MNIST_LABELS_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8';
+
 const plotIndex = new Uint16Array(imgSize*imgSize);
 // Colors for digits 0-9
 const c0 = 0xFF0000;
@@ -165,7 +168,8 @@ function oneHotToIndex(labels) {
  * @returns {Promise<*>}
  */
 async function loadMnist() {
-  const resp = await fetch('../../images/mnist_images.png');
+  //const resp = await fetch('../../images/mnist_images.png');
+  const resp = await fetch(MNIST_IMAGES_PATH);
   const imgArray = await resp.arrayBuffer();
   const reader = new pngReader();
   return new Promise ((resolve) => {
@@ -186,7 +190,8 @@ async function loadMnist() {
  * @returns {Promise<ArrayBuffer>}
  */
 async function loadMnistLabels() {
-  const resp = await fetch('../../images/mnist_labels_uint8.bin');
+  //const resp = await fetch('../../images/mnist_labels_uint8.bin');
+  const resp = await fetch(MNIST_LABELS_PATH);
   return resp.arrayBuffer();
 }
 
