@@ -273,14 +273,11 @@ export class TSNEOptimizer {
 
     // Previous gradients are set to zero
     this.gradient = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
-
-    this.embedding = tf.tidy(() => {
-      const randomData =
-          tf.randomUniform([ this.numRows, this.pointsPerRow * 2 ]);
-      const embedding = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
-      this.initializeEmbeddingPositions(embedding, randomData);
-      return embedding;
-    });
+    const randomData =
+      tf.randomUniform([ this.numRows, this.pointsPerRow * 2 ]);
+    this.embedding  = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
+    this.initializeEmbeddingPositions(this.embedding, randomData);
+    tf.dispose(randomData);
 
     // Setting embedding boundaries
     const maxEmbeddingAbsCoordinate = 3;

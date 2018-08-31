@@ -231,7 +231,7 @@ export class TSNE {
       }
       if (this.knnEstimator.iteration % syncCounter === 0) {
         // To ensure stability (in Chrome)
-        this.knnEstimator.forceFlush();
+        await this.knnEstimator.forceFlush();
       }
     }
   }
