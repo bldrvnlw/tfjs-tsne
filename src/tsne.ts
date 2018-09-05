@@ -279,7 +279,7 @@ export class TSNE {
         // The embedding is normalized in the 0-1 range while preserving the
         // aspect ratio
         const range = max.sub(min);
-        const maxRange = tf.max(range);
+        const maxRange = tf.max(tf.tensor(range.dataSync()));
         const offset = tf.tidy(() => {
           if (rangeX < rangeY) {
             return tf.tensor2d([(rangeY - rangeX) / 2, 0], [1, 2]);

@@ -273,11 +273,14 @@ export class TSNEOptimizer {
 
     // Previous gradients are set to zero
     this.gradient = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
-    const randomData =
-      tf.randomUniform([ this.numRows, this.pointsPerRow * 2 ]);
-    this.embedding  = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
-    this.initializeEmbeddingPositions(this.embedding, randomData);
-    tf.dispose(randomData);
+
+    this.embedding = tf.tidy(() => {
+      const randomData =
+          tf.randomUniform([ this.numRows, this.pointsPerRow * 2 ]);
+      const embedding = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
+      this.initializeEmbeddingPositions(embedding, randomData);
+      return embedding;
+    });
 
     // Setting embedding boundaries
     const maxEmbeddingAbsCoordinate = 3;
@@ -299,15 +302,6 @@ export class TSNEOptimizer {
     this.probOffsetTexture = offsets;
     this.probTexture = probabilities;
     this.probNeighIdTexture = neighIds;
-  }
-
-  private downloadTensor(tensor: tf.Tensor,
-                         numRows: number,
-                         pointsPerRow: number): Float32Array {
-      const texture = this.backend.getTexture(tensor.dataId);
-      return this.gpgpu.downloadMatrixFromTexture(texture,
-          pointsPerRow,
-          numRows);
   }
 
   async initializeNeighborsFromKNNGraph(numPoints: number, numNeighbors: number,
@@ -378,18 +372,7 @@ export class TSNEOptimizer {
     this.computeGaussianDistributions(gaussianDistributions,
         distParamTexture, shape, knnGraph);
     this.log('Retrieve Gaussian distn');
-    const gaussianDistArray: Float32Array =
-        this.downloadTensor(gaussianDistributions,
-            shape.pointsPerRow,
-            shape.numRows);
-    console.log(`gaussian length: ${gaussianDistArray.length}`);
-    let gaussianDistributionsData;
-    try {
-      gaussianDistributionsData = await gaussianDistributions.data();
-    } catch(e) {
-      this.log('Error: ', e.toString());
-    }
-    this.log('Gaussian distributions', gaussianDistributions);
+    const gaussianDistributionsData = gaussianDistributions.dataSync();
 
     // Contains the per-point probability vectors
     const knnIndices =
@@ -403,9 +386,6 @@ export class TSNEOptimizer {
         this.backend.getTexture(knnIndices.dataId));
     const knnIndicesData = await knnIndices.data();
     this.log('knn Indices', knnIndices);
-
-    // console.log(knnIndicesData);
-    // console.log(gaussianDistributionsData);
 
     // Neighborhood indices
     const asymNeighIds =
@@ -574,14 +554,16 @@ export class TSNEOptimizer {
       // 2) compute interpolation of the scalar fields
       const interpQ = tf.zeros([ this.numRows, this.pointsPerRow ]);
       const interpXY = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
+      // @ts-ignore
       this.computeInterpolatedQ(interpQ);
+      // @ts-ignore
       this.computeInterpolatedXY(interpXY);
 
       // 3) compute the normalization term
       const normQ = interpQ.sum();
 
       // 4) compute the repulsive forces
-      const repulsiveForces = interpXY.div(normQ);
+      const repulsiveForces = interpXY.div(normQ.dataSync());
 
       // 5) compute the attracive forces
       const attractiveForces =
@@ -602,7 +584,9 @@ export class TSNEOptimizer {
 
     this.embedding = tf.tidy(() => {
       // 7) update the embedding
-      const embedding = this.embedding.add(this.gradient);
+      const embedding = tf.add(
+        tf.tensor(this.embedding.dataSync(), this.embedding.shape),
+        tf.tensor(this.gradient.dataSync(), this.gradient.shape));
       this.embedding.dispose();
       return embedding;
     });
