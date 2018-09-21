@@ -24,7 +24,7 @@ export declare class TSNE {
     private probabilitiesInitialized;
     private knnMode;
     constructor(data: tf.Tensor, config?: TSNEConfiguration);
-    private initialize();
+    private initialize;
     compute(iterations?: number): Promise<void>;
     iterateKnn(iterations?: number): Promise<void>;
     iterate(iterations?: number): Promise<void>;
@@ -32,5 +32,5 @@ export declare class TSNE {
     coordinates(normalized?: boolean): tf.Tensor;
     coordsArray(normalized?: boolean): Promise<number[][]>;
     knnTotalDistance(): Promise<number>;
-    private initializeProbabilities();
+    private initializeProbabilities;
 }

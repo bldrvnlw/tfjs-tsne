@@ -563,7 +563,8 @@ export class TSNEOptimizer {
       const normQ = interpQ.sum();
 
       // 4) compute the repulsive forces
-      const repulsiveForces = interpXY.div(normQ.dataSync());
+      const repulsiveForces = interpXY.div(tf.tensor(
+        normQ.dataSync(), normQ.shape));
 
       // 5) compute the attracive forces
       const attractiveForces =

@@ -23,9 +23,9 @@ export declare class KNNEstimator {
     readonly iteration: number;
     readonly pointsPerIteration: number;
     constructor(dataTexture: WebGLTexture, dataFormat: RearrangedData | CustomDataDefinition, numPoints: number, numDimensions: number, numNeighs: number, verbose?: boolean);
-    private log(str, obj?);
-    private initializeTextures();
-    private initilizeCustomWebGLPrograms(distanceComputationSource);
+    private log;
+    private initializeTextures;
+    private initilizeCustomWebGLPrograms;
     iterateBruteForce(): void;
     iterateRandomSampling(): void;
     iterateKNNDescent(): void;
@@ -33,8 +33,8 @@ export declare class KNNEstimator {
     distancesTensor(): tf.Tensor;
     indicesTensor(): tf.Tensor;
     forceFlush(): void;
-    private downloadTextureToMatrix(texture);
-    private iterateGPU(dataTexture, _iteration, startingKNNTexture, targetTexture?);
-    private iterateRandomSamplingGPU(dataTexture, _iteration, startingKNNTexture, targetTexture?);
-    private iterateKNNDescentGPU(dataTexture, _iteration, startingKNNTexture, targetTexture?);
+    private downloadTextureToMatrix;
+    private iterateGPU;
+    private iterateRandomSamplingGPU;
+    private iterateKNNDescentGPU;
 }

@@ -197,7 +197,7 @@ var KNNEstimator = (function () {
         console.log("Flush: " + mat0.length / mat0.length);
     };
     KNNEstimator.prototype.downloadTextureToMatrix = function (texture) {
-        return this.gpgpu.downloadMatrixFromTexture(texture, this.knnDataShape.numRows, this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
+        return this.gpgpu.downloadFloat32MatrixFromOutputTexture(texture, this.knnDataShape.numRows, this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
     };
     KNNEstimator.prototype.iterateGPU = function (dataTexture, _iteration, startingKNNTexture, targetTexture) {
         knn_util.executeKNNProgram(this.gpgpu, this.bruteForceKNNProgram, dataTexture, startingKNNTexture, _iteration, this.knnDataShape, this.linesVertexIdBuffer, targetTexture);

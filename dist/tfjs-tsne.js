@@ -389,7 +389,7 @@
           console.log("Flush: " + mat0.length / mat0.length);
       };
       KNNEstimator.prototype.downloadTextureToMatrix = function (texture) {
-          return this.gpgpu.downloadMatrixFromTexture(texture, this.knnDataShape.numRows, this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
+          return this.gpgpu.downloadFloat32MatrixFromOutputTexture(texture, this.knnDataShape.numRows, this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
       };
       KNNEstimator.prototype.iterateGPU = function (dataTexture, _iteration, startingKNNTexture, targetTexture) {
           executeKNNProgram(this.gpgpu, this.bruteForceKNNProgram, dataTexture, startingKNNTexture, _iteration, this.knnDataShape, this.linesVertexIdBuffer, targetTexture);
@@ -951,6 +951,7 @@
           this.gpgpu.gl.deleteProgram(this.gaussiaDistributionsFromDistancesProgram);
       };
       TSNEOptimizer.prototype.initializeEmbedding = function () {
+          var _this = this;
           if (this.embedding != null) {
               this.embedding.dispose();
           }
@@ -958,10 +959,12 @@
               this.gradient.dispose();
           }
           this.gradient = tf.zeros([this.numRows, this.pointsPerRow * 2]);
-          var randomData = tf.randomUniform([this.numRows, this.pointsPerRow * 2]);
-          this.embedding = tf.zeros([this.numRows, this.pointsPerRow * 2]);
-          this.initializeEmbeddingPositions(this.embedding, randomData);
-          tf.dispose(randomData);
+          this.embedding = tf.tidy(function () {
+              var randomData = tf.randomUniform([_this.numRows, _this.pointsPerRow * 2]);
+              var embedding = tf.zeros([_this.numRows, _this.pointsPerRow * 2]);
+              _this.initializeEmbeddingPositions(embedding, randomData);
+              return embedding;
+          });
           var maxEmbeddingAbsCoordinate = 3;
           this._minX = -maxEmbeddingAbsCoordinate;
           this._minY = -maxEmbeddingAbsCoordinate;
@@ -978,10 +981,6 @@
           this.probOffsetTexture = offsets;
           this.probTexture = probabilities;
           this.probNeighIdTexture = neighIds;
-      };
-      TSNEOptimizer.prototype.downloadTensor = function (tensor, numRows, pointsPerRow) {
-          var texture = this.backend.getTexture(tensor.dataId);
-          return this.gpgpu.downloadMatrixFromTexture(texture, pointsPerRow, numRows);
       };
       TSNEOptimizer.prototype.initializeNeighborsFromKNNGraph = function (numPoints, numNeighbors, distances, indices) {
           return __awaiter(this, void 0, void 0, function () {
@@ -1012,7 +1011,7 @@
       };
       TSNEOptimizer.prototype.initializeNeighborsFromKNNTexture = function (shape, knnGraph) {
           return __awaiter(this, void 0, void 0, function () {
-              var distParamTexture, gaussianDistributions, perplexity, gaussianDistArray, gaussianDistributionsData, e_1, knnIndices, copyIndicesProgram, knnIndicesData, asymNeighIds, i, d, linearId, neighborCounter, neighborLinearOffset, i, i, check, maxValue, maxId, i, offsets, pointOffset, i, totalNeighbors, probabilities, neighIds, assignedNeighborCounter, i, n, linearId, pointId, probability, symMatrixDirectId, symMatrixIndirectId;
+              var distParamTexture, gaussianDistributions, perplexity, gaussianDistributionsData, knnIndices, copyIndicesProgram, knnIndicesData, asymNeighIds, i, d, linearId, neighborCounter, neighborLinearOffset, i, i, check, maxValue, maxId, i, offsets, pointOffset, i, totalNeighbors, probabilities, neighIds, assignedNeighborCounter, i, n, linearId, pointId, probability, symMatrixDirectId, symMatrixIndirectId;
               return __generator(this, function (_a) {
                   switch (_a.label) {
                       case 0:
@@ -1032,28 +1031,14 @@
                           this.log('Computing Gaussian distn');
                           this.computeGaussianDistributions(gaussianDistributions, distParamTexture, shape, knnGraph);
                           this.log('Retrieve Gaussian distn');
-                          gaussianDistArray = this.downloadTensor(gaussianDistributions, shape.pointsPerRow, shape.numRows);
-                          console.log("gaussian length: " + gaussianDistArray.length);
-                          _a.label = 1;
-                      case 1:
-                          _a.trys.push([1, 3, , 4]);
-                          return [4, gaussianDistributions.data()];
-                      case 2:
-                          gaussianDistributionsData = _a.sent();
-                          return [3, 4];
-                      case 3:
-                          e_1 = _a.sent();
-                          this.log('Error: ', e_1.toString());
-                          return [3, 4];
-                      case 4:
-                          this.log('Gaussian distributions', gaussianDistributions);
+                          gaussianDistributionsData = gaussianDistributions.dataSync();
                           knnIndices = tf.zeros([shape.numRows, shape.pointsPerRow * shape.pixelsPerPoint]);
                           this.log('Create copy indices program', knnIndices.shape);
                           copyIndicesProgram = createCopyIndicesProgram(this.gpgpu);
                           this.log('Execute copy indices program', knnIndices.shape);
                           executeCopyIndicesProgram(this.gpgpu, copyIndicesProgram, knnGraph, shape, this.backend.getTexture(knnIndices.dataId));
                           return [4, knnIndices.data()];
-                      case 5:
+                      case 1:
                           knnIndicesData = _a.sent();
                           this.log('knn Indices', knnIndices);
                           asymNeighIds = new Float32Array(shape.numPoints * shape.pixelsPerPoint);
@@ -1170,8 +1155,8 @@
       };
       TSNEOptimizer.prototype.iterate = function () {
           return __awaiter(this, void 0, void 0, function () {
+              var _a, normQ, _b;
               var _this = this;
-              var normQ, _a, _b;
               return __generator(this, function (_c) {
                   switch (_c.label) {
                       case 0:
@@ -1181,28 +1166,28 @@
                           }
                           this.updateSplatTextureDiameter();
                           this.updateExaggeration();
-                          _b = __read(tf.tidy(function () {
+                          _a = __read(tf.tidy(function () {
                               _this.splatPoints();
                               var interpQ = tf.zeros([_this.numRows, _this.pointsPerRow]);
                               var interpXY = tf.zeros([_this.numRows, _this.pointsPerRow * 2]);
                               _this.computeInterpolatedQ(interpQ);
                               _this.computeInterpolatedXY(interpXY);
                               var normQ = interpQ.sum();
-                              var repulsiveForces = interpXY.div(normQ);
+                              var repulsiveForces = interpXY.div(tf.tensor(normQ.dataSync(), normQ.shape));
                               var attractiveForces = tf.zeros([_this.numRows, _this.pointsPerRow * 2]);
                               _this.computeAttractiveForces(attractiveForces);
                               var gradientIter = attractiveForces.mul(_this._exaggeration).sub(repulsiveForces);
                               var gradient = _this.gradient.mul(_this._momentum).sub(gradientIter);
                               _this.gradient.dispose();
                               return [gradient, normQ];
-                          }), 2), this.gradient = _b[0], normQ = _b[1];
-                          _a = this;
+                          }), 2), this.gradient = _a[0], normQ = _a[1];
+                          _b = this;
                           return [4, normQ.data()];
                       case 1:
-                          _a._normQ = (_c.sent())[0];
+                          _b._normQ = (_c.sent())[0];
                           normQ.dispose();
                           this.embedding = tf.tidy(function () {
-                              var embedding = _this.embedding.add(_this.gradient);
+                              var embedding = tf.add(tf.tensor(_this.embedding.dataSync(), _this.embedding.shape), tf.tensor(_this.gradient.dataSync(), _this.gradient.shape));
                               _this.embedding.dispose();
                               return embedding;
                           });
@@ -1282,8 +1267,8 @@
       };
       TSNEOptimizer.prototype.computeBoundaries = function () {
           return __awaiter(this, void 0, void 0, function () {
-              var _this = this;
               var _a, min, max, minData, maxData, percentageOffset, offsetX, offsetY;
+              var _this = this;
               return __generator(this, function (_b) {
                   switch (_b.label) {
                       case 0:
@@ -1589,7 +1574,7 @@
                   var min = tf.tensor2d([_this.optimizer.minX, _this.optimizer.minY], [1, 2]);
                   var max = tf.tensor2d([_this.optimizer.maxX, _this.optimizer.maxY], [1, 2]);
                   var range = max.sub(min);
-                  var maxRange = tf.max(range);
+                  var maxRange = tf.max(tf.tensor(range.dataSync()));
                   var offset = tf.tidy(function () {
                       if (rangeX < rangeY) {
                           return tf.tensor2d([(rangeY - rangeX) / 2, 0], [1, 2]);
@@ -1625,8 +1610,8 @@
       };
       TSNE.prototype.knnTotalDistance = function () {
           return __awaiter(this, void 0, void 0, function () {
-              var _this = this;
               var sum;
+              var _this = this;
               return __generator(this, function (_a) {
                   switch (_a.label) {
                       case 0:
