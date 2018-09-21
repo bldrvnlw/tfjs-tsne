@@ -1,0 +1,15 @@
+import * as tf from '@tensorflow/tfjs-core';
+export declare function createEmbeddingSplatterProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeEmbeddingSplatterProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, targetTex: WebGLTexture, embeddingTex: WebGLTexture, kernelTex: WebGLTexture, targetTexDiameter: number, numPoints: number, minX: number, minY: number, maxX: number, maxY: number, kernelSupport: number, pntsPerRow: number, numRows: number, vertexIdBuffer: WebGLBuffer): void;
+export declare function createQInterpolatorProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeQInterpolatorProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, splatTex: WebGLTexture, embeddingTex: WebGLTexture, numPoints: number, minX: number, minY: number, maxX: number, maxY: number, pntsPerRow: number, numRows: number, targetTex?: WebGLTexture): void;
+export declare function createXYInterpolatorProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeXYInterpolatorProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, splatTex: WebGLTexture, embeddingTex: WebGLTexture, targetTex: WebGLTexture, numPoints: number, minX: number, minY: number, maxX: number, maxY: number, pntsPerRow: number, numRows: number, eta: number): void;
+export declare function createAttractiveForcesComputationProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeAttractiveForcesComputationProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, embeddingTex: WebGLTexture, offsetTex: WebGLTexture, neighIdTex: WebGLTexture, neighProbTex: WebGLTexture, numPoints: number, neighsPerRow: number, pntsPerRow: number, numRows: number, eta: number, targetTex?: WebGLTexture): void;
+export declare function createEmbeddingInitializationProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeEmbeddingInitializationProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, randomTex: WebGLTexture, numPoints: number, pntsPerRow: number, numRows: number, targetTex?: WebGLTexture): void;
+export declare function createDistributionParametersComputationProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeDistributionParametersComputationProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, knnGraph: WebGLTexture, numPoints: number, numNeighs: number, pntsPerRow: number, numRows: number, perplexity: number, targetTex?: WebGLTexture): void;
+export declare function createGaussiaDistributionsFromDistancesProgram(gpgpu: tf.webgl.GPGPUContext): WebGLProgram;
+export declare function executeGaussiaDistributionsFromDistancesProgram(gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram, knnGraph: WebGLTexture, parameters: WebGLTexture, numPoints: number, numNeighs: number, pntsPerRow: number, numRows: number, targetTex?: WebGLTexture): void;
