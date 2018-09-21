@@ -71,9 +71,9 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({173:[function(require,module,exports) {
+})({175:[function(require,module,exports) {
 
-},{}],212:[function(require,module,exports) {
+},{}],211:[function(require,module,exports) {
 // 7.1.4 ToInteger
 var ceil = Math.ceil;
 var floor = Math.floor;
@@ -81,14 +81,14 @@ module.exports = function (it) {
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
 
-},{}],213:[function(require,module,exports) {
+},{}],212:[function(require,module,exports) {
 // 7.2.1 RequireObjectCoercible(argument)
 module.exports = function (it) {
   if (it == undefined) throw TypeError("Can't call method on  " + it);
   return it;
 };
 
-},{}],185:[function(require,module,exports) {
+},{}],190:[function(require,module,exports) {
 var toInteger = require('./_to-integer');
 var defined = require('./_defined');
 // true  -> String#at
@@ -107,10 +107,10 @@ module.exports = function (TO_STRING) {
   };
 };
 
-},{"./_to-integer":212,"./_defined":213}],192:[function(require,module,exports) {
+},{"./_to-integer":211,"./_defined":212}],192:[function(require,module,exports) {
 module.exports = true;
 
-},{}],189:[function(require,module,exports) {
+},{}],186:[function(require,module,exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
@@ -151,19 +151,19 @@ module.exports = function (fn, that, length) {
   };
 };
 
-},{"./_a-function":197}],196:[function(require,module,exports) {
+},{"./_a-function":197}],195:[function(require,module,exports) {
 module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
 
-},{}],229:[function(require,module,exports) {
+},{}],213:[function(require,module,exports) {
 var isObject = require('./_is-object');
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
 };
 
-},{"./_is-object":196}],243:[function(require,module,exports) {
+},{"./_is-object":195}],240:[function(require,module,exports) {
 module.exports = function (exec) {
   try {
     return !!exec();
@@ -172,13 +172,13 @@ module.exports = function (exec) {
   }
 };
 
-},{}],222:[function(require,module,exports) {
+},{}],220:[function(require,module,exports) {
 // Thank's IE8 for his funny defineProperty
 module.exports = !require('./_fails')(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
 
-},{"./_fails":243}],234:[function(require,module,exports) {
+},{"./_fails":240}],229:[function(require,module,exports) {
 var isObject = require('./_is-object');
 var document = require('./_global').document;
 // typeof document.createElement is 'object' in old IE
@@ -187,12 +187,12 @@ module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
 
-},{"./_is-object":196,"./_global":189}],242:[function(require,module,exports) {
+},{"./_is-object":195,"./_global":186}],238:[function(require,module,exports) {
 module.exports = !require('./_descriptors') && !require('./_fails')(function () {
   return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
-},{"./_descriptors":222,"./_fails":243,"./_dom-create":234}],244:[function(require,module,exports) {
+},{"./_descriptors":220,"./_fails":240,"./_dom-create":229}],239:[function(require,module,exports) {
 // 7.1.1 ToPrimitive(input [, PreferredType])
 var isObject = require('./_is-object');
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
@@ -206,7 +206,7 @@ module.exports = function (it, S) {
   throw TypeError("Can't convert object to primitive value");
 };
 
-},{"./_is-object":196}],220:[function(require,module,exports) {
+},{"./_is-object":195}],219:[function(require,module,exports) {
 var anObject = require('./_an-object');
 var IE8_DOM_DEFINE = require('./_ie8-dom-define');
 var toPrimitive = require('./_to-primitive');
@@ -224,7 +224,7 @@ exports.f = require('./_descriptors') ? Object.defineProperty : function defineP
   return O;
 };
 
-},{"./_an-object":229,"./_ie8-dom-define":242,"./_to-primitive":244,"./_descriptors":222}],221:[function(require,module,exports) {
+},{"./_an-object":213,"./_ie8-dom-define":238,"./_to-primitive":239,"./_descriptors":220}],233:[function(require,module,exports) {
 module.exports = function (bitmap, value) {
   return {
     enumerable: !(bitmap & 1),
@@ -234,7 +234,7 @@ module.exports = function (bitmap, value) {
   };
 };
 
-},{}],188:[function(require,module,exports) {
+},{}],208:[function(require,module,exports) {
 var dP = require('./_object-dp');
 var createDesc = require('./_property-desc');
 module.exports = require('./_descriptors') ? function (object, key, value) {
@@ -244,13 +244,13 @@ module.exports = require('./_descriptors') ? function (object, key, value) {
   return object;
 };
 
-},{"./_object-dp":220,"./_property-desc":221,"./_descriptors":222}],226:[function(require,module,exports) {
+},{"./_object-dp":219,"./_property-desc":233,"./_descriptors":220}],210:[function(require,module,exports) {
 var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
 
-},{}],195:[function(require,module,exports) {
+},{}],183:[function(require,module,exports) {
 
 var global = require('./_global');
 var core = require('./_core');
@@ -315,20 +315,20 @@ $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
 
-},{"./_global":189,"./_core":179,"./_ctx":193,"./_hide":188,"./_has":226}],217:[function(require,module,exports) {
+},{"./_global":186,"./_core":179,"./_ctx":193,"./_hide":208,"./_has":210}],214:[function(require,module,exports) {
 module.exports = require('./_hide');
 
-},{"./_hide":188}],190:[function(require,module,exports) {
+},{"./_hide":208}],209:[function(require,module,exports) {
 module.exports = {};
 
-},{}],224:[function(require,module,exports) {
+},{}],218:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
 
-},{}],238:[function(require,module,exports) {
+},{}],241:[function(require,module,exports) {
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 var cof = require('./_cof');
 // eslint-disable-next-line no-prototype-builtins
@@ -336,7 +336,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
   return cof(it) == 'String' ? it.split('') : Object(it);
 };
 
-},{"./_cof":224}],216:[function(require,module,exports) {
+},{"./_cof":218}],232:[function(require,module,exports) {
 // to indexed object, toObject with fallback for non-array-like ES3 strings
 var IObject = require('./_iobject');
 var defined = require('./_defined');
@@ -344,7 +344,7 @@ module.exports = function (it) {
   return IObject(defined(it));
 };
 
-},{"./_iobject":238,"./_defined":213}],230:[function(require,module,exports) {
+},{"./_iobject":241,"./_defined":212}],222:[function(require,module,exports) {
 // 7.1.15 ToLength
 var toInteger = require('./_to-integer');
 var min = Math.min;
@@ -352,7 +352,7 @@ module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 };
 
-},{"./_to-integer":212}],266:[function(require,module,exports) {
+},{"./_to-integer":211}],274:[function(require,module,exports) {
 var toInteger = require('./_to-integer');
 var max = Math.max;
 var min = Math.min;
@@ -361,7 +361,7 @@ module.exports = function (index, length) {
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
 
-},{"./_to-integer":212}],262:[function(require,module,exports) {
+},{"./_to-integer":211}],271:[function(require,module,exports) {
 // false -> Array#indexOf
 // true  -> Array#includes
 var toIObject = require('./_to-iobject');
@@ -386,7 +386,7 @@ module.exports = function (IS_INCLUDES) {
   };
 };
 
-},{"./_to-iobject":216,"./_to-length":230,"./_to-absolute-index":266}],225:[function(require,module,exports) {
+},{"./_to-iobject":232,"./_to-length":222,"./_to-absolute-index":274}],225:[function(require,module,exports) {
 
 var core = require('./_core');
 var global = require('./_global');
@@ -401,21 +401,21 @@ var store = global[SHARED] || (global[SHARED] = {});
   copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
 });
 
-},{"./_core":179,"./_global":189,"./_library":192}],223:[function(require,module,exports) {
+},{"./_core":179,"./_global":186,"./_library":192}],226:[function(require,module,exports) {
 var id = 0;
 var px = Math.random();
 module.exports = function (key) {
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
 
-},{}],241:[function(require,module,exports) {
+},{}],237:[function(require,module,exports) {
 var shared = require('./_shared')('keys');
 var uid = require('./_uid');
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
 
-},{"./_shared":225,"./_uid":223}],261:[function(require,module,exports) {
+},{"./_shared":225,"./_uid":226}],265:[function(require,module,exports) {
 var has = require('./_has');
 var toIObject = require('./_to-iobject');
 var arrayIndexOf = require('./_array-includes')(false);
@@ -434,13 +434,13 @@ module.exports = function (object, names) {
   return result;
 };
 
-},{"./_has":226,"./_to-iobject":216,"./_array-includes":262,"./_shared-key":241}],251:[function(require,module,exports) {
+},{"./_has":210,"./_to-iobject":232,"./_array-includes":271,"./_shared-key":237}],244:[function(require,module,exports) {
 // IE 8- don't enum bug keys
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
 
-},{}],260:[function(require,module,exports) {
+},{}],250:[function(require,module,exports) {
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
 var $keys = require('./_object-keys-internal');
 var enumBugKeys = require('./_enum-bug-keys');
@@ -449,7 +449,7 @@ module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
 };
 
-},{"./_object-keys-internal":261,"./_enum-bug-keys":251}],250:[function(require,module,exports) {
+},{"./_object-keys-internal":265,"./_enum-bug-keys":244}],243:[function(require,module,exports) {
 var dP = require('./_object-dp');
 var anObject = require('./_an-object');
 var getKeys = require('./_object-keys');
@@ -464,11 +464,11 @@ module.exports = require('./_descriptors') ? Object.defineProperties : function 
   return O;
 };
 
-},{"./_object-dp":220,"./_an-object":229,"./_object-keys":260,"./_descriptors":222}],233:[function(require,module,exports) {
+},{"./_object-dp":219,"./_an-object":213,"./_object-keys":250,"./_descriptors":220}],228:[function(require,module,exports) {
 var document = require('./_global').document;
 module.exports = document && document.documentElement;
 
-},{"./_global":189}],239:[function(require,module,exports) {
+},{"./_global":186}],235:[function(require,module,exports) {
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = require('./_an-object');
 var dPs = require('./_object-dps');
@@ -511,7 +511,7 @@ module.exports = Object.create || function create(O, Properties) {
   return Properties === undefined ? result : dPs(result, Properties);
 };
 
-},{"./_an-object":229,"./_object-dps":250,"./_enum-bug-keys":251,"./_shared-key":241,"./_dom-create":234,"./_html":233}],191:[function(require,module,exports) {
+},{"./_an-object":213,"./_object-dps":243,"./_enum-bug-keys":244,"./_shared-key":237,"./_dom-create":229,"./_html":228}],201:[function(require,module,exports) {
 var store = require('./_shared')('wks');
 var uid = require('./_uid');
 var Symbol = require('./_global').Symbol;
@@ -524,7 +524,7 @@ var $exports = module.exports = function (name) {
 
 $exports.store = store;
 
-},{"./_shared":225,"./_uid":223,"./_global":189}],208:[function(require,module,exports) {
+},{"./_shared":225,"./_uid":226,"./_global":186}],206:[function(require,module,exports) {
 var def = require('./_object-dp').f;
 var has = require('./_has');
 var TAG = require('./_wks')('toStringTag');
@@ -533,7 +533,7 @@ module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
 };
 
-},{"./_object-dp":220,"./_has":226,"./_wks":191}],218:[function(require,module,exports) {
+},{"./_object-dp":219,"./_has":210,"./_wks":201}],215:[function(require,module,exports) {
 'use strict';
 var create = require('./_object-create');
 var descriptor = require('./_property-desc');
@@ -548,14 +548,14 @@ module.exports = function (Constructor, NAME, next) {
   setToStringTag(Constructor, NAME + ' Iterator');
 };
 
-},{"./_object-create":239,"./_property-desc":221,"./_set-to-string-tag":208,"./_hide":188,"./_wks":191}],240:[function(require,module,exports) {
+},{"./_object-create":235,"./_property-desc":233,"./_set-to-string-tag":206,"./_hide":208,"./_wks":201}],236:[function(require,module,exports) {
 // 7.1.13 ToObject(argument)
 var defined = require('./_defined');
 module.exports = function (it) {
   return Object(defined(it));
 };
 
-},{"./_defined":213}],219:[function(require,module,exports) {
+},{"./_defined":212}],216:[function(require,module,exports) {
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has = require('./_has');
 var toObject = require('./_to-object');
@@ -570,7 +570,7 @@ module.exports = Object.getPrototypeOf || function (O) {
   } return O instanceof Object ? ObjectProto : null;
 };
 
-},{"./_has":226,"./_to-object":240,"./_shared-key":241}],187:[function(require,module,exports) {
+},{"./_has":210,"./_to-object":236,"./_shared-key":237}],191:[function(require,module,exports) {
 'use strict';
 var LIBRARY = require('./_library');
 var $export = require('./_export');
@@ -641,7 +641,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
   return methods;
 };
 
-},{"./_library":192,"./_export":195,"./_redefine":217,"./_hide":188,"./_iterators":190,"./_iter-create":218,"./_set-to-string-tag":208,"./_object-gpo":219,"./_wks":191}],174:[function(require,module,exports) {
+},{"./_library":192,"./_export":183,"./_redefine":214,"./_hide":208,"./_iterators":209,"./_iter-create":215,"./_set-to-string-tag":206,"./_object-gpo":216,"./_wks":201}],177:[function(require,module,exports) {
 'use strict';
 var $at = require('./_string-at')(true);
 
@@ -660,15 +660,15 @@ require('./_iter-define')(String, 'String', function (iterated) {
   return { value: point, done: false };
 });
 
-},{"./_string-at":185,"./_iter-define":187}],214:[function(require,module,exports) {
+},{"./_string-at":190,"./_iter-define":191}],230:[function(require,module,exports) {
 module.exports = function () { /* empty */ };
 
-},{}],215:[function(require,module,exports) {
+},{}],231:[function(require,module,exports) {
 module.exports = function (done, value) {
   return { value: value, done: !!done };
 };
 
-},{}],186:[function(require,module,exports) {
+},{}],207:[function(require,module,exports) {
 'use strict';
 var addToUnscopables = require('./_add-to-unscopables');
 var step = require('./_iter-step');
@@ -704,7 +704,7 @@ addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
 
-},{"./_add-to-unscopables":214,"./_iter-step":215,"./_iterators":190,"./_to-iobject":216,"./_iter-define":187}],175:[function(require,module,exports) {
+},{"./_add-to-unscopables":230,"./_iter-step":231,"./_iterators":209,"./_to-iobject":232,"./_iter-define":191}],180:[function(require,module,exports) {
 
 require('./es6.array.iterator');
 var global = require('./_global');
@@ -726,7 +726,7 @@ for (var i = 0; i < DOMIterables.length; i++) {
   Iterators[NAME] = Iterators.Array;
 }
 
-},{"./es6.array.iterator":186,"./_global":189,"./_hide":188,"./_iterators":190,"./_wks":191}],194:[function(require,module,exports) {
+},{"./es6.array.iterator":207,"./_global":186,"./_hide":208,"./_iterators":209,"./_wks":201}],194:[function(require,module,exports) {
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = require('./_cof');
 var TAG = require('./_wks')('toStringTag');
@@ -751,14 +751,14 @@ module.exports = function (it) {
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
 
-},{"./_cof":224,"./_wks":191}],198:[function(require,module,exports) {
+},{"./_cof":218,"./_wks":201}],198:[function(require,module,exports) {
 module.exports = function (it, Constructor, name, forbiddenField) {
   if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
     throw TypeError(name + ': incorrect invocation!');
   } return it;
 };
 
-},{}],227:[function(require,module,exports) {
+},{}],221:[function(require,module,exports) {
 // call something on iterator step with safe closing on error
 var anObject = require('./_an-object');
 module.exports = function (iterator, fn, value, entries) {
@@ -772,7 +772,7 @@ module.exports = function (iterator, fn, value, entries) {
   }
 };
 
-},{"./_an-object":229}],228:[function(require,module,exports) {
+},{"./_an-object":213}],223:[function(require,module,exports) {
 // check on default Array iterator
 var Iterators = require('./_iterators');
 var ITERATOR = require('./_wks')('iterator');
@@ -782,7 +782,7 @@ module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
 };
 
-},{"./_iterators":190,"./_wks":191}],231:[function(require,module,exports) {
+},{"./_iterators":209,"./_wks":201}],224:[function(require,module,exports) {
 var classof = require('./_classof');
 var ITERATOR = require('./_wks')('iterator');
 var Iterators = require('./_iterators');
@@ -792,7 +792,7 @@ module.exports = require('./_core').getIteratorMethod = function (it) {
     || Iterators[classof(it)];
 };
 
-},{"./_classof":194,"./_wks":191,"./_iterators":190,"./_core":179}],199:[function(require,module,exports) {
+},{"./_classof":194,"./_wks":201,"./_iterators":209,"./_core":179}],196:[function(require,module,exports) {
 var ctx = require('./_ctx');
 var call = require('./_iter-call');
 var isArrayIter = require('./_is-array-iter');
@@ -819,7 +819,7 @@ var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) 
 exports.BREAK = BREAK;
 exports.RETURN = RETURN;
 
-},{"./_ctx":193,"./_iter-call":227,"./_is-array-iter":228,"./_an-object":229,"./_to-length":230,"./core.get-iterator-method":231}],200:[function(require,module,exports) {
+},{"./_ctx":193,"./_iter-call":221,"./_is-array-iter":223,"./_an-object":213,"./_to-length":222,"./core.get-iterator-method":224}],187:[function(require,module,exports) {
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = require('./_an-object');
 var aFunction = require('./_a-function');
@@ -830,7 +830,7 @@ module.exports = function (O, D) {
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
 };
 
-},{"./_an-object":229,"./_a-function":197,"./_wks":191}],232:[function(require,module,exports) {
+},{"./_an-object":213,"./_a-function":197,"./_wks":201}],227:[function(require,module,exports) {
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
 module.exports = function (fn, args, that) {
   var un = that === undefined;
@@ -848,7 +848,7 @@ module.exports = function (fn, args, that) {
   } return fn.apply(that, args);
 };
 
-},{}],201:[function(require,module,exports) {
+},{}],199:[function(require,module,exports) {
 
 
 var ctx = require('./_ctx');
@@ -936,7 +936,7 @@ module.exports = {
   clear: clearTask
 };
 
-},{"./_ctx":193,"./_invoke":232,"./_html":233,"./_dom-create":234,"./_global":189,"./_cof":224}],202:[function(require,module,exports) {
+},{"./_ctx":193,"./_invoke":227,"./_html":228,"./_dom-create":229,"./_global":186,"./_cof":218}],200:[function(require,module,exports) {
 
 
 var global = require('./_global');
@@ -1009,7 +1009,7 @@ module.exports = function () {
   };
 };
 
-},{"./_global":189,"./_task":201,"./_cof":224}],203:[function(require,module,exports) {
+},{"./_global":186,"./_task":199,"./_cof":218}],184:[function(require,module,exports) {
 'use strict';
 // 25.4.1.5 NewPromiseCapability(C)
 var aFunction = require('./_a-function');
@@ -1029,7 +1029,7 @@ module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
 
-},{"./_a-function":197}],204:[function(require,module,exports) {
+},{"./_a-function":197}],185:[function(require,module,exports) {
 module.exports = function (exec) {
   try {
     return { e: false, v: exec() };
@@ -1038,14 +1038,14 @@ module.exports = function (exec) {
   }
 };
 
-},{}],205:[function(require,module,exports) {
+},{}],202:[function(require,module,exports) {
 
 var global = require('./_global');
 var navigator = global.navigator;
 
 module.exports = navigator && navigator.userAgent || '';
 
-},{"./_global":189}],206:[function(require,module,exports) {
+},{"./_global":186}],188:[function(require,module,exports) {
 var anObject = require('./_an-object');
 var isObject = require('./_is-object');
 var newPromiseCapability = require('./_new-promise-capability');
@@ -1059,7 +1059,7 @@ module.exports = function (C, x) {
   return promiseCapability.promise;
 };
 
-},{"./_an-object":229,"./_is-object":196,"./_new-promise-capability":203}],207:[function(require,module,exports) {
+},{"./_an-object":213,"./_is-object":195,"./_new-promise-capability":184}],203:[function(require,module,exports) {
 var hide = require('./_hide');
 module.exports = function (target, src, safe) {
   for (var key in src) {
@@ -1068,7 +1068,7 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
-},{"./_hide":188}],209:[function(require,module,exports) {
+},{"./_hide":208}],204:[function(require,module,exports) {
 
 'use strict';
 var global = require('./_global');
@@ -1085,7 +1085,7 @@ module.exports = function (KEY) {
   });
 };
 
-},{"./_global":189,"./_core":179,"./_object-dp":220,"./_descriptors":222,"./_wks":191}],210:[function(require,module,exports) {
+},{"./_global":186,"./_core":179,"./_object-dp":219,"./_descriptors":220,"./_wks":201}],205:[function(require,module,exports) {
 var ITERATOR = require('./_wks')('iterator');
 var SAFE_CLOSING = false;
 
@@ -1109,7 +1109,7 @@ module.exports = function (exec, skipClosing) {
   return safe;
 };
 
-},{"./_wks":191}],176:[function(require,module,exports) {
+},{"./_wks":201}],176:[function(require,module,exports) {
 
 
 'use strict';
@@ -1399,7 +1399,7 @@ $export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(functi
   }
 });
 
-},{"./_library":192,"./_global":189,"./_ctx":193,"./_classof":194,"./_export":195,"./_is-object":196,"./_a-function":197,"./_an-instance":198,"./_for-of":199,"./_species-constructor":200,"./_task":201,"./_microtask":202,"./_new-promise-capability":203,"./_perform":204,"./_user-agent":205,"./_promise-resolve":206,"./_wks":191,"./_redefine-all":207,"./_set-to-string-tag":208,"./_set-species":209,"./_core":179,"./_iter-detect":210}],177:[function(require,module,exports) {
+},{"./_library":192,"./_global":186,"./_ctx":193,"./_classof":194,"./_export":183,"./_is-object":195,"./_a-function":197,"./_an-instance":198,"./_for-of":196,"./_species-constructor":187,"./_task":199,"./_microtask":200,"./_new-promise-capability":184,"./_perform":185,"./_user-agent":202,"./_promise-resolve":188,"./_wks":201,"./_redefine-all":203,"./_set-to-string-tag":206,"./_set-species":204,"./_core":179,"./_iter-detect":205}],181:[function(require,module,exports) {
 
 // https://github.com/tc39/proposal-promise-finally
 'use strict';
@@ -1422,7 +1422,7 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
   );
 } });
 
-},{"./_export":195,"./_core":179,"./_global":189,"./_species-constructor":200,"./_promise-resolve":206}],178:[function(require,module,exports) {
+},{"./_export":183,"./_core":179,"./_global":186,"./_species-constructor":187,"./_promise-resolve":188}],178:[function(require,module,exports) {
 'use strict';
 // https://github.com/tc39/proposal-promise-try
 var $export = require('./_export');
@@ -1436,7 +1436,7 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
   return promiseCapability.promise;
 } });
 
-},{"./_export":195,"./_new-promise-capability":203,"./_perform":204}],170:[function(require,module,exports) {
+},{"./_export":183,"./_new-promise-capability":184,"./_perform":185}],168:[function(require,module,exports) {
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
@@ -1445,9 +1445,9 @@ require('../modules/es7.promise.finally');
 require('../modules/es7.promise.try');
 module.exports = require('../modules/_core').Promise;
 
-},{"../modules/es6.object.to-string":173,"../modules/es6.string.iterator":174,"../modules/web.dom.iterable":175,"../modules/es6.promise":176,"../modules/es7.promise.finally":177,"../modules/es7.promise.try":178,"../modules/_core":179}],4:[function(require,module,exports) {
+},{"../modules/es6.object.to-string":175,"../modules/es6.string.iterator":177,"../modules/web.dom.iterable":180,"../modules/es6.promise":176,"../modules/es7.promise.finally":181,"../modules/es7.promise.try":178,"../modules/_core":179}],5:[function(require,module,exports) {
 module.exports = { "default": require("core-js/library/fn/promise"), __esModule: true };
-},{"core-js/library/fn/promise":170}],3:[function(require,module,exports) {
+},{"core-js/library/fn/promise":168}],4:[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -1486,7 +1486,7 @@ exports.default = function (fn) {
     });
   };
 };
-},{"../core-js/promise":4}],53:[function(require,module,exports) {
+},{"../core-js/promise":5}],67:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -1639,7 +1639,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],51:[function(require,module,exports) {
+},{}],65:[function(require,module,exports) {
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -1725,14 +1725,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],52:[function(require,module,exports) {
+},{}],66:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],17:[function(require,module,exports) {
+},{}],22:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 /*!
@@ -3525,7 +3525,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":53,"ieee754":51,"isarray":52,"buffer":17}],111:[function(require,module,exports) {
+},{"base64-js":67,"ieee754":65,"isarray":66,"buffer":22}],113:[function(require,module,exports) {
 
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
@@ -3590,7 +3590,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":17}],18:[function(require,module,exports) {
+},{"buffer":22}],23:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -3777,7 +3777,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],73:[function(require,module,exports) {
+},{}],72:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -3820,7 +3820,7 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-},{"safe-buffer":111,"process":18}],50:[function(require,module,exports) {
+},{"safe-buffer":113,"process":23}],64:[function(require,module,exports) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -3845,7 +3845,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],22:[function(require,module,exports) {
+},{}],40:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4149,7 +4149,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],130:[function(require,module,exports) {
+},{}],157:[function(require,module,exports) {
 var process = require("process");
 'use strict';
 
@@ -4196,10 +4196,10 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 
-},{"process":18}],66:[function(require,module,exports) {
+},{"process":23}],107:[function(require,module,exports) {
 module.exports = require('events').EventEmitter;
 
-},{"events":22}],131:[function(require,module,exports) {
+},{"events":40}],156:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -4309,7 +4309,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-},{"buffer":17}],68:[function(require,module,exports) {
+},{"buffer":22}],110:[function(require,module,exports) {
 
 'use strict';
 
@@ -4390,7 +4390,7 @@ if (util && util.inspect && util.inspect.custom) {
     return this.constructor.name + ' ' + obj;
   };
 }
-},{"safe-buffer":111,"util":173}],67:[function(require,module,exports) {
+},{"safe-buffer":113,"util":175}],108:[function(require,module,exports) {
 'use strict';
 
 /*<replacement>*/
@@ -4465,7 +4465,7 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":130}],132:[function(require,module,exports) {
+},{"process-nextick-args":157}],158:[function(require,module,exports) {
 var global = (1,eval)("this");
 
 /**
@@ -4535,7 +4535,7 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-},{}],60:[function(require,module,exports) {
+},{}],95:[function(require,module,exports) {
 var process = require("process");
 
 var global = (1,eval)("this");
@@ -5226,7 +5226,7 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-},{"process-nextick-args":130,"core-util-is":131,"inherits":50,"util-deprecate":132,"./internal/streams/stream":66,"safe-buffer":111,"./internal/streams/destroy":67,"./_stream_duplex":62,"process":18}],62:[function(require,module,exports) {
+},{"process-nextick-args":157,"core-util-is":156,"inherits":64,"util-deprecate":158,"./internal/streams/stream":107,"safe-buffer":113,"./internal/streams/destroy":108,"./_stream_duplex":96,"process":23}],96:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -5358,7 +5358,7 @@ Duplex.prototype._destroy = function (err, cb) {
 
   pna.nextTick(cb, err);
 };
-},{"process-nextick-args":130,"core-util-is":131,"inherits":50,"./_stream_readable":59,"./_stream_writable":60}],118:[function(require,module,exports) {
+},{"process-nextick-args":157,"core-util-is":156,"inherits":64,"./_stream_readable":97,"./_stream_writable":95}],117:[function(require,module,exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -5656,7 +5656,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":111}],59:[function(require,module,exports) {
+},{"safe-buffer":113}],97:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -6679,7 +6679,7 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-},{"process-nextick-args":130,"isarray":52,"events":22,"./internal/streams/stream":66,"safe-buffer":111,"core-util-is":131,"inherits":50,"util":173,"./internal/streams/BufferList":68,"./internal/streams/destroy":67,"./_stream_duplex":62,"string_decoder/":118,"process":18}],61:[function(require,module,exports) {
+},{"process-nextick-args":157,"isarray":66,"events":40,"./internal/streams/stream":107,"safe-buffer":113,"core-util-is":156,"inherits":64,"util":175,"./internal/streams/BufferList":110,"./internal/streams/destroy":108,"./_stream_duplex":96,"string_decoder/":117,"process":23}],98:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6894,7 +6894,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":62,"core-util-is":131,"inherits":50}],63:[function(require,module,exports) {
+},{"./_stream_duplex":96,"core-util-is":156,"inherits":64}],99:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6942,7 +6942,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":61,"core-util-is":131,"inherits":50}],55:[function(require,module,exports) {
+},{"./_stream_transform":98,"core-util-is":156,"inherits":64}],84:[function(require,module,exports) {
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -6951,19 +6951,19 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_readable.js":59,"./lib/_stream_writable.js":60,"./lib/_stream_duplex.js":62,"./lib/_stream_transform.js":61,"./lib/_stream_passthrough.js":63}],57:[function(require,module,exports) {
+},{"./lib/_stream_readable.js":97,"./lib/_stream_writable.js":95,"./lib/_stream_duplex.js":96,"./lib/_stream_transform.js":98,"./lib/_stream_passthrough.js":99}],79:[function(require,module,exports) {
 module.exports = require('./lib/_stream_writable.js');
 
-},{"./lib/_stream_writable.js":60}],58:[function(require,module,exports) {
+},{"./lib/_stream_writable.js":95}],80:[function(require,module,exports) {
 module.exports = require('./lib/_stream_duplex.js');
 
-},{"./lib/_stream_duplex.js":62}],54:[function(require,module,exports) {
+},{"./lib/_stream_duplex.js":96}],78:[function(require,module,exports) {
 module.exports = require('./readable').Transform
 
-},{"./readable":55}],56:[function(require,module,exports) {
+},{"./readable":84}],83:[function(require,module,exports) {
 module.exports = require('./readable').PassThrough
 
-},{"./readable":55}],16:[function(require,module,exports) {
+},{"./readable":84}],21:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -7092,7 +7092,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":22,"inherits":50,"readable-stream/readable.js":55,"readable-stream/writable.js":57,"readable-stream/duplex.js":58,"readable-stream/transform.js":54,"readable-stream/passthrough.js":56}],171:[function(require,module,exports) {
+},{"events":40,"inherits":64,"readable-stream/readable.js":84,"readable-stream/writable.js":79,"readable-stream/duplex.js":80,"readable-stream/transform.js":78,"readable-stream/passthrough.js":83}],155:[function(require,module,exports) {
 
 'use strict'
 var Buffer = require('safe-buffer').Buffer
@@ -7190,7 +7190,7 @@ HashBase.prototype._digest = function () {
 
 module.exports = HashBase
 
-},{"safe-buffer":111,"stream":16,"inherits":50}],109:[function(require,module,exports) {
+},{"safe-buffer":113,"stream":21,"inherits":64}],118:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict'
 var inherits = require('inherits')
@@ -7338,7 +7338,7 @@ function fnI (a, b, c, d, m, k, s) {
 
 module.exports = MD5
 
-},{"inherits":50,"hash-base":171,"buffer":17}],117:[function(require,module,exports) {
+},{"inherits":64,"hash-base":155,"buffer":22}],115:[function(require,module,exports) {
 
 'use strict'
 var Buffer = require('buffer').Buffer
@@ -7504,7 +7504,7 @@ function fn5 (a, b, c, d, e, m, k, s) {
 
 module.exports = RIPEMD160
 
-},{"buffer":17,"inherits":50,"hash-base":171}],139:[function(require,module,exports) {
+},{"buffer":22,"inherits":64,"hash-base":155}],286:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 
@@ -7588,7 +7588,7 @@ Hash.prototype._update = function () {
 
 module.exports = Hash
 
-},{"safe-buffer":111}],122:[function(require,module,exports) {
+},{"safe-buffer":113}],278:[function(require,module,exports) {
 
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -7685,7 +7685,7 @@ Sha.prototype._hash = function () {
 
 module.exports = Sha
 
-},{"inherits":50,"./hash":139,"safe-buffer":111}],123:[function(require,module,exports) {
+},{"inherits":64,"./hash":286,"safe-buffer":113}],279:[function(require,module,exports) {
 
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -7787,7 +7787,7 @@ Sha1.prototype._hash = function () {
 
 module.exports = Sha1
 
-},{"inherits":50,"./hash":139,"safe-buffer":111}],125:[function(require,module,exports) {
+},{"inherits":64,"./hash":286,"safe-buffer":113}],281:[function(require,module,exports) {
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -7925,7 +7925,7 @@ Sha256.prototype._hash = function () {
 
 module.exports = Sha256
 
-},{"inherits":50,"./hash":139,"safe-buffer":111}],124:[function(require,module,exports) {
+},{"inherits":64,"./hash":286,"safe-buffer":113}],280:[function(require,module,exports) {
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -7981,7 +7981,7 @@ Sha224.prototype._hash = function () {
 
 module.exports = Sha224
 
-},{"inherits":50,"./sha256":125,"./hash":139,"safe-buffer":111}],127:[function(require,module,exports) {
+},{"inherits":64,"./sha256":281,"./hash":286,"safe-buffer":113}],283:[function(require,module,exports) {
 
 var inherits = require('inherits')
 var Hash = require('./hash')
@@ -8244,7 +8244,7 @@ Sha512.prototype._hash = function () {
 
 module.exports = Sha512
 
-},{"inherits":50,"./hash":139,"safe-buffer":111}],126:[function(require,module,exports) {
+},{"inherits":64,"./hash":286,"safe-buffer":113}],282:[function(require,module,exports) {
 
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
@@ -8304,7 +8304,7 @@ Sha384.prototype._hash = function () {
 
 module.exports = Sha384
 
-},{"inherits":50,"./sha512":127,"./hash":139,"safe-buffer":111}],116:[function(require,module,exports) {
+},{"inherits":64,"./sha512":283,"./hash":286,"safe-buffer":113}],116:[function(require,module,exports) {
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -8321,7 +8321,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":122,"./sha1":123,"./sha224":124,"./sha256":125,"./sha384":126,"./sha512":127}],110:[function(require,module,exports) {
+},{"./sha":278,"./sha1":279,"./sha224":280,"./sha256":281,"./sha384":282,"./sha512":283}],114:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
@@ -8423,7 +8423,7 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 
 module.exports = CipherBase
 
-},{"safe-buffer":111,"stream":16,"string_decoder":118,"inherits":50}],70:[function(require,module,exports) {
+},{"safe-buffer":113,"stream":21,"string_decoder":117,"inherits":64}],69:[function(require,module,exports) {
 'use strict'
 var inherits = require('inherits')
 var MD5 = require('md5.js')
@@ -8455,7 +8455,7 @@ module.exports = function createHash (alg) {
   return new Hash(sha(alg))
 }
 
-},{"inherits":50,"md5.js":109,"ripemd160":117,"sha.js":116,"cipher-base":110}],80:[function(require,module,exports) {
+},{"inherits":64,"md5.js":118,"ripemd160":115,"sha.js":116,"cipher-base":114}],81:[function(require,module,exports) {
 
 'use strict'
 var inherits = require('inherits')
@@ -8504,14 +8504,14 @@ Hmac.prototype._final = function () {
 }
 module.exports = Hmac
 
-},{"inherits":50,"safe-buffer":111,"cipher-base":110}],135:[function(require,module,exports) {
+},{"inherits":64,"safe-buffer":113,"cipher-base":114}],125:[function(require,module,exports) {
 var MD5 = require('md5.js')
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
 }
 
-},{"md5.js":109}],71:[function(require,module,exports) {
+},{"md5.js":118}],68:[function(require,module,exports) {
 
 'use strict'
 var inherits = require('inherits')
@@ -8576,7 +8576,7 @@ module.exports = function createHmac (alg, key) {
   return new Hmac(alg, key)
 }
 
-},{"inherits":50,"./legacy":80,"cipher-base":110,"safe-buffer":111,"create-hash/md5":135,"ripemd160":117,"sha.js":116}],88:[function(require,module,exports) {
+},{"inherits":64,"./legacy":81,"cipher-base":114,"safe-buffer":113,"create-hash/md5":125,"ripemd160":115,"sha.js":116}],90:[function(require,module,exports) {
 module.exports = {
   "sha224WithRSAEncryption": {
     "sign": "rsa",
@@ -8730,10 +8730,10 @@ module.exports = {
   }
 }
 ;
-},{}],91:[function(require,module,exports) {
+},{}],82:[function(require,module,exports) {
 module.exports = require('./browser/algorithms.json')
 
-},{"./browser/algorithms.json":88}],95:[function(require,module,exports) {
+},{"./browser/algorithms.json":90}],106:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
 
@@ -8764,7 +8764,7 @@ module.exports = function (password, salt, iterations, keylen) {
   }
 }
 
-},{"buffer":17}],96:[function(require,module,exports) {
+},{"buffer":22}],105:[function(require,module,exports) {
 var process = require("process");
 var defaultEncoding
 /* istanbul ignore next */
@@ -8777,7 +8777,7 @@ if (process.browser) {
 }
 module.exports = defaultEncoding
 
-},{"process":18}],81:[function(require,module,exports) {
+},{"process":23}],93:[function(require,module,exports) {
 
 var md5 = require('create-hash/md5')
 var rmd160 = require('ripemd160')
@@ -8881,7 +8881,7 @@ function pbkdf2 (password, salt, iterations, keylen, digest) {
 
 module.exports = pbkdf2
 
-},{"create-hash/md5":135,"ripemd160":117,"sha.js":116,"./precondition":95,"./default-encoding":96,"safe-buffer":111}],85:[function(require,module,exports) {
+},{"create-hash/md5":125,"ripemd160":115,"sha.js":116,"./precondition":106,"./default-encoding":105,"safe-buffer":113}],94:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -8986,11 +8986,11 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
   }), callback)
 }
 
-},{"./precondition":95,"./default-encoding":96,"./sync":81,"safe-buffer":111,"process":18}],72:[function(require,module,exports) {
+},{"./precondition":106,"./default-encoding":105,"./sync":93,"safe-buffer":113,"process":23}],73:[function(require,module,exports) {
 exports.pbkdf2 = require('./lib/async')
 exports.pbkdf2Sync = require('./lib/sync')
 
-},{"./lib/async":85,"./lib/sync":81}],180:[function(require,module,exports) {
+},{"./lib/async":94,"./lib/sync":93}],169:[function(require,module,exports) {
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -9248,7 +9248,7 @@ exports.padSplit = function padSplit(num, size, group) {
   return out.join(' ');
 };
 
-},{}],264:[function(require,module,exports) {
+},{}],275:[function(require,module,exports) {
 module.exports = assert;
 
 function assert(val, msg) {
@@ -9261,7 +9261,7 @@ assert.equal = function assertEqual(l, r, msg) {
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
 
-},{}],181:[function(require,module,exports) {
+},{}],170:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9404,7 +9404,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
   return this._unpad(out);
 };
 
-},{"minimalistic-assert":264}],182:[function(require,module,exports) {
+},{"minimalistic-assert":275}],171:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9549,7 +9549,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"minimalistic-assert":264,"inherits":50,"../des":172}],184:[function(require,module,exports) {
+},{"minimalistic-assert":275,"inherits":64,"../des":154}],172:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9616,7 +9616,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"minimalistic-assert":264,"inherits":50}],183:[function(require,module,exports) {
+},{"minimalistic-assert":275,"inherits":64}],173:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9673,7 +9673,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"minimalistic-assert":264,"inherits":50,"../des":172}],172:[function(require,module,exports) {
+},{"minimalistic-assert":275,"inherits":64,"../des":154}],154:[function(require,module,exports) {
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -9682,7 +9682,7 @@ exports.DES = require('./des/des');
 exports.CBC = require('./des/cbc');
 exports.EDE = require('./des/ede');
 
-},{"./des/utils":180,"./des/cipher":181,"./des/des":182,"./des/cbc":184,"./des/ede":183}],112:[function(require,module,exports) {
+},{"./des/utils":169,"./des/cipher":170,"./des/des":171,"./des/cbc":172,"./des/ede":173}],111:[function(require,module,exports) {
 
 var CipherBase = require('cipher-base')
 var des = require('des.js')
@@ -9735,7 +9735,7 @@ DES.prototype._final = function () {
   return Buffer.from(this._des.final())
 }
 
-},{"cipher-base":110,"des.js":172,"inherits":50,"safe-buffer":111}],160:[function(require,module,exports) {
+},{"cipher-base":114,"des.js":154,"inherits":64,"safe-buffer":113}],161:[function(require,module,exports) {
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block)
 }
@@ -9744,7 +9744,7 @@ exports.decrypt = function (self, block) {
   return self._cipher.decryptBlock(block)
 }
 
-},{}],236:[function(require,module,exports) {
+},{}],264:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -9757,7 +9757,7 @@ module.exports = function xor (a, b) {
   return buffer
 }
 
-},{"buffer":17}],161:[function(require,module,exports) {
+},{"buffer":22}],162:[function(require,module,exports) {
 var xor = require('buffer-xor')
 
 exports.encrypt = function (self, block) {
@@ -9776,7 +9776,7 @@ exports.decrypt = function (self, block) {
   return xor(out, pad)
 }
 
-},{"buffer-xor":236}],163:[function(require,module,exports) {
+},{"buffer-xor":264}],164:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var xor = require('buffer-xor')
@@ -9812,7 +9812,7 @@ exports.encrypt = function (self, data, decrypt) {
   return out
 }
 
-},{"safe-buffer":111,"buffer-xor":236}],162:[function(require,module,exports) {
+},{"safe-buffer":113,"buffer-xor":264}],163:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 
@@ -9840,7 +9840,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":111}],164:[function(require,module,exports) {
+},{"safe-buffer":113}],165:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 
@@ -9885,7 +9885,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":111}],165:[function(require,module,exports) {
+},{"safe-buffer":113}],166:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var xor = require('buffer-xor')
 
@@ -9904,7 +9904,7 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-},{"buffer-xor":236,"buffer":17}],168:[function(require,module,exports) {
+},{"buffer-xor":264,"buffer":22}],174:[function(require,module,exports) {
 function incr32 (iv) {
   var len = iv.length
   var item
@@ -9921,7 +9921,7 @@ function incr32 (iv) {
 }
 module.exports = incr32
 
-},{}],166:[function(require,module,exports) {
+},{}],167:[function(require,module,exports) {
 
 var xor = require('buffer-xor')
 var Buffer = require('safe-buffer').Buffer
@@ -9954,7 +9954,7 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-},{"buffer-xor":236,"safe-buffer":111,"../incr32":168}],143:[function(require,module,exports) {
+},{"buffer-xor":264,"safe-buffer":113,"../incr32":174}],160:[function(require,module,exports) {
 module.exports = {
   "aes-128-ecb": {
     "cipher": "AES",
@@ -10147,7 +10147,7 @@ module.exports = {
   }
 }
 ;
-},{}],148:[function(require,module,exports) {
+},{}],132:[function(require,module,exports) {
 var modeModules = {
   ECB: require('./ecb'),
   CBC: require('./cbc'),
@@ -10167,7 +10167,7 @@ for (var key in modes) {
 
 module.exports = modes
 
-},{"./ecb":160,"./cbc":161,"./cfb":163,"./cfb8":162,"./cfb1":164,"./ofb":165,"./ctr":166,"./list.json":143}],151:[function(require,module,exports) {
+},{"./ecb":161,"./cbc":162,"./cfb":164,"./cfb8":163,"./cfb1":165,"./ofb":166,"./ctr":167,"./list.json":160}],289:[function(require,module,exports) {
 
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -10398,7 +10398,7 @@ AES.prototype.scrub = function () {
 
 module.exports.AES = AES
 
-},{"safe-buffer":111}],167:[function(require,module,exports) {
+},{"safe-buffer":113}],290:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var ZEROES = Buffer.alloc(16, 0)
@@ -10490,7 +10490,7 @@ GHASH.prototype.final = function (abl, bl) {
 
 module.exports = GHASH
 
-},{"safe-buffer":111}],149:[function(require,module,exports) {
+},{"safe-buffer":113}],287:[function(require,module,exports) {
 
 var aes = require('./aes')
 var Buffer = require('safe-buffer').Buffer
@@ -10610,7 +10610,7 @@ StreamCipher.prototype.setAAD = function setAAD (buf) {
 
 module.exports = StreamCipher
 
-},{"./aes":151,"safe-buffer":111,"cipher-base":110,"inherits":50,"./ghash":167,"buffer-xor":236,"./incr32":168}],150:[function(require,module,exports) {
+},{"./aes":289,"safe-buffer":113,"cipher-base":114,"inherits":64,"./ghash":290,"buffer-xor":264,"./incr32":174}],288:[function(require,module,exports) {
 
 var aes = require('./aes')
 var Buffer = require('safe-buffer').Buffer
@@ -10640,7 +10640,7 @@ StreamCipher.prototype._final = function () {
 
 module.exports = StreamCipher
 
-},{"./aes":151,"safe-buffer":111,"cipher-base":110,"inherits":50}],113:[function(require,module,exports) {
+},{"./aes":289,"safe-buffer":113,"cipher-base":114,"inherits":64}],112:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var MD5 = require('md5.js')
@@ -10688,7 +10688,7 @@ function EVP_BytesToKey (password, salt, keyBits, ivLen) {
 
 module.exports = EVP_BytesToKey
 
-},{"safe-buffer":111,"md5.js":109}],141:[function(require,module,exports) {
+},{"safe-buffer":113,"md5.js":118}],284:[function(require,module,exports) {
 
 var MODES = require('./modes')
 var AuthCipher = require('./authCipher')
@@ -10805,7 +10805,7 @@ function createCipher (suite, password) {
 exports.createCipheriv = createCipheriv
 exports.createCipher = createCipher
 
-},{"./modes":148,"./authCipher":149,"safe-buffer":111,"./streamCipher":150,"cipher-base":110,"./aes":151,"evp_bytestokey":113,"inherits":50}],142:[function(require,module,exports) {
+},{"./modes":132,"./authCipher":287,"safe-buffer":113,"./streamCipher":288,"cipher-base":114,"./aes":289,"evp_bytestokey":112,"inherits":64}],285:[function(require,module,exports) {
 
 var AuthCipher = require('./authCipher')
 var Buffer = require('safe-buffer').Buffer
@@ -10932,7 +10932,7 @@ function createDecipher (suite, password) {
 exports.createDecipher = createDecipher
 exports.createDecipheriv = createDecipheriv
 
-},{"./authCipher":149,"safe-buffer":111,"./modes":148,"./streamCipher":150,"cipher-base":110,"./aes":151,"evp_bytestokey":113,"inherits":50}],133:[function(require,module,exports) {
+},{"./authCipher":287,"safe-buffer":113,"./modes":132,"./streamCipher":288,"cipher-base":114,"./aes":289,"evp_bytestokey":112,"inherits":64}],124:[function(require,module,exports) {
 var ciphers = require('./encrypter')
 var deciphers = require('./decrypter')
 var modes = require('./modes/list.json')
@@ -10947,7 +10947,7 @@ exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"./encrypter":141,"./decrypter":142,"./modes/list.json":143}],134:[function(require,module,exports) {
+},{"./encrypter":284,"./decrypter":285,"./modes/list.json":160}],123:[function(require,module,exports) {
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -10973,7 +10973,7 @@ exports['des-ede'] = {
   iv: 0
 }
 
-},{}],74:[function(require,module,exports) {
+},{}],70:[function(require,module,exports) {
 var DES = require('browserify-des')
 var aes = require('browserify-aes/browser')
 var aesModes = require('browserify-aes/modes')
@@ -11042,7 +11042,7 @@ exports.createDecipher = exports.Decipher = createDecipher
 exports.createDecipheriv = exports.Decipheriv = createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"browserify-des":112,"browserify-aes/browser":133,"browserify-aes/modes":148,"browserify-des/modes":134,"evp_bytestokey":113}],115:[function(require,module,exports) {
+},{"browserify-des":111,"browserify-aes/browser":124,"browserify-aes/modes":132,"browserify-des/modes":123,"evp_bytestokey":112}],120:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 (function (module, exports) {
   'use strict';
@@ -14472,7 +14472,7 @@ var Buffer = require("buffer").Buffer;
   };
 })(typeof module === 'undefined' || module, this);
 
-},{"buffer":173}],245:[function(require,module,exports) {
+},{"buffer":175}],189:[function(require,module,exports) {
 var r;
 
 module.exports = function rand(len) {
@@ -14539,7 +14539,7 @@ if (typeof self === 'object') {
   }
 }
 
-},{"crypto":173}],169:[function(require,module,exports) {
+},{"crypto":175}],141:[function(require,module,exports) {
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -14656,7 +14656,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":115,"brorand":245}],86:[function(require,module,exports) {
+},{"bn.js":120,"brorand":189}],86:[function(require,module,exports) {
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -14763,7 +14763,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"randombytes":73,"bn.js":115,"miller-rabin":169}],82:[function(require,module,exports) {
+},{"randombytes":72,"bn.js":120,"miller-rabin":141}],85:[function(require,module,exports) {
 module.exports = {
     "modp1": {
         "gen": "02",
@@ -14965,7 +14965,7 @@ function formatReturnValue(bn, enc) {
   }
 }
 
-},{"bn.js":115,"miller-rabin":169,"./generatePrime":86,"randombytes":73,"buffer":17}],75:[function(require,module,exports) {
+},{"bn.js":120,"miller-rabin":141,"./generatePrime":86,"randombytes":72,"buffer":22}],71:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var generatePrime = require('./lib/generatePrime')
 var primes = require('./lib/primes.json')
@@ -15010,7 +15010,7 @@ function createDiffieHellman (prime, enc, generator, genc) {
 exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
-},{"./lib/generatePrime":86,"./lib/primes.json":82,"./lib/dh":87,"buffer":17}],121:[function(require,module,exports) {
+},{"./lib/generatePrime":86,"./lib/primes.json":85,"./lib/dh":87,"buffer":22}],122:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var bn = require('bn.js');
 var randomBytes = require('randombytes');
@@ -15053,7 +15053,7 @@ function getr(priv) {
   return r;
 }
 
-},{"bn.js":115,"randombytes":73,"buffer":17}],119:[function(require,module,exports) {
+},{"bn.js":120,"randombytes":72,"buffer":22}],126:[function(require,module,exports) {
 module.exports = {
   "name": "elliptic",
   "version": "6.4.1",
@@ -15113,7 +15113,7 @@ module.exports = {
   }
 }
 ;
-},{}],265:[function(require,module,exports) {
+},{}],277:[function(require,module,exports) {
 'use strict';
 
 var utils = exports;
@@ -15173,7 +15173,7 @@ utils.encode = function encode(arr, enc) {
     return arr;
 };
 
-},{}],128:[function(require,module,exports) {
+},{}],130:[function(require,module,exports) {
 'use strict';
 
 var utils = exports;
@@ -15295,7 +15295,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":115,"minimalistic-assert":264,"minimalistic-crypto-utils":265}],152:[function(require,module,exports) {
+},{"bn.js":120,"minimalistic-assert":275,"minimalistic-crypto-utils":277}],291:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -15672,7 +15672,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"bn.js":115,"../../elliptic":114}],153:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":119}],292:[function(require,module,exports) {
 'use strict';
 
 var curve = require('../curve');
@@ -16611,7 +16611,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../curve":145,"../../elliptic":114,"bn.js":115,"inherits":50}],154:[function(require,module,exports) {
+},{"../curve":134,"../../elliptic":119,"bn.js":120,"inherits":64}],293:[function(require,module,exports) {
 'use strict';
 
 var curve = require('../curve');
@@ -16793,7 +16793,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../curve":145,"bn.js":115,"inherits":50,"../../elliptic":114}],155:[function(require,module,exports) {
+},{"../curve":134,"bn.js":120,"inherits":64,"../../elliptic":119}],294:[function(require,module,exports) {
 'use strict';
 
 var curve = require('../curve');
@@ -17228,7 +17228,7 @@ Point.prototype.eqXToP = function eqXToP(x) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../curve":145,"../../elliptic":114,"bn.js":115,"inherits":50}],145:[function(require,module,exports) {
+},{"../curve":134,"../../elliptic":119,"bn.js":120,"inherits":64}],134:[function(require,module,exports) {
 'use strict';
 
 var curve = exports;
@@ -17238,7 +17238,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":152,"./short":153,"./mont":154,"./edwards":155}],268:[function(require,module,exports) {
+},{"./base":291,"./short":292,"./mont":293,"./edwards":294}],259:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -17493,7 +17493,7 @@ function shr64_lo(ah, al, num) {
 }
 exports.shr64_lo = shr64_lo;
 
-},{"minimalistic-assert":264,"inherits":50}],269:[function(require,module,exports) {
+},{"minimalistic-assert":275,"inherits":64}],260:[function(require,module,exports) {
 'use strict';
 
 var utils = require('./utils');
@@ -17587,7 +17587,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"./utils":268,"minimalistic-assert":264}],278:[function(require,module,exports) {
+},{"./utils":259,"minimalistic-assert":275}],273:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17638,7 +17638,7 @@ function g1_256(x) {
 }
 exports.g1_256 = g1_256;
 
-},{"../utils":268}],274:[function(require,module,exports) {
+},{"../utils":259}],266:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17714,7 +17714,7 @@ SHA1.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../utils":268,"../common":269,"./common":278}],275:[function(require,module,exports) {
+},{"../utils":259,"../common":260,"./common":273}],268:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17821,7 +17821,7 @@ SHA256.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../utils":268,"../common":269,"./common":278,"minimalistic-assert":264}],273:[function(require,module,exports) {
+},{"../utils":259,"../common":260,"./common":273,"minimalistic-assert":275}],267:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17853,7 +17853,7 @@ SHA224.prototype._digest = function digest(enc) {
 };
 
 
-},{"../utils":268,"./256":275}],277:[function(require,module,exports) {
+},{"../utils":259,"./256":268}],270:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -18185,7 +18185,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../utils":268,"../common":269,"minimalistic-assert":264}],276:[function(require,module,exports) {
+},{"../utils":259,"../common":260,"minimalistic-assert":275}],269:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -18222,7 +18222,7 @@ SHA384.prototype._digest = function digest(enc) {
     return utils.split32(this.h.slice(0, 12), 'big');
 };
 
-},{"../utils":268,"./512":277}],270:[function(require,module,exports) {
+},{"../utils":259,"./512":270}],261:[function(require,module,exports) {
 'use strict';
 
 exports.sha1 = require('./sha/1');
@@ -18231,7 +18231,7 @@ exports.sha256 = require('./sha/256');
 exports.sha384 = require('./sha/384');
 exports.sha512 = require('./sha/512');
 
-},{"./sha/1":274,"./sha/224":273,"./sha/256":275,"./sha/384":276,"./sha/512":277}],271:[function(require,module,exports) {
+},{"./sha/1":266,"./sha/224":267,"./sha/256":268,"./sha/384":269,"./sha/512":270}],262:[function(require,module,exports) {
 'use strict';
 
 var utils = require('./utils');
@@ -18379,7 +18379,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"./utils":268,"./common":269}],272:[function(require,module,exports) {
+},{"./utils":259,"./common":260}],263:[function(require,module,exports) {
 'use strict';
 
 var utils = require('./utils');
@@ -18428,7 +18428,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"./utils":268,"minimalistic-assert":264}],263:[function(require,module,exports) {
+},{"./utils":259,"minimalistic-assert":275}],249:[function(require,module,exports) {
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -18445,7 +18445,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/utils":268,"./hash/common":269,"./hash/sha":270,"./hash/ripemd":271,"./hash/hmac":272}],140:[function(require,module,exports) {
+},{"./hash/utils":259,"./hash/common":260,"./hash/sha":261,"./hash/ripemd":262,"./hash/hmac":263}],133:[function(require,module,exports) {
 module.exports = {
   doubles: {
     step: 4,
@@ -19227,7 +19227,7 @@ module.exports = {
   }
 };
 
-},{}],129:[function(require,module,exports) {
+},{}],131:[function(require,module,exports) {
 'use strict';
 
 var curves = exports;
@@ -19434,7 +19434,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"hash.js":263,"../elliptic":114,"./precomputed/secp256k1":140}],279:[function(require,module,exports) {
+},{"hash.js":249,"../elliptic":119,"./precomputed/secp256k1":133}],276:[function(require,module,exports) {
 'use strict';
 
 var hash = require('hash.js');
@@ -19549,7 +19549,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"hash.js":263,"minimalistic-crypto-utils":265,"minimalistic-assert":264}],156:[function(require,module,exports) {
+},{"hash.js":249,"minimalistic-crypto-utils":277,"minimalistic-assert":275}],142:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -19670,7 +19670,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"bn.js":115,"../../elliptic":114}],157:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":119}],145:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -19807,7 +19807,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"bn.js":115,"../../elliptic":114}],146:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":119}],135:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -20049,7 +20049,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"bn.js":115,"hmac-drbg":279,"../../elliptic":114,"./key":156,"./signature":157}],158:[function(require,module,exports) {
+},{"bn.js":120,"hmac-drbg":276,"../../elliptic":119,"./key":142,"./signature":145}],144:[function(require,module,exports) {
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -20147,7 +20147,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":114}],159:[function(require,module,exports) {
+},{"../../elliptic":119}],143:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -20215,7 +20215,7 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"bn.js":115,"../../elliptic":114}],147:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":119}],136:[function(require,module,exports) {
 'use strict';
 
 var hash = require('hash.js');
@@ -20335,7 +20335,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
   return val instanceof this.pointClass;
 };
 
-},{"hash.js":263,"../../elliptic":114,"./key":158,"./signature":159}],114:[function(require,module,exports) {
+},{"hash.js":249,"../../elliptic":119,"./key":144,"./signature":143}],119:[function(require,module,exports) {
 'use strict';
 
 var elliptic = exports;
@@ -20350,7 +20350,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":119,"./elliptic/utils":128,"brorand":245,"./elliptic/curve":145,"./elliptic/curves":129,"./elliptic/ec":146,"./elliptic/eddsa":147}],267:[function(require,module,exports) {
+},{"../package.json":126,"./elliptic/utils":130,"brorand":189,"./elliptic/curve":134,"./elliptic/curves":131,"./elliptic/ec":135,"./elliptic/eddsa":136}],272:[function(require,module,exports) {
 
 var indexOf = [].indexOf;
 
@@ -20361,7 +20361,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],237:[function(require,module,exports) {
+},{}],242:[function(require,module,exports) {
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -20501,7 +20501,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":267}],235:[function(require,module,exports) {
+},{"indexof":272}],234:[function(require,module,exports) {
 var asn1 = require('../asn1');
 var inherits = require('inherits');
 
@@ -20564,7 +20564,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":211,"inherits":50,"vm":237}],252:[function(require,module,exports) {
+},{"../asn1":217,"inherits":64,"vm":242}],255:[function(require,module,exports) {
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -20687,7 +20687,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":50}],253:[function(require,module,exports) {
+},{"inherits":64}],256:[function(require,module,exports) {
 
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
@@ -20806,7 +20806,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"inherits":50,"../base":246,"buffer":17}],254:[function(require,module,exports) {
+},{"inherits":64,"../base":245,"buffer":22}],257:[function(require,module,exports) {
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
 var DecoderBuffer = require('../base').DecoderBuffer;
@@ -21442,7 +21442,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
   return /^[A-Za-z0-9 '\(\)\+,\-\.\/:=\?]*$/.test(str);
 };
 
-},{"../base":246,"minimalistic-assert":264}],246:[function(require,module,exports) {
+},{"../base":245,"minimalistic-assert":275}],245:[function(require,module,exports) {
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -21450,7 +21450,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-},{"./reporter":252,"./buffer":253,"./node":254}],255:[function(require,module,exports) {
+},{"./reporter":255,"./buffer":256,"./node":257}],258:[function(require,module,exports) {
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -21494,7 +21494,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-},{"../constants":247}],247:[function(require,module,exports) {
+},{"../constants":248}],248:[function(require,module,exports) {
 var constants = exports;
 
 // Helper
@@ -21515,7 +21515,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-},{"./der":255}],256:[function(require,module,exports) {
+},{"./der":258}],253:[function(require,module,exports) {
 var inherits = require('inherits');
 
 var asn1 = require('../../asn1');
@@ -21841,7 +21841,7 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"inherits":50,"../../asn1":211}],257:[function(require,module,exports) {
+},{"inherits":64,"../../asn1":217}],254:[function(require,module,exports) {
 
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
@@ -21893,13 +21893,13 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"inherits":50,"buffer":17,"./der":256}],248:[function(require,module,exports) {
+},{"inherits":64,"buffer":22,"./der":253}],246:[function(require,module,exports) {
 var decoders = exports;
 
 decoders.der = require('./der');
 decoders.pem = require('./pem');
 
-},{"./der":256,"./pem":257}],258:[function(require,module,exports) {
+},{"./der":253,"./pem":254}],251:[function(require,module,exports) {
 
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
@@ -22197,7 +22197,7 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"inherits":50,"buffer":17,"../../asn1":211}],259:[function(require,module,exports) {
+},{"inherits":64,"buffer":22,"../../asn1":217}],252:[function(require,module,exports) {
 var inherits = require('inherits');
 
 var DEREncoder = require('./der');
@@ -22220,13 +22220,13 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"inherits":50,"./der":258}],249:[function(require,module,exports) {
+},{"inherits":64,"./der":251}],247:[function(require,module,exports) {
 var encoders = exports;
 
 encoders.der = require('./der');
 encoders.pem = require('./pem');
 
-},{"./der":258,"./pem":259}],211:[function(require,module,exports) {
+},{"./der":251,"./pem":252}],217:[function(require,module,exports) {
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -22237,7 +22237,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-},{"bn.js":115,"./asn1/api":235,"./asn1/base":246,"./asn1/constants":247,"./asn1/decoders":248,"./asn1/encoders":249}],144:[function(require,module,exports) {
+},{"bn.js":120,"./asn1/api":234,"./asn1/base":245,"./asn1/constants":248,"./asn1/decoders":246,"./asn1/encoders":247}],159:[function(require,module,exports) {
 // from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
 // thanks to @Rantanen
 
@@ -22327,7 +22327,7 @@ var X509Certificate = asn.define('X509Certificate', function () {
 
 module.exports = X509Certificate
 
-},{"asn1.js":211}],137:[function(require,module,exports) {
+},{"asn1.js":217}],128:[function(require,module,exports) {
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 'use strict'
@@ -22451,7 +22451,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"asn1.js":211,"./certificate":144}],136:[function(require,module,exports) {
+},{"asn1.js":217,"./certificate":159}],127:[function(require,module,exports) {
 module.exports = {"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -22465,7 +22465,7 @@ module.exports = {"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 };
-},{}],138:[function(require,module,exports) {
+},{}],129:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
@@ -22498,7 +22498,7 @@ module.exports = function (okey, password) {
   }
 }
 
-},{"evp_bytestokey":113,"browserify-aes":133,"buffer":17}],120:[function(require,module,exports) {
+},{"evp_bytestokey":112,"browserify-aes":124,"buffer":22}],121:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -22607,7 +22607,7 @@ function decrypt (data, password) {
   return Buffer.concat(out)
 }
 
-},{"./asn1":137,"./aesid.json":136,"./fixProc":138,"browserify-aes":133,"pbkdf2":72,"buffer":17}],97:[function(require,module,exports) {
+},{"./asn1":128,"./aesid.json":127,"./fixProc":129,"browserify-aes":124,"pbkdf2":73,"buffer":22}],104:[function(require,module,exports) {
 module.exports = {
   "1.3.132.0.10": "secp256k1",
   "1.3.132.0.33": "p224",
@@ -22617,7 +22617,7 @@ module.exports = {
   "1.3.132.0.35": "p521"
 }
 ;
-},{}],89:[function(require,module,exports) {
+},{}],91:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -22765,7 +22765,7 @@ module.exports = sign
 module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
-},{"create-hmac":71,"browserify-rsa":121,"elliptic":114,"bn.js":115,"parse-asn1":120,"./curves.json":97,"buffer":17}],90:[function(require,module,exports) {
+},{"create-hmac":68,"browserify-rsa":122,"elliptic":119,"bn.js":120,"parse-asn1":121,"./curves.json":104,"buffer":22}],92:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = require('bn.js')
@@ -22851,7 +22851,7 @@ function checkValue (b, q) {
 
 module.exports = verify
 
-},{"bn.js":115,"elliptic":114,"parse-asn1":120,"./curves.json":97,"buffer":17}],79:[function(require,module,exports) {
+},{"bn.js":120,"elliptic":119,"parse-asn1":121,"./curves.json":104,"buffer":22}],74:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var createHash = require('create-hash')
 var stream = require('stream')
@@ -22945,7 +22945,7 @@ module.exports = {
   createVerify: createVerify
 }
 
-},{"create-hash":70,"stream":16,"inherits":50,"./sign":89,"./verify":90,"./algorithms.json":88,"buffer":17}],76:[function(require,module,exports) {
+},{"create-hash":69,"stream":21,"inherits":64,"./sign":91,"./verify":92,"./algorithms.json":90,"buffer":22}],77:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var elliptic = require('elliptic')
 var BN = require('bn.js')
@@ -23072,7 +23072,7 @@ function formatReturnValue (bn, enc, len) {
   }
 }
 
-},{"elliptic":114,"bn.js":115,"buffer":17}],92:[function(require,module,exports) {
+},{"elliptic":119,"bn.js":120,"buffer":22}],101:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -23090,7 +23090,7 @@ function i2ops(c) {
   out.writeUInt32BE(c,0);
   return out;
 }
-},{"create-hash":70,"buffer":17}],93:[function(require,module,exports) {
+},{"create-hash":69,"buffer":22}],102:[function(require,module,exports) {
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -23099,7 +23099,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-},{}],94:[function(require,module,exports) {
+},{}],103:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -23111,7 +23111,7 @@ function withPublic(paddedMsg, key) {
 }
 
 module.exports = withPublic;
-},{"bn.js":115,"buffer":17}],83:[function(require,module,exports) {
+},{"bn.js":120,"buffer":22}],88:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -23208,7 +23208,7 @@ function nonZero(len, crypto) {
   }
   return out;
 }
-},{"parse-asn1":120,"randombytes":73,"create-hash":70,"./mgf":92,"./xor":93,"bn.js":115,"./withPublic":94,"browserify-rsa":121,"buffer":17}],84:[function(require,module,exports) {
+},{"parse-asn1":121,"randombytes":72,"create-hash":69,"./mgf":101,"./xor":102,"bn.js":120,"./withPublic":103,"browserify-rsa":122,"buffer":22}],89:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -23318,7 +23318,7 @@ function compare(a, b){
   }
   return dif;
 }
-},{"parse-asn1":120,"./mgf":92,"./xor":93,"bn.js":115,"browserify-rsa":121,"create-hash":70,"./withPublic":94,"buffer":17}],77:[function(require,module,exports) {
+},{"parse-asn1":121,"./mgf":101,"./xor":102,"bn.js":120,"browserify-rsa":122,"create-hash":69,"./withPublic":103,"buffer":22}],76:[function(require,module,exports) {
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -23329,7 +23329,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-},{"./publicEncrypt":83,"./privateDecrypt":84}],78:[function(require,module,exports) {
+},{"./publicEncrypt":88,"./privateDecrypt":89}],75:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -23442,7 +23442,7 @@ function randomFillSync (buf, offset, size) {
   return actualFill(buf, offset, size)
 }
 
-},{"safe-buffer":111,"randombytes":73,"process":18}],49:[function(require,module,exports) {
+},{"safe-buffer":113,"randombytes":72,"process":23}],34:[function(require,module,exports) {
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -23541,7 +23541,7 @@ exports.constants = {
   'POINT_CONVERSION_HYBRID': 6
 }
 
-},{"randombytes":73,"create-hash":70,"create-hmac":71,"browserify-sign/algos":91,"pbkdf2":72,"browserify-cipher":74,"diffie-hellman":75,"browserify-sign":79,"create-ecdh":76,"public-encrypt":77,"randomfill":78}],23:[function(require,module,exports) {
+},{"randombytes":72,"create-hash":69,"create-hmac":68,"browserify-sign/algos":82,"pbkdf2":73,"browserify-cipher":70,"diffie-hellman":71,"browserify-sign":74,"create-ecdh":77,"public-encrypt":76,"randomfill":75}],12:[function(require,module,exports) {
 var process = require("process");
 var global = (1,eval)("this");
 var Buffer = require("buffer").Buffer;
@@ -30101,6050 +30101,7 @@ exports.valueAndGrad = valueAndGrad;
 exports.valueAndGrads = valueAndGrads;
 exports.variableGrads = variableGrads;
 //# sourceMappingURL=tf-core.esm.js.map
-},{"crypto":49,"process":18,"buffer":17}],64:[function(require,module,exports) {
-var process = require("process");
-var global = (1,eval)("this");
-var Buffer = require("buffer").Buffer;
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-/**
- * @license
- * Copyright 2018 Google LLC. All Rights Reserved.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * =============================================================================
- */
-var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (e, t) {
-  e.__proto__ = t;
-} || function (e, t) {
-  for (var n in t) t.hasOwnProperty(n) && (e[n] = t[n]);
-};function __extends(e, t) {
-  function n() {
-    this.constructor = e;
-  }extendStatics(e, t), e.prototype = null === t ? Object.create(t) : (n.prototype = t.prototype, new n());
-}function __decorate(e, t, n, r) {
-  var o,
-      a = arguments.length,
-      i = a < 3 ? t : null === r ? r = Object.getOwnPropertyDescriptor(t, n) : r;if ("object" == typeof Reflect && "function" == typeof Reflect.decorate) i = Reflect.decorate(e, t, n, r);else for (var s = e.length - 1; s >= 0; s--) (o = e[s]) && (i = (a < 3 ? o(i) : a > 3 ? o(t, n, i) : o(t, n)) || i);return a > 3 && i && Object.defineProperty(t, n, i), i;
-}function __awaiter(e, t, n, r) {
-  return new (n || (n = Promise))(function (o, a) {
-    function i(e) {
-      try {
-        u(r.next(e));
-      } catch (e) {
-        a(e);
-      }
-    }function s(e) {
-      try {
-        u(r.throw(e));
-      } catch (e) {
-        a(e);
-      }
-    }function u(e) {
-      e.done ? o(e.value) : new n(function (t) {
-        t(e.value);
-      }).then(i, s);
-    }u((r = r.apply(e, t || [])).next());
-  });
-}function __generator(e, t) {
-  var n,
-      r,
-      o,
-      a,
-      i = { label: 0, sent: function () {
-      if (1 & o[0]) throw o[1];return o[1];
-    }, trys: [], ops: [] };return a = { next: s(0), throw: s(1), return: s(2) }, "function" == typeof Symbol && (a[Symbol.iterator] = function () {
-    return this;
-  }), a;function s(a) {
-    return function (s) {
-      return function (a) {
-        if (n) throw new TypeError("Generator is already executing.");for (; i;) try {
-          if (n = 1, r && (o = 2 & a[0] ? r.return : a[0] ? r.throw || ((o = r.return) && o.call(r), 0) : r.next) && !(o = o.call(r, a[1])).done) return o;switch (r = 0, o && (a = [2 & a[0], o.value]), a[0]) {case 0:case 1:
-              o = a;break;case 4:
-              return i.label++, { value: a[1], done: !1 };case 5:
-              i.label++, r = a[1], a = [0];continue;case 7:
-              a = i.ops.pop(), i.trys.pop();continue;default:
-              if (!(o = (o = i.trys).length > 0 && o[o.length - 1]) && (6 === a[0] || 2 === a[0])) {
-                i = 0;continue;
-              }if (3 === a[0] && (!o || a[1] > o[0] && a[1] < o[3])) {
-                i.label = a[1];break;
-              }if (6 === a[0] && i.label < o[1]) {
-                i.label = o[1], o = a;break;
-              }if (o && i.label < o[2]) {
-                i.label = o[2], i.ops.push(a);break;
-              }o[2] && i.ops.pop(), i.trys.pop();continue;}a = t.call(e, i);
-        } catch (e) {
-          a = [6, e], r = 0;
-        } finally {
-          n = o = 0;
-        }if (5 & a[0]) throw a[1];return { value: a[0] ? a[1] : void 0, done: !0 };
-      }([a, s]);
-    };
-  }
-}function isMobile() {
-  var e = navigator.userAgent || navigator.vendor || window.opera;return (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(e) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(e.substr(0, 4))
-  );
-}function doc(e) {
-  return function () {
-    for (var e = [], t = 0; t < arguments.length; t++) e[t] = arguments[t];
-  };
-}function shuffle(e) {
-  for (var t = e.length, n = 0, r = 0; t > 0;) r = Math.random() * t | 0, n = e[--t], e[t] = e[r], e[r] = n;
-}function clamp(e, t, n) {
-  return Math.max(e, Math.min(t, n));
-}function randUniform(e, t) {
-  return Math.random() * (t - e) + e;
-}function distSquared(e, t) {
-  for (var n = 0, r = 0; r < e.length; r++) {
-    var o = Number(e[r]) - Number(t[r]);n += o * o;
-  }return n;
-}function assert(e, t) {
-  if (!e) throw new Error("string" == typeof t ? t : t());
-}function assertShapesMatch(e, t, n) {
-  void 0 === n && (n = ""), assert(arraysEqual(e, t), n + " Shapes " + e + " and " + t + " must match");
-}function assertNonNull(e) {
-  assert(null != e, "The input to the tensor constructor must be a non-null value.");
-}function flatten(e, t) {
-  if (void 0 === t && (t = []), Array.isArray(e)) for (var n = 0; n < e.length; ++n) flatten(e[n], t);else t.push(e);return t;
-}function inferShape(e) {
-  var t = e;if (isTypedArray(e)) return [e.length];if (!Array.isArray(e)) return [];for (var n = []; t instanceof Array;) n.push(t.length), t = t[0];return e instanceof Array && deepAssertShapeConsistency(e, n, []), n;
-}function deepAssertShapeConsistency(e, t, n) {
-  if (n = n || [], e instanceof Array) {
-    assert(t.length > 0, function () {
-      return "Element arr[" + n.join("][") + "] should be a primitive, but is an array of " + e.length + " elements";
-    }), assert(e.length === t[0], function () {
-      return "Element arr[" + n.join("][") + "] should have " + t[0] + " elements, but has " + e.length + " elements";
-    });for (var r = t.slice(1), o = 0; o < e.length; ++o) deepAssertShapeConsistency(e[o], r, n.concat(o));
-  } else assert(0 === t.length, function () {
-    return "Element arr[" + n.join("][") + "] is a primitive, but should be an array of " + t[0] + " elements";
-  });
-}function sizeFromShape(e) {
-  if (0 === e.length) return 1;for (var t = e[0], n = 1; n < e.length; n++) t *= e[n];return t;
-}function isScalarShape(e) {
-  return 0 === e.length;
-}function arraysEqual(e, t) {
-  if (e.length !== t.length) return !1;for (var n = 0; n < e.length; n++) if (e[n] !== t[n]) return !1;return !0;
-}function isInt(e) {
-  return e % 1 == 0;
-}function tanh(e) {
-  if (null != Math.tanh) return Math.tanh(e);if (e === 1 / 0) return 1;if (e === -1 / 0) return -1;var t = Math.exp(2 * e);return (t - 1) / (t + 1);
-}function sizeToSquarishShape(e) {
-  for (var t = Math.floor(Math.sqrt(e)); t > 1; --t) if (e % t == 0) return [t, e / t];return [1, e];
-}function createShuffledIndices(e) {
-  for (var t = new Uint32Array(e), n = 0; n < e; ++n) t[n] = n;return shuffle(t), t;
-}function rightPad(e, t) {
-  return t <= e.length ? e : e + " ".repeat(t - e.length);
-}function repeatedTry(e, t, n) {
-  return void 0 === t && (t = function (e) {
-    return 0;
-  }), new Promise(function (r, o) {
-    var a = 0,
-        i = function () {
-      if (e()) r();else {
-        var s = t(++a);null != n && a >= n ? o() : setTimeout(i, s);
-      }
-    };i();
-  });
-}function getQueryParams(e) {
-  var t = {};return e.replace(/[?&]([^=?&]+)(?:=([^&]*))?/g, function (e) {
-    for (var n = [], r = 1; r < arguments.length; r++) n[r - 1] = arguments[r];return decodeParam(t, n[0], n[1]), n.join("=");
-  }), t;
-}function decodeParam(e, t, n) {
-  e[decodeURIComponent(t)] = decodeURIComponent(n || "");
-}function inferFromImplicitShape(e, t) {
-  for (var n = 1, r = -1, o = 0; o < e.length; ++o) if (e[o] > 0) n *= e[o];else if (-1 === e[o]) {
-    if (-1 !== r) throw Error("Shapes can only have 1 implicit size. Found - 1 at dim " + r + " and dim " + o);r = o;
-  } else if (e[o] <= 0) throw Error("Shapes can not be <= 0. Found " + e[o] + " at dim " + o);if (-1 === r) {
-    if (t > 0 && t !== n) throw Error("Size(" + t + ") must match the product of shape " + e);return e;
-  }if (t % n != 0) throw Error("The implicit shape can't be a fractional number. Got " + t + " / " + n);var a = e.slice();return a[r] = t / n, a;
-}function squeezeShape(e, t) {
-  for (var n = [], r = [], o = 0, a = 0; a < e.length; ++a) {
-    if (null != t) {
-      if (t[o] === a && e[a] > 1) throw new Error("Can't squeeze axis " + a + " since its dim '" + e[a] + "' is not 1");(null == t[o] || t[o] > a) && 1 === e[a] && (n.push(e[a]), r.push(a)), t[o] <= a && o++;
-    }e[a] > 1 && (n.push(e[a]), r.push(a));
-  }return { newShape: n, keptDims: r };
-}function getTypedArrayFromDType(e, t) {
-  var n = null;if (null == e || "float32" === e) n = new Float32Array(t);else if ("int32" === e) n = new Int32Array(t);else {
-    if ("bool" !== e) throw new Error("Unknown data type " + e);n = new Uint8Array(t);
-  }return n;
-}function checkForNaN(e, t, n) {
-  if ("float32" === t) for (var r = 0; r < e.length; r++) if (isNaN(e[r])) throw Error("The result of the '" + n + "' has NaNs.");
-}function hasEncodingLoss(e, t) {
-  return "float32" !== t && ("int32" !== t || "float32" === e) && ("bool" !== t || "bool" !== e);
-}function copyTypedArray(e, t) {
-  if (null == t || "float32" === t) return new Float32Array(e);if ("int32" === t) return new Int32Array(e);if ("bool" === t) {
-    for (var n = new Uint8Array(e.length), r = 0; r < n.length; ++r) 0 !== Math.round(e[r]) && (n[r] = 1);return n;
-  }throw new Error("Unknown data type " + t);
-}function isTypedArray(e) {
-  return e instanceof Float32Array || e instanceof Int32Array || e instanceof Uint8Array;
-}function bytesPerElement(e) {
-  if ("float32" === e || "int32" === e) return 4;if ("bool" === e) return 1;throw new Error("Unknown dtype " + e);
-}function isFunction(e) {
-  return !!(e && e.constructor && e.call && e.apply);
-}function nearestDivisor(e, t) {
-  for (var n = t; n < e; ++n) if (e % n == 0) return n;return e;
-}function computeStrides(e) {
-  var t = e.length;if (t < 2) return [];var n = new Array(t - 1);n[t - 2] = e[t - 1];for (var r = t - 3; r >= 0; --r) n[r] = n[r + 1] * e[r + 1];return n;
-}function toTypedArray(e, t) {
-  return noConversionNeeded(e, t) ? e : (Array.isArray(e) && (e = flatten(e)), copyTypedArray(e, t));
-}function noConversionNeeded(e, t) {
-  return e instanceof Float32Array && "float32" === t || e instanceof Int32Array && "int32" === t || e instanceof Uint8Array && "bool" === t;
-}function makeOnesTypedArray(e, t) {
-  for (var n = makeZerosTypedArray(e, t), r = 0; r < n.length; r++) n[r] = 1;return n;
-}function makeZerosTypedArray(e, t) {
-  if (null == t || "float32" === t) return new Float32Array(e);if ("int32" === t) return new Int32Array(e);if ("bool" === t) return new Uint8Array(e);throw new Error("Unknown data type $ {dtype}");
-}function now() {
-  if ("undefined" != typeof performance) return performance.now();if ("undefined" != typeof process) {
-    var e = process.hrtime();return 1e3 * e[0] + e[1] / 1e6;
-  }throw new Error("Can not measure time in this environment. You should run tf.js in the browser or in Node.js");
-}var util = Object.freeze({ shuffle: shuffle, clamp: clamp, randUniform: randUniform, distSquared: distSquared, assert: assert, assertShapesMatch: assertShapesMatch, assertNonNull: assertNonNull, flatten: flatten, inferShape: inferShape, sizeFromShape: sizeFromShape, isScalarShape: isScalarShape, arraysEqual: arraysEqual, isInt: isInt, tanh: tanh, sizeToSquarishShape: sizeToSquarishShape, createShuffledIndices: createShuffledIndices, rightPad: rightPad, repeatedTry: repeatedTry, getQueryParams: getQueryParams, inferFromImplicitShape: inferFromImplicitShape, squeezeShape: squeezeShape, getTypedArrayFromDType: getTypedArrayFromDType, checkForNaN: checkForNaN, hasEncodingLoss: hasEncodingLoss, copyTypedArray: copyTypedArray, isTypedArray: isTypedArray, bytesPerElement: bytesPerElement, isFunction: isFunction, nearestDivisor: nearestDivisor, computeStrides: computeStrides, toTypedArray: toTypedArray, makeOnesTypedArray: makeOnesTypedArray, makeZerosTypedArray: makeZerosTypedArray, now: now }),
-    FORMAT_LIMIT_NUM_VALS = 20,
-    FORMAT_NUM_FIRST_LAST_VALS = 3,
-    FORMAT_NUM_SIG_DIGITS = 7;function tensorToString(e, t, n, r) {
-  var o = computeStrides(t),
-      a = computeMaxSizePerColumn(e, t, o),
-      i = t.length,
-      s = subTensorToString(e, t, o, a),
-      u = ["Tensor"];return r && (u.push("  dtype: " + n), u.push("  rank: " + i), u.push("  shape: [" + t + "]"), u.push("  values:")), u.push(s.map(function (e) {
-    return "    " + e;
-  }).join("\n")), u.join("\n");
-}function computeMaxSizePerColumn(e, t, n) {
-  var r = sizeFromShape(t),
-      o = n[n.length - 1],
-      a = new Array(o).fill(0);if (t.length > 1) for (var i = 0; i < r / o; i++) for (var s = i * o, u = 0; u < o; u++) a[u] = Math.max(a[u], valToString(e[s + u], 0).length);return a;
-}function valToString(e, t) {
-  return rightPad(parseFloat(e.toFixed(FORMAT_NUM_SIG_DIGITS)).toString(), t);
-}function subTensorToString(e, t, n, r, o) {
-  void 0 === o && (o = !0);var a = t[0],
-      i = t.length;if (0 === i) return [e[0].toString()];if (1 === i) {
-    if (a > FORMAT_LIMIT_NUM_VALS) {
-      var s = Array.from(e.subarray(0, FORMAT_NUM_FIRST_LAST_VALS)),
-          u = Array.from(e.subarray(a - FORMAT_NUM_FIRST_LAST_VALS, a));return ["[" + s.map(function (e, t) {
-        return valToString(e, r[t]);
-      }).join(", ") + ", ..., " + u.map(function (e, t) {
-        return valToString(e, r[a - FORMAT_NUM_FIRST_LAST_VALS + t]);
-      }).join(", ") + "]"];
-    }return ["[" + Array.from(e).map(function (e, t) {
-      return valToString(e, r[t]);
-    }).join(", ") + "]"];
-  }var c = t.slice(1),
-      l = n.slice(1),
-      d = n[0],
-      p = [];if (a > FORMAT_LIMIT_NUM_VALS) {
-    for (var h = 0; h < FORMAT_NUM_FIRST_LAST_VALS; h++) {
-      var f = (g = h * d) + d;p.push.apply(p, subTensorToString(e.subarray(g, f), c, l, r, !1));
-    }p.push("...");for (h = a - FORMAT_NUM_FIRST_LAST_VALS; h < a; h++) {
-      f = (g = h * d) + d;p.push.apply(p, subTensorToString(e.subarray(g, f), c, l, r, h === a - 1));
-    }
-  } else for (h = 0; h < a; h++) {
-    var g;f = (g = h * d) + d;p.push.apply(p, subTensorToString(e.subarray(g, f), c, l, r, h === a - 1));
-  }var m = 2 === i ? "," : "";p[0] = "[" + p[0] + m;for (h = 1; h < p.length - 1; h++) p[h] = " " + p[h] + m;var v = ",\n";for (h = 2; h < i; h++) v += "\n";return p[p.length - 1] = " " + p[p.length - 1] + "]" + (o ? "" : v), p;
-}var TensorBuffer = function () {
-  function e(e, t, n) {
-    if (this.dtype = t, null != n) {
-      var r = n.length,
-          o = sizeFromShape(e);assert(r === o, "Length of values '" + r + "' does not match the size inferred by the shape '" + o + "'");
-    }this.shape = e.slice(), this.values = n || getTypedArrayFromDType(t, sizeFromShape(e)), this.strides = computeStrides(e), this.size = sizeFromShape(e);
-  }return e.prototype.set = function (e) {
-    for (var t = [], n = 1; n < arguments.length; n++) t[n - 1] = arguments[n];0 === t.length && (t = [0]), assert(t.length === this.rank, "The number of provided coordinates (" + t.length + ") must match the rank (" + this.rank + ")");var r = this.locToIndex(t);this.values[r] = e;
-  }, e.prototype.get = function () {
-    for (var e = [], t = 0; t < arguments.length; t++) e[t] = arguments[t];0 === e.length && (e = [0]);for (var n = e[e.length - 1], r = 0; r < e.length - 1; ++r) n += this.strides[r] * e[r];return this.values[n];
-  }, e.prototype.locToIndex = function (e) {
-    if (0 === this.rank) return 0;if (1 === this.rank) return e[0];for (var t = e[e.length - 1], n = 0; n < e.length - 1; ++n) t += this.strides[n] * e[n];return t;
-  }, e.prototype.indexToLoc = function (e) {
-    if (0 === this.rank) return [];if (1 === this.rank) return [e];for (var t = new Array(this.shape.length), n = 0; n < t.length - 1; ++n) t[n] = Math.floor(e / this.strides[n]), e -= t[n] * this.strides[n];return t[t.length - 1] = e, t;
-  }, Object.defineProperty(e.prototype, "rank", { get: function () {
-      return this.shape.length;
-    }, enumerable: !0, configurable: !0 }), e.prototype.toTensor = function () {
-    return Tensor.make(this.shape, { values: this.values }, this.dtype);
-  }, __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e.prototype, "set", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e.prototype, "get", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e.prototype, "toTensor", null), e = __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e);
-}(),
-    trackerFn = null,
-    opHandler = null;function setTensorTracker(e) {
-  trackerFn = e;
-}function setOpHandler(e) {
-  opHandler = e;
-}var Tensor = function () {
-  function e(e, n, r, o) {
-    this.isDisposedInternal = !1, this.size = sizeFromShape(e), null != r && assert(this.size === r.length, "Constructing tensor of shape (" + this.size + ") should match the length of values (" + r.length + ")"), this.shape = e.slice(), this.dtype = n || "float32", this.strides = computeStrides(e), this.dataId = null != o ? o : {}, this.id = t.nextId++, this.rankType = this.rank < 5 ? this.rank.toString() : "higher", trackerFn().registerTensor(this), null != r && trackerFn().write(this.dataId, r);
-  }var t;return t = e, e.make = function (e, n, r) {
-    return new t(e, r, n.values, n.dataId);
-  }, e.prototype.flatten = function () {
-    return this.throwIfDisposed(), this.as1D();
-  }, e.prototype.asScalar = function () {
-    return this.throwIfDisposed(), assert(1 === this.size, "The array must have only 1 element."), this.reshape([]);
-  }, e.prototype.as1D = function () {
-    return this.throwIfDisposed(), this.reshape([this.size]);
-  }, e.prototype.as2D = function (e, t) {
-    return this.throwIfDisposed(), this.reshape([e, t]);
-  }, e.prototype.as3D = function (e, t, n) {
-    return this.throwIfDisposed(), this.reshape([e, t, n]);
-  }, e.prototype.as4D = function (e, t, n, r) {
-    return this.throwIfDisposed(), this.reshape([e, t, n, r]);
-  }, e.prototype.asType = function (e) {
-    return this.throwIfDisposed(), opHandler.cast(this, e);
-  }, Object.defineProperty(e.prototype, "rank", { get: function () {
-      return this.shape.length;
-    }, enumerable: !0, configurable: !0 }), e.prototype.get = function () {
-    for (var e = [], t = 0; t < arguments.length; t++) e[t] = arguments[t];assert(e.length === this.rank, "Number of coordinates in get() must match the rank of the tensor"), this.throwIfDisposed(), 0 === e.length && (e = [0]);for (var n = e[e.length - 1], r = 0; r < e.length - 1; ++r) n += this.strides[r] * e[r];return this.dataSync()[n];
-  }, e.prototype.buffer = function () {
-    return opHandler.buffer(this.shape, this.dtype, this.dataSync());
-  }, e.prototype.data = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (e) {
-        return this.throwIfDisposed(), [2, trackerFn().read(this.dataId)];
-      });
-    });
-  }, e.prototype.dataSync = function () {
-    return this.throwIfDisposed(), trackerFn().readSync(this.dataId);
-  }, e.prototype.dispose = function () {
-    this.isDisposed || (trackerFn().disposeTensor(this), this.isDisposedInternal = !0);
-  }, Object.defineProperty(e.prototype, "isDisposed", { get: function () {
-      return this.isDisposedInternal;
-    }, enumerable: !0, configurable: !0 }), e.prototype.throwIfDisposed = function () {
-    if (this.isDisposed) throw new Error("Tensor is disposed.");
-  }, e.prototype.toFloat = function () {
-    return this.asType("float32");
-  }, e.prototype.toInt = function () {
-    return this.asType("int32");
-  }, e.prototype.toBool = function () {
-    return this.asType("bool");
-  }, e.prototype.print = function (e) {
-    return void 0 === e && (e = !1), opHandler.print(this, e);
-  }, e.prototype.reshape = function (e) {
-    return this.throwIfDisposed(), opHandler.reshape(this, e);
-  }, e.prototype.reshapeAs = function (e) {
-    return this.throwIfDisposed(), this.reshape(e.shape);
-  }, e.prototype.expandDims = function (e) {
-    return void 0 === e && (e = 0), opHandler.expandDims(this, e);
-  }, e.prototype.cumsum = function (e, t, n) {
-    return void 0 === e && (e = 0), void 0 === t && (t = !1), void 0 === n && (n = !1), opHandler.cumsum(this, e, t, n);
-  }, e.prototype.squeeze = function (e) {
-    return this.throwIfDisposed(), opHandler.squeeze(this, e);
-  }, e.prototype.clone = function () {
-    return this.throwIfDisposed(), opHandler.clone(this);
-  }, e.prototype.toString = function (e) {
-    return void 0 === e && (e = !1), tensorToString(this.dataSync(), this.shape, this.dtype, e);
-  }, e.prototype.tile = function (e) {
-    return this.throwIfDisposed(), opHandler.tile(this, e);
-  }, e.prototype.gather = function (e, t) {
-    return void 0 === t && (t = 0), this.throwIfDisposed(), opHandler.gather(this, e, t);
-  }, e.prototype.matMul = function (e, t, n) {
-    return void 0 === t && (t = !1), void 0 === n && (n = !1), this.throwIfDisposed(), opHandler.matMul(this, e, t, n);
-  }, e.prototype.dot = function (e) {
-    return this.throwIfDisposed(), opHandler.dot(this, e);
-  }, e.prototype.norm = function (e, t, n) {
-    return void 0 === e && (e = "euclidean"), void 0 === t && (t = null), void 0 === n && (n = !1), this.throwIfDisposed(), opHandler.norm(this, e, t, n);
-  }, e.prototype.slice = function (e, t) {
-    return this.throwIfDisposed(), opHandler.slice(this, e, t);
-  }, e.prototype.reverse = function (e) {
-    return this.throwIfDisposed(), opHandler.reverse(this, e);
-  }, e.prototype.concat = function (e, t) {
-    return void 0 === t && (t = 0), this.throwIfDisposed(), opHandler.concat([this, e], t);
-  }, e.prototype.stack = function (e, t) {
-    return void 0 === t && (t = 0), opHandler.stack([this, e], t);
-  }, e.prototype.unstack = function (e, t) {
-    return void 0 === t && (t = 0), opHandler.unstack(this, t);
-  }, e.prototype.pad = function (e, t) {
-    return void 0 === t && (t = 0), opHandler.pad(this, e, t);
-  }, e.prototype.batchNormalization = function (e, t, n, r, o) {
-    return void 0 === n && (n = .001), this.throwIfDisposed(), opHandler.batchNormalization(this, e, t, n, r, o);
-  }, e.prototype.all = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.all(this, e, t);
-  }, e.prototype.any = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.any(this, e, t);
-  }, e.prototype.logSumExp = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.logSumExp(this, e, t);
-  }, e.prototype.sum = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.sum(this, e, t);
-  }, e.prototype.mean = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.mean(this, e, t);
-  }, e.prototype.min = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.min(this, e, t);
-  }, e.prototype.max = function (e, t) {
-    return void 0 === e && (e = null), void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.max(this, e, t);
-  }, e.prototype.argMin = function (e) {
-    return void 0 === e && (e = null), this.throwIfDisposed(), opHandler.argMin(this, e);
-  }, e.prototype.argMax = function (e) {
-    return void 0 === e && (e = null), this.throwIfDisposed(), opHandler.argMax(this, e);
-  }, e.prototype.cast = function (e) {
-    return this.throwIfDisposed(), opHandler.cast(this, e);
-  }, e.prototype.add = function (e) {
-    return this.throwIfDisposed(), opHandler.add(this, e);
-  }, e.prototype.addStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.addStrict(this, e);
-  }, e.prototype.sub = function (e) {
-    return this.throwIfDisposed(), opHandler.sub(this, e);
-  }, e.prototype.subStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.subStrict(this, e);
-  }, e.prototype.pow = function (e) {
-    return this.throwIfDisposed(), opHandler.pow(this, e);
-  }, e.prototype.powStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.powStrict(this, e);
-  }, e.prototype.mul = function (e) {
-    return this.throwIfDisposed(), opHandler.mul(this, e);
-  }, e.prototype.mulStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.mulStrict(this, e);
-  }, e.prototype.div = function (e) {
-    return this.throwIfDisposed(), opHandler.div(this, e);
-  }, e.prototype.floorDiv = function (e) {
-    return this.throwIfDisposed(), opHandler.floorDiv(this, e);
-  }, e.prototype.divStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.divStrict(this, e);
-  }, e.prototype.minimum = function (e) {
-    return this.throwIfDisposed(), opHandler.minimum(this, e);
-  }, e.prototype.minimumStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.minimumStrict(this, e);
-  }, e.prototype.maximum = function (e) {
-    return this.throwIfDisposed(), opHandler.maximum(this, e);
-  }, e.prototype.maximumStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.maximumStrict(this, e);
-  }, e.prototype.mod = function (e) {
-    return this.throwIfDisposed(), opHandler.mod(this, e);
-  }, e.prototype.modStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.modStrict(this, e);
-  }, e.prototype.squaredDifference = function (e) {
-    return this.throwIfDisposed(), opHandler.squaredDifference(this, e);
-  }, e.prototype.squaredDifferenceStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.squaredDifferenceStrict(this, e);
-  }, e.prototype.transpose = function (e) {
-    return this.throwIfDisposed(), opHandler.transpose(this, e);
-  }, e.prototype.notEqual = function (e) {
-    return this.throwIfDisposed(), opHandler.notEqual(this, e);
-  }, e.prototype.notEqualStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.notEqualStrict(this, e);
-  }, e.prototype.less = function (e) {
-    return this.throwIfDisposed(), opHandler.less(this, e);
-  }, e.prototype.lessStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.lessStrict(this, e);
-  }, e.prototype.equal = function (e) {
-    return this.throwIfDisposed(), opHandler.equal(this, e);
-  }, e.prototype.equalStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.equalStrict(this, e);
-  }, e.prototype.lessEqual = function (e) {
-    return this.throwIfDisposed(), opHandler.lessEqual(this, e);
-  }, e.prototype.lessEqualStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.lessEqualStrict(this, e);
-  }, e.prototype.greater = function (e) {
-    return this.throwIfDisposed(), opHandler.greater(this, e);
-  }, e.prototype.greaterStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.greaterStrict(this, e);
-  }, e.prototype.greaterEqual = function (e) {
-    return this.throwIfDisposed(), opHandler.greaterEqual(this, e);
-  }, e.prototype.greaterEqualStrict = function (e) {
-    return this.throwIfDisposed(), opHandler.greaterEqualStrict(this, e);
-  }, e.prototype.logicalAnd = function (e) {
-    return this.throwIfDisposed(), opHandler.logicalAnd(this, e);
-  }, e.prototype.logicalOr = function (e) {
-    return this.throwIfDisposed(), opHandler.logicalOr(this, e);
-  }, e.prototype.logicalNot = function () {
-    return this.throwIfDisposed(), opHandler.logicalNot(this);
-  }, e.prototype.logicalXor = function (e) {
-    return this.throwIfDisposed(), opHandler.logicalXor(this, e);
-  }, e.prototype.where = function (e, t) {
-    return this.throwIfDisposed(), opHandler.where(e, this, t);
-  }, e.prototype.neg = function () {
-    return this.throwIfDisposed(), opHandler.neg(this);
-  }, e.prototype.ceil = function () {
-    return this.throwIfDisposed(), opHandler.ceil(this);
-  }, e.prototype.floor = function () {
-    return this.throwIfDisposed(), opHandler.floor(this);
-  }, e.prototype.sign = function () {
-    return this.throwIfDisposed(), opHandler.sign(this);
-  }, e.prototype.exp = function () {
-    return this.throwIfDisposed(), opHandler.exp(this);
-  }, e.prototype.expm1 = function () {
-    return this.throwIfDisposed(), opHandler.expm1(this);
-  }, e.prototype.log = function () {
-    return this.throwIfDisposed(), opHandler.log(this);
-  }, e.prototype.log1p = function () {
-    return this.throwIfDisposed(), opHandler.log1p(this);
-  }, e.prototype.sqrt = function () {
-    return this.throwIfDisposed(), opHandler.sqrt(this);
-  }, e.prototype.rsqrt = function () {
-    return this.throwIfDisposed(), opHandler.rsqrt(this);
-  }, e.prototype.square = function () {
-    return this.throwIfDisposed(), opHandler.square(this);
-  }, e.prototype.reciprocal = function () {
-    return this.throwIfDisposed(), opHandler.reciprocal(this);
-  }, e.prototype.abs = function () {
-    return this.throwIfDisposed(), opHandler.abs(this);
-  }, e.prototype.clipByValue = function (e, t) {
-    return this.throwIfDisposed(), opHandler.clipByValue(this, e, t);
-  }, e.prototype.relu = function () {
-    return this.throwIfDisposed(), opHandler.relu(this);
-  }, e.prototype.elu = function () {
-    return this.throwIfDisposed(), opHandler.elu(this);
-  }, e.prototype.selu = function () {
-    return this.throwIfDisposed(), opHandler.selu(this);
-  }, e.prototype.leakyRelu = function (e) {
-    return void 0 === e && (e = .2), this.throwIfDisposed(), opHandler.leakyRelu(this, e);
-  }, e.prototype.prelu = function (e) {
-    return this.throwIfDisposed(), opHandler.prelu(this, e);
-  }, e.prototype.sigmoid = function () {
-    return this.throwIfDisposed(), opHandler.sigmoid(this);
-  }, e.prototype.logSigmoid = function () {
-    return this.throwIfDisposed(), opHandler.logSigmoid(this);
-  }, e.prototype.softplus = function () {
-    return this.throwIfDisposed(), opHandler.softplus(this);
-  }, e.prototype.sin = function () {
-    return this.throwIfDisposed(), opHandler.sin(this);
-  }, e.prototype.cos = function () {
-    return this.throwIfDisposed(), opHandler.cos(this);
-  }, e.prototype.tan = function () {
-    return this.throwIfDisposed(), opHandler.tan(this);
-  }, e.prototype.asin = function () {
-    return this.throwIfDisposed(), opHandler.asin(this);
-  }, e.prototype.acos = function () {
-    return this.throwIfDisposed(), opHandler.acos(this);
-  }, e.prototype.atan = function () {
-    return this.throwIfDisposed(), opHandler.atan(this);
-  }, e.prototype.sinh = function () {
-    return this.throwIfDisposed(), opHandler.sinh(this);
-  }, e.prototype.cosh = function () {
-    return this.throwIfDisposed(), opHandler.cosh(this);
-  }, e.prototype.tanh = function () {
-    return this.throwIfDisposed(), opHandler.tanh(this);
-  }, e.prototype.asinh = function () {
-    return this.throwIfDisposed(), opHandler.asinh(this);
-  }, e.prototype.acosh = function () {
-    return this.throwIfDisposed(), opHandler.acosh(this);
-  }, e.prototype.atanh = function () {
-    return this.throwIfDisposed(), opHandler.atanh(this);
-  }, e.prototype.erf = function () {
-    return this.throwIfDisposed(), opHandler.erf(this);
-  }, e.prototype.round = function () {
-    return this.throwIfDisposed(), opHandler.round(this);
-  }, e.prototype.step = function (e) {
-    return void 0 === e && (e = 0), this.throwIfDisposed(), opHandler.step(this, e);
-  }, e.prototype.softmax = function (e) {
-    return void 0 === e && (e = -1), this.throwIfDisposed(), opHandler.softmax(this, e);
-  }, e.prototype.resizeBilinear = function (e, t) {
-    return void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.image.resizeBilinear(this, e, t);
-  }, e.prototype.resizeNearestNeighbor = function (e, t) {
-    return void 0 === t && (t = !1), this.throwIfDisposed(), opHandler.image.resizeNearestNeighbor(this, e, t);
-  }, e.prototype.conv1d = function (e, t, n, r, o, a) {
-    return void 0 === r && (r = "NWC"), void 0 === o && (o = 1), this.throwIfDisposed(), opHandler.conv1d(this, e, t, n, r, o, a);
-  }, e.prototype.conv2d = function (e, t, n, r, o, a) {
-    return void 0 === r && (r = "NHWC"), void 0 === o && (o = [1, 1]), this.throwIfDisposed(), opHandler.conv2d(this, e, t, n, r, o, a);
-  }, e.prototype.conv2dTranspose = function (e, t, n, r, o) {
-    return this.throwIfDisposed(), opHandler.conv2dTranspose(this, e, t, n, r, o);
-  }, e.prototype.depthwiseConv2D = function (e, t, n, r, o, a) {
-    return void 0 === r && (r = "NHWC"), void 0 === o && (o = [1, 1]), this.throwIfDisposed(), opHandler.depthwiseConv2d(this, e, t, n, r, o, a);
-  }, e.prototype.avgPool = function (e, t, n, r) {
-    return this.throwIfDisposed(), opHandler.avgPool(this, e, t, n, r);
-  }, e.prototype.maxPool = function (e, t, n, r) {
-    return this.throwIfDisposed(), opHandler.maxPool(this, e, t, n, r);
-  }, e.prototype.localResponseNormalization = function (e, t, n, r) {
-    return void 0 === e && (e = 5), void 0 === t && (t = 1), void 0 === n && (n = 1), void 0 === r && (r = .5), opHandler.localResponseNormalization(this, e, t, n, r);
-  }, e.prototype.variable = function (e, t, n) {
-    return void 0 === e && (e = !0), this.throwIfDisposed(), Variable.variable(this, e, t, n);
-  }, e.prototype.unsortedSegmentSum = function (e, t) {
-    return this.throwIfDisposed(), opHandler.unsortedSegmentSum(this, e, t);
-  }, e.nextId = 0, __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "flatten", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "asScalar", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "as1D", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "as2D", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "as3D", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "as4D", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "asType", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "buffer", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "data", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "dataSync", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "dispose", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "toFloat", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "toInt", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "toBool", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "print", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "reshape", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "reshapeAs", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "expandDims", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "cumsum", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "squeeze", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "clone", null), __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e.prototype, "toString", null), e = t = __decorate([doc({ heading: "Tensors", subheading: "Classes" })], e);
-}(),
-    Variable = function (e) {
-  function t(t, r, o) {
-    void 0 === r && (r = !0);var a = e.call(this, t.shape, t.dtype, null, t.dataId) || this;a.trainable = r, a.name = o, null == a.name && (a.name = n.nextVarId.toString(), n.nextVarId++);try {
-      trackerFn().registerVariable(a);
-    } catch (e) {
-      throw trackerFn().disposeTensor(a), e;
-    }return a;
-  }var n;return __extends(t, e), n = t, t.variable = function (e, t, r, o) {
-    return void 0 === t && (t = !0), null != o && o !== e.dtype && (e = e.asType(o)), new n(e, t, r);
-  }, t.prototype.assign = function (e) {
-    if (e.dtype !== this.dtype) throw new Error("dtype of the new value (" + e.dtype + ") and previous value (" + this.dtype + ") must match");if (!arraysEqual(e.shape, this.shape)) throw new Error("shape of the new value (" + e.shape + ") and previous value (" + this.shape + ") must match");trackerFn().disposeTensor(this), this.dataId = e.dataId, trackerFn().registerTensor(this);
-  }, t.nextVarId = 0, __decorate([doc({ heading: "Tensors", subheading: "Classes" })], t.prototype, "assign", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], t, "variable", null), t = n = __decorate([doc({ heading: "Tensors", subheading: "Classes" })], t);
-}(Tensor),
-    variable = Variable.variable;function assertTypesMatch(e, t) {
-  assert(e.dtype === t.dtype, " The dtypes of the first(" + e.dtype + ") and second(" + t.dtype + ") input must match");
-}function convertToTensor(e, t, n, r) {
-  if (void 0 === r && (r = "float32"), r = r || "float32", e instanceof Tensor) return e;if (!isTypedArray(e) && !Array.isArray(e) && "number" != typeof e && "boolean" != typeof e) throw new Error("Argument '" + t + "' passed to '" + n + "' must be a Tensor or TensorLike, but got " + e.constructor.name);var o = inferShape(e);return isTypedArray(e) || Array.isArray(e) || (e = [e]), Tensor.make(o, { values: toTypedArray(e, r) }, r);
-}function convertToTensorArray(e, t, n) {
-  if (!Array.isArray(e)) throw new Error("Argument " + t + " passed to " + n + " must be a `Tensor[]` or `TensorLike[]`");return e.map(function (e, r) {
-    return convertToTensor(e, t + "[" + r + "]", n);
-  });
-}function isTensorInList(e, t) {
-  for (var n = 0; n < t.length; n++) if (t[n].id === e.id) return !0;return !1;
-}function getTensorsInContainer(e) {
-  var t = [];return walkTensorContainer(e, t, new Set()), t;
-}function walkTensorContainer(e, t, n) {
-  if (null != e) if (e instanceof Tensor) t.push(e);else if (isIterable(e)) {
-    var r = e;for (var o in r) {
-      var a = r[o];n.has(a) || (n.add(a), walkTensorContainer(a, t, n));
-    }
-  }
-}function isIterable(e) {
-  return Array.isArray(e) || "object" == typeof e;
-}var TensorOps = function () {
-  function e() {}return e.tensor = function (e, t, n) {
-    if (void 0 === n && (n = "float32"), !isTypedArray(e) && !Array.isArray(e) && "number" != typeof e && "boolean" != typeof e) throw new Error("values passed to tensor(values) must be an array of numbers or booleans, or a TypedArray");var r = inferShape(e);return null != t && 1 !== r.length && assertShapesMatch(t, r, "Error creating a new Tensor. Inferred shape (" + r + ") does not match the provided shape (" + t + "). "), isTypedArray(e) || Array.isArray(e) || (e = [e]), t = t || r, Tensor.make(t, { values: toTypedArray(e, n) }, n);
-  }, e.scalar = function (t, n) {
-    if (void 0 === n && (n = "float32"), isTypedArray(t) || Array.isArray(t)) throw new Error("Error creating a new Scalar: value must be a primitive (number|boolean)");return e.tensor(t, [], n);
-  }, e.tensor1d = function (t, n) {
-    void 0 === n && (n = "float32"), assertNonNull(t);var r = inferShape(t);if (1 !== r.length) throw new Error("tensor1d() requires values to be a flat/TypedArray");return e.tensor(t, r, n);
-  }, e.tensor2d = function (t, n, r) {
-    if (void 0 === r && (r = "float32"), assertNonNull(t), null != n && 2 !== n.length) throw new Error("tensor2d() requires shape to have two numbers");var o = inferShape(t);if (2 !== o.length && 1 !== o.length) throw new Error("tensor2d() requires values to be number[][] or flat/TypedArray");if (1 === o.length && null == n) throw new Error("tensor2d() requires shape to be provided when `values` are a flat/TypedArray");return n = n || o, e.tensor(t, n, r);
-  }, e.tensor3d = function (t, n, r) {
-    if (void 0 === r && (r = "float32"), assertNonNull(t), null != n && 3 !== n.length) throw new Error("tensor3d() requires shape to have three numbers");var o = inferShape(t);if (3 !== o.length && 1 !== o.length) throw new Error("tensor3d() requires values to be number[][][] or flat/TypedArray");if (1 === o.length && null == n) throw new Error("tensor3d() requires shape to be provided when `values` are a flat array");return n = n || o, e.tensor(t, n, r);
-  }, e.tensor4d = function (t, n, r) {
-    if (void 0 === r && (r = "float32"), assertNonNull(t), null != n && 4 !== n.length) throw new Error("tensor4d() requires shape to have four numbers");var o = inferShape(t);if (4 !== o.length && 1 !== o.length) throw new Error("tensor4d() requires values to be number[][][][] or flat/TypedArray");if (1 === o.length && null == n) throw new Error("tensor4d() requires shape to be provided when `values` are a flat array");return n = n || o, e.tensor(t, n, r);
-  }, e.tensor5d = function (t, n, r) {
-    if (void 0 === r && (r = "float32"), assertNonNull(t), null != n && 5 !== n.length) throw new Error("tensor5d() requires shape to have five numbers");var o = inferShape(t);if (5 !== o.length && 1 !== o.length) throw new Error("tensor5d() requires values to be number[][][][][] or flat/TypedArray");if (1 === o.length && null == n) throw new Error("tensor5d() requires shape to be provided when `values` are a flat array");return n = n || o, e.tensor(t, n, r);
-  }, e.tensor6d = function (t, n, r) {
-    if (void 0 === r && (r = "float32"), assertNonNull(t), null != n && 6 !== n.length) throw new Error("tensor6d() requires shape to have six numbers");var o = inferShape(t);if (6 !== o.length && 1 !== o.length) throw new Error("tensor6d() requires values to be number[][][][] or flat/TypedArray");if (1 === o.length && null == n) throw new Error("tensor6d() requires shape to be provided when `values` are a flat array");return n = n || o, e.tensor(t, n, r);
-  }, e.ones = function (e, t) {
-    void 0 === t && (t = "float32");var n = makeOnesTypedArray(sizeFromShape(e), t);return Tensor.make(e, { values: n }, t);
-  }, e.zeros = function (e, t) {
-    void 0 === t && (t = "float32");var n = makeZerosTypedArray(sizeFromShape(e), t);return Tensor.make(e, { values: n }, t);
-  }, e.fill = function (e, t, n) {
-    void 0 === n && (n = "float32");var r = getTypedArrayFromDType(n, sizeFromShape(e));return r.fill(t), Tensor.make(e, { values: r }, n);
-  }, e.onesLike = function (t) {
-    var n = convertToTensor(t, "x", "onesLike");return e.ones(n.shape, n.dtype);
-  }, e.zerosLike = function (t) {
-    var n = convertToTensor(t, "x", "zerosLike");return e.zeros(n.shape, n.dtype);
-  }, e.linspace = function (t, n, r) {
-    if (0 === r) throw new Error("Cannot request zero samples");var o = (n - t) / (r - 1),
-        a = makeZerosTypedArray(r, "float32");a[0] = t;for (var i = 1; i < a.length; i++) a[i] = a[i - 1] + o;return e.tensor1d(a, "float32");
-  }, e.range = function (t, n, r, o) {
-    if (void 0 === r && (r = 1), void 0 === o && (o = "float32"), 0 === r) throw new Error("Cannot have a step of zero");if (t === n || t < n && r < 0 || n < t && r > 1) return e.zeros([0], o);var a = makeZerosTypedArray(Math.abs(Math.ceil((n - t) / r)), o);n < t && 1 === r && (r = -1), a[0] = t;for (var i = 1; i < a.length; i++) a[i] = a[i - 1] + r;return e.tensor1d(a, o);
-  }, __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "scalar", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor1d", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor2d", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor3d", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor4d", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor5d", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "tensor6d", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "ones", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "zeros", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "fill", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "onesLike", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "zerosLike", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "linspace", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "range", null), e;
-}(),
-    Profiler = function () {
-  function e(e, t) {
-    this.backendTimer = e, this.logger = t, null == t && (this.logger = new Logger());
-  }return e.prototype.profileKernel = function (e, t) {
-    var n,
-        r = this,
-        o = this.backendTimer.time(function () {
-      n = t();
-    }),
-        a = n.dataSync();return checkForNaN(a, n.dtype, e), o.then(function (t) {
-      r.logger.logKernelProfile(e, n, a, t.kernelMs);
-    }), n;
-  }, e;
-}(),
-    Logger = function () {
-  function e() {}return e.prototype.logKernelProfile = function (e, t, n, r) {
-    var o = rightPad(r + "ms", 9),
-        a = rightPad(e, 25),
-        i = t.rank,
-        s = t.size,
-        u = rightPad(t.shape.toString(), 14);console.log("%c" + a + "\t%c" + o + "\t%c" + i + "D " + u + "\t%c" + s, "font-weight:bold", "color:red", "color:blue", "color: orange");
-  }, e;
-}();function getFilteredNodesXToY(e, t, n) {
-  for (var r = {}, o = {}, a = 0; a < t.length; a++) r[t[a].id] = !0;for (a = 0; a < e.length; a++) {
-    var i = (g = e[a]).inputs;for (var s in i) {
-      for (var u = i[s], c = !1, l = 0; l < t.length; l++) if (r[u.id]) {
-        r[g.output.id] = !0, c = !0, o[g.id] = !0;break;
-      }if (c) break;
-    }
-  }var d = {};d[n.id] = !0;var p = {};for (a = e.length - 1; a >= 0; a--) {
-    i = (g = e[a]).inputs;var h = [];h.push(g.output);for (l = 0; l < h.length; l++) if (d[h[l].id]) {
-      for (var s in i) d[i[s].id] = !0, p[g.id] = !0;break;
-    }
-  }var f = [];for (a = 0; a < e.length; a++) {
-    var g;if (o[(g = e[a]).id] && p[g.id]) {
-      var m = {};for (var s in g.inputs) {
-        var v = g.inputs[s];r[v.id] && (m[s] = v);
-      }var y = Object.assign({}, g);y.inputs = m, y.output = g.output, f.push(y);
-    }
-  }return f;
-}function backpropagateGradients(e, t) {
-  for (var n = t.length - 1; n >= 0; n--) {
-    var r = t[n],
-        o = e[r.output.id];if (null == r.gradient) throw new Error("Cannot compute gradient: gradient function not found for " + r.name + ".");var a = r.gradient(o);for (var i in r.inputs) {
-      if (!(i in a)) throw new Error("Cannot backprop through input " + i + ". Available gradients found: " + Object.keys(a) + ".");var s = a[i](),
-          u = r.inputs[i];if (!arraysEqual(s.shape, u.shape)) throw new Error("Error in gradient for op " + r.name + ". The gradient of input '" + i + "' has shape '" + s.shape + "', which does not match the shape of the input '" + u.shape + "'");if (null == e[u.id]) e[u.id] = s;else {
-        var c = e[u.id];e[u.id] = c.add(s), c.dispose();
-      }
-    }
-  }
-}var Type,
-    Engine = function () {
-  function e(e, t, n) {
-    this.backend = e, this.safeMode = t, this.debugMode = n, this.registeredVariables = {}, this.refCounter = new WeakMap(), this.nextTapeNodeId = 0, this.numBytes = 0, this.numTensors = 0, this.numDataBuffers = 0, this.gradientScopeCount = 0, this.customGradientDepth = 0, this.keepTensors = new Set(), this.activeScope = { track: [] }, this.scopeStack = [this.activeScope], this.profiler = new Profiler(e);
-  }return e.prototype.tidy = function (e, t, n) {
-    var r = this;void 0 === n && (n = !1);var o,
-        a = null;if (null == t) {
-      if ("function" != typeof e) throw new Error("Please provide a function to tidy()");t = e;
-    } else {
-      if ("string" != typeof e && !(e instanceof String)) throw new Error("When calling with two arguments, the first argument to tidy() must be a string");if ("function" != typeof t) throw new Error("When calling with two arguments, the 2nd argument to tidy() must be a function");a = e;
-    }return this.scopedRun(function () {
-      return r.startScope(a, n);
-    }, function () {
-      return r.endScope(o, n);
-    }, function () {
-      return (o = t()) instanceof Promise && console.error("Cannot return a Promise inside of tidy."), o;
-    });
-  }, e.prototype.scopedRun = function (e, t, n) {
-    e();try {
-      var r = n();return t(), r;
-    } catch (e) {
-      throw t(), e;
-    }
-  }, e.prototype.runKernel = function (e, t, n) {
-    var r,
-        o = this,
-        a = [],
-        i = function (e) {
-      return a.push(e), e;
-    },
-        s = this.activeScope.name;if (this.scopedRun(function () {
-      return o.customGradientDepth++;
-    }, function () {
-      return o.customGradientDepth--;
-    }, function () {
-      r = o.debugMode() ? o.profiler.profileKernel(s, function () {
-        return e(o.backend, i);
-      }) : e(o.backend, i);
-    }), this.shouldRecord()) {
-      var u = { id: this.nextTapeNodeId++, name: s, inputs: t, output: r };null != n && (u.gradient = function (e) {
-        return n(e, a);
-      }), this.activeTape.push(u);
-    }return r;
-  }, e.prototype.registerTensor = function (e) {
-    var t = this.refCounter.has(e.dataId) ? this.refCounter.get(e.dataId) : 0;this.numTensors++, 0 === t && (this.numDataBuffers++, this.numBytes += sizeFromShape(e.shape) * bytesPerElement(e.dtype), this.backend.register(e.dataId, e.shape, e.dtype)), this.refCounter.set(e.dataId, t + 1), e instanceof Variable || this.track(e);
-  }, e.prototype.registerVariable = function (e) {
-    if (null != this.registeredVariables[e.name]) throw new Error("Variable with name " + e.name + " was already registered");this.registeredVariables[e.name] = e;
-  }, e.prototype.disposeTensor = function (e) {
-    if (this.refCounter.has(e.dataId)) {
-      this.keepTensors.has(e.id) && this.keepTensors.delete(e.id), this.numTensors--;var t = this.refCounter.get(e.dataId);t <= 1 ? (this.refCounter.delete(e.dataId), this.backend.disposeData(e.dataId), this.numDataBuffers--, this.numBytes -= sizeFromShape(e.shape) * bytesPerElement(e.dtype)) : this.refCounter.set(e.dataId, t - 1);
-    }
-  }, e.prototype.disposeVariables = function () {
-    for (var e in this.registeredVariables) {
-      var t = this.registeredVariables[e];this.disposeTensor(t), delete this.registeredVariables[e];
-    }
-  }, e.prototype.memory = function () {
-    var e = this.backend.memory();return e.numTensors = this.numTensors, e.numDataBuffers = this.numDataBuffers, e.numBytes = this.numBytes, e;
-  }, e.prototype.shouldRecord = function () {
-    return null != this.activeTape && 0 === this.customGradientDepth;
-  }, e.prototype.addTapeNode = function (e, t, n) {
-    var r = {};e.forEach(function (e, t) {
-      r[t] = e;
-    });var o = { id: this.nextTapeNodeId++, name: this.activeScope.name, inputs: r, output: t, gradient: function (e) {
-        var t = {};return n(e).forEach(function (e, n) {
-          t[n] = function () {
-            return e;
-          };
-        }), t;
-      } };this.activeTape.push(o);
-  }, e.prototype.keep = function (e) {
-    if (1 === this.scopeStack.length && this.safeMode) throw new Error("Safe mode is ON. Enclose all tensor operations inside tf.tidy(): tf.tidy(() => {...}) to avoid memory leaks.");return this.keepTensors.add(e.id), e;
-  }, e.prototype.startScope = function (e, t) {
-    void 0 === t && (t = !1), t && 0 === this.gradientScopeCount && (this.activeTape = []), t && this.gradientScopeCount++;var n = { track: [] };e && (n.name = e), this.scopeStack.push(n), this.activeScope = n;
-  }, e.prototype.endScope = function (e, t) {
-    var n = this;void 0 === t && (t = !1), t && (this.gradientScopeCount--, 0 === this.gradientScopeCount && (this.activeTape = null));var r = new Set(this.keepTensors),
-        o = getTensorsInContainer(e);o.forEach(function (e) {
-      return r.add(e.id);
-    });for (var a = 0; a < this.activeScope.track.length; a++) {
-      var i = this.activeScope.track[a];r.has(i.id) || (null != this.activeTape ? o.push(i) : i.dispose());
-    }var s = this.scopeStack.pop();this.activeScope = 0 === this.scopeStack.length ? { track: [] } : this.scopeStack[this.scopeStack.length - 1], o.forEach(function (e) {
-      !n.keepTensors.has(e.id) && isTensorInList(e, s.track) && n.track(e);
-    });
-  }, e.prototype.gradients = function (e, t, n, r) {
-    var o = this;return void 0 === r && (r = !1), assert(t.length > 0, "gradients() received an empty list of xs."), this.tidy("gradients", function () {
-      var a = e();assert(a instanceof Tensor, "The result y returned by f() must be a tensor.");var i = getFilteredNodesXToY(o.activeTape, t, a);if (!r && 0 === i.length && t.length > 0) throw new Error("Cannot compute gradient of y=f(x) with respect to x. Make sure that the f you passed encloses all operations that lead from x to y.");var s = {};return s[a.id] = null == n ? TensorOps.ones(a.shape) : n, backpropagateGradients(s, i), { value: a, grads: t.map(function (e) {
-          return s[e.id];
-        }) };
-    }, !0);
-  }, e.prototype.customGrad = function (e) {
-    var t = this;return assert(isFunction(e), "The f passed in customGrad(f) must be a function."), function () {
-      for (var n, r, o = [], a = 0; a < arguments.length; a++) o[a] = arguments[a];if (assert(o.every(function (e) {
-        return e instanceof Tensor;
-      }), "The args passed in customGrad(f)(x1, x2,...) must all be tensors"), t.scopedRun(function () {
-        return t.customGradientDepth++;
-      }, function () {
-        return t.customGradientDepth--;
-      }, function () {
-        r = t.tidy(e.name, function () {
-          var t = e.apply(void 0, o),
-              r = t.value,
-              a = t.gradFunc;return assert(r instanceof Tensor, "The function f passed in customGrad(f) must return an object where `obj.value` is a tensor"), assert(isFunction(a), "The function f passed in customGrad(f) must return an object where `obj.gradFunc` is a function."), n = a, r;
-        }, !0);
-      }), t.shouldRecord()) {
-        t.addTapeNode(o, r, function (e) {
-          var t = n(e),
-              r = Array.isArray(t) ? t : [t];return assert(r.length === o.length, "The function f passed in customGrad(f) must return an object where `obj.gradFunc` is a function that returns the same number of tensors as inputs passed to f(...)."), assert(r.every(function (e) {
-            return e instanceof Tensor;
-          }), "The function f passed in customGrad(f) must return an object where `obj.gradFunc` is a function that returns a list of only tensors."), r;
-        });
-      }return r;
-    };
-  }, e.prototype.write = function (e, t) {
-    this.backend.write(e, t);
-  }, e.prototype.readSync = function (e) {
-    return this.backend.readSync(e);
-  }, e.prototype.read = function (e) {
-    return this.backend.read(e);
-  }, e.prototype.fromPixels = function (e, t) {
-    return this.backend.fromPixels(e, t);
-  }, e.prototype.time = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n;return __generator(this, function (r) {
-        switch (r.label) {case 0:
-            return t = now(), [4, this.backend.time(e)];case 1:
-            return (n = r.sent()).wallMs = now() - t, [2, n];}
-      });
-    });
-  }, e.prototype.track = function (e) {
-    if (1 === this.scopeStack.length && this.safeMode) throw new Error("Safe mode is ON. Enclose all tensor operations inside tf.tidy(): tf.tidy(() => {op();...}); to avoid memory leaks.");return this.activeScope.track.push(e), e;
-  }, e;
-}();!function (e) {
-  e[e.NUMBER = 0] = "NUMBER", e[e.BOOLEAN = 1] = "BOOLEAN", e[e.STRING = 2] = "STRING";
-}(Type || (Type = {}));var URL_PROPERTIES = [{ name: "DEBUG", type: Type.BOOLEAN }, { name: "IS_BROWSER", type: Type.BOOLEAN }, { name: "WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION", type: Type.NUMBER }, { name: "WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_RELIABLE", type: Type.BOOLEAN }, { name: "WEBGL_VERSION", type: Type.NUMBER }, { name: "WEBGL_RENDER_FLOAT32_ENABLED", type: Type.BOOLEAN }, { name: "WEBGL_DOWNLOAD_FLOAT_ENABLED", type: Type.BOOLEAN }, { name: "WEBGL_GET_BUFFER_SUB_DATA_ASYNC_EXTENSION_ENABLED", type: Type.BOOLEAN }, { name: "BACKEND", type: Type.STRING }];function isWebGLVersionEnabled(e, t) {
-  var n;try {
-    n = getWebGLRenderingContext(e, t);
-  } catch (e) {
-    return !1;
-  }return null != n && (loseContext(n), !0);
-}function getWebGLDisjointQueryTimerVersion(e, t) {
-  if (0 === e) return 0;var n,
-      r = getWebGLRenderingContext(e, t);return n = hasExtension(r, "EXT_disjoint_timer_query_webgl2") && 2 === e ? 2 : hasExtension(r, "EXT_disjoint_timer_query") ? 1 : 0, null != r && loseContext(r), n;
-}function isRenderToFloatTextureEnabled(e, t) {
-  if (0 === e) return !1;var n = getWebGLRenderingContext(e, t);if (1 === e) {
-    if (!hasExtension(n, "OES_texture_float")) return !1;
-  } else if (!hasExtension(n, "EXT_color_buffer_float")) return !1;createFloatTextureAndBindToFramebuffer(n, e);var r = n.checkFramebufferStatus(n.FRAMEBUFFER) === n.FRAMEBUFFER_COMPLETE;return loseContext(n), r;
-}function isDownloadFloatTextureEnabled(e, t) {
-  if (0 === e) return !1;var n = getWebGLRenderingContext(e, t);if (1 === e) {
-    if (!hasExtension(n, "OES_texture_float")) return !1;
-  } else if (!hasExtension(n, "EXT_color_buffer_float")) return !1;createFloatTextureAndBindToFramebuffer(n, e), n.readPixels(0, 0, 1, 1, n.RGBA, n.FLOAT, new Float32Array(4));var r = n.getError() === n.NO_ERROR;return loseContext(n), r;
-}function isWebGLGetBufferSubDataAsyncExtensionEnabled(e, t) {
-  if (e > 0) return !1;if (2 !== e) return !1;var n = getWebGLRenderingContext(e, t),
-      r = hasExtension(n, "WEBGL_get_buffer_sub_data_async");return loseContext(n), r;
-}function isChrome() {
-  return "undefined" != typeof navigator && null != navigator && null != navigator.userAgent && /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-}var TENSORFLOWJS_FLAGS_PREFIX = "tfjsflags";function getFeaturesFromURL() {
-  var e = {};if ("undefined" == typeof window || void 0 === window.location) return e;var t = getQueryParams(window.location.search);if (TENSORFLOWJS_FLAGS_PREFIX in t) {
-    var n = {};t[TENSORFLOWJS_FLAGS_PREFIX].split(",").forEach(function (e) {
-      var t = e.split(":"),
-          r = t[0],
-          o = t[1];n[r] = o;
-    }), URL_PROPERTIES.forEach(function (t) {
-      t.name in n && (console.log("Setting feature override from URL " + t.name + ": " + n[t.name]), t.type === Type.NUMBER ? e[t.name] = +n[t.name] : t.type === Type.BOOLEAN ? e[t.name] = "true" === n[t.name] : t.type === Type.STRING ? e[t.name] = n[t.name] : console.warn("Unknown URL param: " + t.name + "."));
-    });
-  }return e;
-}function hasExtension(e, t) {
-  return null != e.getExtension(t);
-}function getWebGLRenderingContext(e, t) {
-  if (0 === e || !t) throw new Error("Cannot get WebGL rendering context, WebGL is disabled.");var n = document.createElement("canvas");return 1 === e ? n.getContext("webgl") || n.getContext("experimental-webgl") : n.getContext("webgl2");
-}function loseContext(e) {
-  if (null != e) {
-    var t = e.getExtension("WEBGL_lose_context");if (null == t) throw new Error("Extension WEBGL_lose_context not supported on this browser.");t.loseContext();
-  }
-}function createFloatTextureAndBindToFramebuffer(e, t) {
-  var n = e.createFramebuffer(),
-      r = e.createTexture();e.bindTexture(e.TEXTURE_2D, r);var o = 2 === t ? e.RGBA32F : e.RGBA;e.texImage2D(e.TEXTURE_2D, 0, o, 1, 1, 0, e.RGBA, e.FLOAT, null), e.bindFramebuffer(e.FRAMEBUFFER, n), e.framebufferTexture2D(e.FRAMEBUFFER, e.COLOR_ATTACHMENT0, e.TEXTURE_2D, r, 0);
-}var TEST_EPSILON_FLOAT32_ENABLED = .001,
-    TEST_EPSILON_FLOAT32_DISABLED = .1,
-    Environment = function () {
-  function e(e) {
-    this.features = {}, this.registry = {}, null != e && (this.features = e), this.get("DEBUG") && console.warn("Debugging mode is ON. The output of every math call will be downloaded to CPU and checked for NaNs. This significantly impacts performance.");
-  }return e.setBackend = function (e, t) {
-    if (void 0 === t && (t = !1), !(e in ENV.registry)) throw new Error("Backend type '" + e + "' not found in registry");ENV.initBackend(e, t);
-  }, e.getBackend = function () {
-    return ENV.initDefaultBackend(), ENV.currentBackend;
-  }, e.disposeVariables = function () {
-    ENV.engine.disposeVariables();
-  }, e.memory = function () {
-    return ENV.engine.memory();
-  }, e.tidy = function (e, t, n) {
-    return void 0 === n && (n = !1), ENV.engine.tidy(e, t, n);
-  }, e.dispose = function (e) {
-    getTensorsInContainer(e).forEach(function (e) {
-      return e.dispose();
-    });
-  }, e.keep = function (e) {
-    return ENV.engine.keep(e);
-  }, e.time = function (e) {
-    return ENV.engine.time(e);
-  }, e.prototype.get = function (e) {
-    return e in this.features ? this.features[e] : (this.features[e] = this.evaluateFeature(e), this.features[e]);
-  }, e.prototype.getFeatures = function () {
-    return this.features;
-  }, e.prototype.set = function (e, t) {
-    this.features[e] = t;
-  }, e.prototype.getBestBackendType = function () {
-    var e = this;if (0 === Object.keys(this.registry).length) throw new Error("No backend found in registry.");return Object.keys(this.registry).map(function (t) {
-      return { name: t, entry: e.registry[t] };
-    }).sort(function (e, t) {
-      return t.entry.priority - e.entry.priority;
-    })[0].name;
-  }, e.prototype.evaluateFeature = function (e) {
-    if ("DEBUG" === e) return !1;if ("IS_BROWSER" === e) return "undefined" != typeof window;if ("IS_NODE" === e) return "undefined" != typeof process && void 0 !== process.versions.node;if ("IS_CHROME" === e) return isChrome();if ("IS_TEST" === e) return !1;if ("BACKEND" === e) return this.getBestBackendType();if ("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION" === e) {
-      var t = this.get("WEBGL_VERSION");return 0 === t ? 0 : getWebGLDisjointQueryTimerVersion(t, this.get("IS_BROWSER"));
-    }if ("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_RELIABLE" === e) return this.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION") > 0 && !isMobile();if ("HAS_WEBGL" === e) return this.get("WEBGL_VERSION") > 0;if ("WEBGL_VERSION" === e) return isWebGLVersionEnabled(2, this.get("IS_BROWSER")) ? 2 : isWebGLVersionEnabled(1, this.get("IS_BROWSER")) ? 1 : 0;if ("WEBGL_RENDER_FLOAT32_ENABLED" === e) return isRenderToFloatTextureEnabled(this.get("WEBGL_VERSION"), this.get("IS_BROWSER"));if ("WEBGL_DOWNLOAD_FLOAT_ENABLED" === e) return isDownloadFloatTextureEnabled(this.get("WEBGL_VERSION"), this.get("IS_BROWSER"));if ("WEBGL_GET_BUFFER_SUB_DATA_ASYNC_EXTENSION_ENABLED" === e) return isWebGLGetBufferSubDataAsyncExtensionEnabled(this.get("WEBGL_VERSION"), this.get("IS_BROWSER"));if ("TEST_EPSILON" === e) return this.get("WEBGL_RENDER_FLOAT32_ENABLED") ? TEST_EPSILON_FLOAT32_ENABLED : TEST_EPSILON_FLOAT32_DISABLED;throw new Error("Unknown feature " + e + ".");
-  }, e.prototype.setFeatures = function (e) {
-    this.features = Object.assign({}, e);
-  }, e.prototype.reset = function () {
-    this.features = getFeaturesFromURL(), null != this.globalEngine && (this.globalEngine = null);
-  }, e.prototype.initBackend = function (e, t) {
-    var n = this;void 0 === t && (t = !1), this.currentBackend = e;var r = this.findBackend(e);this.globalEngine = new Engine(r, t, function () {
-      return n.get("DEBUG");
-    });
-  }, e.prototype.findBackend = function (e) {
-    return e in this.registry ? this.registry[e].backend : null;
-  }, e.prototype.registerBackend = function (e, t, n, r) {
-    var o = this;if (void 0 === n && (n = 1), e in this.registry) return console.warn(e + " backend was already registered. Reusing existing backend"), null != r && r(function () {
-      return o.engine;
-    }), !1;try {
-      var a = t();return this.registry[e] = { backend: a, priority: n }, !0;
-    } catch (t) {
-      return console.warn("Registration of backend " + e + " failed"), console.warn(t.stack || t.message), !1;
-    }
-  }, e.prototype.removeBackend = function (e) {
-    if (!(e in this.registry)) throw new Error(e + " backend not found in registry");this.registry[e].backend.dispose(), delete this.registry[e];
-  }, Object.defineProperty(e.prototype, "engine", { get: function () {
-      return this.initDefaultBackend(), this.globalEngine;
-    }, enumerable: !0, configurable: !0 }), e.prototype.initDefaultBackend = function () {
-    null == this.globalEngine && this.initBackend(this.get("BACKEND"), !1);
-  }, __decorate([doc({ heading: "Environment" })], e, "setBackend", null), __decorate([doc({ heading: "Environment" })], e, "getBackend", null), __decorate([doc({ heading: "Environment" })], e, "disposeVariables", null), __decorate([doc({ heading: "Performance", subheading: "Memory" })], e, "memory", null), __decorate([doc({ heading: "Performance", subheading: "Memory" })], e, "tidy", null), __decorate([doc({ heading: "Performance", subheading: "Memory" })], e, "dispose", null), __decorate([doc({ heading: "Performance", subheading: "Memory" })], e, "keep", null), __decorate([doc({ heading: "Performance", subheading: "Timing" })], e, "time", null), e;
-}();function getGlobalNamespace() {
-  var e;if ("undefined" != typeof window) e = window;else {
-    if ("undefined" == typeof process) throw new Error("Could not find a global object");e = process;
-  }return e;
-}function getOrMakeEnvironment() {
-  var e = getGlobalNamespace();return null == e.ENV && (e.ENV = new Environment(getFeaturesFromURL()), setTensorTracker(function () {
-    return e.ENV.engine;
-  })), e.ENV;
-}var DType,
-    Rank,
-    UpcastInt32AndMap,
-    UpcastBoolAndMap,
-    UpcastFloat32AndMap,
-    ENV = getOrMakeEnvironment(),
-    environment = Object.freeze({ Environment: Environment, ENV: ENV });function axesAreInnerMostDims(e, t) {
-  for (var n = 0; n < e.length; ++n) if (e[e.length - n - 1] !== t - 1 - n) return !1;return !0;
-}function combineLocations(e, t, n) {
-  for (var r = e.length + t.length, o = [], a = 0, i = 0, s = 0; s < r; s++) -1 === n.indexOf(s) ? o.push(e[a++]) : o.push(t[i++]);return o;
-}function computeOutAndReduceShapes(e, t) {
-  for (var n = [], r = e.length, o = 0; o < r; o++) -1 === t.indexOf(o) && n.push(e[o]);return [n, t.map(function (t) {
-    return e[t];
-  })];
-}function expandShapeToKeepDim(e, t) {
-  return combineLocations(e, t.map(function (e) {
-    return 1;
-  }), t);
-}function parseAxisParam(e, t) {
-  var n = t.length;return assert((e = null == e ? t.map(function (e, t) {
-    return t;
-  }) : [].concat(e)).every(function (e) {
-    return e >= -n && e < n;
-  }), "All values in axis param must be in range [-" + n + ", " + n + ") but got axis " + e), assert(e.every(function (e) {
-    return isInt(e);
-  }), "All values in axis param must be integers but got axis " + e), e.map(function (e) {
-    return e < 0 ? n + e : e;
-  });
-}function assertAxesAreInnerMostDims(e, t, n) {
-  assert(axesAreInnerMostDims(t, n), e + " supports only inner-most axes for now. Got axes " + t + " and rank-" + n + " input.");
-}function getAxesPermutation(e, t) {
-  if (axesAreInnerMostDims(e, t)) return null;for (var n = [], r = 0; r < t; ++r) -1 === e.indexOf(r) && n.push(r);return e.forEach(function (e) {
-    return n.push(e);
-  }), n;
-}function getUndoAxesPermutation(e) {
-  return e.map(function (e, t) {
-    return [t, e];
-  }).sort(function (e, t) {
-    return e[1] - t[1];
-  }).map(function (e) {
-    return e[0];
-  });
-}function getInnerMostAxes(e, t) {
-  for (var n = [], r = t - e; r < t; ++r) n.push(r);return n;
-}!function (e) {
-  e.float32 = "float32", e.int32 = "int32", e.bool = "bool";
-}(DType || (DType = {})), function (e) {
-  e.R0 = "R0", e.R1 = "R1", e.R2 = "R2", e.R3 = "R3", e.R4 = "R4", e.R5 = "R5", e.R6 = "R6";
-}(Rank || (exports.Rank = Rank = {})), function (e) {
-  e.float32 = "float32", e.int32 = "int32", e.bool = "int32";
-}(UpcastInt32AndMap || (UpcastInt32AndMap = {})), function (e) {
-  e.float32 = "float32", e.int32 = "int32", e.bool = "bool";
-}(UpcastBoolAndMap || (UpcastBoolAndMap = {})), function (e) {
-  e.float32 = "float32", e.int32 = "float32", e.bool = "float32";
-}(UpcastFloat32AndMap || (UpcastFloat32AndMap = {}));var upcastTypeMap = { float32: UpcastFloat32AndMap, int32: UpcastInt32AndMap, bool: UpcastBoolAndMap };function upcastType(e, t) {
-  return upcastTypeMap[e][t];
-}function sumOutType(e) {
-  return upcastType(e, "int32");
-}function assertParams(e, t, n) {
-  var r = e.length,
-      o = t.length;assert(e.length === t.length, "Error in concat" + r + "D: rank of x1 (" + r + ") and x2 (" + o + ") must be the same."), assert(n >= 0 && n < r, "Error in concat" + r + "D: axis must be between 0 and " + (r - 1) + ".");for (var a = 0; a < r; a++) assert(a === n || e[a] === t[a], "Error in concat" + r + "D: Shape (" + e + ") does not match (" + t + ") along the non-concatenated axis " + a + ".");
-}function computeOutShape(e, t, n) {
-  assert(e.length === t.length, "x1 and x2 should have the same rank.");var r = e.slice();return r[n] += t[n], r;
-}function computeGradientSliceShapes(e, t) {
-  return { aBegin: [0, 0], aSize: e, bBegin: [0, e[1]], bSize: t };
-}function operation(e, t, n) {
-  var r = n.value;return n.value = function () {
-    for (var e = [], n = 0; n < arguments.length; n++) e[n] = arguments[n];return Environment.tidy(t, function () {
-      return r.apply(void 0, e);
-    });
-  }, n;
-}var ConcatOps = function () {
-  function e() {}return e.concat1d = function (t) {
-    return e.concat(t, 0);
-  }, e.concat2d = function (t, n) {
-    return e.concat(t, n);
-  }, e.concat3d = function (t, n) {
-    return e.concat(t, n);
-  }, e.concat4d = function (t, n) {
-    return e.concat(t, n);
-  }, e.concat = function (e, t) {
-    void 0 === t && (t = 0), assert(e.length >= 1, "Pass at least one tensor to concat");var n = convertToTensorArray(e, "tensors", "concat"),
-        r = n[0];if (1 === n.length) return r;for (var o = parseAxisParam(t, r.shape), a = 1; a < n.length; ++a) r = concat2Tensors(r, n[a], o[0]);return r;
-  }, __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "concat", null), e;
-}();function concat2Tensors(e, t, n) {
-  assertParams(e.shape, t.shape, n);var r = computeOutShape(e.shape, t.shape, n),
-      o = e.as2D(-1, sizeFromShape(e.shape.slice(n))),
-      a = t.as2D(-1, sizeFromShape(t.shape.slice(n))),
-      i = computeGradientSliceShapes(o.shape, a.shape),
-      s = i.aBegin,
-      u = i.aSize,
-      c = i.bBegin,
-      l = i.bSize;return ENV.engine.runKernel(function (e) {
-    return e.concat(o, a);
-  }, { a: o, b: a }, function (e) {
-    return { a: function () {
-        return e.slice(s, u);
-      }, b: function () {
-        return e.slice(c, l);
-      } };
-  }).reshape(r);
-}var commonjsGlobal = "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self ? self : {};function createCommonjsModule(e, t) {
-  return e(t = { exports: {} }, t.exports), t.exports;
-}var alea = createCommonjsModule(function (e) {
-  !function (e, t, n) {
-    function r(e, t) {
-      return t.c = e.c, t.s0 = e.s0, t.s1 = e.s1, t.s2 = e.s2, t;
-    }function o(e, t) {
-      var n = new function (e) {
-        var t,
-            n = this,
-            r = (t = 4022871197, function (e) {
-          e = e.toString();for (var n = 0; n < e.length; n++) {
-            var r = .02519603282416938 * (t += e.charCodeAt(n));r -= t = r >>> 0, t = (r *= t) >>> 0, t += 4294967296 * (r -= t);
-          }return 2.3283064365386963e-10 * (t >>> 0);
-        });n.next = function () {
-          var e = 2091639 * n.s0 + 2.3283064365386963e-10 * n.c;return n.s0 = n.s1, n.s1 = n.s2, n.s2 = e - (n.c = 0 | e);
-        }, n.c = 1, n.s0 = r(" "), n.s1 = r(" "), n.s2 = r(" "), n.s0 -= r(e), n.s0 < 0 && (n.s0 += 1), n.s1 -= r(e), n.s1 < 0 && (n.s1 += 1), n.s2 -= r(e), n.s2 < 0 && (n.s2 += 1), r = null;
-      }(e),
-          o = t && t.state,
-          a = n.next;return a.int32 = function () {
-        return 4294967296 * n.next() | 0;
-      }, a.double = function () {
-        return a() + 1.1102230246251565e-16 * (2097152 * a() | 0);
-      }, a.quick = a, o && ("object" == typeof o && r(o, n), a.state = function () {
-        return r(n, {});
-      }), a;
-    }t && t.exports ? t.exports = o : n && n.amd ? n(function () {
-      return o;
-    }) : this.alea = o;
-  }(0, e, !1);
-}),
-    xor128 = createCommonjsModule(function (e) {
-  !function (e, t, n) {
-    function r(e, t) {
-      return t.x = e.x, t.y = e.y, t.z = e.z, t.w = e.w, t;
-    }function o(e, t) {
-      var n = new function (e) {
-        var t = this,
-            n = "";t.x = 0, t.y = 0, t.z = 0, t.w = 0, t.next = function () {
-          var e = t.x ^ t.x << 11;return t.x = t.y, t.y = t.z, t.z = t.w, t.w ^= t.w >>> 19 ^ e ^ e >>> 8;
-        }, e === (0 | e) ? t.x = e : n += e;for (var r = 0; r < n.length + 64; r++) t.x ^= 0 | n.charCodeAt(r), t.next();
-      }(e),
-          o = t && t.state,
-          a = function () {
-        return (n.next() >>> 0) / 4294967296;
-      };return a.double = function () {
-        do {
-          var e = ((n.next() >>> 11) + (n.next() >>> 0) / 4294967296) / (1 << 21);
-        } while (0 === e);return e;
-      }, a.int32 = n.next, a.quick = a, o && ("object" == typeof o && r(o, n), a.state = function () {
-        return r(n, {});
-      }), a;
-    }t && t.exports ? t.exports = o : n && n.amd ? n(function () {
-      return o;
-    }) : this.xor128 = o;
-  }(0, e, !1);
-}),
-    xorwow = createCommonjsModule(function (e) {
-  !function (e, t, n) {
-    function r(e, t) {
-      return t.x = e.x, t.y = e.y, t.z = e.z, t.w = e.w, t.v = e.v, t.d = e.d, t;
-    }function o(e, t) {
-      var n = new function (e) {
-        var t = this,
-            n = "";t.next = function () {
-          var e = t.x ^ t.x >>> 2;return t.x = t.y, t.y = t.z, t.z = t.w, t.w = t.v, (t.d = t.d + 362437 | 0) + (t.v = t.v ^ t.v << 4 ^ e ^ e << 1) | 0;
-        }, t.x = 0, t.y = 0, t.z = 0, t.w = 0, t.v = 0, e === (0 | e) ? t.x = e : n += e;for (var r = 0; r < n.length + 64; r++) t.x ^= 0 | n.charCodeAt(r), r == n.length && (t.d = t.x << 10 ^ t.x >>> 4), t.next();
-      }(e),
-          o = t && t.state,
-          a = function () {
-        return (n.next() >>> 0) / 4294967296;
-      };return a.double = function () {
-        do {
-          var e = ((n.next() >>> 11) + (n.next() >>> 0) / 4294967296) / (1 << 21);
-        } while (0 === e);return e;
-      }, a.int32 = n.next, a.quick = a, o && ("object" == typeof o && r(o, n), a.state = function () {
-        return r(n, {});
-      }), a;
-    }t && t.exports ? t.exports = o : n && n.amd ? n(function () {
-      return o;
-    }) : this.xorwow = o;
-  }(0, e, !1);
-}),
-    xorshift7 = createCommonjsModule(function (e) {
-  !function (e, t, n) {
-    function r(e, t) {
-      return t.x = e.x.slice(), t.i = e.i, t;
-    }function o(e, t) {
-      null == e && (e = +new Date());var n = new function (e) {
-        var t = this;t.next = function () {
-          var e,
-              n,
-              r = t.x,
-              o = t.i;return e = r[o], n = (e ^= e >>> 7) ^ e << 24, n ^= (e = r[o + 1 & 7]) ^ e >>> 10, n ^= (e = r[o + 3 & 7]) ^ e >>> 3, n ^= (e = r[o + 4 & 7]) ^ e << 7, e = r[o + 7 & 7], n ^= (e ^= e << 13) ^ e << 9, r[o] = n, t.i = o + 1 & 7, n;
-        }, function (e, t) {
-          var n,
-              r = [];if (t === (0 | t)) r[0] = t;else for (t = "" + t, n = 0; n < t.length; ++n) r[7 & n] = r[7 & n] << 15 ^ t.charCodeAt(n) + r[n + 1 & 7] << 13;for (; r.length < 8;) r.push(0);for (n = 0; n < 8 && 0 === r[n]; ++n);for (8 == n ? r[7] = -1 : r[n], e.x = r, e.i = 0, n = 256; n > 0; --n) e.next();
-        }(t, e);
-      }(e),
-          o = t && t.state,
-          a = function () {
-        return (n.next() >>> 0) / 4294967296;
-      };return a.double = function () {
-        do {
-          var e = ((n.next() >>> 11) + (n.next() >>> 0) / 4294967296) / (1 << 21);
-        } while (0 === e);return e;
-      }, a.int32 = n.next, a.quick = a, o && (o.x && r(o, n), a.state = function () {
-        return r(n, {});
-      }), a;
-    }t && t.exports ? t.exports = o : n && n.amd ? n(function () {
-      return o;
-    }) : this.xorshift7 = o;
-  }(0, e, !1);
-}),
-    xor4096 = createCommonjsModule(function (e) {
-  !function (e, t, n) {
-    function r(e, t) {
-      return t.i = e.i, t.w = e.w, t.X = e.X.slice(), t;
-    }function o(e, t) {
-      null == e && (e = +new Date());var n = new function (e) {
-        var t = this;t.next = function () {
-          var e,
-              n,
-              r = t.w,
-              o = t.X,
-              a = t.i;return t.w = r = r + 1640531527 | 0, n = o[a + 34 & 127], e = o[a = a + 1 & 127], n ^= n << 13, e ^= e << 17, n ^= n >>> 15, e ^= e >>> 12, n = o[a] = n ^ e, t.i = a, n + (r ^ r >>> 16) | 0;
-        }, function (e, t) {
-          var n,
-              r,
-              o,
-              a,
-              i,
-              s = [],
-              u = 128;for (t === (0 | t) ? (r = t, t = null) : (t += "\0", r = 0, u = Math.max(u, t.length)), o = 0, a = -32; a < u; ++a) t && (r ^= t.charCodeAt((a + 32) % t.length)), 0 === a && (i = r), r ^= r << 10, r ^= r >>> 15, r ^= r << 4, r ^= r >>> 13, a >= 0 && (i = i + 1640531527 | 0, o = 0 == (n = s[127 & a] ^= r + i) ? o + 1 : 0);for (o >= 128 && (s[127 & (t && t.length || 0)] = -1), o = 127, a = 512; a > 0; --a) r = s[o + 34 & 127], n = s[o = o + 1 & 127], r ^= r << 13, n ^= n << 17, r ^= r >>> 15, n ^= n >>> 12, s[o] = r ^ n;e.w = i, e.X = s, e.i = o;
-        }(t, e);
-      }(e),
-          o = t && t.state,
-          a = function () {
-        return (n.next() >>> 0) / 4294967296;
-      };return a.double = function () {
-        do {
-          var e = ((n.next() >>> 11) + (n.next() >>> 0) / 4294967296) / (1 << 21);
-        } while (0 === e);return e;
-      }, a.int32 = n.next, a.quick = a, o && (o.X && r(o, n), a.state = function () {
-        return r(n, {});
-      }), a;
-    }t && t.exports ? t.exports = o : n && n.amd ? n(function () {
-      return o;
-    }) : this.xor4096 = o;
-  }(0, e, !1);
-}),
-    tychei = createCommonjsModule(function (e) {
-  !function (e, t, n) {
-    function r(e, t) {
-      return t.a = e.a, t.b = e.b, t.c = e.c, t.d = e.d, t;
-    }function o(e, t) {
-      var n = new function (e) {
-        var t = this,
-            n = "";t.next = function () {
-          var e = t.b,
-              n = t.c,
-              r = t.d,
-              o = t.a;return e = e << 25 ^ e >>> 7 ^ n, n = n - r | 0, r = r << 24 ^ r >>> 8 ^ o, o = o - e | 0, t.b = e = e << 20 ^ e >>> 12 ^ n, t.c = n = n - r | 0, t.d = r << 16 ^ n >>> 16 ^ o, t.a = o - e | 0;
-        }, t.a = 0, t.b = 0, t.c = -1640531527, t.d = 1367130551, e === Math.floor(e) ? (t.a = e / 4294967296 | 0, t.b = 0 | e) : n += e;for (var r = 0; r < n.length + 20; r++) t.b ^= 0 | n.charCodeAt(r), t.next();
-      }(e),
-          o = t && t.state,
-          a = function () {
-        return (n.next() >>> 0) / 4294967296;
-      };return a.double = function () {
-        do {
-          var e = ((n.next() >>> 11) + (n.next() >>> 0) / 4294967296) / (1 << 21);
-        } while (0 === e);return e;
-      }, a.int32 = n.next, a.quick = a, o && ("object" == typeof o && r(o, n), a.state = function () {
-        return r(n, {});
-      }), a;
-    }t && t.exports ? t.exports = o : n && n.amd ? n(function () {
-      return o;
-    }) : this.tychei = o;
-  }(0, e, !1);
-}),
-    seedrandom = createCommonjsModule(function (e) {
-  !function (t, n) {
-    var r,
-        o = this,
-        a = 256,
-        i = 6,
-        s = "random",
-        u = n.pow(a, i),
-        c = n.pow(2, 52),
-        l = 2 * c,
-        d = a - 1;function p(e, p, m) {
-      var v = [],
-          y = f(function e(t, n) {
-        var r,
-            o = [],
-            a = typeof t;if (n && "object" == a) for (r in t) try {
-          o.push(e(t[r], n - 1));
-        } catch (e) {}return o.length ? o : "string" == a ? t : t + "\0";
-      }((p = 1 == p ? { entropy: !0 } : p || {}).entropy ? [e, g(t)] : null == e ? function () {
-        try {
-          var e;return r && (e = r.randomBytes) ? e = e(a) : (e = new Uint8Array(a), (o.crypto || o.msCrypto).getRandomValues(e)), g(e);
-        } catch (e) {
-          var n = o.navigator,
-              i = n && n.plugins;return [+new Date(), o, i, o.screen, g(t)];
-        }
-      }() : e, 3), v),
-          x = new function (e) {
-        var t,
-            n = e.length,
-            r = this,
-            o = 0,
-            i = r.i = r.j = 0,
-            s = r.S = [];n || (e = [n++]);for (; o < a;) s[o] = o++;for (o = 0; o < a; o++) s[o] = s[i = d & i + e[o % n] + (t = s[o])], s[i] = t;(r.g = function (e) {
-          for (var t, n = 0, o = r.i, i = r.j, s = r.S; e--;) t = s[o = d & o + 1], n = n * a + s[d & (s[o] = s[i = d & i + t]) + (s[i] = t)];return r.i = o, r.j = i, n;
-        })(a);
-      }(v),
-          T = function () {
-        for (var e = x.g(i), t = u, n = 0; e < c;) e = (e + n) * a, t *= a, n = x.g(1);for (; e >= l;) e /= 2, t /= 2, n >>>= 1;return (e + n) / t;
-      };return T.int32 = function () {
-        return 0 | x.g(4);
-      }, T.quick = function () {
-        return x.g(4) / 4294967296;
-      }, T.double = T, f(g(x.S), t), (p.pass || m || function (e, t, r, o) {
-        return o && (o.S && h(o, x), e.state = function () {
-          return h(x, {});
-        }), r ? (n[s] = e, t) : e;
-      })(T, y, "global" in p ? p.global : this == n, p.state);
-    }function h(e, t) {
-      return t.i = e.i, t.j = e.j, t.S = e.S.slice(), t;
-    }function f(e, t) {
-      for (var n, r = e + "", o = 0; o < r.length;) t[d & o] = d & (n ^= 19 * t[d & o]) + r.charCodeAt(o++);return g(t);
-    }function g(e) {
-      return String.fromCharCode.apply(0, e);
-    }if (n["seed" + s] = p, f(n.random(), t), e.exports) {
-      e.exports = p;try {
-        r = require("crypto");
-      } catch (e) {}
-    } else 0;
-  }([], Math);
-});seedrandom.alea = alea, seedrandom.xor128 = xor128, seedrandom.xorwow = xorwow, seedrandom.xorshift7 = xorshift7, seedrandom.xor4096 = xor4096, seedrandom.tychei = tychei;var seedrandom$1 = seedrandom,
-    seedrandom_1 = seedrandom$1.alea,
-    MPRandGauss = function () {
-  function e(e, t, n, r, o) {
-    this.mean = e, this.stdDev = t, this.dtype = n, this.nextVal = NaN, this.truncated = r, this.truncated && (this.upper = this.mean + 2 * this.stdDev, this.lower = this.mean - 2 * this.stdDev);var a = o || Math.random();this.random = seedrandom_1(a.toString());
-  }return e.prototype.nextValue = function () {
-    if (!isNaN(this.nextVal)) {
-      var e = this.nextVal;return this.nextVal = NaN, e;
-    }for (var t, n, r = !1; !r;) {
-      var o = void 0,
-          a = void 0,
-          i = void 0;do {
-        i = (o = 2 * this.random() - 1) * o + (a = 2 * this.random() - 1) * a;
-      } while (i >= 1 || 0 === i);var s = Math.sqrt(-2 * Math.log(i) / i);t = this.mean + this.stdDev * o * s, n = this.mean + this.stdDev * a * s, this.truncated && !this.isValidTruncated(t) || (r = !0);
-    }return this.truncated && !this.isValidTruncated(n) || (this.nextVal = this.convertValue(n)), this.convertValue(t);
-  }, e.prototype.convertValue = function (e) {
-    return null == this.dtype || "float32" === this.dtype ? e : Math.round(e);
-  }, e.prototype.isValidTruncated = function (e) {
-    return e <= this.upper && e >= this.lower;
-  }, e;
-}(),
-    ArrayOps = function () {
-  function e() {}return e.clone = function (e) {
-    var t = convertToTensor(e, "x", "clone");return ENV.engine.runKernel(function (e) {
-      return Tensor.make(t.shape, { dataId: t.dataId }, t.dtype);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.toFloat();
-        } };
-    });
-  }, e.eye = function (t, n, r, o) {
-    void 0 === o && (o = "float32"), null == n && (n = t);for (var a = e.buffer([t, n], o), i = t <= n ? t : n, s = 0; s < i; ++s) a.set(1, s, s);var u = a.toTensor().as2D(t, n);if (null == r) return u;if (1 === r.length) return e.tile(e.expandDims(u, 0), [r[0], 1, 1]);if (2 === r.length) return e.tile(e.expandDims(e.expandDims(u, 0), 0), [r[0], r[1], 1, 1]);throw new Error("eye() currently supports only 1D and 2D batchShapes, but received " + r.length + "D.");
-  }, e.randomNormal = function (t, n, r, o, a) {
-    if (void 0 === n && (n = 0), void 0 === r && (r = 1), null != o && "bool" === o) throw new Error("Unsupported data type " + o);for (var i = new MPRandGauss(n, r, o, !1, a), s = e.buffer(t, o), u = 0; u < s.values.length; u++) s.values[u] = i.nextValue();return s.toTensor();
-  }, e.truncatedNormal = function (t, n, r, o, a) {
-    if (void 0 === n && (n = 0), void 0 === r && (r = 1), null != o && "bool" === o) throw new Error("Unsupported data type " + o);for (var i = new MPRandGauss(n, r, o, !0, a), s = e.buffer(t, o), u = 0; u < s.values.length; u++) s.values[u] = i.nextValue();return s.toTensor();
-  }, e.randomUniform = function (t, n, r, o) {
-    void 0 === n && (n = 0), void 0 === r && (r = 1), void 0 === o && (o = "float32");for (var a = e.buffer(t, o), i = 0; i < a.values.length; i++) a.values[i] = randUniform(n, r);return a.toTensor();
-  }, e.rand = function (e, t, n) {
-    var r = sizeFromShape(e),
-        o = null;if (null == n || "float32" === n) o = new Float32Array(r);else if ("int32" === n) o = new Int32Array(r);else {
-      if ("bool" !== n) throw new Error("Unknown data type " + n);o = new Uint8Array(r);
-    }for (var a = 0; a < r; a++) o[a] = t();return Tensor.make(e, { values: o }, n);
-  }, e.multinomial = function (e, t, n, r) {
-    void 0 === r && (r = !1);var o = convertToTensor(e, "logits", "multinomial"),
-        a = o.size,
-        i = o.rank;if (a < 2) throw new Error("Error in multinomial: you need at least 2 outcomes, but got " + a + ".");if (i > 2) throw new Error("Rank of probabilities must be 1 or 2, but is " + i);n = n || Math.random();var s = 1 === i ? o.as2D(1, -1) : o,
-        u = ENV.engine.runKernel(function (e) {
-      return e.multinomial(s, r, t, n);
-    }, { logits2D: s });return 1 === i ? u.as1D() : u;
-  }, e.oneHot = function (e, t, n, r) {
-    void 0 === n && (n = 1), void 0 === r && (r = 0);var o = convertToTensor(e, "indices", "oneHot", "int32");if (assert("int32" === o.dtype, "Indices must be of dtype `int32`"), t < 2) throw new Error("Error in oneHot: depth must be >=2, but it is " + t);return ENV.engine.runKernel(function (e) {
-      return e.oneHot(o, t, n, r);
-    }, { $indices: o });
-  }, e.fromPixels = function (e, t) {
-    if (void 0 === t && (t = 3), t > 4) throw new Error("Cannot construct Tensor with more than 4 channels from pixels.");return ENV.engine.fromPixels(e, t);
-  }, e.toPixels = function (e, t) {
-    return __awaiter(this, void 0, void 0, function () {
-      var n, r, o, a, i, s, u, c, l, d, p, h, f, g, m, v, y, x, T, b;return __generator(this, function (S) {
-        switch (S.label) {case 0:
-            if (2 !== (n = convertToTensor(e, "img", "toPixels", "int32")).rank && 3 !== n.rank) throw new Error("toPixels only supports rank 2 or 3 tensors, got rank " + n.rank + ".");if (r = n.shape.slice(0, 2), o = r[0], a = r[1], (i = 2 === n.rank ? 1 : n.shape[2]) > 4 || 2 === i) throw new Error("toPixels only supports depth of size 1, 3 or 4 but got " + i);return s = n.min(), u = n.max(), [4, s.data()];case 1:
-            return c = S.sent()[0], [4, u.data()];case 2:
-            if (l = S.sent()[0], s.dispose(), u.dispose(), "float32" === n.dtype) {
-              if (c < 0 || l > 1) throw new Error("Tensor values for a float32 Tensor must be in the range [0 - 1] but got range [" + c + " - " + l + "].");
-            } else {
-              if ("int32" !== n.dtype) throw new Error("Unsupported type for toPixels: " + n.dtype + ". Please use float32 or int32 tensors.");if (c < 0 || l > 255) throw new Error("Tensor values for a int32 Tensor must be in the range [0 - 255] but got range [" + c + " - " + l + "].");
-            }return [4, n.data()];case 3:
-            for (d = S.sent(), p = "float32" === n.dtype ? 255 : 1, h = new Uint8ClampedArray(a * o * 4), f = 0; f < o * a; ++f) g = void 0, m = void 0, v = void 0, y = void 0, 1 === i ? (g = d[f] * p, m = d[f] * p, v = d[f] * p, y = 255) : 3 === i ? (g = d[3 * f] * p, m = d[3 * f + 1] * p, v = d[3 * f + 2] * p, y = 255) : 4 === i && (g = d[4 * f] * p, m = d[4 * f + 1] * p, v = d[4 * f + 2] * p, y = d[4 * f + 3] * p), h[(x = 4 * f) + 0] = Math.round(g), h[x + 1] = Math.round(m), h[x + 2] = Math.round(v), h[x + 3] = Math.round(y);return null != t && (t.width = a, t.height = o, T = t.getContext("2d"), b = new ImageData(h, a, o), T.putImageData(b, 0, 0)), [2, h];}
-      });
-    });
-  }, e.reshape = function (e, t) {
-    var n = convertToTensor(e, "x", "reshape");t = inferFromImplicitShape(t, n.size), assert(n.size === sizeFromShape(t), "new shape and old shape must have the same number of elements.");return ENV.engine.runKernel(function (e) {
-      return e.reshape(n, t);
-    }, { $x: n }, function (e) {
-      return { $x: function () {
-          return e.reshape(n.shape);
-        } };
-    });
-  }, e.squeeze = function (t, n) {
-    var r = convertToTensor(t, "x", "squeeze");return e.reshape(r, squeezeShape(r.shape, n).newShape);
-  }, e.cast = function (e, t) {
-    var n = convertToTensor(e, "x", "cast");return ENV.engine.runKernel(function (e) {
-      return e.cast(n, t);
-    }, { $x: n }, function (e) {
-      return { $x: function () {
-          return e.clone();
-        } };
-    });
-  }, e.tile = function (e, t) {
-    var n = convertToTensor(e, "x", "tile");assert(n.rank === t.length, "Error in transpose: rank of input " + n.rank + " must match length of reps " + t + ".");return ENV.engine.runKernel(function (e) {
-      return e.tile(n, t);
-    }, { $x: n }, function (e) {
-      return { $x: function () {
-          var r = TensorOps.zerosLike(n);if (1 === n.rank) for (var o = 0; o < t[0]; ++o) r = r.add(e.slice([o * n.shape[0]], [n.shape[0]]));else if (2 === n.rank) for (o = 0; o < t[0]; ++o) for (var a = 0; a < t[1]; ++a) r = r.add(e.slice([o * n.shape[0], a * n.shape[1]], [n.shape[0], n.shape[1]]));else if (3 === n.rank) for (o = 0; o < t[0]; ++o) for (a = 0; a < t[1]; ++a) for (var i = 0; i < t[2]; ++i) r = r.add(e.slice([o * n.shape[0], a * n.shape[1], i * n.shape[2]], [n.shape[0], n.shape[1], n.shape[2]]));else {
-            if (4 !== n.rank) throw new Error("Gradient for tile operation is not implemented for rank-" + n.rank + " tensors yet.");for (o = 0; o < t[0]; ++o) for (a = 0; a < t[1]; ++a) for (i = 0; i < t[2]; ++i) for (var s = 0; s < t[3]; ++s) r = r.add(e.slice([o * n.shape[0], a * n.shape[1], i * n.shape[2], s * n.shape[3]], [n.shape[0], n.shape[1], n.shape[2], n.shape[3]]));
-          }return r;
-        } };
-    });
-  }, e.pad1d = function (t, n, r) {
-    return void 0 === r && (r = 0), assert(2 === n.length, "Invalid number of paddings. Must be length of 2."), e.pad(t, [n], r);
-  }, e.pad2d = function (t, n, r) {
-    return void 0 === r && (r = 0), assert(2 === n.length && 2 === n[0].length && 2 === n[1].length, "Invalid number of paddings. Must be length of 2 each."), e.pad(t, n, r);
-  }, e.pad3d = function (t, n, r) {
-    return void 0 === r && (r = 0), assert(3 === n.length && 2 === n[0].length && 2 === n[1].length && 2 === n[2].length, "Invalid number of paddings. Must be length of 2 each."), e.pad(t, n, r);
-  }, e.pad4d = function (t, n, r) {
-    return void 0 === r && (r = 0), assert(4 === n.length && 2 === n[0].length && 2 === n[1].length && 2 === n[2].length && 2 === n[3].length, "Invalid number of paddings. Must be length of 2 each."), e.pad(t, n, r);
-  }, e.pad = function (e, t, n) {
-    void 0 === n && (n = 0);var r = convertToTensor(e, "x", "pad");if (0 === r.rank) throw new Error("pad(scalar) is not defined. Pass non-scalar to pad");var o = t.map(function (e) {
-      return e[0];
-    });return ENV.engine.runKernel(function (e) {
-      return e.pad(r, t, n);
-    }, { $x: r }, function (e) {
-      return { $x: function () {
-          return e.slice(o, r.shape);
-        } };
-    });
-  }, e.stack = function (e, t) {
-    void 0 === t && (t = 0);var n = convertToTensorArray(e, "tensors", "stack");if (assert(n.length >= 1, "Pass at least one tensor to tf.stack"), 1 === n.length) return n[0].expandDims(t);var r = n[0].rank,
-        o = n[0].shape,
-        a = n[0].dtype;assert(t <= r, "Axis must be <= rank of the tensor"), n.forEach(function (e) {
-      assertShapesMatch(o, e.shape, "All tensors passed to stack must have matching shapes");
-    }), n.forEach(function (e) {
-      assert(a === e.dtype, "All tensors passed to stack must have matching dtypes");
-    });var i = n.map(function (e) {
-      return e.expandDims(t);
-    });return ConcatOps.concat(i, t);
-  }, e.unstack = function (e, t) {
-    void 0 === t && (t = 0);for (var n, r = convertToTensor(e, "x", "unstack"), o = r.shape[t], a = Array(r.rank - 1).fill(0), i = 0, s = 0; s < r.rank; s++) s !== t && (a[i] = r.shape[s], i++);n = Array(o).fill(1);var u = Array(r.rank).fill(0),
-        c = r.shape.slice();return n.map(function (e) {
-      c[t] = e;var n = r.slice(u, c);return u[t] += e, n.reshape(a);
-    });
-  }, e.split = function (e, t, n) {
-    void 0 === n && (n = 0);var r,
-        o = convertToTensor(e, "x", "split");n = parseAxisParam(n, o.shape)[0], "number" == typeof t ? (assert(o.shape[n] % t == 0, "Number of splits must evenly divide the axis."), r = Array(t).fill(o.shape[n] / t)) : (assert(o.shape[n] === t.reduce(function (e, t) {
-      return e + t;
-    }), "The sum of sizes must match the size of the axis dimension."), r = t);var a = Array(o.rank).fill(0),
-        i = o.shape.slice();return r.map(function (e) {
-      i[n] = e;var t = o.slice(a, i);return a[n] += e, t;
-    });
-  }, e.cumsum = function (e, t, n, r) {
-    void 0 === t && (t = 0), void 0 === n && (n = !1), void 0 === r && (r = !1);var o = convertToTensor(e, "x", "cumsum"),
-        a = getAxesPermutation([t |= 0], o.rank),
-        i = o;null != a && (i = o.transpose(a));var s = getInnerMostAxes(1, o.rank)[0],
-        u = ENV.engine.runKernel(function (e) {
-      return e.cumsum(i, s, n, r);
-    }, { permutedX: i }, function (e) {
-      return { permutedX: function () {
-          return e.cumsum(t, n, !r);
-        } };
-    });return null != a && (u = u.transpose(a)), u;
-  }, e.expandDims = function (t, n) {
-    void 0 === n && (n = 0);var r = convertToTensor(t, "x", "expandDims");assert(n <= r.rank, "Axis must be <= rank of the tensor");var o = r.shape.slice();return o.splice(n, 0, 1), e.reshape(r, o);
-  }, e.buffer = function (e, t, n) {
-    return void 0 === t && (t = "float32"), new TensorBuffer(e, t, n);
-  }, e.print = function (e, t) {
-    void 0 === t && (t = !1), console.log(e.toString(t));
-  }, __decorate([doc({ heading: "Tensors", subheading: "Creation" }), operation], e, "clone", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" }), operation], e, "eye", null), __decorate([doc({ heading: "Tensors", subheading: "Random" }), operation], e, "randomNormal", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" }), operation], e, "truncatedNormal", null), __decorate([doc({ heading: "Tensors", subheading: "Random" }), operation], e, "randomUniform", null), __decorate([operation], e, "rand", null), __decorate([doc({ heading: "Tensors", subheading: "Random" }), operation], e, "multinomial", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" }), operation], e, "oneHot", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" }), operation], e, "fromPixels", null), __decorate([doc({ heading: "Visualization" })], e, "toPixels", null), __decorate([doc({ heading: "Tensors", subheading: "Transformations" }), operation], e, "reshape", null), __decorate([doc({ heading: "Tensors", subheading: "Transformations" })], e, "squeeze", null), __decorate([doc({ heading: "Tensors", subheading: "Transformations" }), operation], e, "cast", null), __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "tile", null), __decorate([doc({ heading: "Tensors", subheading: "Transformations" }), operation], e, "pad", null), __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "stack", null), __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "unstack", null), __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "split", null), __decorate([doc({ heading: "Operations", subheading: "Scan" })], e, "cumsum", null), __decorate([doc({ heading: "Tensors", subheading: "Transformations" }), operation], e, "expandDims", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "buffer", null), __decorate([doc({ heading: "Tensors", subheading: "Creation" })], e, "print", null), e;
-}();function getBroadcastDims(e, t) {
-  for (var n = e.length, r = [], o = 0; o < n; o++) {
-    var a = n - 1 - o,
-        i = e[a] || 1;(t[t.length - 1 - o] || 1) > 1 && 1 === i && r.unshift(a);
-  }return r;
-}function getReductionAxes(e, t) {
-  for (var n = [], r = 0; r < t.length; r++) {
-    var o = e[e.length - r - 1],
-        a = t.length - r - 1,
-        i = t[a];(null == o || 1 === o && i > 1) && n.unshift(a);
-  }return n;
-}function broadcastDimsAreOuter(e) {
-  for (var t = 0; t < e.length; t++) if (e[t] !== t) return !1;return !0;
-}function assertAndGetBroadcastShape(e, t) {
-  for (var n = [], r = "Operands could not be broadcast together with shapes " + e + " and " + t + ".", o = Math.max(e.length, t.length), a = 0; a < o; a++) {
-    var i = e[e.length - a - 1] || 1,
-        s = t[t.length - a - 1] || 1;if (i > 1 && s > 1 && i !== s) throw Error(r);n.unshift(Math.max(i, s));
-  }return n;
-}var UnaryOps = function () {
-  function e() {}return e.neg = function (e) {
-    var t = convertToTensor(e, "x", "neg");return ENV.engine.runKernel(function (e) {
-      return e.neg(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.neg();
-        } };
-    });
-  }, e.ceil = function (e) {
-    var t = convertToTensor(e, "x", "ceil");return ENV.engine.runKernel(function (e) {
-      return e.ceil(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return TensorOps.zerosLike(e);
-        } };
-    });
-  }, e.floor = function (e) {
-    var t = convertToTensor(e, "x", "floor");return ENV.engine.runKernel(function (e) {
-      return e.floor(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return TensorOps.zerosLike(e);
-        } };
-    });
-  }, e.sign = function (e) {
-    var t = convertToTensor(e, "x", "sign");return ENV.engine.runKernel(function (e) {
-      return e.sign(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return TensorOps.zerosLike(e);
-        } };
-    });
-  }, e.round = function (e) {
-    var t = convertToTensor(e, "x", "round");return ENV.engine.runKernel(function (e) {
-      return e.round(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return TensorOps.zerosLike(e);
-        } };
-    });
-  }, e.exp = function (e) {
-    var t = convertToTensor(e, "x", "exp");return ENV.engine.runKernel(function (e, n) {
-      return n(e.exp(t));
-    }, { $x: t }, function (e, t) {
-      var n = t[0];return { $x: function () {
-          return e.mulStrict(n);
-        } };
-    });
-  }, e.expm1 = function (e) {
-    var t = convertToTensor(e, "x", "expm1");return ENV.engine.runKernel(function (e) {
-      return e.expm1(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.mulStrict(t.exp());
-        } };
-    });
-  }, e.log = function (e) {
-    var t = convertToTensor(e, "x", "log");return ENV.engine.runKernel(function (e) {
-      return e.log(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.toFloat());
-        } };
-    });
-  }, e.log1p = function (e) {
-    var t = convertToTensor(e, "x", "log1p");return ENV.engine.runKernel(function (e) {
-      return e.log1p(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.add(TensorOps.scalar(1)));
-        } };
-    });
-  }, e.sqrt = function (e) {
-    var t = convertToTensor(e, "x", "sqrt");return ENV.engine.runKernel(function (e) {
-      return e.sqrt(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.toFloat().sqrt().mul(TensorOps.scalar(2)));
-        } };
-    });
-  }, e.rsqrt = function (e) {
-    var t = convertToTensor(e, "x", "rsqrt");return ENV.engine.runKernel(function (e) {
-      return e.rsqrt(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.pow(TensorOps.scalar(1.5)).mul(TensorOps.scalar(2))).neg();
-        } };
-    });
-  }, e.square = function (e) {
-    var t = convertToTensor(e, "x", "square");return ENV.engine.runKernel(function (e) {
-      return e.square(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.mulStrict(t.toFloat().mul(TensorOps.scalar(2)));
-        } };
-    });
-  }, e.reciprocal = function (e) {
-    var t = convertToTensor(e, "x", "reciprocal");return ENV.engine.runKernel(function (e) {
-      return e.reciprocal(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.square().neg());
-        } };
-    });
-  }, e.abs = function (e) {
-    var t = convertToTensor(e, "x", "abs");return ENV.engine.runKernel(function (e) {
-      return e.abs(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.mulStrict(t.toFloat().step(-1));
-        } };
-    });
-  }, e.clipByValue = function (e, t, n) {
-    var r = convertToTensor(e, "x", "clipByValue");assert(t <= n, "Error in clip: min (" + t + ") must be less than or equal to max (" + n + ").");return ENV.engine.runKernel(function (e) {
-      return e.clip(r, t, n);
-    }, { $x: r }, function (e) {
-      return { $x: function () {
-          return e.where(r.greaterEqual(TensorOps.scalar(t)).logicalAnd(r.lessEqual(TensorOps.scalar(n))), TensorOps.zerosLike(e));
-        } };
-    });
-  }, e.sigmoid = function (e) {
-    var t = convertToTensor(e, "x", "sigmoid");return ENV.engine.runKernel(function (e, n) {
-      return n(e.sigmoid(t));
-    }, { $x: t }, function (e, t) {
-      var n = t[0];return { $x: function () {
-          return e.mulStrict(n.mul(TensorOps.scalar(1).sub(n)));
-        } };
-    });
-  }, e.logSigmoid = function (e) {
-    var t = convertToTensor(e, "x", "logSigmoid");return ENV.engine.runKernel(function (e) {
-      return e.softplus(t.neg()).neg();
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.mulStrict(t.neg().sigmoid());
-        } };
-    });
-  }, e.softplus = function (e) {
-    var t = convertToTensor(e, "x", "softplus");return ENV.engine.runKernel(function (e) {
-      return e.softplus(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.mulStrict(t.sigmoid());
-        } };
-    });
-  }, e.sin = function (e) {
-    var t = convertToTensor(e, "x", "sin");return ENV.engine.runKernel(function (e) {
-      return e.sin(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return t.toFloat().cos().mulStrict(e);
-        } };
-    });
-  }, e.cos = function (e) {
-    var t = convertToTensor(e, "x", "cos");return ENV.engine.runKernel(function (e) {
-      return e.cos(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return t.toFloat().sin().neg().mulStrict(e);
-        } };
-    });
-  }, e.tan = function (e) {
-    var t = convertToTensor(e, "x", "tan");return ENV.engine.runKernel(function (e) {
-      return e.tan(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.cos().square());
-        } };
-    });
-  }, e.asin = function (e) {
-    var t = convertToTensor(e, "x", "asin");return ENV.engine.runKernel(function (e) {
-      return e.asin(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(TensorOps.scalar(1).sub(t.toFloat().square()).sqrt());
-        } };
-    });
-  }, e.acos = function (e) {
-    var t = convertToTensor(e, "x", "acos");return ENV.engine.runKernel(function (e) {
-      return e.acos(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(TensorOps.scalar(1).sub(t.toFloat().square()).sqrt()).neg();
-        } };
-    });
-  }, e.atan = function (e) {
-    var t = convertToTensor(e, "x", "atan");return ENV.engine.runKernel(function (e) {
-      return e.atan(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(TensorOps.scalar(1).add(t.toFloat().square()));
-        } };
-    });
-  }, e.sinh = function (e) {
-    var t = convertToTensor(e, "x", "sinh");return ENV.engine.runKernel(function (e) {
-      return e.sinh(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return t.toFloat().cosh().mulStrict(e);
-        } };
-    });
-  }, e.cosh = function (e) {
-    var t = convertToTensor(e, "x", "cosh");return ENV.engine.runKernel(function (e) {
-      return e.cosh(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return t.toFloat().sinh().mulStrict(e);
-        } };
-    });
-  }, e.tanh = function (e) {
-    var t = convertToTensor(e, "x", "tanh");return ENV.engine.runKernel(function (e, n) {
-      return n(e.tanh(t));
-    }, { $x: t }, function (e, t) {
-      var n = t[0];return { $x: function () {
-          return TensorOps.scalar(1).sub(n.square()).mulStrict(e);
-        } };
-    });
-  }, e.asinh = function (e) {
-    var t = convertToTensor(e, "x", "asinh");return ENV.engine.runKernel(function (e) {
-      return e.asinh(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(TensorOps.scalar(1).add(t.toFloat().square()).sqrt());
-        } };
-    });
-  }, e.acosh = function (e) {
-    var t = convertToTensor(e, "x", "acosh");return ENV.engine.runKernel(function (e) {
-      return e.acosh(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(t.toFloat().square().sub(TensorOps.scalar(1)).sqrt());
-        } };
-    });
-  }, e.atanh = function (e) {
-    var t = convertToTensor(e, "x", "atanh");return ENV.engine.runKernel(function (e) {
-      return e.atanh(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.divStrict(TensorOps.scalar(1).sub(t.toFloat().square()));
-        } };
-    });
-  }, e.erf = function (e) {
-    var t = convertToTensor(e, "x", "erf");assert("int32" === t.dtype || "float32" === t.dtype, "Input dtype must be `int32` or `float32`."), "int32" === t.dtype && (t = t.toFloat());return ENV.engine.runKernel(function (e) {
-      return e.erf(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          return e.mulStrict(TensorOps.scalar(2 / Math.sqrt(Math.PI)).mul(t.square().neg().exp()));
-        } };
-    });
-  }, e.step = function (e, t) {
-    void 0 === t && (t = 0);var n = convertToTensor(e, "x", "step");return ENV.engine.runKernel(function (e) {
-      return e.step(n, t);
-    }, { $x: n }, function (e) {
-      return { $x: function () {
-          return TensorOps.zerosLike(e);
-        } };
-    });
-  }, __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "neg", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "ceil", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "floor", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "sign", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "round", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "exp", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "expm1", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "log", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "log1p", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "sqrt", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "rsqrt", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "square", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "reciprocal", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "abs", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "clipByValue", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "sigmoid", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "logSigmoid", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "softplus", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "sin", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "cos", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "tan", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "asin", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "acos", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "atan", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "sinh", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "cosh", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "tanh", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "asinh", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "acosh", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "atanh", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "erf", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "step", null), e;
-}(),
-    BatchNormOps = function () {
-  function e() {}return e.batchNormalization2d = function (t, n, r, o, a, i) {
-    void 0 === o && (o = .001);var s,
-        u,
-        c = convertToTensor(t, "x", "batchNormalization"),
-        l = convertToTensor(n, "mean", "batchNormalization"),
-        d = convertToTensor(r, "variance", "batchNormalization");return null != a && (s = convertToTensor(a, "scale", "batchNormalization")), null != i && (u = convertToTensor(i, "offset", "batchNormalization")), assert(2 === c.rank, "Error in batchNormalization3D: x must be rank 3 but got rank " + c.rank + "."), assert(2 === l.rank || 1 === l.rank, "Error in batchNormalization2D: mean must be rank 2 or rank 1 but got rank " + l.rank + "."), assert(2 === d.rank || 1 === d.rank, "Error in batchNormalization2D: variance must be rank 2 or rank 1 but got rank " + d.rank + "."), null != s && assert(2 === s.rank || 1 === s.rank, "Error in batchNormalization2D: scale must be rank 2 or rank 1 but got rank " + s.rank + "."), null != u && assert(2 === u.rank || 1 === u.rank, "Error in batchNormalization2D: offset must be rank 2 or rank 1 but got rank " + u.rank + "."), e.batchNormalization(c, l, d, o, s, u);
-  }, e.batchNormalization3d = function (t, n, r, o, a, i) {
-    void 0 === o && (o = .001);var s,
-        u,
-        c = convertToTensor(t, "x", "batchNormalization"),
-        l = convertToTensor(n, "mean", "batchNormalization"),
-        d = convertToTensor(r, "variance", "batchNormalization");return null != a && (s = convertToTensor(a, "scale", "batchNormalization")), null != i && (u = convertToTensor(i, "offset", "batchNormalization")), assert(3 === c.rank, "Error in batchNormalization3D: x must be rank 3 but got rank " + c.rank + "."), assert(3 === l.rank || 1 === l.rank, "Error in batchNormalization3D: mean must be rank 3 or rank 1 but got rank " + l.rank + "."), assert(3 === d.rank || 1 === d.rank, "Error in batchNormalization3D: variance must be rank 3 or rank 1 but got rank " + d.rank + "."), null != s && assert(3 === s.rank || 1 === s.rank, "Error in batchNormalization3D: scale must be rank 3 or rank 1 but got rank " + s.rank + "."), null != u && assert(3 === u.rank || 1 === u.rank, "Error in batchNormalization3D: offset must be rank 3 or rank 1 but got rank " + u.rank + "."), e.batchNormalization(c, l, d, o, s, u);
-  }, e.batchNormalization4d = function (t, n, r, o, a, i) {
-    void 0 === o && (o = .001);var s,
-        u,
-        c = convertToTensor(t, "x", "batchNormalization"),
-        l = convertToTensor(n, "mean", "batchNormalization"),
-        d = convertToTensor(r, "variance", "batchNormalization");return null != a && (s = convertToTensor(a, "scale", "batchNormalization")), null != i && (u = convertToTensor(i, "offset", "batchNormalization")), assert(4 === c.rank, "Error in batchNormalization4D: x must be rank 4 but got rank " + c.rank + "."), assert(4 === l.rank || 1 === l.rank, "Error in batchNormalization4D: mean must be rank 4 or rank 1 but got rank " + l.rank + "."), assert(4 === d.rank || 1 === d.rank, "Error in batchNormalization4D: variance must be rank 4 or rank 1 but got rank " + d.rank + "."), null != s && assert(4 === s.rank || 1 === s.rank, "Error in batchNormalization4D: scale must be rank 4 or rank 1 but got rank " + s.rank + "."), null != u && assert(4 === u.rank || 1 === u.rank, "Error in batchNormalization4D: offset must be rank 4 or rank 1 but got rank " + u.rank + "."), e.batchNormalization(c, l, d, o, s, u);
-  }, e.batchNormalization = function (e, t, n, r, o, a) {
-    void 0 === r && (r = .001);var i,
-        s,
-        u,
-        c = convertToTensor(e, "x", "batchNormalization"),
-        l = convertToTensor(t, "mean", "batchNormalization"),
-        d = convertToTensor(n, "variance", "batchNormalization");null != o && (i = convertToTensor(o, "scale", "batchNormalization")), null != a && (s = convertToTensor(a, "offset", "batchNormalization")), assert(l.rank === d.rank, "Batch normalization gradient requires mean and variance to have equal ranks."), assert(null == s || l.rank === s.rank, "Batch normalization gradient requires mean and offset to have equal ranks."), assert(null == i || l.rank === i.rank, "Batch normalization gradient requires mean and scale to have equal ranks."), u = 0 === c.rank || 1 === c.rank ? c.as4D(1, 1, 1, c.size) : 2 === c.rank ? c.as4D(1, 1, c.shape[0], c.shape[1]) : 3 === c.rank ? c.as4D(1, c.shape[0], c.shape[1], c.shape[2]) : c;return ENV.engine.runKernel(function (e) {
-      return e.batchNormalization(u, batchnormReshape4D(l), batchnormReshape4D(d), r, batchnormReshape4D(i), batchnormReshape4D(s));
-    }, { $x: c, $mean: l, $variance: d, $scale: i, $offset: s }, function (e) {
-      var t = null == i ? TensorOps.scalar(1) : i,
-          n = getReductionAxes(l.shape, u.shape),
-          o = [];if (1 === l.rank) {
-        for (var a = 0; a < u.shape.length - 1; ++a) o.push(u.shape[a]);o.push(1);
-      }var s = c.sub(l),
-          p = e.mul(t),
-          h = UnaryOps.rsqrt(d.add(TensorOps.scalar(r))),
-          f = h.mul(h).mul(h).mul(TensorOps.scalar(-.5));return { $x: function () {
-          return 1 === l.rank ? e.mul(ArrayOps.tile(h.as4D(1, 1, 1, l.shape[0]), o)).mul(t).reshape(c.shape) : e.mul(h).mul(t).reshape(c.shape);
-        }, $mean: function () {
-          var e = h.mul(TensorOps.scalar(-1)).mul(p);return 1 === l.rank && (e = e.sum(n)), e.reshape(l.shape);
-        }, $variance: function () {
-          var e = f.mul(s).mul(p);return 1 === l.rank && (e = e.sum(n)), e.reshape(l.shape);
-        }, $scale: function () {
-          var t = s.mul(h),
-              r = e.mul(t);return 1 === l.rank && (r = r.sum(n)), r.reshape(l.shape);
-        }, $offset: function () {
-          var t = e;return 1 === l.rank && (t = t.sum(n)), t.reshape(l.shape);
-        } };
-    }).reshape(c.shape);
-  }, __decorate([operation], e, "batchNormalization2d", null), __decorate([operation], e, "batchNormalization3d", null), __decorate([operation], e, "batchNormalization4d", null), __decorate([doc({ heading: "Operations", subheading: "Normalization" })], e, "batchNormalization", null), e;
-}();function batchnormReshape4D(e) {
-  return null == e ? null : 0 === e.rank ? e.as1D() : 1 === e.rank ? e : 2 === e.rank ? e.as4D(1, 1, e.shape[0], e.shape[1]) : 3 === e.rank ? e.as4D(1, e.shape[0], e.shape[1], e.shape[2]) : e;
-}var BinaryOps = function () {
-  function e() {}return e.add = function (e, t) {
-    var n = convertToTensor(e, "a", "add"),
-        r = convertToTensor(t, "b", "add");assertTypesMatch(n, r);var o = assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.add(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          var t = e,
-              r = getReductionAxes(n.shape, o);return r.length > 0 && (t = t.sum(r)), t.reshape(n.shape);
-        }, $b: function () {
-          var t = e,
-              n = getReductionAxes(r.shape, o);return n.length > 0 && (t = t.sum(n)), t.reshape(r.shape);
-        } };
-    });
-  }, e.addStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in addStrict: "), e.add(t);
-  }, e.sub = function (e, t) {
-    var n = convertToTensor(e, "a", "sub"),
-        r = convertToTensor(t, "b", "sub");assertTypesMatch(n, r);var o = assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.subtract(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          var t = e,
-              r = getReductionAxes(n.shape, o);return r.length > 0 && (t = t.sum(r)), t.reshape(n.shape);
-        }, $b: function () {
-          var t = e,
-              n = getReductionAxes(r.shape, o);return n.length > 0 && (t = t.sum(n)), t.neg().reshape(r.shape);
-        } };
-    });
-  }, e.subStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in subStrict: "), e.sub(t);
-  }, e.pow = function (e, t) {
-    var n = convertToTensor(e, "base", "pow"),
-        r = convertToTensor(t, "exp", "pow"),
-        o = assertAndGetBroadcastShape(n.shape, r.shape);e = n.cast(upcastType(n.dtype, r.dtype)), t = r.cast(upcastType(n.dtype, r.dtype));return ENV.engine.runKernel(function (e, t) {
-      return t(e.pow(n, r));
-    }, { $base: n, $exp: r }, function (e, t) {
-      var a = t[0];return { $base: function () {
-          var t = e.mul(r.toFloat().mul(a.div(n))),
-              i = getReductionAxes(n.shape, o);return i.length > 0 && (t = t.sum(i)), t.reshape(n.shape);
-        }, $exp: function () {
-          var t = e.mul(a.mul(n.log()).toFloat()),
-              i = getReductionAxes(r.shape, o);return i.length > 0 && (t = t.sum(i)), t.reshape(r.shape);
-        } };
-    });
-  }, e.powStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in powStrict: "), e.pow(t);
-  }, e.mul = function (e, t) {
-    var n = convertToTensor(e, "a", "mul"),
-        r = convertToTensor(t, "b", "mul");assertTypesMatch(n, r);var o = assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.multiply(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          var t = e.mul(r.toFloat()),
-              a = getReductionAxes(n.shape, o);return a.length > 0 ? t.sum(a).reshape(n.shape) : t;
-        }, $b: function () {
-          var t = e.mul(n.toFloat()),
-              a = getReductionAxes(r.shape, o);return a.length > 0 ? t.sum(a).reshape(r.shape) : t;
-        } };
-    });
-  }, e.mulStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in multiplyStrict: "), e.mul(t);
-  }, e.div = function (t, n) {
-    var r,
-        o = convertToTensor(t, "a", "div"),
-        a = convertToTensor(n, "b", "div");if (assertTypesMatch(o, a), "int32" === o.dtype && "int32" === a.dtype) return e.floorDiv(o, a);r = function (e) {
-      return e.realDivide(o, a);
-    };var i = assertAndGetBroadcastShape(o.shape, a.shape);return ENV.engine.runKernel(r, { $a: o, $b: a }, function (e) {
-      return { $a: function () {
-          var t = e.div(a.toFloat()),
-              n = getReductionAxes(o.shape, i);return n.length > 0 ? t.sum(n).reshape(o.shape) : t;
-        }, $b: function () {
-          var t = e.mul(o.toFloat()),
-              n = getReductionAxes(a.shape, i);n.length > 0 && (t = t.sum(n).reshape(a.shape));var r = a.square();return t.div(r.toFloat()).neg();
-        } };
-    });
-  }, e.floorDiv = function (e, t) {
-    var n = convertToTensor(e, "a", "floorDiv"),
-        r = convertToTensor(t, "b", "floorDiv");assertTypesMatch(n, r);var o = assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.floorDiv(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          var t = e.div(r.toFloat()),
-              a = getReductionAxes(n.shape, o);return a.length > 0 ? t.sum(a).reshape(n.shape) : t;
-        }, $b: function () {
-          var t = e.mul(n.toFloat()),
-              a = getReductionAxes(r.shape, o);a.length > 0 && (t = t.sum(a).reshape(r.shape));var i = r.square();return t.div(i.toFloat()).neg();
-        } };
-    });
-  }, e.divStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in divideStrict: "), e.div(t);
-  }, e.mod = function (e, t) {
-    var n = convertToTensor(e, "a", "mod"),
-        r = convertToTensor(t, "b", "mod");assertTypesMatch(n, r);var o = assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.mod(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          var t = getReductionAxes(n.shape, o);return t.length > 0 ? e.sum(t).reshape(n.shape) : e;
-        }, $b: function () {
-          var t = e.mul(n.div(r).floor().neg()),
-              a = getReductionAxes(r.shape, o);return a.length > 0 ? t.sum(a).reshape(r.shape) : t;
-        } };
-    });
-  }, e.modStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in modStrict: "), e.mod(t);
-  }, e.minimum = function (e, t) {
-    var n = convertToTensor(e, "a", "minimum"),
-        r = convertToTensor(t, "b", "minimum");assertTypesMatch(n, r), "bool" === n.dtype && (n = n.toInt()), "bool" === r.dtype && (r = r.toInt()), assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.minimum(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          return e.mul(n.lessEqual(r).toFloat());
-        }, $b: function () {
-          return e.mul(n.greater(r).toFloat());
-        } };
-    });
-  }, e.minimumStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in minimumStrict: "), e.minimum(t);
-  }, e.maximum = function (e, t) {
-    var n = convertToTensor(e, "a", "maximum"),
-        r = convertToTensor(t, "b", "maximum");assertTypesMatch(n, r), "bool" === n.dtype && (n = n.toInt()), "bool" === r.dtype && (r = r.toInt()), assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.maximum(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      return { $a: function () {
-          return e.mul(n.greaterEqual(r).toFloat());
-        }, $b: function () {
-          return e.mul(n.less(r).toFloat());
-        } };
-    });
-  }, e.maximumStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in minimumStrict: "), e.maximum(t);
-  }, e.squaredDifference = function (e, t) {
-    var n = convertToTensor(e, "a", "squaredDifference"),
-        r = convertToTensor(t, "b", "squaredDifference");assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape);return ENV.engine.runKernel(function (e) {
-      return e.squaredDifference(n, r);
-    }, { $a: n, $b: r }, function (e) {
-      var t = TensorOps.scalar(2);return { $a: function () {
-          return e.mul(n.sub(r).mul(t));
-        }, $b: function () {
-          return e.mul(r.sub(n).mul(t));
-        } };
-    });
-  }, e.squaredDifferenceStrict = function (e, t) {
-    return assertShapesMatch(e.shape, t.shape, "Error in squaredDifferenceStrict: "), e.squaredDifference(t);
-  }, e.atan2 = function (t, n) {
-    var r = convertToTensor(t, "a", "atan2"),
-        o = convertToTensor(n, "b", "atan2");assertTypesMatch(r, o);var a = assertAndGetBroadcastShape(r.shape, o.shape);return ENV.engine.runKernel(function (e) {
-      return e.atan2(r, o);
-    }, { $a: r, $b: o }, function (t) {
-      return { $a: function () {
-          var n = e.add(r.square(), o.square()),
-              i = t.mul(o.div(n)),
-              s = getReductionAxes(r.shape, a);return s.length > 0 && (i = i.sum(s)), i.reshape(r.shape);
-        }, $b: function () {
-          var n = e.add(r.square(), o.square()),
-              i = UnaryOps.neg(t.mul(r.div(n))),
-              s = getReductionAxes(o.shape, a);return s.length > 0 && (i = i.sum(s)), i.reshape(o.shape);
-        } };
-    });
-  }, __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "add", null), __decorate([operation], e, "addStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "sub", null), __decorate([operation], e, "subStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "pow", null), __decorate([operation], e, "powStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "mul", null), __decorate([operation], e, "mulStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "div", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "floorDiv", null), __decorate([operation], e, "divStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "mod", null), __decorate([operation], e, "modStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "minimum", null), __decorate([operation], e, "minimumStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "maximum", null), __decorate([operation], e, "maximumStrict", null), __decorate([doc({ heading: "Operations", subheading: "Arithmetic" }), operation], e, "squaredDifference", null), __decorate([operation], e, "squaredDifferenceStrict", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "atan2", null), e;
-}(),
-    CompareOps = function () {
-  function e() {}return e.notEqual = function (e, t) {
-    var n = convertToTensor(e, "a", "notEqual"),
-        r = convertToTensor(t, "b", "notEqual");return assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.notEqual(n, r);
-    }, { $a: n, $b: r });
-  }, e.notEqualStrict = function (e, t) {
-    var n = convertToTensor(e, "a", "notEqualStrict"),
-        r = convertToTensor(t, "b", "notEqualStrict");return assertShapesMatch(n.shape, r.shape, "Error in notEqualStrict: "), n.notEqual(r);
-  }, e.less = function (e, t) {
-    var n = convertToTensor(e, "a", "less"),
-        r = convertToTensor(t, "b", "less");return assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.less(n, r);
-    }, { $a: n, $b: r });
-  }, e.lessStrict = function (e, t) {
-    var n = convertToTensor(e, "a", "lessStrict"),
-        r = convertToTensor(t, "b", "lessStrict");return assertShapesMatch(n.shape, r.shape, "Error in lessStrict: "), n.less(r);
-  }, e.equal = function (e, t) {
-    var n = convertToTensor(e, "a", "equal"),
-        r = convertToTensor(t, "b", "equal");return assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.equal(n, r);
-    }, { $a: n, $b: r });
-  }, e.equalStrict = function (e, t) {
-    var n = convertToTensor(e, "a", "equalStrict"),
-        r = convertToTensor(t, "b", "equalStrict");return assertShapesMatch(n.shape, r.shape, "Error in equalStrict: "), n.equal(r);
-  }, e.lessEqual = function (e, t) {
-    var n = convertToTensor(e, "a", "lessEqual"),
-        r = convertToTensor(t, "b", "lessEqual");return assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.lessEqual(n, r);
-    }, { $a: n, $b: r });
-  }, e.lessEqualStrict = function (e, t) {
-    var n = convertToTensor(e, "a", "lessEqualStrict"),
-        r = convertToTensor(t, "b", "lessEqualStrict");return assertShapesMatch(n.shape, r.shape, "Error in lessEqualStrict: "), n.lessEqual(r);
-  }, e.greater = function (e, t) {
-    var n = convertToTensor(e, "a", "greater"),
-        r = convertToTensor(t, "b", "greater");return assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.greater(n, r);
-    }, { $a: n, $b: r });
-  }, e.greaterStrict = function (e, t) {
-    var n = convertToTensor(e, "a", "greaterStrict"),
-        r = convertToTensor(t, "b", "greaterStrict");return assertShapesMatch(n.shape, r.shape, "Error in greaterStrict: "), n.greater(r);
-  }, e.greaterEqual = function (e, t) {
-    var n = convertToTensor(e, "a", "greaterEqual"),
-        r = convertToTensor(t, "b", "greaterEqual");return assertTypesMatch(n, r), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.greaterEqual(n, r);
-    }, { $a: n, $b: r });
-  }, e.greaterEqualStrict = function (e, t) {
-    var n = convertToTensor(e, "a", "greaterEqualStrict"),
-        r = convertToTensor(t, "b", "greaterEqualStrict");return assertShapesMatch(n.shape, r.shape, "Error in greaterEqualStrict: "), n.greaterEqual(r);
-  }, __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "notEqual", null), __decorate([operation], e, "notEqualStrict", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "less", null), __decorate([operation], e, "lessStrict", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "equal", null), __decorate([operation], e, "equalStrict", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "lessEqual", null), __decorate([operation], e, "lessEqualStrict", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "greater", null), __decorate([operation], e, "greaterStrict", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "greaterEqual", null), __decorate([operation], e, "greaterEqualStrict", null), e;
-}();function computePool2DInfo(e, t, n, r, o, a) {
-  void 0 === a && (a = "channelsLast");var i,
-      s = parseTupleParam(t),
-      u = s[0],
-      c = s[1];if ("channelsLast" === a) i = [u, c, e[3], e[3]];else {
-    if ("channelsFirst" !== a) throw new Error("Unknown dataFormat " + a);i = [u, c, e[1], e[1]];
-  }return computeConv2DInfo(e, i, n, 1, r, o, !1, a);
-}function computeConv2DInfo(e, t, n, r, o, a, i, s) {
-  void 0 === i && (i = !1), void 0 === s && (s = "channelsLast");var u = [-1, -1, -1, -1],
-      c = u[0],
-      l = u[1],
-      d = u[2],
-      p = u[3];if ("channelsLast" === s) c = e[0], l = e[1], d = e[2], p = e[3];else {
-    if ("channelsFirst" !== s) throw new Error("Unknown dataFormat " + s);c = e[0], p = e[1], l = e[2], d = e[3];
-  }var h,
-      f = t[0],
-      g = t[1],
-      m = t[3],
-      v = parseTupleParam(n),
-      y = v[0],
-      x = v[1],
-      T = parseTupleParam(r),
-      b = T[0],
-      S = T[1],
-      E = getPadAndOutInfo(o, l, d, y, x, getEffectiveFilterSize(f, b), getEffectiveFilterSize(g, S), a),
-      w = E.padInfo,
-      A = E.outHeight,
-      _ = E.outWidth,
-      R = i ? m * p : m;return "channelsFirst" === s ? h = [c, R, A, _] : "channelsLast" === s && (h = [c, A, _, R]), { batchSize: c, dataFormat: s, inHeight: l, inWidth: d, inChannels: p, outHeight: A, outWidth: _, outChannels: R, padInfo: w, strideHeight: y, strideWidth: x, filterHeight: f, filterWidth: g, dilationHeight: b, dilationWidth: S, inShape: e, outShape: h, filterShape: t };
-}function computeOutputShape3D(e, t, n, r, o, a) {
-  null == o && (o = computeDefaultPad(e, t, r));var i = e[0],
-      s = e[1],
-      u = conditionalRound((i - t + 2 * o) / r + 1, a);assert(isInt(u), "The output # of rows (" + u + ") must be an integer. Change the stride and/or zero pad parameters");var c = conditionalRound((s - t + 2 * o) / r + 1, a);return assert(isInt(c), "The output # of columns (" + c + ") must be an integer. Change the stride and/or zero pad parameters"), [u, c, n];
-}function computeDefaultPad(e, t, n, r) {
-  void 0 === r && (r = 1);var o = getEffectiveFilterSize(t, r);return Math.floor((e[0] * (n - 1) - n + o) / 2);
-}function parseTupleParam(e) {
-  return "number" == typeof e ? [e, e] : e;
-}function getEffectiveFilterSize(e, t) {
-  return t <= 1 ? e : e + (e - 1) * (t - 1);
-}function getPadAndOutInfo(e, t, n, r, o, a, i, s) {
-  var u, c, l;if ("number" == typeof e) {
-    u = { top: e, bottom: e, left: e, right: e, type: 0 === e ? "VALID" : "NUMBER" };var d = computeOutputShape3D([t, n, 1], a, 1, r, e, s);c = d[0], l = d[1];
-  } else if ("same" === e) {
-    var p = ((c = Math.ceil(t / r)) - 1) * r + a - t,
-        h = ((l = Math.ceil(n / o)) - 1) * o + i - n,
-        f = Math.floor(p / 2),
-        g = p - f,
-        m = Math.floor(h / 2);u = { top: f, bottom: g, left: m, right: h - m, type: "SAME" };
-  } else {
-    if ("valid" !== e) throw Error("Unknown padding parameter: " + e);u = { top: 0, bottom: 0, left: 0, right: 0, type: "VALID" }, c = Math.ceil((t - a + 1) / r), l = Math.ceil((n - i + 1) / o);
-  }return { padInfo: u, outHeight: c, outWidth: l };
-}function conditionalRound(e, t) {
-  if (!t) return e;switch (t) {case "round":
-      return Math.round(e);case "ceil":
-      return Math.ceil(e);case "floor":
-      return Math.floor(e);default:
-      throw new Error("Unknown roundingMode " + t);}
-}var ConvOps = function () {
-  function e() {}return e.conv1d = function (t, n, r, o, a, i, s) {
-    void 0 === a && (a = "NWC"), void 0 === i && (i = 1);var u = convertToTensor(t, "x", "conv1d"),
-        c = convertToTensor(n, "filter", "conv1d"),
-        l = u,
-        d = !1;2 === u.rank && (d = !0, l = u.as3D(1, u.shape[0], u.shape[1])), assert(3 === l.rank, "Error in conv1d: input must be rank 3, but got rank " + l.rank + "."), assert(3 === c.rank, "Error in conv1d: filter must be rank 3, but got rank " + c.rank + "."), null != s && assert(isInt(o), "Error in conv1d: pad must be an integer when using, dimRoundingMode " + s + " but got pad " + o + "."), assert(l.shape[2] === c.shape[1], "Error in conv1d: depth of input (" + l.shape[2] + ") must match input depth for filter " + c.shape[1] + "."), assert(eitherStridesOrDilationsAreOne(r, i), "Error in conv1D: Either stride or dilation must be 1. Got stride " + r + " and dilation '" + i + "'"), assert("NWC" === a, "Error in conv1d: got dataFormat of " + a + " but only NWC is currently supported.");var p = c.as4D(1, c.shape[0], c.shape[1], c.shape[2]),
-        h = l.as4D(l.shape[0], 1, l.shape[1], l.shape[2]),
-        f = [1, r],
-        g = [1, i],
-        m = e.conv2d(h, p, f, o, "NHWC", g, s);return d ? m.as2D(m.shape[2], m.shape[3]) : m.as3D(m.shape[0], m.shape[2], m.shape[3]);
-  }, e.conv2d = function (t, n, r, o, a, i, s) {
-    void 0 === a && (a = "NHWC"), void 0 === i && (i = [1, 1]);var u = convertToTensor(t, "x", "conv2d"),
-        c = convertToTensor(n, "filter", "conv2d"),
-        l = u,
-        d = !1;3 === u.rank && (d = !0, l = u.as4D(1, u.shape[0], u.shape[1], u.shape[2])), assert(4 === l.rank, "Error in conv2d: input must be rank 4, but got rank " + l.rank + "."), assert(4 === c.rank, "Error in conv2d: filter must be rank 4, but got rank " + c.rank + "."), null != s && assert(isInt(o), "Error in conv2d: pad must be an integer when using, dimRoundingMode " + s + " but got pad " + o + "."), assert(l.shape[3] === c.shape[2], "Error in conv2d: depth of input (" + l.shape[3] + ") must match input depth for filter " + c.shape[2] + "."), assert(eitherStridesOrDilationsAreOne(r, i), "Error in conv2D: Either strides or dilations must be 1. Got strides " + r + " and dilations '" + i + "'"), assert("NHWC" === a, "Error in conv2d: got dataFormat of " + a + " but only NHWC is currently supported.");var p = computeConv2DInfo(l.shape, c.shape, r, i, o, s),
-        h = ENV.engine.runKernel(function (e) {
-      return e.conv2d(l, c, p);
-    }, { x: l, $filter: c }, function (t) {
-      return assert(tupleValuesAreOne(i), "Error in gradient of conv2D: dilation rates greater than 1 are notyet supported in gradients. Got dilations '" + i + "'"), { x: function () {
-          return e.conv2dDerInput(l.shape, t, c, r, o);
-        }, $filter: function () {
-          return e.conv2dDerFilter(l, t, c.shape, r, o);
-        } };
-    });return d ? h.as3D(h.shape[1], h.shape[2], h.shape[3]) : h;
-  }, e.conv2dDerInput = function (e, t, n, r, o, a) {
-    assert(e.length === t.rank, "Length of inShape (" + e.length + ") and rank of dy (" + t.rank + ") must match");var i = e,
-        s = t,
-        u = !1;3 === t.rank && (u = !0, s = t.as4D(1, t.shape[0], t.shape[1], t.shape[2]), i = [1, e[0], e[1], e[2]]);var c = i[3],
-        l = s.shape[3];assert(4 === i.length, "Error in conv2dDerInput: inShape must be length 4, but got length " + i.length + "."), assert(4 === s.rank, "Error in conv2dDerInput: dy must be rank 4, but got rank " + s.rank), assert(4 === n.rank, "Error in conv2dDerInput: filter must be rank 4, but got rank " + n.rank), assert(c === n.shape[2], "Error in conv2dDerInput: depth of input (" + c + ") must match input depth for filter " + n.shape[2] + "."), assert(l === n.shape[3], "Error in conv2dDerInput: depth of output (" + l + ") must match output depth for filter " + n.shape[3] + "."), null != a && assert(isInt(o), "Error in conv2dDerInput: pad must be an integer when using, dimRoundingMode " + a + " but got pad " + o + ".");var d = computeConv2DInfo(i, n.shape, r, 1, o, a),
-        p = ENV.engine.runKernel(function (e) {
-      return e.conv2dDerInput(s, n, d);
-    }, { dy4D: s });return u ? p.as3D(p.shape[1], p.shape[2], p.shape[3]) : p;
-  }, e.conv2dDerFilter = function (e, t, n, r, o, a) {
-    var i = e;3 === e.rank && (i = e.as4D(1, e.shape[0], e.shape[1], e.shape[2]));var s = t;3 === s.rank && (s = t.as4D(1, t.shape[0], t.shape[1], t.shape[2])), assert(4 === i.rank, "Error in conv2dDerFilter: input must be rank 4, but got shape " + i.shape + "."), assert(4 === s.rank, "Error in conv2dDerFilter: dy must be rank 4, but got shape " + s.shape + "."), assert(4 === n.length, "Error in conv2dDerFilter: filterShape must be length 4, but got " + n + "."), assert(i.shape[3] === n[2], "Error in conv2dDerFilter: depth of input " + i.shape[3] + ") must match input depth in filter (" + n[2] + "."), assert(s.shape[3] === n[3], "Error in conv2dDerFilter: depth of dy (" + s.shape[3] + ") must match output depth for filter (" + n[3] + ")."), null != a && assert(isInt(o), "Error in conv2dDerFilter: pad must be an integer when using, dimRoundingMode " + a + " but got pad " + o + ".");var u = computeConv2DInfo(i.shape, n, r, 1, o, a);return ENV.engine.runKernel(function (e) {
-      return e.conv2dDerFilter(i, s, u);
-    }, { x4D: i, dy4D: s });
-  }, e.conv2dTranspose = function (t, n, r, o, a, i) {
-    var s = convertToTensor(t, "x", "conv2dTranspose"),
-        u = convertToTensor(n, "filter", "conv2dTranspose");return e.conv2dDerInput(r, s, u, o, a, i);
-  }, e.depthwiseConv2d = function (e, t, n, r, o, a, i) {
-    void 0 === o && (o = "NHWC"), void 0 === a && (a = [1, 1]);var s = convertToTensor(e, "x", "depthwiseConv2d"),
-        u = convertToTensor(t, "filter", "depthwiseConv2d"),
-        c = s,
-        l = !1;3 === s.rank && (l = !0, c = s.as4D(1, s.shape[0], s.shape[1], s.shape[2])), assert(4 === c.rank, "Error in depthwiseConv2d: input must be rank 4, but got rank " + c.rank + "."), assert(4 === u.rank, "Error in depthwiseConv2d: filter must be rank 4, but got rank " + u.rank + "."), assert(c.shape[3] === u.shape[2], "Error in depthwiseConv2d: number of input channels (" + c.shape[3] + ") must match the inChannels dimension in filter " + u.shape[2] + "."), null == a && (a = [1, 1]), assert(eitherStridesOrDilationsAreOne(n, a), "Error in depthwiseConv2d: Either strides or dilations must be 1. Got strides " + n + " and dilations '" + a + "'"), null != i && assert(isInt(r), "Error in depthwiseConv2d: pad must be an integer when using, dimRoundingMode " + i + " but got pad " + r + ".");var d = computeConv2DInfo(c.shape, u.shape, n, a, r, i, !0),
-        p = ENV.engine.runKernel(function (e) {
-      return e.depthwiseConv2D(c, u, d);
-    }, { x: c, $filter: u }, function (e) {
-      return assert(tupleValuesAreOne(a), "Error in gradient of depthwiseConv2d: dilation rates greater than 1 are not yet supported. Got dilations '" + a + "'"), { x: function () {
-          return depthwiseConv2dDerInput(c.shape, e, u, d);
-        }, $filter: function () {
-          return depthwiseConv2dDerFilter(c, e, u.shape, d);
-        } };
-    });return l ? p.as3D(p.shape[1], p.shape[2], p.shape[3]) : p;
-  }, e.separableConv2d = function (t, n, r, o, a, i, s) {
-    void 0 === i && (i = [1, 1]), void 0 === s && (s = "NHWC");var u = convertToTensor(t, "x", "separableConv2d"),
-        c = convertToTensor(n, "depthwiseFilter", "separableConv2d"),
-        l = convertToTensor(r, "pointwiseFilter", "separableConv2d"),
-        d = u,
-        p = !1;if (3 === u.rank && (p = !0, d = u.as4D(1, u.shape[0], u.shape[1], u.shape[2])), "NCHW" === s) throw new Error("separableConv2d currently does not support dataFormat NCHW; only NHWC is supported");assert(4 === d.rank, "Error in separableConv2d: input must be rank 4, but got rank " + d.rank + "."), assert(4 === c.rank, "Error in separableConv2d: depthwise filter must be rank 4, but got rank " + c.rank + "."), assert(4 === l.rank, "Error in separableConv2d: pointwise filter must be rank 4, but got rank " + c.rank + "."), assert(1 === l.shape[0], "Error in separableConv2d: the first dimension of pointwise filter  must be 1, but got " + l.shape[0] + "."), assert(1 === l.shape[1], "Error in separableConv2d: the second dimension of pointwise filter  must be 1, but got " + l.shape[1] + ".");var h = c.shape[2],
-        f = c.shape[3];assert(l.shape[2] === h * f, "Error in separableConv2d: the third dimension of pointwise filter must be " + h * f + ", but got " + l.shape[2] + ".");var g = e.depthwiseConv2d(d, c, o, a, s, i),
-        m = e.conv2d(g, l, 1, "valid", s);return p ? m.as3D(m.shape[1], m.shape[2], m.shape[3]) : m;
-  }, __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "conv1d", null), __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "conv2d", null), __decorate([operation], e, "conv2dDerInput", null), __decorate([operation], e, "conv2dDerFilter", null), __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "conv2dTranspose", null), __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "depthwiseConv2d", null), __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "separableConv2d", null), e;
-}();function parseTupleParam$1(e) {
-  return "number" == typeof e ? [e, e] : e;
-}function tupleValuesAreOne(e) {
-  var t = parseTupleParam$1(e),
-      n = t[0],
-      r = t[1];return 1 === n && 1 === r;
-}function eitherStridesOrDilationsAreOne(e, t) {
-  return tupleValuesAreOne(e) || tupleValuesAreOne(t);
-}function depthwiseConv2dDerInput(e, t, n, r) {
-  var o = t,
-      a = !1;3 === t.rank && (a = !0, o = t.as4D(1, t.shape[0], t.shape[1], t.shape[2]));var i = ENV.engine.runKernel(function (e) {
-    return e.depthwiseConv2DDerInput(o, n, r);
-  }, { dy4D: o });return a ? i.as3D(i.shape[1], i.shape[2], i.shape[3]) : i;
-}function depthwiseConv2dDerFilter(e, t, n, r) {
-  var o = e;3 === e.rank && (o = e.as4D(1, e.shape[0], e.shape[1], e.shape[2]));var a = t;return 3 === a.rank && (a = t.as4D(1, t.shape[0], t.shape[1], t.shape[2])), ENV.engine.runKernel(function (e) {
-    return e.depthwiseConv2DDerFilter(o, a, r);
-  }, { x4D: o, dy4D: a });
-}var ImageOps = function () {
-  function e() {}return e.resizeBilinear = function (e, t, n) {
-    void 0 === n && (n = !1);var r = convertToTensor(e, "images", "resizeBilinear");assert(3 === r.rank || 4 === r.rank, "Error in resizeBilinear: x must be rank 3 or 4, but got rank " + r.rank + "."), assert(2 === t.length, "Error in resizeBilinear: new shape must 2D, but got shape " + t + ".");var o = r,
-        a = !1;3 === r.rank && (a = !0, o = r.as4D(1, r.shape[0], r.shape[1], r.shape[2]));var i = t[0],
-        s = t[1],
-        u = ENV.engine.runKernel(function (e, t) {
-      return e.resizeBilinear(o, i, s, n);
-    }, { batchImages: o }, function (e, t) {
-      return { batchImages: function () {
-          return ENV.engine.runKernel(function (t) {
-            return t.resizeBilinearBackprop(e, o, n);
-          }, {});
-        } };
-    });return a ? u.as3D(u.shape[1], u.shape[2], u.shape[3]) : u;
-  }, e.resizeNearestNeighbor = function (e, t, n) {
-    void 0 === n && (n = !1);var r = convertToTensor(e, "images", "resizeNearestNeighbor");assert(3 === r.rank || 4 === r.rank, "Error in resizeNearestNeighbor: x must be rank 3 or 4, but got rank " + r.rank + "."), assert(2 === t.length, "Error in resizeNearestNeighbor: new shape must 2D, but got shape " + t + "."), assert("float32" === r.dtype || "int32" === r.dtype, "`images` must have `int32` or `float32` as dtype");var o = r,
-        a = !1;3 === r.rank && (a = !0, o = r.as4D(1, r.shape[0], r.shape[1], r.shape[2]));var i = t[0],
-        s = t[1],
-        u = ENV.engine.runKernel(function (e, t) {
-      return e.resizeNearestNeighbor(o, i, s, n);
-    }, { batchImages: o }, function (e, t) {
-      return { batchImages: function () {
-          return ENV.engine.runKernel(function (t) {
-            return t.resizeNearestNeighborBackprop(e, o, n);
-          }, {});
-        } };
-    });return a ? u.as3D(u.shape[1], u.shape[2], u.shape[3]) : u;
-  }, __decorate([doc({ heading: "Operations", subheading: "Images", namespace: "image" }), operation], e, "resizeBilinear", null), __decorate([doc({ heading: "Operations", subheading: "Images", namespace: "image" }), operation], e, "resizeNearestNeighbor", null), e;
-}(),
-    Gradients = function () {
-  function e() {}return e.gradScope = function (e, t) {
-    return ENV.engine.tidy(e, t, !0);
-  }, e.grad = function (e) {
-    return assert(isFunction(e), "The f passed in grad(f) must be a function"), function (t, n) {
-      return assert(t instanceof Tensor, "The x passed in grad(f)(x) must be a tensor"), assert(null == n || n instanceof Tensor, "The dy passed in grad(f)(x, dy) must be a tensor"), ENV.engine.tidy(function () {
-        var r = ENV.engine.gradients(function () {
-          return e(t);
-        }, [t], n),
-            o = r.value,
-            a = r.grads;return null != n && assertShapesMatch(o.shape, n.shape, "The shape of dy passed in grad(f)(x, dy) must match the shape returned by f(x)"), checkGrads(a), a[0];
-      });
-    };
-  }, e.grads = function (e) {
-    return assert(isFunction(e), "The f passed in grads(f) must be a function"), function (t, n) {
-      return assert(Array.isArray(t) && t.every(function (e) {
-        return e instanceof Tensor;
-      }), "The args passed in grads(f)(args) must be an array of tensors"), assert(null == n || n instanceof Tensor, "The dy passed in grads(f)(args, dy) must be a tensor"), ENV.engine.tidy(function () {
-        var r = ENV.engine.gradients(function () {
-          return e.apply(void 0, t);
-        }, t, n),
-            o = r.value,
-            a = r.grads;return null != n && assertShapesMatch(o.shape, n.shape, "The shape of dy passed in grads(f)([x1,...], dy) must match the shape returned by f([x1,...])"), checkGrads(a), a;
-      });
-    };
-  }, e.valueAndGrad = function (e) {
-    return assert(isFunction(e), "The f passed in valueAndGrad(f) must be a function"), function (t, n) {
-      assert(t instanceof Tensor, "The x passed in valueAndGrad(f)(x) must be a tensor"), assert(null == n || n instanceof Tensor, "The dy passed in valueAndGrad(f)(x, dy) must be a tensor");var r = ENV.engine.gradients(function () {
-        return e(t);
-      }, [t], n),
-          o = r.grads,
-          a = r.value;return checkGrads(o), { grad: o[0], value: a };
-    };
-  }, e.valueAndGrads = function (e) {
-    return assert(isFunction(e), "The f passed in valueAndGrads(f) must be a function"), function (t, n) {
-      assert(Array.isArray(t) && t.every(function (e) {
-        return e instanceof Tensor;
-      }), "The args passed in valueAndGrads(f)(args) must be array of tensors"), assert(null == n || n instanceof Tensor, "The dy passed in valueAndGrads(f)(args, dy) must be a tensor");var r = ENV.engine.gradients(function () {
-        return e.apply(void 0, t);
-      }, t, n);return null != n && assertShapesMatch(r.value.shape, n.shape, "The shape of dy passed in valueAndGrads(f)([x1,...], dy) must match the shape returned by f([x1,...])"), checkGrads(r.grads), r;
-    };
-  }, e.variableGrads = function (e, t) {
-    if (assert(isFunction(e), "The f passed in variableGrads(f) must be a function"), assert(null == t || Array.isArray(t) && t.every(function (e) {
-      return e instanceof Variable;
-    }), "The varList passed in variableGrads(f, varList) must be an array of variables"), null == t) for (var n in t = [], ENV.engine.registeredVariables) t.push(ENV.engine.registeredVariables[n]);var r = t.length;assert((t = t.filter(function (e) {
-      return e.trainable;
-    })).length > 0, "variableGrads() expects at least one of the input variables to be trainable, but none of the " + r + " variables is trainable.");var o = ENV.engine.gradients(e, t, null, !0),
-        a = o.value,
-        i = o.grads;assert(i.some(function (e) {
-      return null != e;
-    }), "Cannot find a connection between any variable and the result of the loss function y=f(x). Please make sure the operations that use variables are inside the function f passed to minimize()."), assert(0 === a.rank, "The f passed in variableGrads(f) must return a scalar, but it returned a rank-" + a.rank + " tensor");var s = {};return t.forEach(function (e, t) {
-      null != i[t] && (s[e.name] = i[t]);
-    }), { value: a, grads: s };
-  }, e.customGrad = function (e) {
-    return ENV.engine.customGrad(e);
-  }, __decorate([doc({ heading: "Training", subheading: "Gradients" })], e, "grad", null), __decorate([doc({ heading: "Training", subheading: "Gradients" })], e, "grads", null), __decorate([doc({ heading: "Training", subheading: "Gradients" })], e, "valueAndGrad", null), __decorate([doc({ heading: "Training", subheading: "Gradients" })], e, "valueAndGrads", null), __decorate([doc({ heading: "Training", subheading: "Gradients" })], e, "variableGrads", null), __decorate([doc({ heading: "Training", subheading: "Gradients" })], e, "customGrad", null), e;
-}();function checkGrads(e) {
-  if (e.filter(function (e) {
-    return null == e;
-  }).length > 0) throw new Error("Cannot compute gradient of y=f(x) with respect to x. Make sure that\n    the f you passed encloses all operations that lead from x to y.");
-}var tidy = Environment.tidy,
-    keep = Environment.keep,
-    dispose = Environment.dispose,
-    time = Environment.time,
-    grad = Gradients.grad,
-    valueAndGrad = Gradients.valueAndGrad,
-    grads = Gradients.grads,
-    valueAndGrads = Gradients.valueAndGrads,
-    variableGrads = Gradients.variableGrads,
-    customGrad = Gradients.customGrad,
-    NormOps = function () {
-  function e() {}return e.norm = function (e, t, n, r) {
-    void 0 === t && (t = "euclidean"), void 0 === n && (n = null), void 0 === r && (r = !1);var o = normImpl(e = convertToTensor(e, "x", "norm"), t, n),
-        a = o.shape;if (r) {
-      var i = parseAxisParam(n, e.shape);a = expandShapeToKeepDim(o.shape, i);
-    }return o.reshape(a);
-  }, __decorate([doc({ heading: "Operations", subheading: "Matrices" }), operation], e, "norm", null), e;
-}();function normImpl(e, t, n) {
-  if (void 0 === n && (n = null), 0 === e.rank) return e.abs();if (1 !== e.rank && null === n) return normImpl(e.reshape([-1]), t, n);if (1 === e.rank || "number" == typeof n || n instanceof Array && 1 === n.length) {
-    if (1 === t) return e.abs().sum(n);if (t === 1 / 0) return e.abs().max(n);if (t === -1 / 0) return e.abs().min(n);if ("euclidean" === t || 2 === t) return e.abs().pow(TensorOps.scalar(2, "int32")).sum(n).sqrt();throw new Error("Error in norm: invalid ord value: " + t);
-  }if (n instanceof Array && 2 === n.length) {
-    if (1 === t) return e.abs().sum(n[0]).max(n[1] - 1);if (t === 1 / 0) return e.abs().sum(n[1]).max(n[0]);if (t === -1 / 0) return e.abs().sum(n[1]).min(n[0]);if ("fro" === t || "euclidean" === t) return e.square().sum(n).sqrt();throw new Error("Error in norm: invalid ord value: " + t);
-  }throw new Error("Error in norm: invalid axis: " + n);
-}var ReductionOps = function () {
-  function e() {}return e.logSumExp = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "logSumExp"),
-        o = parseAxisParam(t, r.shape),
-        a = r.max(o, !0),
-        i = r.sub(a).exp().sum(o).log(),
-        s = a.reshape(i.shape).add(i);if (n) {
-      var u = expandShapeToKeepDim(s.shape, o);return s.reshape(u);
-    }return s;
-  }, e.sum = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "sum");"bool" === r.dtype && (r = r.toInt());var o = parseAxisParam(t, r.shape);return customGrad(function (e) {
-      var t = getAxesPermutation(o, e.rank),
-          r = o,
-          a = e;null != t && (a = e.transpose(t), r = getInnerMostAxes(r.length, e.rank));var i = ENV.engine.runKernel(function (e) {
-        return e.sum(a, r);
-      }, { permutedX: a });if (n) {
-        var s = expandShapeToKeepDim(i.shape, o);i = i.reshape(s);
-      }return { value: i, gradFunc: function (t) {
-          var n = e.shape.slice();return o.forEach(function (e) {
-            n[e] = 1;
-          }), t.reshape(n).mul(TensorOps.ones(e.shape, "float32"));
-        } };
-    })(r);
-  }, e.mean = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "mean"),
-        o = parseAxisParam(t, r.shape),
-        a = sizeFromShape(computeOutAndReduceShapes(r.shape, o)[1]);return customGrad(function (e) {
-      var r = TensorOps.scalar(a);return { value: (r.dtype === e.dtype ? e : e.cast(r.dtype)).div(r).sum(t, n), gradFunc: function (t) {
-          var n = e.shape.slice();return o.forEach(function (e) {
-            n[e] = 1;
-          }), t.reshape(n).mul(TensorOps.ones(e.shape, "float32")).div(r);
-        } };
-    })(r);
-  }, e.min = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "min"),
-        o = parseAxisParam(t, r.shape),
-        a = o,
-        i = getAxesPermutation(a, r.rank);null != i && (r = r.transpose(i), a = getInnerMostAxes(a.length, r.rank));var s = ENV.engine.runKernel(function (e) {
-      return e.min(r, a);
-    }, { $x: r });if (n) {
-      var u = expandShapeToKeepDim(s.shape, o);return s.reshape(u);
-    }return s;
-  }, e.max = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "max"),
-        o = parseAxisParam(t, r.shape),
-        a = o,
-        i = getAxesPermutation(a, r.rank);null != i && (r = r.transpose(i), a = getInnerMostAxes(a.length, r.rank));var s = ENV.engine.runKernel(function (e) {
-      return e.max(r, a);
-    }, { $x: r });if (n) {
-      var u = expandShapeToKeepDim(s.shape, o);return s.reshape(u);
-    }return s;
-  }, e.argMin = function (e, t) {
-    void 0 === t && (t = 0);var n = convertToTensor(e, "x", "argMin");null == t && (t = 0);var r = parseAxisParam(t, n.shape),
-        o = getAxesPermutation(r, n.rank);return null != o && (n = n.transpose(o), r = getInnerMostAxes(r.length, n.rank)), ENV.engine.runKernel(function (e) {
-      return e.argMin(n, r[0]);
-    }, { $x: n });
-  }, e.argMax = function (e, t) {
-    void 0 === t && (t = 0);var n = convertToTensor(e, "x", "argMax");null == t && (t = 0);var r = parseAxisParam(t, n.shape),
-        o = getAxesPermutation(r, n.rank);return null != o && (n = n.transpose(o), r = getInnerMostAxes(r.length, n.rank)), ENV.engine.runKernel(function (e) {
-      return e.argMax(n, r[0]);
-    }, { $x: n });
-  }, e.all = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "all", "bool");assert("bool" === r.dtype, "Error Tensor must be of type bool. Got: " + r.dtype);var o = parseAxisParam(t, r.shape),
-        a = o,
-        i = getAxesPermutation(a, r.rank);null != i && (r = r.transpose(i), a = getInnerMostAxes(a.length, r.rank));var s = ENV.engine.runKernel(function (e) {
-      return e.all(r, a);
-    }, { $x: r });if (n) {
-      var u = expandShapeToKeepDim(s.shape, o);return s.reshape(u);
-    }return s;
-  }, e.any = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = convertToTensor(e, "x", "any", "bool");assert("bool" === r.dtype, "Error Tensor must be of type bool. Got: " + r.dtype);var o = parseAxisParam(t, r.shape),
-        a = o,
-        i = getAxesPermutation(a, r.rank);null != i && (r = r.transpose(i), a = getInnerMostAxes(a.length, r.rank));var s = ENV.engine.runKernel(function (e) {
-      return e.any(r, a);
-    }, { $x: r });if (n) {
-      var u = expandShapeToKeepDim(s.shape, o);return s.reshape(u);
-    }return s;
-  }, e.moments = function (e, t, n) {
-    void 0 === t && (t = null), void 0 === n && (n = !1);var r = parseAxisParam(t, (e = convertToTensor(e, "x", "moments")).shape),
-        o = e.mean(r, n),
-        a = o.shape;return n || (a = expandShapeToKeepDim(o.shape, r)), { mean: o, variance: e.toFloat().sub(o.reshape(a)).square().mean(r, n) };
-  }, __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "logSumExp", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "sum", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "mean", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "min", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "max", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "argMin", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "argMax", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "all", null), __decorate([doc({ heading: "Operations", subheading: "Reduction" }), operation], e, "any", null), __decorate([doc({ heading: "Operations", subheading: "Normalization" }), operation], e, "moments", null), e;
-}(),
-    LinalgOps = function () {
-  function e() {}return e.gramSchmidt = function (e) {
-    var t;if (Array.isArray(e)) {
-      t = !1, assert(null != e && e.length > 0, "Gram-Schmidt process: input must not be null, undefined, or empty");for (var n = e[0].shape[0], r = 1; r < e.length; ++r) assert(e[r].shape[0] === n, "Gram-Schmidt: Non-unique lengths found in the input vectors: (" + e[r].shape[0] + " vs. " + n + ")");
-    } else t = !0, e = ArrayOps.split(e, e.shape[0], 0).map(function (e) {
-      return ArrayOps.squeeze(e, [0]);
-    });assert(e.length <= e[0].shape[0], "Gram-Schmidt: Number of vectors (" + e.length + ") exceeds number of dimensions (" + e[0].shape[0] + ").");var o = [],
-        a = e,
-        i = function (e) {
-      o.push(ENV.engine.tidy(function () {
-        var t = a[e];if (e > 0) for (var n = 0; n < e; ++n) {
-          var r = ReductionOps.sum(o[n].mulStrict(t)).mul(o[n]);t = t.sub(r);
-        }return t.div(NormOps.norm(t, "euclidean"));
-      }));
-    };for (r = 0; r < e.length; ++r) i(r);return t ? ArrayOps.stack(o, 0) : o;
-  }, e.qr = function (e, t) {
-    if (void 0 === t && (t = !1), e.rank < 2) throw new Error("qr() requires input tensor to have a rank >= 2, but got rank " + e.rank);if (2 === e.rank) return qr2d(e, t);var n = e.shape.slice(0, e.shape.length - 2).reduce(function (e, t) {
-      return e * t;
-    }),
-        r = [],
-        o = [];return ArrayOps.unstack(e.reshape([n, e.shape[e.shape.length - 2], e.shape[e.shape.length - 1]]), 0).forEach(function (e) {
-      var n = qr2d(e, t),
-          a = n[0],
-          i = n[1];r.push(a), o.push(i);
-    }), [ArrayOps.stack(r, 0).reshape(e.shape), ArrayOps.stack(o, 0).reshape(e.shape)];
-  }, __decorate([doc({ heading: "Operations", subheading: "Linear Algebra" }), operation], e, "gramSchmidt", null), __decorate([doc({ heading: "Operations", subheading: "Linear Algebra" }), operation], e, "qr", null), e;
-}();function qr2d(e, t) {
-  return void 0 === t && (t = !1), ENV.engine.tidy(function () {
-    if (2 !== e.shape.length) throw new Error("qr2d() requires a 2D Tensor, but got a " + e.shape.length + "D Tensor.");for (var n = e.shape[0], r = e.shape[1], o = ArrayOps.eye(n), a = e.clone(), i = TensorOps.tensor2d([[1]], [1, 1]), s = i.clone(), u = n >= r ? r : n, c = function (e) {
-      var t,
-          u = a,
-          c = s,
-          l = o;t = ENV.engine.tidy(function () {
-        var t = a.slice([e, e], [n - e, 1]),
-            u = t.norm(),
-            c = a.slice([e, e], [1, 1]),
-            l = c.sign().neg(),
-            d = c.sub(l.mul(u)),
-            p = t.div(d);s = 1 === p.shape[0] ? i.clone() : i.concat(p.slice([1, 0], [p.shape[0] - 1, p.shape[1]]), 0);var h = l.matMul(d).div(u).neg(),
-            f = a.slice([e, 0], [n - e, r]),
-            g = h.mul(s);a = 0 === e ? f.sub(g.matMul(s.transpose().matMul(f))) : a.slice([0, 0], [e, r]).concat(f.sub(g.matMul(s.transpose().matMul(f))), 0);var m = o.slice([0, e], [n, o.shape[1] - e]);return o = 0 === e ? m.sub(m.matMul(s).matMul(g.transpose())) : o.slice([0, 0], [n, e]).concat(m.sub(m.matMul(s).matMul(g.transpose())), 1), [s, a, o];
-      }), s = t[0], a = t[1], o = t[2], dispose([u, c, l]);
-    }, l = 0; l < u; ++l) c(l);return !t && n > r && (o = o.slice([0, 0], [n, r]), a = a.slice([0, 0], [r, r])), [o, a];
-  });
-}var Reduction,
-    LogicalOps = function () {
-  function e() {}return e.logicalNot = function (e) {
-    var t = convertToTensor(e, "x", "logicalNot", "bool");return assert("bool" === t.dtype, "Error Array must be of type bool."), ENV.engine.runKernel(function (e) {
-      return e.logicalNot(t);
-    }, { $x: t });
-  }, e.logicalAnd = function (e, t) {
-    var n = convertToTensor(e, "a", "logicalAnd", "bool"),
-        r = convertToTensor(t, "b", "logicalAnd", "bool");return assert("bool" === n.dtype && "bool" === r.dtype, "Error Array must be of type bool."), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.logicalAnd(n, r);
-    }, { $a: n, $b: r });
-  }, e.logicalOr = function (e, t) {
-    var n = convertToTensor(e, "a", "logicalOr", "bool"),
-        r = convertToTensor(t, "b", "logicalOr", "bool");return assert("bool" === n.dtype && "bool" === r.dtype, "Error Array must be of type bool."), assertAndGetBroadcastShape(n.shape, r.shape), ENV.engine.runKernel(function (e) {
-      return e.logicalOr(n, r);
-    }, { $a: n, $b: r });
-  }, e.logicalXor = function (t, n) {
-    var r = convertToTensor(t, "a", "logicalXor", "bool"),
-        o = convertToTensor(n, "b", "logicalXor", "bool");return assert("bool" === r.dtype && "bool" === o.dtype, "Error Array must be of type bool."), assertAndGetBroadcastShape(r.shape, o.shape), e.logicalOr(t, n).logicalAnd(e.logicalAnd(t, n).logicalNot());
-  }, e.where = function (e, t, n) {
-    var r = convertToTensor(t, "a", "where"),
-        o = convertToTensor(n, "b", "where"),
-        a = convertToTensor(e, "condition", "where", "bool");assert("bool" === a.dtype, "Error Condition must be of type bool."), assertShapesMatch(r.shape, o.shape, "Error in where: "), 1 === a.rank ? assert(a.shape[0] === r.shape[0], "The first dimension of `a` must match the size of `condition`.") : assertShapesMatch(a.shape, o.shape, "Error in where: ");var i = upcastType(r.dtype, o.dtype);return ENV.engine.runKernel(function (e) {
-      return e.where(a, r, o, i);
-    }, { $condition: a, $a: r, $b: o }, function (e) {
-      return { $condition: function () {
-          return TensorOps.zerosLike(a);
-        }, $a: function () {
-          return e.mul(a.cast(r.dtype));
-        }, $b: function () {
-          return e.mul(a.logicalNot().cast(o.dtype));
-        } };
-    });
-  }, __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "logicalNot", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "logicalAnd", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "logicalOr", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "logicalXor", null), __decorate([doc({ heading: "Operations", subheading: "Logical" }), operation], e, "where", null), e;
-}();!function (e) {
-  e[e.NONE = 0] = "NONE", e[e.MEAN = 1] = "MEAN", e[e.SUM = 2] = "SUM", e[e.SUM_BY_NONZERO_WEIGHTS = 3] = "SUM_BY_NONZERO_WEIGHTS";
-}(Reduction || (exports.Reduction = Reduction = {}));var LossOps = function () {
-  function e() {}return e.computeWeightedLoss = function (e, t, n) {
-    void 0 === n && (n = Reduction.SUM_BY_NONZERO_WEIGHTS);var r = convertToTensor(e, "losses", "computeWeightedLoss"),
-        o = null;null != t && (o = convertToTensor(t, "weights", "computeWeightedLoss"));var a = null == o ? r : r.mul(o);if (n === Reduction.NONE) return a;if (n === Reduction.SUM) return a.sum();if (n === Reduction.MEAN) return null == o ? a.mean() : a.sum().div(o.sum());if (n === Reduction.SUM_BY_NONZERO_WEIGHTS) {
-      if (null == o) return a.sum().div(TensorOps.scalar(r.size));var i = o.mul(TensorOps.ones(r.shape)).notEqual(TensorOps.scalar(0)).sum().toFloat();return a.sum().div(i);
-    }throw Error("Unknown reduction: " + n);
-  }, e.absoluteDifference = function (t, n, r, o) {
-    void 0 === o && (o = Reduction.SUM_BY_NONZERO_WEIGHTS);var a = convertToTensor(t, "labels", "absoluteDifference"),
-        i = convertToTensor(n, "predictions", "absoluteDifference"),
-        s = null;null != r && (s = convertToTensor(r, "weights", "absoluteDifference")), assertShapesMatch(a.shape, i.shape, "Error in absoluteDifference: ");var u = a.sub(i).abs();return e.computeWeightedLoss(u, s, o);
-  }, e.meanSquaredError = function (t, n, r, o) {
-    void 0 === o && (o = Reduction.SUM_BY_NONZERO_WEIGHTS);var a = convertToTensor(t, "labels", "meanSquaredError"),
-        i = convertToTensor(n, "predictions", "meanSquaredError"),
-        s = null;null != r && (s = convertToTensor(r, "weights", "meanSquaredError")), assertShapesMatch(a.shape, i.shape, "Error in meanSquaredError: ");var u = a.squaredDifference(i);return e.computeWeightedLoss(u, s, o);
-  }, e.cosineDistance = function (t, n, r, o, a) {
-    void 0 === a && (a = Reduction.SUM_BY_NONZERO_WEIGHTS);var i = convertToTensor(t, "labels", "cosineDistance"),
-        s = convertToTensor(n, "predictions", "cosineDistance"),
-        u = null;null != o && (u = convertToTensor(o, "weights", "cosineDistance")), assertShapesMatch(i.shape, s.shape, "Error in cosineDistance: ");var c = TensorOps.scalar(1).sub(i.mul(s).sum(r, !0));return e.computeWeightedLoss(c, u, a);
-  }, e.hingeLoss = function (t, n, r, o) {
-    void 0 === o && (o = Reduction.SUM_BY_NONZERO_WEIGHTS);var a = convertToTensor(t, "labels", "hingeLoss"),
-        i = convertToTensor(n, "predictions", "hingeLoss"),
-        s = null;null != r && (s = convertToTensor(r, "weights", "hingeLoss")), assertShapesMatch(a.shape, i.shape, "Error in hingeLoss: ");var u = TensorOps.scalar(1);a = TensorOps.scalar(2).mul(a).sub(u);var c = u.sub(a.mul(i)).relu();return e.computeWeightedLoss(c, s, o);
-  }, e.logLoss = function (t, n, r, o, a) {
-    void 0 === o && (o = 1e-7), void 0 === a && (a = Reduction.SUM_BY_NONZERO_WEIGHTS);var i = convertToTensor(t, "labels", "logLoss"),
-        s = convertToTensor(n, "predictions", "logLoss"),
-        u = null;null != r && (u = convertToTensor(r, "weights", "logLoss")), assertShapesMatch(i.shape, s.shape, "Error in logLoss: ");var c = TensorOps.scalar(1),
-        l = TensorOps.scalar(o),
-        d = i.mul(s.add(l).log()).neg().sub(c.sub(i).mul(c.sub(s).add(l).log()));return e.computeWeightedLoss(d, u, a);
-  }, e.huberLoss = function (t, n, r, o, a) {
-    void 0 === o && (o = 1), void 0 === a && (a = Reduction.SUM_BY_NONZERO_WEIGHTS);var i = convertToTensor(t, "labels", "huberLoss"),
-        s = convertToTensor(n, "predictions", "huberLoss"),
-        u = null;null != r && (u = convertToTensor(r, "weights", "huberLoss")), assertShapesMatch(i.shape, s.shape, "Error in huberLoss: ");var c = TensorOps.scalar(o),
-        l = s.sub(i).abs(),
-        d = BinaryOps.minimum(l, c),
-        p = l.sub(d),
-        h = TensorOps.scalar(.5).mul(d.square()).add(c.mul(p));return e.computeWeightedLoss(h, u, a);
-  }, __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "computeWeightedLoss", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "absoluteDifference", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "meanSquaredError", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "cosineDistance", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "hingeLoss", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "logLoss", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "huberLoss", null), e;
-}(),
-    LRNOps = function () {
-  function e() {}return e.localResponseNormalization = function (e, t, n, r, o) {
-    void 0 === t && (t = 5), void 0 === n && (n = 1), void 0 === r && (r = 1), void 0 === o && (o = .5);var a = convertToTensor(e, "x", "localResponseNormalization");assert(4 === a.rank || 3 === a.rank, "Error in localResponseNormalization: x must be rank 3 or 4 but got\n               rank " + a.rank + "."), assert(isInt(t), "Error in localResponseNormalization: depthRadius must be an integer\n                     but got depthRadius " + t + ".");var i = a,
-        s = !1;3 === a.rank && (s = !0, i = a.as4D(1, a.shape[0], a.shape[1], a.shape[2]));var u = ENV.engine.runKernel(function (e) {
-      return e.localResponseNormalization4D(i, t, n, r, o);
-    }, { x4D: i });return s ? u.as3D(u.shape[1], u.shape[2], u.shape[3]) : u;
-  }, __decorate([doc({ heading: "Operations", subheading: "Normalization" }), operation], e, "localResponseNormalization", null), e;
-}(),
-    LSTMOps = function () {
-  function e() {}return e.multiRNNCell = function (e, t, n, r) {
-    for (var o = convertToTensor(t, "data", "multiRNNCell"), a = convertToTensorArray(n, "c", "multiRNNCell"), i = convertToTensorArray(r, "h", "multiRNNCell"), s = o, u = [], c = 0; c < e.length; c++) {
-      var l = e[c](s, a[c], i[c]);u.push(l[0]), u.push(l[1]), s = l[1];
-    }var d = [],
-        p = [];for (c = 0; c < u.length; c += 2) d.push(u[c]), p.push(u[c + 1]);return [d, p];
-  }, e.basicLSTMCell = function (e, t, n, r, o, a) {
-    var i = convertToTensor(e, "forgetBias", "basicLSTMCell"),
-        s = convertToTensor(t, "lstmKernel", "basicLSTMCell"),
-        u = convertToTensor(n, "lstmBias", "basicLSTMCell"),
-        c = convertToTensor(r, "data", "basicLSTMCell"),
-        l = convertToTensor(o, "c", "basicLSTMCell"),
-        d = convertToTensor(a, "h", "basicLSTMCell"),
-        p = c.concat(d, 1).matMul(s).add(u),
-        h = p.shape[0],
-        f = p.shape[1] / 4,
-        g = [h, f],
-        m = p.slice([0, 0], g),
-        v = p.slice([0, f], g),
-        y = p.slice([0, 2 * f], g),
-        x = p.slice([0, 3 * f], g),
-        T = m.sigmoid().mulStrict(v.tanh()).addStrict(l.mulStrict(i.add(y).sigmoid()));return [T, T.tanh().mulStrict(x.sigmoid())];
-  }, __decorate([doc({ heading: "Operations", subheading: "RNN" }), operation], e, "multiRNNCell", null), __decorate([doc({ heading: "Operations", subheading: "RNN" }), operation], e, "basicLSTMCell", null), e;
-}(),
-    MatmulOps = function () {
-  function e() {}return e.matMul = function (e, t, n, r) {
-    void 0 === n && (n = !1), void 0 === r && (r = !1);var o = convertToTensor(e, "a", "matMul"),
-        a = convertToTensor(t, "b", "matMul"),
-        i = n ? o.shape[0] : o.shape[1],
-        s = r ? a.shape[1] : a.shape[0];assert(2 === o.rank && 2 === a.rank, "Error in matMul: inputs must be rank 2, got ranks " + o.rank + " and " + a.rank + "."), assert(i === s, "Error in matMul: inner shapes (" + i + ") and (" + s + ") of Tensors with shapes " + o.shape + " and " + a.shape + " and transposeA=" + n + " and transposeB=" + r + " must match.");return ENV.engine.runKernel(function (e) {
-      return e.matMul(o, a, n, r);
-    }, { $a: o, $b: a }, function (e) {
-      return n || r ? !n && r ? { $a: function () {
-          return e.matMul(a.toFloat(), !1, !1);
-        }, $b: function () {
-          return e.matMul(o.toFloat(), !0, !1);
-        } } : n && !r ? { $a: function () {
-          return a.toFloat().matMul(e, !1, !0);
-        }, $b: function () {
-          return o.toFloat().matMul(e, !1, !1);
-        } } : { $a: function () {
-          return a.toFloat().matMul(e, !0, !0);
-        }, $b: function () {
-          return e.matMul(o.toFloat(), !0, !0);
-        } } : { $a: function () {
-          return e.matMul(a.toFloat(), !1, !0);
-        }, $b: function () {
-          return o.toFloat().matMul(e, !0, !1);
-        } };
-    });
-  }, e.vectorTimesMatrix = function (e, t) {
-    return assert(1 === e.rank, "Error in vectorTimesMatrix: first input must be rank 1, but got rank " + e.rank + "."), assert(2 === t.rank, "Error in vectorTimesMatrix: second input must be rank 2, but got rank " + t.rank + "."), assert(e.size === t.shape[0], "Error in vectorTimesMatrix: size of vector (" + e.size + ") must match first dimension of matrix (" + t.shape[0] + ")"), e.as2D(1, -1).matMul(t).as1D();
-  }, e.matrixTimesVector = function (e, t) {
-    return assert(1 === t.rank, "Error in matrixTimesVector: second input must rank 1, but got rank " + t.rank + "."), assert(2 === e.rank, "Error in matrixTimesVector: first input must be a rank 2, but got rank " + e.rank + "."), assert(t.size === e.shape[1], "Error in matrixTimesVector: size of first rank 1 input " + t.size + " must match inner dimension of second rank 2 input, but got shape " + e.shape + "."), e.matMul(t.as2D(-1, 1)).as1D();
-  }, e.dotProduct = function (e, t) {
-    return assert(1 === e.rank && 1 === t.rank, "Error in dotProduct: inputs must be rank 1, but got ranks " + e.rank + " and " + t.rank + "."), assert(e.size === t.size, "Error in dotProduct: size of inputs (" + e.size + ") and (" + t.size + ") must match."), e.as2D(1, -1).matMul(t.as2D(-1, 1)).asScalar();
-  }, e.outerProduct = function (e, t) {
-    var n = convertToTensor(e, "v1", "outerProduct"),
-        r = convertToTensor(t, "v2", "outerProduct");return assert(1 === n.rank && 1 === r.rank, "Error in outerProduct: inputs must be rank 1, but got ranks " + n.rank + " and " + r.rank + "."), n.as2D(-1, 1).matMul(r.as2D(1, -1));
-  }, e.dot = function (e, t) {
-    var n = convertToTensor(e, "t1", "dot"),
-        r = convertToTensor(t, "t2", "dot");assert(!(1 !== n.rank && 2 !== n.rank || 1 !== r.rank && 2 !== r.rank), "Error in dot: inputs must all be rank 1 or 2, but got ranks " + n.rank + " and " + r.rank + ".");var o = 1 === n.rank ? n.size : n.shape[1],
-        a = 1 === r.rank ? r.size : r.shape[0];return assert(o === a, "Error in dot: inner dimensions of inputs must match, but got " + o + " and " + a + "."), 1 === n.rank && 1 === r.rank ? n.as2D(1, -1).matMul(r.as2D(-1, 1)).asScalar() : 1 === n.rank && 2 === r.rank ? n.as2D(1, -1).matMul(r.as2D(r.shape[0], r.shape[1])).as1D() : 2 === n.rank && 1 === r.rank ? n.matMul(r.as2D(-1, 1)).as1D() : n.matMul(r.as2D(r.shape[0], r.shape[1]));
-  }, __decorate([doc({ heading: "Operations", subheading: "Matrices" }), operation], e, "matMul", null), __decorate([operation], e, "vectorTimesMatrix", null), __decorate([operation], e, "matrixTimesVector", null), __decorate([operation], e, "dotProduct", null), __decorate([doc({ heading: "Operations", subheading: "Matrices" }), operation], e, "outerProduct", null), __decorate([doc({ heading: "Operations", subheading: "Matrices" }), operation], e, "dot", null), e;
-}(),
-    MovingAverageOps = function () {
-  function e() {}return e.movingAverage = function (e, t, n, r, o) {
-    void 0 === o && (o = !0);var a = convertToTensor(e, "v", "movingAverage"),
-        i = convertToTensor(t, "x", "movingAverage"),
-        s = convertToTensor(n, "decay", "movingAverage");assertTypesMatch(a, i), assert(arraysEqual(a.shape, i.shape), "Shape mismatch in v and x");var u = TensorOps.scalar(1),
-        c = u.sub(s),
-        l = i.sub(a).mul(c);if (o) {
-      assert(null != r, "When using zeroDebias: true, step is required.");var d = convertToTensor(r, "step", "movingAverage");l = l.div(u.sub(BinaryOps.pow(s, d)));
-    }return a.add(l);
-  }, __decorate([doc({ heading: "Operations", subheading: "Moving Average" }), operation], e, "movingAverage", null), e;
-}(),
-    PoolOps = function () {
-  function e() {}return e.maxPool = function (t, n, r, o, a) {
-    var i = convertToTensor(t, "x", "maxPool"),
-        s = i,
-        u = !1;3 === i.rank && (u = !0, s = i.as4D(1, i.shape[0], i.shape[1], i.shape[2])), assert(4 === s.rank, "Error in maxPool: input must be rank 4 but got rank " + s.rank + "."), null != a && assert(isInt(o), "Error in maxPool: pad must be an integer when using, dimRoundingMode " + a + " but got pad " + o + ".");var c = computePool2DInfo(s.shape, n, r, o, a),
-        l = ENV.engine.runKernel(function (e, t) {
-      return t(e.maxPool(s, c));
-    }, { x: s }, function (t, a) {
-      var i = a[0];return { x: function () {
-          return e.maxPoolBackprop(t, s, i, n, r, o);
-        } };
-    });return u ? l.as3D(l.shape[1], l.shape[2], l.shape[3]) : l;
-  }, e.maxPoolBackprop = function (e, t, n, r, o, a, i) {
-    var s = convertToTensor(e, "dy", "maxPoolBackprop"),
-        u = convertToTensor(t, "input", "maxPoolBackprop"),
-        c = convertToTensor(n, "output", "maxPoolBackprop");assert(u.rank === s.rank, "Rank of input (" + u.rank + ") does not match rank of dy (" + s.rank + ")"), assert(4 === s.rank, "Error in maxPoolBackprop: dy must be rank 4 but got rank " + s.rank + "."), assert(4 === u.rank, "Error in maxPoolBackprop: input must be rank 4 but got rank " + u.rank + "."), null != i && assert(isInt(a), "Error in maxPoolBackprop: pad must be an integer when using, dimRoundingMode " + i + " but got pad " + a + ".");var l = computePool2DInfo(u.shape, r, o, a, i);return ENV.engine.runKernel(function (e) {
-      return e.maxPoolBackprop(s, u, c, l);
-    }, { $dy: s, $input: u });
-  }, e.avgPool = function (t, n, r, o, a) {
-    var i = convertToTensor(t, "x", "avgPool");assert("float32" === i.dtype, "The input dtype to avgPool must be float32");var s = i,
-        u = !1;3 === i.rank && (u = !0, s = i.as4D(1, i.shape[0], i.shape[1], i.shape[2])), assert(4 === s.rank, "Error in avgPool: x must be rank 4 but got rank " + s.rank + "."), null != a && assert(isInt(o), "Error in avgPool: pad must be an integer when using, dimRoundingMode " + a + " but got pad " + o + ".");var c = computePool2DInfo(s.shape, n, r, o),
-        l = ENV.engine.runKernel(function (e) {
-      return e.avgPool(s, c);
-    }, { x: s }, function (t) {
-      return { x: function () {
-          return e.avgPoolBackprop(t, s, n, r, o);
-        } };
-    });return l = l.cast(i.dtype), u ? l.as3D(l.shape[1], l.shape[2], l.shape[3]) : l;
-  }, e.avgPoolBackprop = function (e, t, n, r, o) {
-    var a = convertToTensor(e, "dy", "avgPoolBackprop"),
-        i = convertToTensor(t, "input", "avgPoolBackprop");assert(i.rank === a.rank, "Rank of input (" + i.rank + ") does not match rank of dy (" + a.rank + ")");var s = i,
-        u = a,
-        c = !1;3 === i.rank && (c = !0, s = i.as4D(1, i.shape[0], i.shape[1], i.shape[2]), u = a.as4D(1, a.shape[0], a.shape[1], a.shape[2])), assert(4 === u.rank, "Error in avgPoolBackprop: dy must be rank 4 but got rank " + u.rank + "."), assert(4 === s.rank, "Error in avgPoolBackprop: input must be rank 4 but got rank " + s.rank + ".");var l = computePool2DInfo(s.shape, n, r, o),
-        d = ENV.engine.runKernel(function (e) {
-      return e.avgPoolBackprop(u, s, l);
-    }, { dy4D: u, input4D: s });return c ? d.as3D(d.shape[1], d.shape[2], d.shape[3]) : d;
-  }, __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "maxPool", null), __decorate([operation], e, "maxPoolBackprop", null), __decorate([doc({ heading: "Operations", subheading: "Convolution" }), operation], e, "avgPool", null), __decorate([operation], e, "avgPoolBackprop", null), e;
-}(),
-    SELU_SCALEALPHA = 1.7580993408473768,
-    SELU_SCALE = 1.0507009873554805,
-    ReluOps = function () {
-  function e() {}return e.relu = function (e) {
-    var t = convertToTensor(e, "x", "relu");if ("bool" === t.dtype) return t.toInt();return ENV.engine.runKernel(function (e) {
-      return e.relu(t);
-    }, { $x: t }, function (e) {
-      var n = t.step();return { $x: function () {
-          return e.mulStrict(n.toFloat());
-        } };
-    });
-  }, e.elu = function (e) {
-    var t = convertToTensor(e, "x", "elu");return ENV.engine.runKernel(function (e, n) {
-      return n(e.elu(t));
-    }, { $x: t }, function (e, t) {
-      var n = t[0];return { $x: function () {
-          return ENV.engine.runKernel(function (t) {
-            return t.eluDer(e, n);
-          }, { dy: e, y: n });
-        } };
-    });
-  }, e.selu = function (e) {
-    var t = convertToTensor(e, "x", "selu");return ENV.engine.runKernel(function (e) {
-      return e.selu(t);
-    }, { $x: t }, function (e) {
-      return { $x: function () {
-          var n = t.greater(TensorOps.scalar(0)),
-              r = TensorOps.scalar(SELU_SCALEALPHA),
-              o = TensorOps.scalar(SELU_SCALE),
-              a = e.mul(o),
-              i = e.mul(r).mul(t.toFloat().exp());return LogicalOps.where(n, a, i);
-        } };
-    });
-  }, e.leakyRelu = function (e, t) {
-    void 0 === t && (t = .2);var n = convertToTensor(e, "x", "leakyRelu");return BinaryOps.maximum(TensorOps.scalar(t).mul(n), n);
-  }, e.prelu = function (e, t) {
-    var n = convertToTensor(e, "x", "prelu"),
-        r = convertToTensor(t, "alpha", "prelu"),
-        o = TensorOps.scalar(0);return BinaryOps.maximum(o, n).add(r.mul(BinaryOps.minimum(o, n)));
-  }, __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "relu", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "elu", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "selu", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "leakyRelu", null), __decorate([doc({ heading: "Operations", subheading: "Basic math" }), operation], e, "prelu", null), e;
-}(),
-    ReverseOps = function () {
-  function e() {}return e.reverse1d = function (t) {
-    var n = convertToTensor(t, "x", "reverse");return assert(1 === n.rank, "Error in reverse1D: x must be rank 1 but got\n             rank " + n.rank + "."), e.reverse(n, 0);
-  }, e.reverse2d = function (t, n) {
-    var r = convertToTensor(t, "x", "reverse");return assert(2 === r.rank, "Error in reverse2D: x must be rank 2 but got\n             rank " + r.rank + "."), e.reverse(r, n);
-  }, e.reverse3d = function (t, n) {
-    var r = convertToTensor(t, "x", "reverse");return assert(3 === r.rank, "Error in reverse3D: x must be rank 3 but got\n             rank " + r.rank + "."), e.reverse(r, n);
-  }, e.reverse4d = function (t, n) {
-    var r = convertToTensor(t, "x", "reverse");return assert(4 === r.rank, "Error in reverse4D: x must be rank 4 but got\n             rank " + r.rank + "."), e.reverse(r, n);
-  }, e.reverse = function (e, t) {
-    var n = convertToTensor(e, "x", "reverse");if (0 === n.rank) return n.clone();var r = parseAxisParam(t, n.shape);return ENV.engine.runKernel(function (e) {
-      return e.reverse(n, r);
-    }, { $x: n }, function (e) {
-      return { $x: function () {
-          return e.reverse(r);
-        } };
-    }).reshapeAs(n);
-  }, __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "reverse", null), e;
-}(),
-    SegmentOps = function () {
-  function e() {}return e.unsortedSegmentSum = function (e, t, n) {
-    var r = convertToTensor(e, "x", "unsortedSegmentSum"),
-        o = convertToTensor(t, "segmentIds", "unsortedSegmentSum", "int32");assert("int32" === o.dtype, "segmentIds must be of dtype `int32`"), assert(isInt(n), "numSegments must be of dtype int");return ENV.engine.runKernel(function (e) {
-      return e.unsortedSegmentSum(r, o, n);
-    }, { $x: r }, function (e) {
-      return { $x: function () {
-          return gatherDropNegatives(e, o);
-        } };
-    });
-  }, e.gather = function (t, n, r) {
-    void 0 === r && (r = 0);var o = convertToTensor(t, "x", "gather"),
-        a = convertToTensor(n, "indices", "gather", "int32");assert("int32" === a.dtype, "Indices must be of dtype `int32`"), r = parseAxisParam(r, o.shape)[0];return ENV.engine.runKernel(function (e) {
-      return e.gather(o, a, r);
-    }, { $x: o }, function (t) {
-      return { $x: function () {
-          if (0 === r) return e.unsortedSegmentSum(t, a, o.shape[r]);var n = o.shape,
-              i = a.size,
-              s = n.slice(0, r),
-              u = s.length,
-              c = n.slice(r, n.length).slice(1),
-              l = c.length,
-              d = arrayRange(0, u),
-              p = arrayRange(u + 1, u + 1 + l),
-              h = arrayConcat([s, [i], c]),
-              f = t.reshape(h),
-              g = a.reshape([i]),
-              m = arrayConcat([[u], d, p]),
-              v = f.transpose(m),
-              y = e.unsortedSegmentSum(v, g, o.shape[r]),
-              x = getUndoAxesPermutation(m);return y = y.transpose(x);
-        } };
-    });
-  }, __decorate([doc({ heading: "Operations", subheading: "Segment" }), operation], e, "unsortedSegmentSum", null), __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "gather", null), e;
-}();function arrayRange(e, t) {
-  for (var n = [], r = e; r < t; ++r) n.push(r);return n;
-}function arrayConcat(e) {
-  for (var t = [], n = 0; n < e.length; ++n) for (var r = 0; r < e[n].length; ++r) t.push(e[n][r]);return t;
-}function gatherDropNegatives(e, t) {
-  for (var n = BinaryOps.maximum(t, TensorOps.zerosLike(t)), r = SegmentOps.gather(e, n), o = CompareOps.greaterEqual(t, TensorOps.scalar(0, "int32")), a = r.rank - o.rank, i = 0; i < a; ++i) o = ArrayOps.expandDims(o, i + 1);o = LogicalOps.logicalAnd(o, TensorOps.ones(r.shape, "bool"));var s = TensorOps.zerosLike(r);return LogicalOps.where(o, r, s);
-}var SigmoidCrossEntropyOps = function () {
-  function e() {}return e.sigmoidCrossEntropyWithLogits = function (e, t) {
-    var n = convertToTensor(e, "labels", "sigmoidCrossEntropyWithLogits"),
-        r = convertToTensor(t, "logits", "sigmoidCrossEntropyWithLogits");assertShapesMatch(n.shape, r.shape, "Error in sigmoidCrossEntropyWithLogits: ");var o = r.relu(),
-        a = r.mul(n),
-        i = r.abs().neg().exp().log1p();return o.sub(a).add(i);
-  }, __decorate([doc({ heading: "Operations", subheading: "Cross Entropy" }), operation], e, "sigmoidCrossEntropyWithLogits", null), e;
-}();function assertParamsValid(e, t, n) {
-  assert(e.rank === t.length, "Error in slice" + e.rank + "D: Length of begin " + t + " must match the rank of the array (" + e.rank + ")."), assert(e.rank === n.length, "Error in slice" + e.rank + "D: Length of size " + n + " must match the rank of the array (" + e.rank + ").");for (var r = 0; r < e.rank; ++r) assert(t[r] + n[r] <= e.shape[r], "Error in slice" + e.rank + "D: begin[" + r + "] + size[" + r + "] (" + (t[r] + n[r]) + ") would overflow input.shape[" + r + "] (" + e.shape[r] + ")");
-}function getStridedSlicedInfo(e, t, n, r, o, a) {
-  void 0 === o && (o = 0), void 0 === a && (a = 0);for (var i = [], s = [], u = 0; u < e.length; u++) i[u] = startForAxis(o, t, r, e, u), s[u] = stopForAxis(a, n, r, e, u);var c = new Array(e.length).fill(0);return c = c.map(function (e, t) {
-    for (var n = 0, o = i[t]; !(r[t] > 0 ? o >= s[t] : o <= s[t]); o += r[t]) n += 1;return n;
-  }), [i, c];
-}function startForAxis(e, t, n, r, o) {
-  var a = t[o];e & 1 << o && (a = n[o] > 0 ? Number.MIN_SAFE_INTEGER : Number.MAX_SAFE_INTEGER);var i = r[o];return a < 0 && (a += i), a = clamp(0, a, i - 1);
-}function stopForAxis(e, t, n, r, o) {
-  var a = t[o];e & 1 << o && (a = n[o] > 0 ? Number.MAX_SAFE_INTEGER : Number.MIN_SAFE_INTEGER);var i = r[o];return a < 0 && (a += i), a = n[o] > 0 ? clamp(0, a, i) : clamp(-1, a, i - 1);
-}var SliceOps = function () {
-  function e() {}return e.slice1d = function (t, n, r) {
-    var o = convertToTensor(t, "x", "slice1d");return assert(1 === o.rank, "slice1d expects a rank-1 tensor, but got a rank-" + o.rank + " tensor"), e.slice(o, [n], [r]);
-  }, e.slice2d = function (t, n, r) {
-    var o = convertToTensor(t, "x", "slice2d");return assert(2 === o.rank, "slice1d expects a rank-2 tensor, but got a rank-" + o.rank + " tensor"), e.slice(o, n, r);
-  }, e.slice3d = function (t, n, r) {
-    var o = convertToTensor(t, "x", "slice3d");return assert(3 === o.rank, "slice1d expects a rank-3 tensor, but got a rank-" + o.rank + " tensor"), e.slice(o, n, r);
-  }, e.slice4d = function (t, n, r) {
-    var o = convertToTensor(t, "x", "slice4d");return assert(4 === o.rank, "slice1d expects a rank-4 tensor, but got a rank-" + o.rank + " tensor"), e.slice(o, n, r);
-  }, e.slice = function (e, t, n) {
-    var r,
-        o,
-        a = convertToTensor(e, "x", "slice");if (0 === a.rank) throw new Error("Slicing scalar is not possible");r = "number" == typeof t ? [t].concat(new Array(a.rank - 1).fill(0)) : t.length < a.rank ? t.concat(new Array(a.rank - t.length).fill(0)) : t, o = (o = null == n ? new Array(a.rank).fill(-1) : "number" == typeof n ? [n].concat(new Array(a.rank - 1).fill(-1)) : n.length < a.rank ? n.concat(new Array(a.rank - n.length).fill(-1)) : n).map(function (e, t) {
-      return e >= 0 ? e : (assert(-1 === e, "Bad value in size"), a.shape[t] - r[t]);
-    }), assertParamsValid(a, r, o);var i = a.shape;return ENV.engine.runKernel(function (e) {
-      return e.slice(a, r, o);
-    }, { $x: a }, function (e) {
-      for (var t = [], n = 0; n < e.rank; n++) t.push([r[n], i[n] - r[n] - o[n]]);return { $x: function () {
-          return e.pad(t);
-        } };
-    });
-  }, __decorate([doc({ heading: "Tensors", subheading: "Slicing and Joining" }), operation], e, "slice", null), e;
-}(),
-    SoftmaxOps = function () {
-  function e() {}return e.softmax = function (e, t) {
-    void 0 === t && (t = -1);var n = convertToTensor(e, "logits", "softmax");if (-1 === t && (t = n.rank - 1), t !== n.rank - 1) throw Error("Softmax along a non-last dimension is not yet supported. Logits was rank " + n.rank + " and dim was " + t);return customGrad(function (e) {
-      var n = e.logSumExp([t], !0),
-          r = e.toFloat().sub(n).exp();return { value: r, gradFunc: function (e) {
-          var n = e.mul(r);return n.sub(n.sum([t], !0).mul(r));
-        } };
-    })(n);
-  }, e.softmaxCrossEntropy = function (e, t, n) {
-    void 0 === n && (n = -1);var r = convertToTensor(e, "labels", "softmaxCrossEntropy"),
-        o = convertToTensor(t, "logits", "softmaxCrossEntropy");if (assertShapesMatch(r.shape, o.shape, "Error in softmaxCrossEntropy: "), -1 === n && (n = o.rank - 1), n !== o.rank - 1) throw Error("Softmax cross entropy along a non-last dimension is not yet supported. Labels / logits was rank " + o.rank + " and dim was " + n);return customGrad(function (e, t) {
-      var r = t.softmax(n);return { value: TensorOps.scalar(1e-5).add(r).log().mul(e).neg().sum([n]), gradFunc: function (t) {
-          var o = expandShapeToKeepDim(t.shape, [n]);return [t.reshape(o).mul(e.toFloat().sub(r)), t.reshape(o).mul(r.sub(e.toFloat()))];
-        } };
-    })(r, o);
-  }, __decorate([doc({ heading: "Operations", subheading: "Normalization" }), operation], e, "softmax", null), __decorate([doc({ heading: "Training", subheading: "Losses", namespace: "losses" }), operation], e, "softmaxCrossEntropy", null), e;
-}(),
-    StridedSliceOps = function () {
-  function e() {}return e.stridedSlice = function (e, t, n, r, o, a) {
-    void 0 === o && (o = 0), void 0 === a && (a = 0);var i = convertToTensor(e, "x", "stridedSlice");return ENV.engine.runKernel(function (e) {
-      return e.stridedSlice(i, t, n, r, o, a);
-    }, { $x: i });
-  }, __decorate([doc({ heading: "Operations", subheading: "Slicing and Joining" }), operation], e, "stridedSlice", null), e;
-}(),
-    TransposeOps = function () {
-  function e() {}return e.transpose = function (e, t) {
-    var n = convertToTensor(e, "x", "transpose");if (null == t && (t = n.shape.map(function (e, t) {
-      return t;
-    }).reverse()), assert(n.rank === t.length, "Error in transpose: rank of input " + n.rank + " must match length of perm " + t + "."), t.forEach(function (e) {
-      assert(e >= 0 && e < n.rank, "All entries in 'perm' must be between 0 and " + (n.rank - 1) + " but got " + t);
-    }), n.rank <= 1) return n.clone();return ENV.engine.runKernel(function (e) {
-      return e.transpose(n, t);
-    }, { $x: n }, function (e) {
-      var n = getUndoAxesPermutation(t);return { $x: function () {
-          return e.transpose(n);
-        } };
-    });
-  }, __decorate([doc({ heading: "Operations", subheading: "Matrices" }), operation], e, "transpose", null), e;
-}(),
-    batchNormalization = BatchNormOps.batchNormalization,
-    batchNormalization2d = BatchNormOps.batchNormalization2d,
-    batchNormalization3d = BatchNormOps.batchNormalization3d,
-    batchNormalization4d = BatchNormOps.batchNormalization4d,
-    concat = ConcatOps.concat,
-    concat1d = ConcatOps.concat1d,
-    concat2d = ConcatOps.concat2d,
-    concat3d = ConcatOps.concat3d,
-    concat4d = ConcatOps.concat4d,
-    conv1d = ConvOps.conv1d,
-    conv2d = ConvOps.conv2d,
-    conv2dTranspose = ConvOps.conv2dTranspose,
-    depthwiseConv2d = ConvOps.depthwiseConv2d,
-    separableConv2d = ConvOps.separableConv2d,
-    matMul = MatmulOps.matMul,
-    matrixTimesVector = MatmulOps.matrixTimesVector,
-    outerProduct = MatmulOps.outerProduct,
-    vectorTimesMatrix = MatmulOps.vectorTimesMatrix,
-    dot = MatmulOps.dot,
-    avgPool = PoolOps.avgPool,
-    maxPool = PoolOps.maxPool,
-    transpose = TransposeOps.transpose,
-    reverse = ReverseOps.reverse,
-    reverse1d = ReverseOps.reverse1d,
-    reverse2d = ReverseOps.reverse2d,
-    reverse3d = ReverseOps.reverse3d,
-    reverse4d = ReverseOps.reverse4d,
-    slice = SliceOps.slice,
-    slice1d = SliceOps.slice1d,
-    slice2d = SliceOps.slice2d,
-    slice3d = SliceOps.slice3d,
-    slice4d = SliceOps.slice4d,
-    stridedSlice = StridedSliceOps.stridedSlice,
-    argMax = ReductionOps.argMax,
-    argMin = ReductionOps.argMin,
-    logSumExp = ReductionOps.logSumExp,
-    max = ReductionOps.max,
-    mean = ReductionOps.mean,
-    min = ReductionOps.min,
-    all = ReductionOps.all,
-    any = ReductionOps.any,
-    moments = ReductionOps.moments,
-    sum = ReductionOps.sum,
-    equal = CompareOps.equal,
-    equalStrict = CompareOps.equalStrict,
-    greater = CompareOps.greater,
-    greaterStrict = CompareOps.greaterStrict,
-    greaterEqual = CompareOps.greaterEqual,
-    greaterEqualStrict = CompareOps.greaterEqualStrict,
-    less = CompareOps.less,
-    lessStrict = CompareOps.lessStrict,
-    lessEqual = CompareOps.lessEqual,
-    lessEqualStrict = CompareOps.lessEqualStrict,
-    notEqual = CompareOps.notEqual,
-    notEqualStrict = CompareOps.notEqualStrict,
-    logicalNot = LogicalOps.logicalNot,
-    logicalAnd = LogicalOps.logicalAnd,
-    logicalOr = LogicalOps.logicalOr,
-    logicalXor = LogicalOps.logicalXor,
-    where = LogicalOps.where,
-    abs = UnaryOps.abs,
-    acos = UnaryOps.acos,
-    acosh = UnaryOps.acosh,
-    asin = UnaryOps.asin,
-    asinh = UnaryOps.asinh,
-    atan = UnaryOps.atan,
-    atanh = UnaryOps.atanh,
-    ceil = UnaryOps.ceil,
-    clipByValue = UnaryOps.clipByValue,
-    cos = UnaryOps.cos,
-    cosh = UnaryOps.cosh,
-    elu = ReluOps.elu,
-    exp = UnaryOps.exp,
-    expm1 = UnaryOps.expm1,
-    floor = UnaryOps.floor,
-    sign = UnaryOps.sign,
-    leakyRelu = ReluOps.leakyRelu,
-    log = UnaryOps.log,
-    log1p = UnaryOps.log1p,
-    logSigmoid = UnaryOps.logSigmoid,
-    neg = UnaryOps.neg,
-    prelu = ReluOps.prelu,
-    relu = ReluOps.relu,
-    reciprocal = UnaryOps.reciprocal,
-    round = UnaryOps.round,
-    selu = ReluOps.selu,
-    sigmoid = UnaryOps.sigmoid,
-    sin = UnaryOps.sin,
-    sinh = UnaryOps.sinh,
-    softplus = UnaryOps.softplus,
-    sqrt = UnaryOps.sqrt,
-    rsqrt = UnaryOps.rsqrt,
-    square = UnaryOps.square,
-    step = UnaryOps.step,
-    tan = UnaryOps.tan,
-    tanh$1 = UnaryOps.tanh,
-    erf = UnaryOps.erf,
-    add = BinaryOps.add,
-    addStrict = BinaryOps.addStrict,
-    atan2 = BinaryOps.atan2,
-    div = BinaryOps.div,
-    floorDiv = BinaryOps.floorDiv,
-    divStrict = BinaryOps.divStrict,
-    maximum = BinaryOps.maximum,
-    maximumStrict = BinaryOps.maximumStrict,
-    minimum = BinaryOps.minimum,
-    minimumStrict = BinaryOps.minimumStrict,
-    mod = BinaryOps.mod,
-    modStrict = BinaryOps.modStrict,
-    mul = BinaryOps.mul,
-    mulStrict = BinaryOps.mulStrict,
-    pow = BinaryOps.pow,
-    powStrict = BinaryOps.powStrict,
-    sub = BinaryOps.sub,
-    subStrict = BinaryOps.subStrict,
-    squaredDifference = BinaryOps.squaredDifference,
-    squaredDifferenceStrict = BinaryOps.squaredDifferenceStrict,
-    norm = NormOps.norm,
-    cast = ArrayOps.cast,
-    clone = ArrayOps.clone,
-    fromPixels = ArrayOps.fromPixels,
-    toPixels = ArrayOps.toPixels,
-    ones = TensorOps.ones,
-    onesLike = TensorOps.onesLike,
-    zeros = TensorOps.zeros,
-    zerosLike = TensorOps.zerosLike,
-    eye = ArrayOps.eye,
-    rand = ArrayOps.rand,
-    randomNormal = ArrayOps.randomNormal,
-    truncatedNormal = ArrayOps.truncatedNormal,
-    randomUniform = ArrayOps.randomUniform,
-    multinomial = ArrayOps.multinomial,
-    reshape = ArrayOps.reshape,
-    squeeze = ArrayOps.squeeze,
-    tile = ArrayOps.tile,
-    gather = SegmentOps.gather,
-    oneHot = ArrayOps.oneHot,
-    linspace = TensorOps.linspace,
-    range = TensorOps.range,
-    buffer = ArrayOps.buffer,
-    fill = TensorOps.fill,
-    tensor = TensorOps.tensor,
-    scalar = TensorOps.scalar,
-    tensor1d = TensorOps.tensor1d,
-    tensor2d = TensorOps.tensor2d,
-    tensor3d = TensorOps.tensor3d,
-    tensor4d = TensorOps.tensor4d,
-    tensor5d = TensorOps.tensor5d,
-    tensor6d = TensorOps.tensor6d,
-    print = ArrayOps.print,
-    expandDims = ArrayOps.expandDims,
-    stack = ArrayOps.stack,
-    unstack = ArrayOps.unstack,
-    split = ArrayOps.split,
-    cumsum = ArrayOps.cumsum,
-    pad = ArrayOps.pad,
-    pad1d = ArrayOps.pad1d,
-    pad2d = ArrayOps.pad2d,
-    pad3d = ArrayOps.pad3d,
-    pad4d = ArrayOps.pad4d,
-    unsortedSegmentSum = SegmentOps.unsortedSegmentSum,
-    movingAverage = MovingAverageOps.movingAverage,
-    basicLSTMCell = LSTMOps.basicLSTMCell,
-    multiRNNCell = LSTMOps.multiRNNCell,
-    softmax = SoftmaxOps.softmax,
-    sigmoidCrossEntropyWithLogits = SigmoidCrossEntropyOps.sigmoidCrossEntropyWithLogits,
-    localResponseNormalization = LRNOps.localResponseNormalization,
-    linalg = LinalgOps,
-    losses = { absoluteDifference: LossOps.absoluteDifference, computeWeightedLoss: LossOps.computeWeightedLoss, cosineDistance: LossOps.cosineDistance, hingeLoss: LossOps.hingeLoss, huberLoss: LossOps.huberLoss, logLoss: LossOps.logLoss, meanSquaredError: LossOps.meanSquaredError, softmaxCrossEntropy: SoftmaxOps.softmaxCrossEntropy },
-    image = { resizeBilinear: ImageOps.resizeBilinear, resizeNearestNeighbor: ImageOps.resizeNearestNeighbor },
-    ops = Object.freeze({ batchNormalization: batchNormalization, batchNormalization2d: batchNormalization2d, batchNormalization3d: batchNormalization3d, batchNormalization4d: batchNormalization4d, concat: concat, concat1d: concat1d, concat2d: concat2d, concat3d: concat3d, concat4d: concat4d, conv1d: conv1d, conv2d: conv2d, conv2dTranspose: conv2dTranspose, depthwiseConv2d: depthwiseConv2d, separableConv2d: separableConv2d, matMul: matMul, matrixTimesVector: matrixTimesVector, outerProduct: outerProduct, vectorTimesMatrix: vectorTimesMatrix, dot: dot, avgPool: avgPool, maxPool: maxPool, transpose: transpose, reverse: reverse, reverse1d: reverse1d, reverse2d: reverse2d, reverse3d: reverse3d, reverse4d: reverse4d, slice: slice, slice1d: slice1d, slice2d: slice2d, slice3d: slice3d, slice4d: slice4d, stridedSlice: stridedSlice, argMax: argMax, argMin: argMin, logSumExp: logSumExp, max: max, mean: mean, min: min, all: all, any: any, moments: moments, sum: sum, equal: equal, equalStrict: equalStrict, greater: greater, greaterStrict: greaterStrict, greaterEqual: greaterEqual, greaterEqualStrict: greaterEqualStrict, less: less, lessStrict: lessStrict, lessEqual: lessEqual, lessEqualStrict: lessEqualStrict, notEqual: notEqual, notEqualStrict: notEqualStrict, logicalNot: logicalNot, logicalAnd: logicalAnd, logicalOr: logicalOr, logicalXor: logicalXor, where: where, abs: abs, acos: acos, acosh: acosh, asin: asin, asinh: asinh, atan: atan, atanh: atanh, ceil: ceil, clipByValue: clipByValue, cos: cos, cosh: cosh, elu: elu, exp: exp, expm1: expm1, floor: floor, sign: sign, leakyRelu: leakyRelu, log: log, log1p: log1p, logSigmoid: logSigmoid, neg: neg, prelu: prelu, relu: relu, reciprocal: reciprocal, round: round, selu: selu, sigmoid: sigmoid, sin: sin, sinh: sinh, softplus: softplus, sqrt: sqrt, rsqrt: rsqrt, square: square, step: step, tan: tan, tanh: tanh$1, erf: erf, add: add, addStrict: addStrict, atan2: atan2, div: div, floorDiv: floorDiv, divStrict: divStrict, maximum: maximum, maximumStrict: maximumStrict, minimum: minimum, minimumStrict: minimumStrict, mod: mod, modStrict: modStrict, mul: mul, mulStrict: mulStrict, pow: pow, powStrict: powStrict, sub: sub, subStrict: subStrict, squaredDifference: squaredDifference, squaredDifferenceStrict: squaredDifferenceStrict, norm: norm, cast: cast, clone: clone, fromPixels: fromPixels, toPixels: toPixels, ones: ones, onesLike: onesLike, zeros: zeros, zerosLike: zerosLike, eye: eye, rand: rand, randomNormal: randomNormal, truncatedNormal: truncatedNormal, randomUniform: randomUniform, multinomial: multinomial, reshape: reshape, squeeze: squeeze, tile: tile, gather: gather, oneHot: oneHot, linspace: linspace, range: range, buffer: buffer, fill: fill, tensor: tensor, scalar: scalar, tensor1d: tensor1d, tensor2d: tensor2d, tensor3d: tensor3d, tensor4d: tensor4d, tensor5d: tensor5d, tensor6d: tensor6d, print: print, expandDims: expandDims, stack: stack, unstack: unstack, split: split, cumsum: cumsum, pad: pad, pad1d: pad1d, pad2d: pad2d, pad3d: pad3d, pad4d: pad4d, unsortedSegmentSum: unsortedSegmentSum, movingAverage: movingAverage, basicLSTMCell: basicLSTMCell, multiRNNCell: multiRNNCell, softmax: softmax, sigmoidCrossEntropyWithLogits: sigmoidCrossEntropyWithLogits, localResponseNormalization: localResponseNormalization, linalg: linalg, losses: losses, image: image, operation: operation }),
-    PARALLELIZE_THRESHOLD = 30;function computeOptimalWindowSize(e) {
-  return e <= PARALLELIZE_THRESHOLD ? e : nearestDivisor(e, Math.floor(Math.sqrt(e)));
-}function segOpComputeOptimalWindowSize(e, t) {
-  var n,
-      r = !1;for (e <= PARALLELIZE_THRESHOLD ? (n = e, r = !0) : n = nearestDivisor(e, Math.floor(Math.sqrt(e))); !r;) {
-    if (n > t || n === e) {
-      r = !0;break;
-    }n = nearestDivisor(e, n + 1);
-  }return n;
-}function computeOutShape$1(e, t, n) {
-  for (var r = [], o = e.length, a = 0; a < o; a++) a !== t ? r.push(e[a]) : r.push(n);return r;
-}function castTensor(e, t, n) {
-  if (!hasEncodingLoss(e.dtype, t)) return Tensor.make(e.shape, { dataId: e.dataId }, t);if ("int32" === t) return n.int(e);if ("bool" === t) return n.notEqual(e, TensorOps.scalar(0, e.dtype));throw new Error("Error in Cast: unknown dtype argument (" + t + ")");
-}function reshapeTensor(e, t) {
-  return Tensor.make(t, { dataId: e.dataId }, e.dtype);
-}var ArgMinMaxProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["A"];var r = e.windowSize,
-        o = e.batchSize,
-        a = e.inSize,
-        i = Math.ceil(a / r);n || this.variableNames.push("bestIndicesA"), this.outputShape = [o, i];var s = "max" === t ? ">" : "<",
-        u = n ? "inOffset + i;" : "round(getBestIndicesA(batch, inOffset + i));";this.userCode = "\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int batch = coords[0];\n        int outIdx = coords[1];\n        int inOffset = outIdx * " + r + ";\n\n        int bestIndex = 0;\n        float bestValue = getA(batch, inOffset);\n\n        for (int i = 0; i < " + r + "; i++) {\n          int inIdx = " + u + ";\n          float candidate = getA(batch, inIdx);\n          if (candidate " + s + " bestValue) {\n            bestValue = candidate;\n            bestIndex = inIdx;\n          }\n        }\n        setOutput(float(bestIndex));\n      }\n    ";
-  };
-}(),
-    AvgPool2DBackpropProgram = function () {
-  return function (e) {
-    this.variableNames = ["dy"], this.outputShape = e.inShape;var t = e.filterHeight,
-        n = e.filterWidth,
-        r = e.strideHeight,
-        o = e.strideWidth,
-        a = t - 1 - e.padInfo.top,
-        i = n - 1 - e.padInfo.left,
-        s = 1 / (t * n);this.userCode = "\n      const ivec2 pads = ivec2(" + a + ", " + i + ");\n      const float avgMultiplier = float(" + s + ");\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int d = coords[3];\n\n        ivec2 dyRCCorner = coords.yz - pads;\n        int dyRCorner = dyRCCorner.x;\n        int dyCCorner = dyRCCorner.y;\n\n        // Convolve dy(?, ?, d) with pos mask(:, :, d) to get dx(xR, xC, d).\n        // ? = to be determined. : = across all values in that axis.\n        float dotProd = 0.0;\n        for (int wR = 0; wR < " + t + "; wR++) {\n          float dyR = float(dyRCorner + wR) / " + r + ".0;\n\n          if (dyR < 0.0 || dyR >= " + e.outHeight + ".0 || fract(dyR) > 0.0) {\n            continue;\n          }\n          int idyR = int(dyR);\n\n          for (int wC = 0; wC < " + n + "; wC++) {\n            float dyC = float(dyCCorner + wC) / " + o + ".0;\n\n            if (dyC < 0.0 || dyC >= " + e.outWidth + ".0 ||\n                fract(dyC) > 0.0) {\n              continue;\n            }\n            int idyC = int(dyC);\n\n            float dyValue = getDy(b, idyR, idyC, d);\n\n            dotProd += dyValue * avgMultiplier;\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    BatchNormProgram = function () {
-  return function (e, t, n, r, o, a) {
-    this.outputShape = [], this.supportsBroadcasting = !0, this.variableNames = ["x", "mean", "variance"], assertAndGetBroadcastShape(e, t), assertAndGetBroadcastShape(e, n);var i = "0.0";null != r && (assertAndGetBroadcastShape(e, r), this.variableNames.push("offset"), i = "getOffsetAtOutCoords()");var s = "1.0";null != o && (assertAndGetBroadcastShape(e, o), this.variableNames.push("scale"), s = "getScaleAtOutCoords()"), this.outputShape = e, this.userCode = "\n      void main() {\n        float x = getXAtOutCoords();\n        float mean = getMeanAtOutCoords();\n        float variance = getVarianceAtOutCoords();\n        float offset = " + i + ";\n        float scale = " + s + ";\n        float inv = scale * inversesqrt(variance + float(" + a + "));\n        setOutput((x - mean) * inv + offset);\n      }\n    ";
-  };
-}(),
-    CHECK_NAN_SNIPPET = "\n  if (isNaN(a)) return a;\n  if (isNaN(b)) return b;\n",
-    ADD = "return a + b;",
-    SUB = "return a - b;",
-    MUL = "return a * b;",
-    DIV = "if (a == b) return 1.0;\n  return a / b;",
-    INT_DIV = "\n  float resultSign = sign(a) * sign(b);\n  int ia = round(a);\n  int ib = round(b);\n  int result = ia / ib;\n  int amodb = ia - ib * result;\n\n  if (resultSign < 0.0 && amodb != 0) {\n    result -= 1;\n  }\n  return float(result);\n",
-    POW = "\nif(a < 0.0 && floor(b) < b){\n  return NAN;\n}\nreturn (round(mod(b, 2.0)) == 0 || round(mod(b, 2.0)) == 2) ?\n    pow(abs(a), b) : sign(a) * pow(abs(a), b);\n",
-    SQUARED_DIFFERENCE = "return (a - b) * (a - b);",
-    EQUAL = "return float(a == b);",
-    NOT_EQUAL = "return float(a != b);",
-    LESS = "return float(a < b);",
-    LESS_EQUAL = "return float(a <= b);",
-    GREATER = "return float(a > b);",
-    GREATER_EQUAL = "return float(a >= b);",
-    LOGICAL_AND = "return float(a >= 1.0 && b >= 1.0);",
-    LOGICAL_OR = "return float(a >= 1.0 || b >= 1.0);",
-    MAX = CHECK_NAN_SNIPPET + "\n  return max(a, b);\n",
-    MIN = CHECK_NAN_SNIPPET + "\n  return min(a, b);\n",
-    MOD = "if (b == 0.0) return NAN;\n  return mod(a, b);",
-    ATAN2 = CHECK_NAN_SNIPPET + "\n  return atan(a, b);\n",
-    ELU_DER = "return (b >= 1.0) ? a : a * (b + 1.0);",
-    BinaryOpProgram = function () {
-  function e(e, t, n) {
-    this.variableNames = ["A", "B"], this.supportsBroadcasting = !0, this.outputShape = assertAndGetBroadcastShape(t, n), this.userCode = "\n      uniform float NAN;\n      float binaryOperation(float a, float b) {\n        " + e + "\n      }\n\n      void main() {\n        float a = getAAtOutCoords();\n        float b = getBAtOutCoords();\n        setOutput(binaryOperation(a, b));\n      }\n    ";
-  }return e.prototype.getCustomSetupFunc = function () {
-    var e = this;return function (t, n) {
-      null == e.startLoc && (e.startLoc = t.getUniformLocationNoThrow(n, "NAN"), null == e.startLoc) || t.gl.uniform1f(e.startLoc, NaN);
-    };
-  }, e;
-}(),
-    ClipProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["A"], this.outputShape = e;var r = t.toFixed(20),
-        o = n.toFixed(20);this.userCode = "\n      void main() {\n        float value = getAAtOutCoords();\n        if (isNaN(value)) {\n          setOutput(value);\n          return;\n        }\n\n        setOutput(clamp(value, " + r + ", " + o + "));\n      }\n    ";
-  };
-}(),
-    ConcatProgram = function () {
-  return function (e, t) {
-    this.variableNames = ["A", "B"], this.outputShape = [], this.outputShape = computeOutShape(e, t, 1), this.userCode = "\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int yR = coords.x;\n        int yC = coords.y;\n\n        float value = 0.0;\n        if (yC < " + e[1] + ") {\n          value = getA(yR, yC);\n        } else {\n          yC -= " + e[1] + ";\n          value = getB(yR, yC);\n        }\n\n        setOutput(value);\n      }\n    ";
-  };
-}(),
-    Conv2DDerFilterProgram = function () {
-  return function (e) {
-    this.variableNames = ["x", "dy"], this.outputShape = e.filterShape;var t = e.strideHeight,
-        n = e.strideWidth,
-        r = e.padInfo.top,
-        o = e.padInfo.left;this.userCode = "\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int wR = coords.x;\n        int wC = coords.y;\n        int d1 = coords.z;\n        int d2 = coords.w;\n\n        // Convolve x(?, ?, d1) with dy(:, :, d2) to get dw(wR, wC, d1, d2).\n        // ? = to be determined. : = across all values in that axis.\n        float dotProd = 0.0;\n\n        for (int b = 0; b < " + e.batchSize + "; b++) {\n          for (int yR = 0; yR < " + e.outHeight + "; yR++) {\n            int xR = wR + yR * " + t + " - " + r + ";\n\n            if (xR < 0 || xR >= " + e.inHeight + ") {\n              continue;\n            }\n\n            for (int yC = 0; yC < " + e.outWidth + "; yC++) {\n              int xC = wC + yC * " + n + " - " + o + ";\n\n              if (xC < 0 || xC >= " + e.inWidth + ") {\n                continue;\n              }\n\n              float dyValue = getDy(b, yR, yC, d2);\n              float xValue = getX(b, xR, xC, d1);\n              dotProd += (xValue * dyValue);\n            }\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    Conv2DDerInputProgram = function () {
-  return function (e) {
-    this.variableNames = ["dy", "W"], this.outputShape = e.inShape;var t = e.filterHeight,
-        n = e.filterWidth,
-        r = e.strideHeight,
-        o = e.strideWidth,
-        a = t - 1 - e.padInfo.top,
-        i = n - 1 - e.padInfo.left;this.userCode = "\n      const ivec2 pads = ivec2(" + a + ", " + i + ");\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int batch = coords[0];\n        int d1 = coords[3];\n\n        ivec2 dyCorner = coords.yz - pads;\n        int dyRCorner = dyCorner.x;\n        int dyCCorner = dyCorner.y;\n\n        // Convolve dy(?, ?, d2) with w(:, :, d1, d2) to compute dx(xR, xC, d1).\n        // ? = to be determined. : = across all values in that axis.\n        float dotProd = 0.0;\n        for (int wR = 0; wR < " + t + "; wR++) {\n          float dyR = float(dyRCorner + wR) / " + r + ".0;\n\n          if (dyR < 0.0 || dyR >= " + e.outHeight + ".0 || fract(dyR) > 0.0) {\n            continue;\n          }\n          int idyR = int(dyR);\n\n          int wRPerm = " + t + " - 1 - wR;\n\n          for (int wC = 0; wC < " + n + "; wC++) {\n            float dyC = float(dyCCorner + wC) / " + o + ".0;\n\n            if (dyC < 0.0 || dyC >= " + e.outWidth + ".0 ||\n                fract(dyC) > 0.0) {\n              continue;\n            }\n            int idyC = int(dyC);\n\n            int wCPerm = " + n + " - 1 - wC;\n\n            for (int d2 = 0; d2 < " + e.outChannels + "; d2++) {\n              float xValue = getDy(batch, idyR, idyC, d2);\n              float wValue = getW(wRPerm, wCPerm, d1, d2);\n              dotProd += xValue * wValue;\n            }\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    DepthwiseConv2DDerFilterProgram = function () {
-  return function (e) {
-    this.variableNames = ["x", "dy"], this.outputShape = e.filterShape;var t = e.strideHeight,
-        n = e.strideWidth,
-        r = e.padInfo.top,
-        o = e.padInfo.left,
-        a = e.outChannels / e.inChannels;this.userCode = "\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int wR = coords.x;\n        int wC = coords.y;\n        int d1 = coords.z;\n        int dm = coords.w;\n        int d2 = d1 * " + a + " + dm;\n\n        float dotProd = 0.0;\n\n        // TODO: Vec4 over the batch size\n        for (int b = 0; b < " + e.batchSize + "; b++) {\n          for (int yR = 0; yR < " + e.outHeight + "; yR++) {\n            int xR = wR + yR * " + t + " - " + r + ";\n\n            if (xR < 0 || xR >= " + e.inHeight + ") {\n              continue;\n            }\n\n            for (int yC = 0; yC < " + e.outWidth + "; yC++) {\n              int xC = wC + yC * " + n + " - " + o + ";\n\n              if (xC < 0 || xC >= " + e.inWidth + ") {\n                continue;\n              }\n\n              float dyValue = getDy(b, yR, yC, d2);\n              float xValue = getX(b, xR, xC, d1);\n              dotProd += (xValue * dyValue);\n            }\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    DepthwiseConv2DDerInputProgram = function () {
-  return function (e) {
-    this.variableNames = ["dy", "W"], this.outputShape = e.inShape;var t = e.filterHeight,
-        n = e.filterWidth,
-        r = e.strideHeight,
-        o = e.strideWidth,
-        a = t - 1 - e.padInfo.top,
-        i = n - 1 - e.padInfo.left,
-        s = e.outChannels / e.inChannels;this.userCode = "\n      const ivec2 pads = ivec2(" + a + ", " + i + ");\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int batch = coords[0];\n        int d1 = coords[3];\n        ivec2 dyCorner = coords.yz - pads;\n        int dyRCorner = dyCorner.x;\n        int dyCCorner = dyCorner.y;\n\n        float dotProd = 0.0;\n\n        for (int wR = 0; wR < " + t + "; wR++) {\n          float dyR = float(dyRCorner + wR) / " + r + ".0;\n\n          if (dyR < 0.0 || dyR >= " + e.outHeight + ".0 || fract(dyR) > 0.0) {\n            continue;\n          }\n          int idyR = int(dyR);\n\n          int wRPerm = " + t + " - 1 - wR;\n\n          for (int wC = 0; wC < " + n + "; wC++) {\n            float dyC = float(dyCCorner + wC) / " + o + ".0;\n\n            if (dyC < 0.0 || dyC >= " + e.outWidth + ".0 ||\n                fract(dyC) > 0.0) {\n              continue;\n            }\n            int idyC = int(dyC);\n\n            int wCPerm = " + n + " - 1 - wC;\n\n            // TODO: Vec4 over the channelMul\n            for (int dm = 0; dm < " + s + "; dm++) {\n              int d2 = d1 * " + s + " + dm;\n              float xValue = getDy(batch, idyR, idyC, d2);\n              float wValue = getW(wRPerm, wCPerm, d1, dm);\n              dotProd += xValue * wValue;\n            }\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    Conv2DProgram = function () {
-  return function (e) {
-    this.variableNames = ["x", "W"], this.outputShape = e.outShape;var t = e.padInfo.top,
-        n = e.padInfo.left,
-        r = e.strideHeight,
-        o = e.strideWidth,
-        a = e.dilationHeight,
-        i = e.dilationWidth,
-        s = e.filterHeight,
-        u = e.filterWidth,
-        c = 4 * Math.floor(e.inChannels / 4),
-        l = e.inChannels % 4;this.userCode = "\n      const ivec2 strides = ivec2(" + r + ", " + o + ");\n      const ivec2 pads = ivec2(" + t + ", " + n + ");\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int batch = coords[0];\n        int d2 = coords[3];\n\n        ivec2 xRCCorner = coords.yz * strides - pads;\n        int xRCorner = xRCCorner.x;\n        int xCCorner = xRCCorner.y;\n\n        // Convolve x(?, ?, d1) with w(:, :, d1, d2) to get y(yR, yC, d2).\n        // ? = to be determined. : = across all values in that axis.\n        float dotProd = 0.0;\n        for (int wR = 0; wR < " + s + "; wR++) {\n          int xR = xRCorner + wR * " + a + ";\n\n          if (xR < 0 || xR >= " + e.inHeight + ") {\n            continue;\n          }\n\n          for (int wC = 0; wC < " + u + "; wC++) {\n            int xC = xCCorner + wC * " + i + ";\n\n            if (xC < 0 || xC >= " + e.inWidth + ") {\n              continue;\n            }\n\n            for (int d1 = 0; d1 < " + c + "; d1 += 4) {\n              vec4 xValues = vec4(\n                getX(batch, xR, xC, d1),\n                getX(batch, xR, xC, d1 + 1),\n                getX(batch, xR, xC, d1 + 2),\n                getX(batch, xR, xC, d1 + 3)\n              );\n              vec4 wValues = vec4(\n                getW(wR, wC, d1, d2),\n                getW(wR, wC, d1 + 1, d2),\n                getW(wR, wC, d1 + 2, d2),\n                getW(wR, wC, d1 + 3, d2)\n              );\n\n              dotProd += dot(xValues, wValues);\n            }\n\n            if (" + (1 === l) + ") {\n              dotProd +=\n                getX(batch, xR, xC, " + c + ") *\n                getW(wR, wC, " + c + ", d2);\n            } else if (" + (2 === l) + ") {\n              vec2 xValues = vec2(\n                getX(batch, xR, xC, " + c + "),\n                getX(batch, xR, xC, " + c + " + 1)\n              );\n              vec2 wValues = vec2(\n                getW(wR, wC, " + c + ", d2),\n                getW(wR, wC, " + c + " + 1, d2)\n              );\n              dotProd += dot(xValues, wValues);\n            } else if (" + (3 === l) + ") {\n              vec3 xValues = vec3(\n                getX(batch, xR, xC, " + c + "),\n                getX(batch, xR, xC, " + c + " + 1),\n                getX(batch, xR, xC, " + c + " + 2)\n              );\n              vec3 wValues = vec3(\n                getW(wR, wC, " + c + ", d2),\n                getW(wR, wC, " + c + " + 1, d2),\n                getW(wR, wC, " + c + " + 2, d2)\n              );\n              dotProd += dot(xValues, wValues);\n            }\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    DepthwiseConv2DProgram = function () {
-  return function (e) {
-    this.variableNames = ["x", "W"], this.outputShape = e.outShape;var t = e.inHeight,
-        n = e.inWidth,
-        r = e.padInfo.top,
-        o = e.padInfo.left,
-        a = e.strideHeight,
-        i = e.strideWidth,
-        s = e.dilationHeight,
-        u = e.dilationWidth,
-        c = e.filterHeight,
-        l = e.filterWidth,
-        d = e.outChannels / e.inChannels;this.userCode = "\n      const ivec2 strides = ivec2(" + a + ", " + i + ");\n      const ivec2 pads = ivec2(" + r + ", " + o + ");\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int batch = coords.x;\n        ivec2 xRCCorner = coords.yz * strides - pads;\n        int d2 = coords.w;\n        int d1 = d2 / " + d + ";\n        int q = d2 - d1 * " + d + ";\n\n        int xRCorner = xRCCorner.x;\n        int xCCorner = xRCCorner.y;\n\n        // Convolve x(?, ?, d1) with w(:, :, d1, q) to get y(yR, yC, d2).\n        // ? = to be determined. : = across all values in that axis.\n        float dotProd = 0.0;\n        // TODO(dsmilkov): Flatten the two for loops and vec4 the operations.\n        for (int wR = 0; wR < " + c + "; wR++) {\n          int xR = xRCorner + wR * " + s + ";\n\n          if (xR < 0 || xR >= " + t + ") {\n            continue;\n          }\n\n          for (int wC = 0; wC < " + l + "; wC++) {\n            int xC = xCCorner + wC * " + u + ";\n\n            if (xC < 0 || xC >= " + n + ") {\n              continue;\n            }\n\n            float xVal = getX(batch, xR, xC, d1);\n            float wVal = getW(wR, wC, d1, q);\n            dotProd += xVal * wVal;\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}();function makeShader(e, t, n, r) {
-  var o = e.map(function (e) {
-    var t = sizeFromShape(e.shapeInfo.logicalShape);return e.shapeInfo.isUniform ? "uniform float " + e.name + (t > 1 ? "[" + t + "]" : "") + ";" : "uniform sampler2D " + e.name + ";";
-  });o = o.join("\n");var a = e.map(function (e) {
-    return getInputSamplingSnippet(e, t, r);
-  }).join("\n"),
-      i = t.texShape,
-      s = getOutputSamplingSnippet(t.logicalShape, i);return [SHADER_PREFIX, FLOAT_TEXTURE_SAMPLE_SNIPPET, FLOAT_TEXTURE_SETOUTPUT_SNIPPET, o, s, a, n].join("\n");
-}function getSamplerFromInInfo(e) {
-  var t = e.shapeInfo.logicalShape;switch (t.length) {case 0:
-      return getSamplerScalar(e);case 1:
-      return getSampler1D(e);case 2:
-      return getSampler2D(e);case 3:
-      return getSampler3D(e);case 4:
-      return getSampler4D(e);case 5:
-      return getSampler5D(e);case 6:
-      return getSampler6D(e);default:
-      throw new Error(t.length + "-D input sampling is not yet supported");}
-}function getInputSamplingSnippet(e, t, n) {
-  var r = getSamplerFlat(e);return r += getSamplerFromInInfo(e), (n || arraysEqual(e.shapeInfo.logicalShape, t.logicalShape)) && (r += getSamplerAtOutputCoords(e, t, n)), r;
-}function getOutputSamplingSnippet(e, t) {
-  switch (e.length) {case 0:
-      return getOutputScalarCoords();case 1:
-      return getOutput1DCoords(e, t);case 2:
-      return getOutput2DCoords(e, t);case 3:
-      return getOutput3DCoords(e, t);case 4:
-      return getOutput4DCoords(e, t);case 5:
-      return getOutput5DCoords(e, t);case 6:
-      return getOutput6DCoords(e, t);default:
-      throw new Error(e.length + "-D output sampling is not yet supported");}
-}var SAMPLE_1D_SNIPPET = "\nvec2 UVfrom1D(int texNumR, int texNumC, int index) {\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n",
-    SAMPLE_2D_SNIPPET = "\nvec2 UVfrom2D(int texNumR, int texNumC, int numC, int row, int col) {\n  int index = row * numC + col;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n",
-    SAMPLE_3D_SNIPPET = "\nvec2 UVfrom3D(int texNumR, int texNumC, int stride0,\n    int stride1, int row, int col, int depth) {\n  // Explicitly use integer operations as dot() only works on floats.\n  int index = row * stride0 + col * stride1 + depth;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n",
-    SAMPLE_4D_SNIPPET = "\nvec2 UVfrom4D(int texNumR, int texNumC, int stride0,\n    int stride1, int stride2, int row, int col, int depth,\n    int depth2) {\n  // Explicitly use integer operations as dot() only works on floats.\n  int index = row * stride0 + col * stride1 + depth * stride2 + depth2;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n",
-    SAMPLE_5D_SNIPPET = "\nvec2 UVfrom5D(int texNumR, int texNumC, int stride0,\n    int stride1, int stride2, int stride3, int row, int col, int depth,\n    int depth2, int depth3) {\n  // Explicitly use integer operations as dot() only works on floats.\n  int index = row * stride0 + col * stride1 +\n              depth * stride2 + depth2 * stride3 + depth3;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n",
-    SAMPLE_6D_SNIPPET = "\nvec2 UVfrom6D(int texNumR, int texNumC, int stride0,\n    int stride1, int stride2, int stride3, int stride4,\n    int row, int col, int depth, int depth2, int depth3, int depth4) {\n  // Explicitly use integer operations as dot() only works on floats.\n  int index = row * stride0 + col * stride1 + depth * stride2 + depth2 *\n    stride3 + depth3 * stride4 + depth4;\n  int texR = index / texNumC;\n  int texC = index - texR * texNumC;\n  return (vec2(texC, texR) + halfCR) / vec2(texNumC, texNumR);\n}\n",
-    FLOAT_TEXTURE_SAMPLE_SNIPPET = "\n  float sampleTexture(sampler2D textureSampler, vec2 uv) {\n    return texture2D(textureSampler, uv).r;\n  }\n",
-    FLOAT_TEXTURE_SETOUTPUT_SNIPPET = "\n  void setOutput(float val) {\n    gl_FragColor = vec4(val, 0, 0, 0);\n  }\n",
-    SHADER_PREFIX = "\n  precision highp float;\n  precision highp int;\n  varying vec2 resultUV;\n  const vec2 halfCR = vec2(0.5, 0.5);\n\n  struct ivec5\n  {\n    int x;\n    int y;\n    int z;\n    int w;\n    int u;\n  };\n\n  struct ivec6\n  {\n    int x;\n    int y;\n    int z;\n    int w;\n    int u;\n    int v;\n  };\n\n  bool isNaN(float val) {\n    return (val < 0.0 || 0.0 < val || val == 0.0) ? false : true;\n  }\n\n  bool hasNaN(vec4 values) {\n    vec4 v1 = values * values;\n    vec4 v2 = values * values;\n    return any(notEqual(v1, v2));\n  }\n\n  float getNaN(vec4 values) {\n    return dot(vec4(1), values);\n  }\n\n  int round(float value) {\n    return int(floor(value + 0.5));\n  }\n\n  int imod(int x, int y) {\n    return x - y * (x / y);\n  }\n\n  //Based on the work of Dave Hoskins\n  //https://www.shadertoy.com/view/4djSRW\n  #define HASHSCALE1 443.8975\n  float random(float seed){\n    vec2 p = resultUV * seed;\n    vec3 p3  = fract(vec3(p.xyx) * HASHSCALE1);\n    p3 += dot(p3, p3.yzx + 19.19);\n    return fract((p3.x + p3.y) * p3.z);\n  }\n\n  " + SAMPLE_1D_SNIPPET + "\n  " + SAMPLE_2D_SNIPPET + "\n  " + SAMPLE_3D_SNIPPET + "\n  " + SAMPLE_4D_SNIPPET + "\n  " + SAMPLE_5D_SNIPPET + "\n  " + SAMPLE_6D_SNIPPET + "\n";function getOutputScalarCoords() {
-  return "\n    int getOutputCoords() {\n      return 0;\n    }\n  ";
-}function getOutput1DCoords(e, t) {
-  return 1 === t[0] ? "\n      int getOutputCoords() {\n        return int(resultUV.x * " + t[1] + ".0);\n      }\n    " : 1 === t[1] ? "\n      int getOutputCoords() {\n        return int(resultUV.y * " + t[0] + ".0);\n      }\n    " : "\n    int getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + t[0] + ", " + t[1] + "));\n      return resTexRC.x * " + t[1] + " + resTexRC.y;\n    }\n  ";
-}function getOutput3DCoords(e, t) {
-  var n = e[1] * e[2],
-      r = e[2];return "\n    ivec3 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + t[0] + ", " + t[1] + "));\n      int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n      int r = index / " + n + ";\n      index -= r * " + n + ";\n      int c = index / " + r + ";\n      int d = index - c * " + r + ";\n      return ivec3(r, c, d);\n    }\n  ";
-}function getOutput4DCoords(e, t) {
-  var n = e[3],
-      r = e[2] * n,
-      o = e[1] * r;return "\n    ivec4 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n        vec2(" + t[0] + ", " + t[1] + "));\n      int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n\n      int r = index / " + o + ";\n      index -= r * " + o + ";\n\n      int c = index / " + r + ";\n      index -= c * " + r + ";\n\n      int d = index / " + n + ";\n      int d2 = index - d * " + n + ";\n\n      return ivec4(r, c, d, d2);\n    }\n  ";
-}function getOutput5DCoords(e, t) {
-  var n = e[4],
-      r = e[3] * n,
-      o = e[2] * r,
-      a = e[1] * o;return "\n    ivec5 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx * vec2(" + t[0] + ",\n                             " + t[1] + "));\n\n      int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n\n      int r = index / " + a + ";\n      index -= r * " + a + ";\n\n      int c = index / " + o + ";\n      index -= c * " + o + ";\n\n      int d = index / " + r + ";\n      index -= d * " + r + ";\n\n      int d2 = index  / " + n + ";\n      int d3 = index - d2 * " + n + ";\n\n      ivec5 outShape = ivec5(r, c, d, d2, d3);\n      return outShape;\n    }\n  ";
-}function getOutput6DCoords(e, t) {
-  var n = e[5],
-      r = e[4] * n,
-      o = e[3] * r,
-      a = e[2] * o,
-      i = e[1] * a;return "\n    ivec6 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n        vec2(" + t[0] + ", " + t[1] + "));\n      int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n\n      int r = index / " + i + ";\n      index -= r * " + i + ";\n\n      int c = index / " + a + ";\n      index -= c * " + a + ";\n\n      int d = index / " + o + ";\n      index -= d * " + o + ";\n\n      int d2 = index / " + r + ";\n      index -= d2 * " + r + ";\n\n      int d3 = index / " + n + ";\n      int d4 = index - d3 * " + n + ";\n\n      ivec6 result = ivec6(r, c, d, d2, d3, d4);\n      return result;\n    }\n  ";
-}function getOutput2DCoords(e, t) {
-  return arraysEqual(e, t) ? "\n      ivec2 getOutputCoords() {\n        return ivec2(resultUV.yx * vec2(" + t[0] + ", " + t[1] + "));\n      }\n    " : 1 === e[1] ? "\n      ivec2 getOutputCoords() {\n        ivec2 resTexRC = ivec2(resultUV.yx *\n                               vec2(" + t[0] + ", " + t[1] + "));\n        int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n        return ivec2(index, 0);\n      }\n    " : 1 === e[0] ? "\n      ivec2 getOutputCoords() {\n        ivec2 resTexRC = ivec2(resultUV.yx *\n                               vec2(" + t[0] + ", " + t[1] + "));\n        int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n        return ivec2(0, index);\n      }\n    " : "\n    ivec2 getOutputCoords() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + t[0] + ", " + t[1] + "));\n      int index = resTexRC.x * " + t[1] + " + resTexRC.y;\n      int r = index / " + e[1] + ";\n      int c = index - r * " + e[1] + ";\n      return ivec2(r, c);\n    }\n  ";
-}function getSamplerScalar(e) {
-  var t = e.name,
-      n = "get" + t.charAt(0).toUpperCase() + t.slice(1);return e.shapeInfo.isUniform ? "float " + n + "() {return " + t + ";}" : "\n    float " + n + "() {\n      return sampleTexture(" + t + ", halfCR);\n    }\n  ";
-}function getSampler1D(e) {
-  var t = e.name,
-      n = "get" + t.charAt(0).toUpperCase() + t.slice(1);return "\n    float " + n + "(int index) {\n      return " + n + "Flat(index);\n    }\n  ";
-}function getSampler2D(e) {
-  var t = e.shapeInfo.logicalShape,
-      n = e.name,
-      r = "get" + n.charAt(0).toUpperCase() + n.slice(1),
-      o = e.shapeInfo.texShape;if (null != o && arraysEqual(t, o)) {
-    var a = o[0];return "\n    float " + r + "(int row, int col) {\n      vec2 uv = (vec2(col, row) + halfCR) / vec2(" + o[1] + ".0, " + a + ".0);\n      return sampleTexture(" + n + ", uv);\n    }\n  ";
-  }var i = squeezeShape(t),
-      s = i.newShape,
-      u = i.keptDims,
-      c = s;if (c.length < t.length) {
-    return "\n      " + getSamplerFromInInfo(squeezeInputInfo(e, c)) + "\n      float " + r + "(int row, int col) {\n        return " + r + "(" + getSqueezedParams(["row", "col"], u) + ");\n      }\n    ";
-  }if (e.shapeInfo.isUniform) return "\n      float " + r + "(int row, int col) {\n        int index = row * " + t[1] + " + col;\n        return " + r + "Flat(index);\n      }\n    ";var l = o[0],
-      d = o[1];return 1 === d ? "\n    float " + r + "(int row, int col) {\n      int index = row * " + t[1] + " + col;\n      vec2 uv = vec2(0.5, (float(index) + 0.5) / " + l + ".0);\n      return sampleTexture(" + n + ", uv);\n    }\n  " : 1 === l ? "\n    float " + r + "(int row, int col) {\n      int index = row * " + t[1] + " + col;\n      vec2 uv = vec2((float(index) + 0.5) / " + d + ".0, 0.5);\n      return sampleTexture(" + n + ", uv);\n    }\n  " : "\n  float " + r + "(int row, int col) {\n    vec2 uv = UVfrom2D(" + l + ", " + d + ", " + t[1] + ", row, col);\n    return sampleTexture(" + n + ", uv);\n  }\n";
-}function getSampler3D(e) {
-  var t = e.shapeInfo.logicalShape,
-      n = e.name,
-      r = "get" + n.charAt(0).toUpperCase() + n.slice(1),
-      o = t[1] * t[2],
-      a = t[2],
-      i = squeezeShape(t),
-      s = i.newShape,
-      u = i.keptDims,
-      c = s;if (c.length < t.length) {
-    return "\n        " + getSamplerFromInInfo(squeezeInputInfo(e, c)) + "\n        float " + r + "(int row, int col, int depth) {\n          return " + r + "(" + getSqueezedParams(["row", "col", "depth"], u) + ");\n        }\n      ";
-  }if (e.shapeInfo.isUniform) return "\n      float " + r + "(int row, int col, int depth) {\n        int index = row * " + o + " + col * " + a + " + depth;\n        return " + r + "Flat(index);\n      }\n    ";var l = e.shapeInfo.texShape,
-      d = l[0],
-      p = l[1];return p === o ? "\n        float " + r + "(int row, int col, int depth) {\n          int texR = row;\n          int texC = col * " + a + " + depth;\n          vec2 uv = (vec2(texC, texR) + halfCR) /\n                     vec2(" + p + ".0, " + d + ".0);\n          return sampleTexture(" + n + ", uv);\n        }\n      " : p === a ? "\n    float " + r + "(int row, int col, int depth) {\n      int texR = row * " + t[1] + " + col;\n      int texC = depth;\n      vec2 uv = (vec2(texC, texR) + halfCR) / vec2(" + p + ".0, " + d + ".0);\n      return sampleTexture(" + n + ", uv);\n    }\n  " : "\n      float " + r + "(int row, int col, int depth) {\n        vec2 uv = UVfrom3D(\n            " + d + ", " + p + ", " + o + ", " + a + ", row, col, depth);\n        return sampleTexture(" + n + ", uv);\n      }\n  ";
-}function getSampler4D(e) {
-  var t = e.shapeInfo.logicalShape,
-      n = e.name,
-      r = "get" + n.charAt(0).toUpperCase() + n.slice(1),
-      o = t[3],
-      a = t[2] * o,
-      i = t[1] * a,
-      s = squeezeShape(t),
-      u = s.newShape,
-      c = s.keptDims;if (u.length < t.length) {
-    return "\n      " + getSamplerFromInInfo(squeezeInputInfo(e, u)) + "\n      float " + r + "(int row, int col, int depth, int depth2) {\n        return " + r + "(" + getSqueezedParams(["row", "col", "depth", "depth2"], c) + ");\n      }\n    ";
-  }if (e.shapeInfo.isUniform) return "\n      float " + r + "(int row, int col, int depth, int depth2) {\n        int index = row * " + i + " + col * " + a + " +\n            depth * " + o + " + depth2;\n        return " + r + "Flat(index);\n      }\n    ";var l = e.shapeInfo.texShape,
-      d = l[0],
-      p = l[1];return p === i ? "\n      float " + r + "(int row, int col, int depth, int depth2) {\n        int texR = row;\n        int texC = col * " + a + " + depth * " + o + " + depth2;\n        vec2 uv = (vec2(texC, texR) + halfCR) /\n                   vec2(" + p + ".0, " + d + ".0);\n        return sampleTexture(" + n + ", uv);\n      }\n    " : p === o ? "\n      float " + r + "(int row, int col, int depth, int depth2) {\n        int texR = row * " + t[1] * t[2] + " + col * " + t[2] + " + depth;\n        int texC = depth2;\n        vec2 uv = (vec2(texC, texR) + halfCR) /\n                  vec2(" + p + ".0, " + d + ".0);\n        return sampleTexture(" + n + ", uv);\n      }\n    " : "\n    float " + r + "(int row, int col, int depth, int depth2) {\n      vec2 uv = UVfrom4D(" + d + ", " + p + ", " + i + ", " + a + ",\n          " + o + ", row, col, depth, depth2);\n      return sampleTexture(" + n + ", uv);\n    }\n  ";
-}function getSampler5D(e) {
-  var t = e.shapeInfo.logicalShape,
-      n = e.name,
-      r = "get" + n.charAt(0).toUpperCase() + n.slice(1),
-      o = t[4],
-      a = t[3] * o,
-      i = t[2] * a,
-      s = t[1] * i,
-      u = squeezeShape(t),
-      c = u.newShape,
-      l = u.keptDims;if (c.length < t.length) {
-    return "\n      " + getSamplerFromInInfo(squeezeInputInfo(e, c)) + "\n      float " + r + "(int row, int col, int depth, int depth2, int depth3) {\n        return " + r + "(" + getSqueezedParams(["row", "col", "depth", "depth2", "depth3"], l) + ");\n      }\n    ";
-  }if (e.shapeInfo.isUniform) return "\n      float " + r + "(int row, int col, int depth, int depth2, int depth3) {\n        int index = row * " + s + " + col * " + i + " +\n            depth * " + a + " + depth2 * " + o + " + depth3;\n        return " + r + "Flat(index);\n      }\n    ";var d = e.shapeInfo.texShape,
-      p = d[0],
-      h = d[1];return h === s ? "\n      float " + r + "(int row, int col, int depth, int depth2, int depth3) {\n        int texR = row;\n        int texC = col * " + i + " + depth * " + a + " +\n                   depth2 * " + o + " + depth3;\n        vec2 uv = (vec2(texC, texR) + halfCR) /\n                   vec2(" + h + ".0, " + p + ".0);\n        return sampleTexture(" + n + ", uv);\n      }\n    " : h === o ? "\n      float " + r + "(int row, int col, int depth, int depth2, int depth3) {\n        int texR = row * " + t[1] * t[2] + " + col * " + t[2] + " +\n                   depth * " + t[3] + " + depth2;\n        int texC = depth3;\n        vec2 uv = (vec2(texC, texR) + halfCR) /\n                  vec2(" + h + ".0, " + p + ".0);\n        return sampleTexture(" + n + ", uv);\n      }\n    " : "\n    float " + r + "(int row, int col, int depth, int depth2, int depth3) {\n      vec2 uv = UVfrom5D(" + p + ", " + h + ", " + s + ", " + i + ",\n          " + a + ", " + o + ", row, col, depth, depth2, depth3);\n      return sampleTexture(" + n + ", uv);\n    }\n  ";
-}function getSampler6D(e) {
-  var t = e.shapeInfo.logicalShape,
-      n = e.name,
-      r = "get" + n.charAt(0).toUpperCase() + n.slice(1),
-      o = t[5],
-      a = t[4] * o,
-      i = t[3] * a,
-      s = t[2] * i,
-      u = t[1] * s,
-      c = squeezeShape(t),
-      l = c.newShape,
-      d = c.keptDims;if (l.length < t.length) {
-    return "\n      " + getSamplerFromInInfo(squeezeInputInfo(e, l)) + "\n      float " + r + "(int row, int col, int depth,\n                    int depth2, int depth3, int depth4) {\n        return " + r + "(" + getSqueezedParams(["row", "col", "depth", "depth2", "depth3", "depth4"], d) + ");\n      }\n    ";
-  }if (e.shapeInfo.isUniform) return "\n      float " + r + "(int row, int col, int depth,\n                  int depth2, int depth3, int depth4) {\n        int index = row * " + u + " + col * " + s + " +\n            depth * " + i + " + depth2 * " + a + " + depth3 * " + a + "\n            + depth4\n        return " + r + "Flat(index);\n      }\n    ";var p = e.shapeInfo.texShape,
-      h = p[0],
-      f = p[1];return f === u ? "\n      float " + r + "(int row, int col, int depth,\n                    int depth2, int depth3, int depth4) {\n        int texR = row;\n        int texC = col * " + s + " + depth * " + i + " + depth2;\n        vec2 uv = (vec2(texC, texR) + halfCR) /\n                   vec2(" + f + ".0, " + h + ".0);\n        return sampleTexture(" + n + ", uv);\n      }\n    " : f === o ? "\n      float " + r + "(int row, int col, int depth,\n                    int depth2, int depth3, int depth4) {\n        int texR = row * " + t[1] * t[2] + " + col * " + t[2] + " + depth;\n        int texC = depth4;\n        vec2 uv = (vec2(texC, texR) + halfCR) /\n                  vec2(" + f + ".0, " + h + ".0);\n        return sampleTexture(" + n + ", uv);\n      }\n    " : "\n    float " + r + "(int row, int col, int depth,\n                  int depth2, int depth3, int depth4) {\n      vec2 uv = UVfrom6D(" + h + ", " + f + ", " + u + ", " + s + ",\n          " + i + ", " + a + ", " + o + "\n          ,row, col, depth, depth2, depth3, depth4);\n      return sampleTexture(" + n + ", uv);\n    }\n  ";
-}function getSamplerFlat(e) {
-  var t = e.name,
-      n = "get" + t.charAt(0).toUpperCase() + t.slice(1) + "Flat",
-      r = sizeFromShape(e.shapeInfo.logicalShape);if (e.shapeInfo.isUniform) return 1 === r ? "float " + n + "(int index) {return " + t + ";}" : "\n      float " + n + "(int index) {\n        for (int i = 0; i < " + r + "; i++) {\n          if (i == index) {\n            return " + t + "[i];\n          }\n        }\n      }\n    ";var o = e.shapeInfo.texShape,
-      a = o[0],
-      i = o[1];return 1 === i && 1 === a ? "\n      float " + n + "(int index) {\n        return sampleTexture(" + t + ", halfCR);\n      }\n    " : 1 === i ? "\n      float " + n + "(int index) {\n        vec2 uv = vec2(0.5, (float(index) + 0.5) / " + a + ".0);\n        return sampleTexture(" + t + ", uv);\n      }\n    " : 1 === a ? "\n      float " + n + "(int index) {\n        vec2 uv = vec2((float(index) + 0.5) / " + i + ".0, 0.5);\n        return sampleTexture(" + t + ", uv);\n      }\n    " : "\n    float " + n + "(int index) {\n      vec2 uv = UVfrom1D(" + a + ", " + i + ", index);\n      return sampleTexture(" + t + ", uv);\n    }\n  ";
-}function getBroadcastOutputCoordsSampler(e, t, n, r) {
-  var o = e.shapeInfo.logicalShape.length,
-      a = t.logicalShape.length,
-      i = "int";2 === a ? i = "ivec2" : 3 === a ? i = "ivec3" : 4 === a && (i = "ivec4");var s = getBroadcastDims(e.shapeInfo.logicalShape, t.logicalShape),
-      u = a - o;return "\n    float " + r + "() {\n      " + i + " coords = getOutputCoords();\n      " + (0 === o ? "" : a < 2 && s.length >= 1 ? "coords = 0;" : s.map(function (e) {
-    return "coords[" + (e + u) + "] = 0;";
-  }).join("\n")) + "\n      return get" + n + "(" + (a < 2 && o > 0 ? "coords" : e.shapeInfo.logicalShape.map(function (e, t) {
-    return "coords[" + (t + u) + "]";
-  }).join(", ")) + ");\n    }\n  ";
-}function getSamplerAtOutputCoords(e, t, n) {
-  var r = e.name,
-      o = r.charAt(0).toUpperCase() + r.slice(1),
-      a = "get" + o + "AtOutCoords",
-      i = getBroadcastDims(e.shapeInfo.logicalShape, t.logicalShape),
-      s = e.shapeInfo.logicalShape.length,
-      u = t.logicalShape.length,
-      c = n && (u > s || i.length > 0),
-      l = broadcastDimsAreOuter(i),
-      d = e.shapeInfo.isUniform;if (c && !l) return getBroadcastOutputCoordsSampler(e, t, o, a);var p = sizeFromShape(e.shapeInfo.logicalShape),
-      h = "";c && l && (h = "\n        int mainPart = index / " + p + ";\n        index -= mainPart * " + p + ";\n      ");var f = t.texShape;if (d) return 1 === p ? "float " + a + "() {return " + r + ";}" : "\n      float " + a + "() {\n        ivec2 resTexRC = ivec2(resultUV.yx *\n                              vec2(" + f[0] + ", " + f[1] + "));\n        int index = resTexRC.x * " + f[1] + " + resTexRC.y;\n        " + h + "\n        return get" + o + "Flat(index);\n      }\n    ";var g = e.shapeInfo.texShape;return arraysEqual(g, f) ? "\n      float " + a + "() {\n        return sampleTexture(" + r + ", resultUV);\n      }\n    " : "\n    float " + a + "() {\n      ivec2 resTexRC = ivec2(resultUV.yx *\n                             vec2(" + f[0] + ", " + f[1] + "));\n      int index = resTexRC.x * " + f[1] + " + resTexRC.y;\n      " + h + "\n      int texR = index / " + g[1] + ";\n      int texC = index - texR * " + g[1] + ";\n      vec2 uv = (vec2(texC, texR) + halfCR) /\n                 vec2(" + g[1] + ".0, " + g[0] + ".0);\n\n      return sampleTexture(" + r + ", uv);\n    }\n  ";
-}function getCoordsDataType(e) {
-  if (e <= 1) return "int";if (2 === e) return "ivec2";if (3 === e) return "ivec3";if (4 === e) return "ivec4";if (5 === e) return "ivec5";if (6 === e) return "ivec6";throw Error("GPU for rank " + e + " is not yet supported");
-}function squeezeInputInfo(e, t) {
-  var n = JSON.parse(JSON.stringify(e));return n.shapeInfo.logicalShape = t, n;
-}function getSqueezedParams(e, t) {
-  return t.map(function (t) {
-    return e[t];
-  }).join(", ");
-}var CumSumProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["x"], this.outputShape = e;var r = e.length,
-        o = e[e.length - 1],
-        a = n ? "<" : ">";this.userCode = "\n      int getIndex(int i) {\n        " + (n ? "return " + o + " -i - 1;" : "return i;") + "\n      }\n\n      void main() {\n        " + getCoordsDataType(r) + " coords = getOutputCoords();\n        int end = " + getFinalCoord(r, "coords") + ";\n        float val = 0.0;\n        for (int i = " + o + " - 1; i >= 0; i -= 1) {\n          int idx = getIndex(i);\n          if (idx " + a + " end) {\n            continue;\n          }\n          if (idx == end && " + t + ") {\n            continue;\n          }\n          " + getFinalCoord(r, "coords") + " = idx;\n          val += getX(" + getCoords(r, "coords") + ");\n        }\n        setOutput(val);\n      }\n    ";
-  };
-}();function getCoords(e, t) {
-  if (1 === e) return "" + t;if (2 === e) return t + ".x, " + t + ".y";if (3 === e) return t + ".x, " + t + ".y, " + t + ".z";if (4 === e) return t + ".x, " + t + ".y, " + t + ".z, " + t + ".w";throw Error("Cumulative sum for rank " + e + " is not yet supported");
-}function getFinalCoord(e, t) {
-  if (1 === e) return "" + t;if (2 === e) return t + ".y";if (3 === e) return t + ".z";if (4 === e) return t + ".w";throw Error("Cumulative sum for rank " + e + " is not yet supported");
-}var TextureUsage,
-    PhysicalTextureType,
-    EncodeFloatProgram = function () {
-  return function (e) {
-    this.variableNames = ["A"], this.outputShape = e, this.userCode = "\n      const float FLOAT_MAX = 1.70141184e38;\n      const float FLOAT_MIN = 1.17549435e-38;\n\n      lowp vec4 encode_float(highp float v) {\n        if (isNaN(v)) {\n          return vec4(255, 255, 255, 255);\n        }\n\n        highp float av = abs(v);\n\n        if(av < FLOAT_MIN) {\n          return vec4(0.0, 0.0, 0.0, 0.0);\n        } else if(v > FLOAT_MAX) {\n          return vec4(0.0, 0.0, 128.0, 127.0) / 255.0;\n        } else if(v < -FLOAT_MAX) {\n          return vec4(0.0, 0.0,  128.0, 255.0) / 255.0;\n        }\n\n        highp vec4 c = vec4(0,0,0,0);\n\n        highp float e = floor(log2(av));\n        highp float m = exp2(fract(log2(av))) - 1.0;\n\n        c[2] = floor(128.0 * m);\n        m -= c[2] / 128.0;\n        c[1] = floor(32768.0 * m);\n        m -= c[1] / 32768.0;\n        c[0] = floor(8388608.0 * m);\n\n        highp float ebias = e + 127.0;\n        c[3] = floor(ebias / 2.0);\n        ebias -= c[3] * 2.0;\n        c[2] += floor(ebias) * 128.0;\n\n        c[3] += 128.0 * step(0.0, -v);\n\n        return c / 255.0;\n      }\n\n      void main() {\n        float x = getAAtOutCoords();\n        gl_FragColor = encode_float(x);\n      }\n    ";
-  };
-}(),
-    FromPixelsProgram = function () {
-  return function (e) {
-    this.variableNames = ["A"];var t = e[0],
-        n = e[1];this.outputShape = e, this.userCode = "\n      void main() {\n        ivec3 coords = getOutputCoords();\n        int texR = coords[0];\n        int texC = coords[1];\n        int depth = coords[2];\n        vec2 uv = (vec2(texC, texR) + halfCR) / vec2(" + n + ".0, " + t + ".0);\n\n        vec4 values = texture2D(A, uv);\n        float value;\n        if (depth == 0) {\n          value = values.r;\n        } else if (depth == 1) {\n          value = values.g;\n        } else if (depth == 2) {\n          value = values.b;\n        } else if (depth == 3) {\n          value = values.a;\n        }\n\n        setOutput(floor(value * 255.0 + 0.5));\n      }\n    ";
-  };
-}(),
-    GatherProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["A", "indices"];var r = e.slice();r[n] = t, this.outputShape = r, this.rank = r.length;var o = getCoordsDataType(this.rank),
-        a = getSourceCoords(e, n);this.userCode = "\n      void main() {\n        " + o + " resRC = getOutputCoords();\n        setOutput(getA(" + a + "));\n      }\n    ";
-  };
-}();function getSourceCoords(e, t) {
-  var n = e.length;if (n > 4) throw Error("Gather for rank " + n + " is not yet supported");if (1 === n) return "int(getIndices(resRC))";for (var r = ["resRC.x", "resRC.y", "resRC.z", "resRC.w"], o = [], a = 0; a < e.length; a++) a === t ? o.push("int(getIndices(" + r[a] + "))") : o.push("" + r[a]);return o.join();
-}function getUnpackedMatrixTextureShapeWidthHeight(e, t) {
-  return [t, e];
-}function getUnpackedArraySizeFromMatrixSize(e, t) {
-  return e * t;
-}function getMatrixSizeFromUnpackedArraySize(e, t) {
-  if (e % t != 0) throw new Error("unpackedSize (" + e + ") must be a multiple of " + t);return e / t;
-}function encodeMatrixToUnpackedArray(e, t, n) {
-  var r = getUnpackedArraySizeFromMatrixSize(e.length, n);if (t.length < r) throw new Error("unpackedArray length (" + t.length + ") must be >= " + r);for (var o = 0, a = 0; a < e.length; ++a) t[o] = e[a], o += n;
-}function decodeMatrixFromUnpackedArray(e, t, n) {
-  var r = getMatrixSizeFromUnpackedArraySize(e.length, n);if (t.length < r) throw new Error("matrix length (" + t.length + ") must be >= " + r);for (var o = 0, a = 0; a < e.length; a += n) t[o++] = e[a];
-}function getPackedMatrixTextureShapeWidthHeight(e, t) {
-  return [Math.ceil(t / 2), Math.ceil(e / 2)];
-}function getPackedRGBAArraySizeFromMatrixShape(e, t) {
-  var n = getPackedMatrixTextureShapeWidthHeight(e, t);return n[0] * n[1] * 4;
-}function encodeMatrixToPackedRGBA(e, t, n, r) {
-  var o = getPackedRGBAArraySizeFromMatrixShape(t, n);if (r.length < o) throw new Error("packedRGBA length (" + r.length + ") must be >= " + o);for (var a = getPackedMatrixTextureShapeWidthHeight(t, n), i = a[0], s = a[1], u = n % 2 == 1, c = t % 2 == 1, l = Math.floor(n / 2), d = Math.floor(t / 2), p = u ? 4 : 0, h = n, f = 0, g = 0; g < d; ++g) {
-    for (var m = 2 * g * n, v = 0; v < l; ++v) {
-      var y = m + 2 * v;r[f] = e[y], r[f + 1] = e[y + 1], r[f + 2] = e[y + h], r[f + 3] = e[y + h + 1], f += 4;
-    }f += p;
-  }if (u) {
-    y = n - 1, f = 4 * (i - 1);var x = 2 * n;for (p = 4 * i, g = 0; g < d; ++g) r[f] = e[y], r[f + 2] = e[y + n], y += x, f += p;
-  }if (c) for (y = (t - 1) * n, f = (s - 1) * i * 4, v = 0; v < l; ++v) r[f++] = e[y++], r[f++] = e[y++], f += 2;return u && c && (r[r.length - 4] = e[e.length - 1]), r;
-}function decodeMatrixFromPackedRGBA(e, t, n, r) {
-  var o = t * n;if (o < r.length) throw new Error("matrix length (" + r.length + ") must be >= " + o);for (var a = n % 2 == 1, i = t % 2 == 1, s = Math.floor(n / 2), u = Math.floor(t / 2), c = getPackedMatrixTextureShapeWidthHeight(t, n), l = c[0], d = c[1], p = a ? 4 : 0, h = n + (a ? 1 : 0), f = 0, g = 0, m = n, v = 0; v < u; ++v) {
-    for (var y = 0; y < s; ++y) r[g++] = e[f++], r[g++] = e[f++], r[m++] = e[f++], r[m++] = e[f++];f += p, g += h, m += h;
-  }if (a) {
-    f = 4 * (l - 1);var x = n - 1;for (p = 4 * l, h = 2 * n, v = 0; v < u; ++v) r[x] = e[f], r[x + n] = e[f + 2], f += p, x += h;
-  }if (i) for (f = (d - 1) * l * 4, x = (t - 1) * n, y = 0; y < s; ++y) r[x++] = e[f++], r[x++] = e[f++], f += 2;return a && i && (r[r.length - 1] = e[e.length - 4]), r;
-}!function (e) {
-  e[e.RENDER = 0] = "RENDER", e[e.UPLOAD = 1] = "UPLOAD", e[e.PIXELS = 2] = "PIXELS", e[e.DOWNLOAD = 3] = "DOWNLOAD";
-}(TextureUsage || (TextureUsage = {})), function (e) {
-  e[e.FLOAT16 = 0] = "FLOAT16", e[e.FLOAT32 = 1] = "FLOAT32", e[e.UNSIGNED_BYTE = 2] = "UNSIGNED_BYTE";
-}(PhysicalTextureType || (PhysicalTextureType = {}));var MAX_TEXTURE_SIZE = null;function createWebGLRenderingContext(e) {
-  var t = document.createElement("canvas");return t.width = 1, t.height = 1, createWebGLRenderingContextFromCanvas(t, e);
-}function createWebGLRenderingContextFromCanvas(e, t) {
-  var n,
-      r = ENV.get("WEBGL_VERSION");if (2 === r ? n = e.getContext("webgl2", t) : 1 === r && (n = e.getContext("webgl", t) || e.getContext("experimental-webgl", t)), 0 === r || null == n) throw new Error("This browser does not support WebGL.");return n;
-}function callAndCheck(e, t) {
-  var n = t();return checkWebGLError(e), n;
-}var webGLDebugErrorCheckingEnabled = !1;function enableDebugWebGLErrorChecking(e) {
-  webGLDebugErrorCheckingEnabled = e;
-}function checkWebGLError(e) {
-  if (webGLDebugErrorCheckingEnabled) {
-    var t = e.getError();if (t !== e.NO_ERROR) throw new Error("WebGL Error: " + getWebGLErrorMessage(e, t));
-  }
-}function getWebGLErrorMessage(e, t) {
-  switch (t) {case e.NO_ERROR:
-      return "NO_ERROR";case e.INVALID_ENUM:
-      return "INVALID_ENUM";case e.INVALID_VALUE:
-      return "INVALID_VALUE";case e.INVALID_OPERATION:
-      return "INVALID_OPERATION";case e.INVALID_FRAMEBUFFER_OPERATION:
-      return "INVALID_FRAMEBUFFER_OPERATION";case e.OUT_OF_MEMORY:
-      return "OUT_OF_MEMORY";case e.CONTEXT_LOST_WEBGL:
-      return "CONTEXT_LOST_WEBGL";default:
-      return "Unknown error code " + t;}
-}function getExtensionOrThrow(e, t) {
-  return throwIfNull(e, function () {
-    return e.getExtension(t);
-  }, 'Extension "' + t + '" not supported on this browser.');
-}function createVertexShader(e, t) {
-  var n = throwIfNull(e, function () {
-    return e.createShader(e.VERTEX_SHADER);
-  }, "Unable to create vertex WebGLShader.");if (callAndCheck(e, function () {
-    return e.shaderSource(n, t);
-  }), callAndCheck(e, function () {
-    return e.compileShader(n);
-  }), !1 === e.getShaderParameter(n, e.COMPILE_STATUS)) throw console.log(e.getShaderInfoLog(n)), new Error("Failed to compile vertex shader.");return n;
-}function createFragmentShader(e, t) {
-  var n = throwIfNull(e, function () {
-    return e.createShader(e.FRAGMENT_SHADER);
-  }, "Unable to create fragment WebGLShader.");if (callAndCheck(e, function () {
-    return e.shaderSource(n, t);
-  }), callAndCheck(e, function () {
-    return e.compileShader(n);
-  }), !1 === e.getShaderParameter(n, e.COMPILE_STATUS)) throw logShaderSourceAndInfoLog(t, e.getShaderInfoLog(n)), new Error("Failed to compile fragment shader.");return n;
-}var lineNumberRegex = /ERROR: [0-9]+:([0-9]+):/g;function logShaderSourceAndInfoLog(e, t) {
-  var n = lineNumberRegex.exec(t);if (null == n) return console.log("Couldn't parse line number in error: " + t), void console.log(e);for (var r = +n[1], o = e.split("\n"), a = o.length.toString().length + 2, i = o.map(function (e, t) {
-    return rightPad((t + 1).toString(), a) + e;
-  }), s = 0, u = 0; u < i.length; u++) s = Math.max(i[u].length, s);var c = i.slice(0, r - 1),
-      l = i.slice(r - 1, r),
-      d = i.slice(r);console.log(c.join("\n")), console.log(t.split("\n")[0]), console.log("%c " + rightPad(l[0], s), "border:1px solid red; background-color:#e3d2d2; color:#a61717"), console.log(d.join("\n"));
-}function createProgram(e) {
-  return throwIfNull(e, function () {
-    return e.createProgram();
-  }, "Unable to create WebGLProgram.");
-}function linkProgram(e, t) {
-  if (callAndCheck(e, function () {
-    return e.linkProgram(t);
-  }), !1 === e.getProgramParameter(t, e.LINK_STATUS)) throw console.log(e.getProgramInfoLog(t)), new Error("Failed to link vertex and fragment shaders.");
-}function validateProgram(e, t) {
-  if (callAndCheck(e, function () {
-    return e.validateProgram(t);
-  }), !1 === e.getProgramParameter(t, e.VALIDATE_STATUS)) throw console.log(e.getProgramInfoLog(t)), new Error("Shader program validation failed.");
-}function createStaticVertexBuffer(e, t) {
-  var n = throwIfNull(e, function () {
-    return e.createBuffer();
-  }, "Unable to create WebGLBuffer");return callAndCheck(e, function () {
-    return e.bindBuffer(e.ARRAY_BUFFER, n);
-  }), callAndCheck(e, function () {
-    return e.bufferData(e.ARRAY_BUFFER, t, e.STATIC_DRAW);
-  }), n;
-}function createStaticIndexBuffer(e, t) {
-  var n = throwIfNull(e, function () {
-    return e.createBuffer();
-  }, "Unable to create WebGLBuffer");return callAndCheck(e, function () {
-    return e.bindBuffer(e.ELEMENT_ARRAY_BUFFER, n);
-  }), callAndCheck(e, function () {
-    return e.bufferData(e.ELEMENT_ARRAY_BUFFER, t, e.STATIC_DRAW);
-  }), n;
-}function queryMaxTextureSize(e) {
-  return null != MAX_TEXTURE_SIZE ? MAX_TEXTURE_SIZE : MAX_TEXTURE_SIZE = callAndCheck(e, function () {
-    return e.getParameter(e.MAX_TEXTURE_SIZE);
-  });
-}function getNumChannels() {
-  return 2 === ENV.get("WEBGL_VERSION") ? 1 : 4;
-}function createTexture(e) {
-  return throwIfNull(e, function () {
-    return e.createTexture();
-  }, "Unable to create WebGLTexture.");
-}function validateTextureSize(e, t, n) {
-  var r = queryMaxTextureSize(e);if (t <= 0 || n <= 0) {
-    var o = "[" + t + "x" + n + "]";throw new Error("Requested texture size " + o + " is invalid.");
-  }if (t > r || n > r) {
-    o = "[" + t + "x" + n + "]";throw new Error("Requested texture size " + o + " greater than WebGL maximum on this browser / GPU " + ("[" + r + "x" + r + "]") + ".");
-  }
-}function createFramebuffer(e) {
-  return throwIfNull(e, function () {
-    return e.createFramebuffer();
-  }, "Unable to create WebGLFramebuffer.");
-}function bindVertexBufferToProgramAttribute(e, t, n, r, o, a, i) {
-  var s = e.getAttribLocation(t, n);return -1 !== s && (callAndCheck(e, function () {
-    return e.bindBuffer(e.ARRAY_BUFFER, r);
-  }), callAndCheck(e, function () {
-    return e.vertexAttribPointer(s, o, e.FLOAT, !1, a, i);
-  }), callAndCheck(e, function () {
-    return e.enableVertexAttribArray(s);
-  }), !0);
-}function bindTextureUnit(e, t, n) {
-  validateTextureUnit(e, n), callAndCheck(e, function () {
-    return e.activeTexture(e.TEXTURE0 + n);
-  }), callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, t);
-  });
-}function unbindTextureUnit(e, t) {
-  validateTextureUnit(e, t), callAndCheck(e, function () {
-    return e.activeTexture(e.TEXTURE0 + t);
-  }), callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, null);
-  });
-}function getProgramUniformLocationOrThrow(e, t, n) {
-  return throwIfNull(e, function () {
-    return e.getUniformLocation(t, n);
-  }, 'uniform "' + n + '" not present in program.');
-}function getProgramUniformLocation(e, t, n) {
-  return e.getUniformLocation(t, n);
-}function bindTextureToProgramUniformSampler(e, t, n, r, o) {
-  callAndCheck(e, function () {
-    return bindTextureUnit(e, n, o);
-  }), callAndCheck(e, function () {
-    return e.uniform1i(r, o);
-  });
-}function bindCanvasToFramebuffer(e) {
-  callAndCheck(e, function () {
-    return e.bindFramebuffer(e.FRAMEBUFFER, null);
-  }), callAndCheck(e, function () {
-    return e.viewport(0, 0, e.canvas.width, e.canvas.height);
-  }), callAndCheck(e, function () {
-    return e.scissor(0, 0, e.canvas.width, e.canvas.height);
-  });
-}function bindColorTextureToFramebuffer(e, t, n) {
-  callAndCheck(e, function () {
-    return e.bindFramebuffer(e.FRAMEBUFFER, n);
-  }), callAndCheck(e, function () {
-    return e.framebufferTexture2D(e.FRAMEBUFFER, e.COLOR_ATTACHMENT0, e.TEXTURE_2D, t, 0);
-  });
-}function unbindColorTextureFromFramebuffer(e, t) {
-  callAndCheck(e, function () {
-    return e.bindFramebuffer(e.FRAMEBUFFER, t);
-  }), callAndCheck(e, function () {
-    return e.framebufferTexture2D(e.FRAMEBUFFER, e.COLOR_ATTACHMENT0, e.TEXTURE_2D, null, 0);
-  });
-}function validateFramebuffer(e) {
-  var t = e.checkFramebufferStatus(e.FRAMEBUFFER);if (t !== e.FRAMEBUFFER_COMPLETE) throw new Error("Error binding framebuffer: " + getFramebufferErrorMessage(e, t));
-}function getFramebufferErrorMessage(e, t) {
-  switch (t) {case e.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-      return "FRAMEBUFFER_INCOMPLETE_ATTACHMENT";case e.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-      return "FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT";case e.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-      return "FRAMEBUFFER_INCOMPLETE_DIMENSIONS";case e.FRAMEBUFFER_UNSUPPORTED:
-      return "FRAMEBUFFER_UNSUPPORTED";default:
-      return "unknown error " + t;}
-}function throwIfNull(e, t, n) {
-  var r = callAndCheck(e, function () {
-    return t();
-  });if (null == r) throw new Error(n);return r;
-}function validateTextureUnit(e, t) {
-  var n = e.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1,
-      r = t + e.TEXTURE0;if (r < e.TEXTURE0 || r > n) throw new Error("textureUnit must be in " + ("[gl.TEXTURE0, gl.TEXTURE" + n + "]") + ".");
-}function getTextureShapeFromLogicalShape(e, t) {
-  2 !== t.length && (t = squeezeShape(t).newShape);var n = queryMaxTextureSize(e),
-      r = sizeFromShape(t);return t.length <= 1 && r <= n ? [r, 1] : 2 === t.length && t[0] <= n && t[1] <= n ? t : 3 === t.length && t[0] <= n && t[1] * t[2] <= n ? [t[0], t[1] * t[2]] : 4 === t.length && t[0] <= n && t[1] * t[2] * t[3] <= n ? [t[0], t[1] * t[2] * t[3]] : sizeToSquarishShape(r);
-}var webgl_util = Object.freeze({ createWebGLRenderingContext: createWebGLRenderingContext, createWebGLRenderingContextFromCanvas: createWebGLRenderingContextFromCanvas, callAndCheck: callAndCheck, enableDebugWebGLErrorChecking: enableDebugWebGLErrorChecking, checkWebGLError: checkWebGLError, getWebGLErrorMessage: getWebGLErrorMessage, getExtensionOrThrow: getExtensionOrThrow, createVertexShader: createVertexShader, createFragmentShader: createFragmentShader, createProgram: createProgram, linkProgram: linkProgram, validateProgram: validateProgram, createStaticVertexBuffer: createStaticVertexBuffer, createStaticIndexBuffer: createStaticIndexBuffer, queryMaxTextureSize: queryMaxTextureSize, getNumChannels: getNumChannels, createTexture: createTexture, validateTextureSize: validateTextureSize, createFramebuffer: createFramebuffer, bindVertexBufferToProgramAttribute: bindVertexBufferToProgramAttribute, bindTextureUnit: bindTextureUnit, unbindTextureUnit: unbindTextureUnit, getProgramUniformLocationOrThrow: getProgramUniformLocationOrThrow, getProgramUniformLocation: getProgramUniformLocation, bindTextureToProgramUniformSampler: bindTextureToProgramUniformSampler, bindCanvasToFramebuffer: bindCanvasToFramebuffer, bindColorTextureToFramebuffer: bindColorTextureToFramebuffer, unbindColorTextureFromFramebuffer: unbindColorTextureFromFramebuffer, validateFramebuffer: validateFramebuffer, getFramebufferErrorMessage: getFramebufferErrorMessage, getTextureShapeFromLogicalShape: getTextureShapeFromLogicalShape });function getWebGLContextAttributes() {
-  return { alpha: !1, antialias: !1, premultipliedAlpha: !1, preserveDrawingBuffer: !1, depth: !1, stencil: !1, failIfMajorPerformanceCaveat: !0 };
-}function createWebGLContext(e) {
-  var t,
-      n = getWebGLContextAttributes();return callAndCheck(t = null != e ? createWebGLRenderingContextFromCanvas(e, n) : createWebGLRenderingContext(n), function () {
-    return t.disable(t.DEPTH_TEST);
-  }), callAndCheck(t, function () {
-    return t.disable(t.STENCIL_TEST);
-  }), callAndCheck(t, function () {
-    return t.disable(t.BLEND);
-  }), callAndCheck(t, function () {
-    return t.disable(t.DITHER);
-  }), callAndCheck(t, function () {
-    return t.disable(t.POLYGON_OFFSET_FILL);
-  }), callAndCheck(t, function () {
-    return t.disable(t.SAMPLE_COVERAGE);
-  }), callAndCheck(t, function () {
-    return t.enable(t.SCISSOR_TEST);
-  }), callAndCheck(t, function () {
-    return t.enable(t.CULL_FACE);
-  }), callAndCheck(t, function () {
-    return t.cullFace(t.BACK);
-  }), t;
-}function createVertexShader$1(e) {
-  return createVertexShader(e, "\n    precision highp float;\n    attribute vec3 clipSpacePos;\n    attribute vec2 uv;\n    varying vec2 resultUV;\n\n    void main() {\n      gl_Position = vec4(clipSpacePos, 1);\n      resultUV = uv;\n    }");
-}function createVertexBuffer(e) {
-  return createStaticVertexBuffer(e, new Float32Array([-1, 1, 0, 0, 1, -1, -1, 0, 0, 0, 1, 1, 0, 1, 1, 1, -1, 0, 1, 0]));
-}function createIndexBuffer(e) {
-  return createStaticIndexBuffer(e, new Uint16Array([0, 1, 2, 2, 1, 3]));
-}function getTextureConfig(e, t) {
-  var n,
-      r,
-      o,
-      a,
-      i,
-      s,
-      u,
-      c = e;return 2 === ENV.get("WEBGL_VERSION") ? (n = c.R32F, r = c.R16F, o = c.RGBA32F, a = c.RED, i = 4, s = 1, u = c.HALF_FLOAT) : (n = e.RGBA, r = e.RGBA, o = c.RGBA, a = e.RGBA, i = 4, s = 4, u = null != t ? t.HALF_FLOAT_OES : null), { internalFormatFloat: n, internalFormatHalfFloat: r, internalFormatPackedFloat: o, textureFormatFloat: a, downloadTextureFormat: e.RGBA, downloadUnpackNumChannels: i, defaultNumChannels: s, textureTypeHalfFloat: u };
-}function createAndConfigureTexture(e, t, n, r, o, a) {
-  validateTextureSize(e, t, n);var i = createTexture(e),
-      s = e.TEXTURE_2D;return callAndCheck(e, function () {
-    return e.bindTexture(s, i);
-  }), callAndCheck(e, function () {
-    return e.texParameteri(s, e.TEXTURE_WRAP_S, e.CLAMP_TO_EDGE);
-  }), callAndCheck(e, function () {
-    return e.texParameteri(s, e.TEXTURE_WRAP_T, e.CLAMP_TO_EDGE);
-  }), callAndCheck(e, function () {
-    return e.texParameteri(s, e.TEXTURE_MIN_FILTER, e.NEAREST);
-  }), callAndCheck(e, function () {
-    return e.texParameteri(s, e.TEXTURE_MAG_FILTER, e.NEAREST);
-  }), callAndCheck(e, function () {
-    return e.texImage2D(s, 0, r, t, n, 0, o, a, null);
-  }), callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, null);
-  }), i;
-}function createFloat32MatrixTexture(e, t, n, r) {
-  var o = getUnpackedMatrixTextureShapeWidthHeight(t, n);return createAndConfigureTexture(e, o[0], o[1], r.internalFormatFloat, r.textureFormatFloat, e.FLOAT);
-}function createFloat16MatrixTexture(e, t, n, r) {
-  var o = getUnpackedMatrixTextureShapeWidthHeight(t, n);return createAndConfigureTexture(e, o[0], o[1], r.internalFormatFloat, r.textureFormatFloat, r.textureTypeHalfFloat);
-}function createUnsignedBytesMatrixTexture(e, t, n, r) {
-  var o = getUnpackedMatrixTextureShapeWidthHeight(t, n);return createAndConfigureTexture(e, o[0], o[1], e.RGBA, e.RGBA, e.UNSIGNED_BYTE);
-}function createPackedMatrixTexture(e, t, n, r) {
-  var o = getPackedMatrixTextureShapeWidthHeight(t, n);return createAndConfigureTexture(e, o[0], o[1], r.internalFormatPackedFloat, e.RGBA, e.FLOAT);
-}function bindVertexProgramAttributeStreams(e, t, n) {
-  return callAndCheck(e, function () {
-    return e.bindBuffer(e.ARRAY_BUFFER, n);
-  }), bindVertexBufferToProgramAttribute(e, t, "clipSpacePos", n, 3, 20, 0) && bindVertexBufferToProgramAttribute(e, t, "uv", n, 2, 20, 12);
-}function uploadPixelDataToTexture(e, t, n) {
-  callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, t);
-  }), callAndCheck(e, function () {
-    return e.texImage2D(e.TEXTURE_2D, 0, e.RGBA, e.RGBA, e.UNSIGNED_BYTE, n);
-  }), callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, null);
-  });
-}function uploadDataToTexture(e, t, n, r, o, a) {
-  validateTextureSize(e, n, r), callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, t);
-  }), callAndCheck(e, function () {
-    return e.texSubImage2D(e.TEXTURE_2D, 0, 0, 0, n, r, a, e.FLOAT, o);
-  }), callAndCheck(e, function () {
-    return e.bindTexture(e.TEXTURE_2D, null);
-  });
-}function uploadMatrixToTexture(e, t, n, r, o, a, i) {
-  var s,
-      u = getUnpackedMatrixTextureShapeWidthHeight(n, r),
-      c = u[0],
-      l = u[1];1 === i.defaultNumChannels ? s = o : encodeMatrixToUnpackedArray(o, s = new Float32Array(getUnpackedArraySizeFromMatrixSize(o.length, a)), a), uploadDataToTexture(e, t, c, l, s, i.textureFormatFloat);
-}function uploadMatrixToPackedTexture(e, t, n, r, o, a) {
-  var i = getPackedMatrixTextureShapeWidthHeight(n, r),
-      s = i[0],
-      u = i[1],
-      c = new Float32Array(getPackedRGBAArraySizeFromMatrixShape(n, r));encodeMatrixToPackedRGBA(o, n, r, c), uploadDataToTexture(e, t, s, u, c, e.RGBA);
-}function downloadMatrixFromOutputTextureAsync(e, t, n, r, o) {
-  return __awaiter(this, void 0, void 0, function () {
-    var a, i, s, u, c;return __generator(this, function (l) {
-      switch (l.label) {case 0:
-          return a = e, i = new Float32Array(getUnpackedArraySizeFromMatrixSize(n * r, o.downloadUnpackNumChannels)), s = i instanceof Float32Array ? 4 * i.length : i, u = e.createBuffer(), callAndCheck(e, function () {
-            return e.bindBuffer(a.PIXEL_PACK_BUFFER, u);
-          }), callAndCheck(e, function () {
-            return e.bufferData(a.PIXEL_PACK_BUFFER, s, e.STATIC_DRAW);
-          }), callAndCheck(e, function () {
-            return a.readPixels(0, 0, r, n, e.RGBA, e.FLOAT, 0);
-          }), [4, t.getBufferSubDataAsync(a.PIXEL_PACK_BUFFER, 0, i)];case 1:
-          return l.sent(), c = new Float32Array(n * r), decodeMatrixFromUnpackedArray(i, c, o.downloadUnpackNumChannels), [2, c];}
-    });
-  });
-}function downloadFloat32MatrixFromOutputTexture(e, t, n, r) {
-  var o = getUnpackedMatrixTextureShapeWidthHeight(t, n),
-      a = o[0],
-      i = o[1],
-      s = new Float32Array(getUnpackedArraySizeFromMatrixSize(t * n, r.downloadUnpackNumChannels));callAndCheck(e, function () {
-    return e.readPixels(0, 0, a, i, r.downloadTextureFormat, e.FLOAT, s);
-  });var u = new Float32Array(t * n);return decodeMatrixFromUnpackedArray(s, u, r.downloadUnpackNumChannels), u;
-}function downloadByteEncodedFloatMatrixFromOutputTexture(e, t, n, r) {
-  var o = getUnpackedMatrixTextureShapeWidthHeight(t, n),
-      a = o[0],
-      i = o[1],
-      s = new Uint8Array(getUnpackedArraySizeFromMatrixSize(t * n, 4));return callAndCheck(e, function () {
-    return e.readPixels(0, 0, a, i, r.downloadTextureFormat, e.UNSIGNED_BYTE, s);
-  }), new Float32Array(s.buffer);
-}function downloadMatrixFromPackedOutputTexture(e, t, n, r) {
-  var o = getPackedMatrixTextureShapeWidthHeight(t, n),
-      a = o[0],
-      i = o[1],
-      s = new Float32Array(getPackedRGBAArraySizeFromMatrixShape(t, n));callAndCheck(e, function () {
-    return e.readPixels(0, 0, a, i, e.RGBA, e.FLOAT, s);
-  });var u = new Float32Array(t * n);return decodeMatrixFromPackedRGBA(s, t, n, u);
-}var gpgpu_util = Object.freeze({ getWebGLContextAttributes: getWebGLContextAttributes, createWebGLContext: createWebGLContext, createVertexShader: createVertexShader$1, createVertexBuffer: createVertexBuffer, createIndexBuffer: createIndexBuffer, getTextureConfig: getTextureConfig, createFloat32MatrixTexture: createFloat32MatrixTexture, createFloat16MatrixTexture: createFloat16MatrixTexture, createUnsignedBytesMatrixTexture: createUnsignedBytesMatrixTexture, createPackedMatrixTexture: createPackedMatrixTexture, bindVertexProgramAttributeStreams: bindVertexProgramAttributeStreams, uploadPixelDataToTexture: uploadPixelDataToTexture, uploadMatrixToTexture: uploadMatrixToTexture, uploadMatrixToPackedTexture: uploadMatrixToPackedTexture, downloadMatrixFromOutputTextureAsync: downloadMatrixFromOutputTextureAsync, downloadFloat32MatrixFromOutputTexture: downloadFloat32MatrixFromOutputTexture, downloadByteEncodedFloatMatrixFromOutputTexture: downloadByteEncodedFloatMatrixFromOutputTexture, downloadMatrixFromPackedOutputTexture: downloadMatrixFromPackedOutputTexture }),
-    GPGPUContext = function () {
-  function e(e) {
-    this.outputTexture = null, this.program = null, this.disposed = !1, this.autoDebugValidate = !1, this.vertexAttrsAreBound = !1, this.itemsToPoll = [], this.gl = null != e ? e : createWebGLContext(), 1 === ENV.get("WEBGL_VERSION") ? (this.textureFloatExtension = getExtensionOrThrow(this.gl, "OES_texture_float"), this.colorBufferFloatExtension = this.gl.getExtension("WEBGL_color_buffer_float"), ENV.get("WEBGL_RENDER_FLOAT32_ENABLED") || (this.textureHalfFloatExtension = getExtensionOrThrow(this.gl, "OES_texture_half_float"), this.colorBufferHalfFloatExtension = this.gl.getExtension("EXT_color_buffer_half_float"))) : this.colorBufferFloatExtension = getExtensionOrThrow(this.gl, "EXT_color_buffer_float"), this.loseContextExtension = getExtensionOrThrow(this.gl, "WEBGL_lose_context"), ENV.get("WEBGL_GET_BUFFER_SUB_DATA_ASYNC_EXTENSION_ENABLED") && (this.getBufferSubDataAsyncExtension = this.gl.getExtension("WEBGL_get_buffer_sub_data_async")), this.vertexBuffer = createVertexBuffer(this.gl), this.indexBuffer = createIndexBuffer(this.gl), this.framebuffer = createFramebuffer(this.gl), this.textureConfig = getTextureConfig(this.gl, this.textureHalfFloatExtension);
-  }return e.prototype.dispose = function () {
-    var e = this;if (!this.disposed) {
-      null != this.program && console.warn("Disposing a GPGPUContext that still has a bound WebGLProgram. This is probably a resource leak, delete the program with GPGPUContext.deleteProgram before disposing."), null != this.outputTexture && console.warn("Disposing a GPGPUContext that still has a bound output matrix texture.  This is probably a resource leak, delete the output matrix texture with GPGPUContext.deleteMatrixTexture before disposing.");var t = this.gl;callAndCheck(t, function () {
-        return t.finish();
-      }), callAndCheck(t, function () {
-        return t.bindFramebuffer(t.FRAMEBUFFER, null);
-      }), callAndCheck(t, function () {
-        return t.deleteFramebuffer(e.framebuffer);
-      }), callAndCheck(t, function () {
-        return t.bindBuffer(t.ARRAY_BUFFER, null);
-      }), callAndCheck(t, function () {
-        return t.deleteBuffer(e.vertexBuffer);
-      }), callAndCheck(t, function () {
-        return t.bindBuffer(t.ELEMENT_ARRAY_BUFFER, null);
-      }), callAndCheck(t, function () {
-        return t.deleteBuffer(e.indexBuffer);
-      }), this.loseContextExtension.loseContext(), this.disposed = !0;
-    }
-  }, e.prototype.enableAutomaticDebugValidation = function (e) {
-    this.autoDebugValidate = e, enableDebugWebGLErrorChecking(e);
-  }, e.prototype.createFloat32MatrixTexture = function (e, t) {
-    return this.throwIfDisposed(), createFloat32MatrixTexture(this.gl, e, t, this.textureConfig);
-  }, e.prototype.createFloat16MatrixTexture = function (e, t) {
-    return this.throwIfDisposed(), createFloat16MatrixTexture(this.gl, e, t, this.textureConfig);
-  }, e.prototype.createUnsignedBytesMatrixTexture = function (e, t) {
-    return this.throwIfDisposed(), createUnsignedBytesMatrixTexture(this.gl, e, t, this.textureConfig);
-  }, e.prototype.uploadPixelDataToTexture = function (e, t) {
-    this.throwIfDisposed(), uploadPixelDataToTexture(this.gl, e, t);
-  }, e.prototype.createPackedMatrixTexture = function (e, t) {
-    return this.throwIfDisposed(), createPackedMatrixTexture(this.gl, e, t, this.textureConfig);
-  }, e.prototype.deleteMatrixTexture = function (e) {
-    var t = this;this.throwIfDisposed(), this.outputTexture === e && (unbindColorTextureFromFramebuffer(this.gl, this.framebuffer), this.outputTexture = null), callAndCheck(this.gl, function () {
-      return t.gl.deleteTexture(e);
-    });
-  }, e.prototype.uploadMatrixToTexture = function (e, t, n, r) {
-    this.throwIfDisposed();var o = getNumChannels();return uploadMatrixToTexture(this.gl, e, t, n, r, o, this.textureConfig);
-  }, e.prototype.uploadMatrixToPackedTexture = function (e, t, n, r) {
-    return this.throwIfDisposed(), uploadMatrixToPackedTexture(this.gl, e, t, n, r, this.textureConfig);
-  }, e.prototype.downloadFloat32MatrixFromOutputTexture = function (e, t, n) {
-    var r = this;return this.downloadMatrixDriver(e, function () {
-      return downloadFloat32MatrixFromOutputTexture(r.gl, t, n, r.textureConfig);
-    });
-  }, e.prototype.downloadByteEncodedFloatMatrixFromOutputTexture = function (e, t, n) {
-    var r = this;return this.downloadMatrixDriver(e, function () {
-      return downloadByteEncodedFloatMatrixFromOutputTexture(r.gl, t, n, r.textureConfig);
-    });
-  }, e.prototype.downloadMatrixFromTextureAsync = function (e, t, n) {
-    return __awaiter(this, void 0, void 0, function () {
-      var r = this;return __generator(this, function (o) {
-        if (null == this.getBufferSubDataAsyncExtension) throw new Error("Cannot download matrix from output texture asynchronously, WEBGL_get_buffer_sub_data_async is not enabled.");return [2, this.downloadMatrixDriverAsync(e, function () {
-          return downloadMatrixFromOutputTextureAsync(r.gl, r.getBufferSubDataAsyncExtension, t, n, r.textureConfig);
-        })];
-      });
-    });
-  }, e.prototype.downloadMatrixFromPackedTexture = function (e, t, n) {
-    var r = this;return this.downloadMatrixDriver(e, function () {
-      return downloadMatrixFromPackedOutputTexture(r.gl, t, n, r.textureConfig);
-    });
-  }, e.prototype.createProgram = function (e) {
-    this.throwIfDisposed();var t = this.gl,
-        n = createFragmentShader(t, e),
-        r = createVertexShader$1(t),
-        o = createProgram(t);return callAndCheck(t, function () {
-      return t.attachShader(o, r);
-    }), callAndCheck(t, function () {
-      return t.attachShader(o, n);
-    }), linkProgram(t, o), this.autoDebugValidate && validateProgram(t, o), this.vertexAttrsAreBound || (this.setProgram(o), this.vertexAttrsAreBound = bindVertexProgramAttributeStreams(t, this.program, this.vertexBuffer)), o;
-  }, e.prototype.deleteProgram = function (e) {
-    var t = this;this.throwIfDisposed(), e === this.program && (this.program = null), null != e && callAndCheck(this.gl, function () {
-      return t.gl.deleteProgram(e);
-    });
-  }, e.prototype.setProgram = function (e) {
-    var t = this;this.throwIfDisposed(), this.program = e, null != this.program && this.autoDebugValidate && validateProgram(this.gl, this.program), callAndCheck(this.gl, function () {
-      return t.gl.useProgram(e);
-    });
-  }, e.prototype.getUniformLocation = function (e, t, n) {
-    return void 0 === n && (n = !0), this.throwIfDisposed(), n ? getProgramUniformLocationOrThrow(this.gl, e, t) : getProgramUniformLocation(this.gl, e, t);
-  }, e.prototype.getAttributeLocation = function (e, t) {
-    var n = this;return this.throwIfDisposed(), callAndCheck(this.gl, function () {
-      return n.gl.getAttribLocation(e, t);
-    });
-  }, e.prototype.getUniformLocationNoThrow = function (e, t) {
-    return this.throwIfDisposed(), this.gl.getUniformLocation(e, t);
-  }, e.prototype.setInputMatrixTexture = function (e, t, n) {
-    this.throwIfDisposed(), this.throwIfNoProgram(), bindTextureToProgramUniformSampler(this.gl, this.program, e, t, n);
-  }, e.prototype.setOutputMatrixTexture = function (e, t, n) {
-    this.setOutputMatrixTextureDriver(e, n, t);
-  }, e.prototype.setOutputPackedMatrixTexture = function (e, t, n) {
-    this.throwIfDisposed();var r = getPackedMatrixTextureShapeWidthHeight(t, n),
-        o = r[0],
-        a = r[1];this.setOutputMatrixTextureDriver(e, o, a);
-  }, e.prototype.setOutputMatrixWriteRegion = function (e, t, n, r) {
-    this.setOutputMatrixWriteRegionDriver(n, e, r, t);
-  }, e.prototype.setOutputPackedMatrixWriteRegion = function (e, t, n, r) {
-    throw new Error("setOutputPackedMatrixWriteRegion not implemented.");
-  }, e.prototype.debugValidate = function () {
-    null != this.program && validateProgram(this.gl, this.program), validateFramebuffer(this.gl);
-  }, e.prototype.executeProgram = function () {
-    this.throwIfDisposed(), this.throwIfNoProgram();var e = this.gl;this.autoDebugValidate && this.debugValidate(), callAndCheck(e, function () {
-      return e.drawElements(e.TRIANGLES, 6, e.UNSIGNED_SHORT, 0);
-    });
-  }, e.prototype.blockUntilAllProgramsCompleted = function () {
-    var e = this;this.throwIfDisposed(), callAndCheck(this.gl, function () {
-      return e.gl.finish();
-    });
-  }, e.prototype.getQueryTimerExtension = function () {
-    return null == this.disjointQueryTimerExtension && (this.disjointQueryTimerExtension = getExtensionOrThrow(this.gl, 2 === ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION") ? "EXT_disjoint_timer_query_webgl2" : "EXT_disjoint_timer_query")), this.disjointQueryTimerExtension;
-  }, e.prototype.getQueryTimerExtensionWebGL2 = function () {
-    return this.getQueryTimerExtension();
-  }, e.prototype.getQueryTimerExtensionWebGL1 = function () {
-    return this.getQueryTimerExtension();
-  }, e.prototype.runQuery = function (e) {
-    var t = this.beginQuery();return e(), this.endQuery(), this.pollQueryTime(t);
-  }, e.prototype.beginQuery = function () {
-    if (2 === ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION")) {
-      var e = this.gl,
-          t = this.getQueryTimerExtensionWebGL2(),
-          n = e.createQuery();return e.beginQuery(t.TIME_ELAPSED_EXT, n), n;
-    }var r = this.getQueryTimerExtensionWebGL1(),
-        o = r.createQueryEXT();return r.beginQueryEXT(r.TIME_ELAPSED_EXT, o), o;
-  }, e.prototype.endQuery = function () {
-    if (2 !== ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION")) {
-      var e = this.getQueryTimerExtensionWebGL1();e.endQueryEXT(e.TIME_ELAPSED_EXT);
-    } else {
-      var t = this.gl,
-          n = this.getQueryTimerExtensionWebGL2();t.endQuery(n.TIME_ELAPSED_EXT);
-    }
-  }, e.prototype.isQueryAvailable = function (e, t) {
-    if (0 === t) return !0;if (2 === t) {
-      var n = this.gl,
-          r = this.getQueryTimerExtensionWebGL2(),
-          o = n.getQueryParameter(e, n.QUERY_RESULT_AVAILABLE);return null == this.disjoint && (this.disjoint = this.gl.getParameter(r.GPU_DISJOINT_EXT)), o && !this.disjoint;
-    }o = (r = this.getQueryTimerExtensionWebGL1()).getQueryObjectEXT(e, r.QUERY_RESULT_AVAILABLE_EXT);return null == this.disjoint && (this.disjoint = this.gl.getParameter(r.GPU_DISJOINT_EXT)), o && !this.disjoint;
-  }, e.prototype.pollQueryTime = function (e) {
-    var t = this;return new Promise(function (n) {
-      var r = ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION");t.addItemToPoll(function () {
-        return t.isQueryAvailable(e, r);
-      }, function () {
-        return n(t.getQueryTime(e, r));
-      });
-    });
-  }, e.prototype.pollItems = function () {
-    for (var e = binSearchLastTrue(this.itemsToPoll.map(function (e) {
-      return e.isDoneFn;
-    })), t = 0; t <= e; ++t) {
-      (0, this.itemsToPoll[t].resolveFn)();
-    }this.itemsToPoll = this.itemsToPoll.slice(e + 1);
-  }, e.prototype.addItemToPoll = function (e, t) {
-    var n = this;this.itemsToPoll.push({ isDoneFn: e, resolveFn: t }), this.itemsToPoll.length > 1 || repeatedTry(function () {
-      return n.pollItems(), 0 === n.itemsToPoll.length;
-    });
-  }, e.prototype.getQueryTime = function (e, t) {
-    if (0 === t) return null;if (2 === t) {
-      var n = this.gl;return n.getQueryParameter(e, n.QUERY_RESULT) / 1e6;
-    }var r = this.getQueryTimerExtensionWebGL1();return r.getQueryObjectEXT(e, r.QUERY_RESULT_EXT) / 1e6;
-  }, e.prototype.downloadMatrixDriverSetup = function (e) {
-    this.throwIfDisposed(), bindColorTextureToFramebuffer(this.gl, e, this.framebuffer), this.autoDebugValidate && validateFramebuffer(this.gl);
-  }, e.prototype.downloadMatrixDriverTeardown = function () {
-    null != this.outputTexture ? (bindColorTextureToFramebuffer(this.gl, this.outputTexture, this.framebuffer), this.autoDebugValidate && validateFramebuffer(this.gl)) : unbindColorTextureFromFramebuffer(this.gl, this.framebuffer);
-  }, e.prototype.downloadMatrixDriver = function (e, t) {
-    this.downloadMatrixDriverSetup(e);var n = t();return this.downloadMatrixDriverTeardown(), n;
-  }, e.prototype.downloadMatrixDriverAsync = function (e, t) {
-    return __awaiter(this, void 0, void 0, function () {
-      var n;return __generator(this, function (r) {
-        switch (r.label) {case 0:
-            return this.downloadMatrixDriverSetup(e), [4, t()];case 1:
-            return n = r.sent(), this.downloadMatrixDriverTeardown(), [2, n];}
-      });
-    });
-  }, e.prototype.setOutputMatrixTextureDriver = function (e, t, n) {
-    this.throwIfDisposed();var r = this.gl;bindColorTextureToFramebuffer(r, e, this.framebuffer), this.autoDebugValidate && validateFramebuffer(r), this.outputTexture = e, callAndCheck(r, function () {
-      return r.viewport(0, 0, t, n);
-    }), callAndCheck(r, function () {
-      return r.scissor(0, 0, t, n);
-    });
-  }, e.prototype.setOutputMatrixWriteRegionDriver = function (e, t, n, r) {
-    var o = this;this.throwIfDisposed(), callAndCheck(this.gl, function () {
-      return o.gl.scissor(e, t, n, r);
-    });
-  }, e.prototype.throwIfDisposed = function () {
-    if (this.disposed) throw new Error("Attempted to use disposed GPGPUContext.");
-  }, e.prototype.throwIfNoProgram = function () {
-    if (null == this.program) throw new Error("No GPU program is currently set.");
-  }, e;
-}();function binSearchLastTrue(e) {
-  for (var t = 0, n = e.length - 1, r = -1; t <= n;) {
-    var o = t + n >> 1;e[o]() ? (r = o, t = o + 1) : n = o - 1;
-  }return r;
-}function compileProgram(e, t, n, r) {
-  for (var o = t.userCode, a = n.map(function (e, n) {
-    var r = { logicalShape: e.tensor.shape, texShape: e.isUniform ? null : e.texData.texShape, isUniform: e.isUniform };return { name: t.variableNames[n], shapeInfo: r };
-  }), i = a.map(function (e) {
-    return e.shapeInfo;
-  }), s = { logicalShape: r.tensor.shape, texShape: r.texData.texShape, isUniform: !1 }, u = makeShader(a, s, o, !0 === t.supportsBroadcasting), c = e.createProgram(u), l = {}, d = 0; d < t.variableNames.length; d++) {
-    var p = t.variableNames[d];l[p] = e.getUniformLocation(c, p, !1);
-  }return { program: t, source: u, webGLProgram: c, uniformLocations: l, gpgpu: e, inShapeInfos: i, outShapeInfo: s };
-}function validateBinaryAndProgram(e, t) {
-  if (e.length !== t.length) throw Error("Binary was compiled with " + e.length + " inputs, but was executed with " + t.length + " inputs");e.forEach(function (e, n) {
-    var r = e.logicalShape,
-        o = t[n],
-        a = o.tensor.shape;if (!arraysEqual(r, a)) throw Error("Binary was compiled with different shapes than the current args. Shapes " + r + " and " + a + " must match");if (!e.isUniform || !o.isUniform) {
-      var i = e.texShape,
-          s = o.isUniform ? null : o.texData.texShape;if (!arraysEqual(i, s)) throw Error("Binary was compiled with different texture shapes than the current args. Shape " + i + " and " + s + " must match");
-    }
-  });
-}function runProgram(e, t, n, r) {
-  validateBinaryAndProgram(e.inShapeInfos, t), validateBinaryAndProgram([e.outShapeInfo], [n]);var o = n.texData.texture,
-      a = n.texData.texShape,
-      i = e.gpgpu;i.setOutputMatrixTexture(o, a[0], a[1]), i.setProgram(e.webGLProgram), t.forEach(function (t, n) {
-    var r = e.program.variableNames[n],
-        o = e.uniformLocations[r];if (null != o) {
-      if (t.isUniform) {
-        if (1 === t.tensor.size) i.gl.uniform1f(o, t.tensor.dataSync()[0]);else {
-          var a = t.tensor.dataSync();a instanceof Float32Array || (a = new Float32Array(a)), i.gl.uniform1fv(o, a);
-        }return;
-      }var s = t.texData.texture;i.setInputMatrixTexture(s, o, n);
-    }
-  }), null != r && r(i, e.webGLProgram), i.executeProgram();
-}function makeShaderKey(e, t, n) {
-  var r = "";t.concat(n).forEach(function (e) {
-    r += e.tensor.shape + "_" + (e.isUniform ? "uniform" : e.texData.texShape);
-  });var o = e.userCode,
-      a = (!0 === e.supportsBroadcasting).toString(),
-      i = e.constructor.name;return i += "_" + a + "_" + r + "_" + o;
-}var WhereProgram = function () {
-  return function (e, t, n) {
-    var r, o;if (this.variableNames = ["c", "a", "b"], this.outputShape = t, n > 4) throw Error("Where for rank " + n + " is not yet supported");if (1 === n) o = "resRC", r = "resRC";else {
-      for (var a = ["resRC.x", "resRC.y", "resRC.z", "resRC.w"], i = [], s = [], u = 0; u < t.length; u++) s.push("" + a[u]), u < e && i.push("" + a[u]);r = i.join(), o = s.join();
-    }var c = getCoordsDataType(n);this.userCode = "\n      void main() {\n        " + c + " resRC = getOutputCoords();\n        float cVal = getC(" + r + ");\n        if (cVal >= 1.0) {\n          setOutput(getA(" + o + "));\n        } else {\n          setOutput(getB(" + o + "));\n        }\n      }\n    ";
-  };
-}(),
-    LRNProgram = function () {
-  return function (e, t, n, r, o) {
-    this.variableNames = ["x"], this.outputShape = [];var a,
-        i = t,
-        s = e[3] - 1;this.outputShape = e;var u = "float(" + n + ") + float(" + r + ") * sum";a = .5 === o ? "inversesqrt(" + u + ")" : 1 === o ? "1.0/(" + u + ")" : "exp(log(" + u + ") * float(-" + o + "));", this.userCode = "\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int r = coords[1];\n        int c = coords[2];\n        int d = coords[3];\n        float x = getX(b, r, c, d);\n        float sum = 0.0;\n        for (int j = -" + i + "; j <= " + i + "; j++) {\n          int idx = d + j;\n          if (idx >= 0 && idx <=  " + s + ") {\n            float z = getX(b, r, c, idx);\n            sum += z * z;\n          }\n        }\n        float val = x * " + a + ";\n        setOutput(val);\n      }\n    ";
-  };
-}(),
-    MaxPool2DBackpropProgram = function () {
-  return function (e) {
-    this.variableNames = ["dy", "maxPos"], this.outputShape = e.inShape;var t = e.filterHeight,
-        n = e.filterWidth,
-        r = e.strideHeight,
-        o = e.strideWidth,
-        a = t - 1 - e.padInfo.top,
-        i = n - 1 - e.padInfo.left,
-        s = t * n - 1;this.userCode = "\n      const ivec2 pads = ivec2(" + a + ", " + i + ");\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int d = coords[3];\n\n        ivec2 dyRCCorner = coords.yz - pads;\n        int dyRCorner = dyRCCorner.x;\n        int dyCCorner = dyRCCorner.y;\n\n        // Convolve dy(?, ?, d) with pos mask(:, :, d) to get dx(xR, xC, d).\n        // ? = to be determined. : = across all values in that axis.\n        float dotProd = 0.0;\n        for (int wR = 0; wR < " + t + "; wR++) {\n          float dyR = float(dyRCorner + wR) / " + r + ".0;\n\n          if (dyR < 0.0 || dyR >= " + e.outHeight + ".0 || fract(dyR) > 0.0) {\n            continue;\n          }\n          int idyR = int(dyR);\n\n          for (int wC = 0; wC < " + n + "; wC++) {\n            float dyC = float(dyCCorner + wC) / " + o + ".0;\n\n            if (dyC < 0.0 || dyC >= " + e.outWidth + ".0 ||\n                fract(dyC) > 0.0) {\n              continue;\n            }\n            int idyC = int(dyC);\n\n            float dyValue = getDy(b, idyR, idyC, d);\n            int maxPosValue = " + s + " - int(getMaxPos(b, idyR, idyC, d));\n\n            // Get the current value, check it against the value from the\n            // position matrix.\n            int curPosValue = wR * " + n + " + wC;\n            float mask = float(maxPosValue == curPosValue ? 1.0 : 0.0);\n\n            dotProd += dyValue * mask;\n          }\n        }\n        setOutput(dotProd);\n      }\n    ";
-  };
-}(),
-    MatMulProgram = function () {
-  return function (e, t, n, r) {
-    void 0 === n && (n = !1), void 0 === r && (r = !1), this.variableNames = ["matrixA", "matrixB"];var o = n ? e[1] : e[0],
-        a = r ? t[0] : t[1],
-        i = n ? e[0] : e[1];this.outputShape = [o, a];var s = function (e, t) {
-      return n ? t + " + " + e + ", aRow" : "aRow, " + t + " + " + e;
-    },
-        u = function (e, t) {
-      return r ? "bCol, " + t + " + " + e : t + " + " + e + ", bCol";
-    },
-        c = 4 * Math.floor(i / 4),
-        l = i % 4;this.userCode = " float dotARowBCol(int aRow, int bCol) {\n      float result = 0.0;\n      for (int i = 0; i < " + c + "; i += 4) {\n        vec4 a = vec4(\n          getMatrixA(" + s(0, "i") + "),\n          getMatrixA(" + s(1, "i") + "),\n          getMatrixA(" + s(2, "i") + "),\n          getMatrixA(" + s(3, "i") + ")\n        );\n        vec4 b = vec4(\n          getMatrixB(" + u(0, "i") + "),\n          getMatrixB(" + u(1, "i") + "),\n          getMatrixB(" + u(2, "i") + "),\n          getMatrixB(" + u(3, "i") + ")\n        );\n\n        result += dot(a, b);\n      }\n\n      if (" + (1 === l) + ") {\n        result += getMatrixA(" + s(0, c) + ") *\n          getMatrixB(" + u(0, c) + ");\n      } else if (" + (2 === l) + ") {\n        vec2 a = vec2(\n          getMatrixA(" + s(0, c) + "),\n          getMatrixA(" + s(1, c) + ")\n        );\n        vec2 b = vec2(\n          getMatrixB(" + u(0, c) + "),\n          getMatrixB(" + u(1, c) + ")\n        );\n        result += dot(a, b);\n      } else if (" + (3 === l) + ") {\n        vec3 a = vec3(\n          getMatrixA(" + s(0, c) + "),\n          getMatrixA(" + s(1, c) + "),\n          getMatrixA(" + s(2, c) + ")\n        );\n        vec3 b = vec3(\n          getMatrixB(" + u(0, c) + "),\n          getMatrixB(" + u(1, c) + "),\n          getMatrixB(" + u(2, c) + ")\n        );\n        result += dot(a, b);\n      }\n\n      return result;\n    }\n\n    void main() {\n      ivec2 resRC = getOutputCoords();\n      setOutput(dotARowBCol(resRC.x, resRC.y));\n    }\n    ";
-  };
-}(),
-    MultinomialProgram = function () {
-  function e(e, t, n) {
-    this.variableNames = ["probs"], this.outputShape = [e, n], this.userCode = "\n      uniform float seed;\n\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int batch = coords[0];\n\n        float r = random(seed);\n        float cdf = 0.0;\n\n        for (int i = 0; i < " + (t - 1) + "; i++) {\n          cdf += getProbs(batch, i);\n\n          if (r < cdf) {\n            setOutput(float(i));\n            return;\n          }\n        }\n\n        // If no other event happened, last event happened.\n        setOutput(float(" + (t - 1) + "));\n      }\n    ";
-  }return e.prototype.getCustomSetupFunc = function (e) {
-    var t = this;return function (n, r) {
-      null == t.seedLoc && (t.seedLoc = n.getUniformLocation(r, "seed")), n.gl.uniform1f(t.seedLoc, e);
-    };
-  }, e;
-}(),
-    OneHotProgram = function () {
-  return function (e, t, n, r) {
-    this.variableNames = ["indices"], this.outputShape = [e, t], this.userCode = "\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int index = round(getIndices(coords.x));\n        setOutput(mix(float(" + r + "), float(" + n + "),\n                      float(index == coords.y)));\n      }\n    ";
-  };
-}(),
-    PadProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["x"], this.outputShape = t.map(function (t, n) {
-      return t[0] + e[n] + t[1];
-    });var r = e.length,
-        o = getCoordsDataType(r),
-        a = t.map(function (e) {
-      return e[0];
-    }).join(","),
-        i = t.map(function (t, n) {
-      return t[0] + e[n];
-    }).join(","),
-        s = ["coords[0]", "coords[1]", "coords[2]", "coords[3]"].slice(0, r);this.userCode = 1 !== r ? "\n      " + o + " start = " + o + "(" + a + ");\n      " + o + " end = " + o + "(" + i + ");\n\n      void main() {\n        " + o + " outC = getOutputCoords();\n        if (any(lessThan(outC, start)) || any(greaterThanEqual(outC, end))) {\n          setOutput(float(" + n + "));\n        } else {\n          " + o + " coords = outC - start;\n          setOutput(getX(" + s + "));\n        }\n      }\n    " : "\n        int start = " + a + ";\n        int end = " + i + ";\n\n        void main() {\n          int outC = getOutputCoords();\n          if (outC < start || outC >= end) {\n            setOutput(float(" + n + "));\n          } else {\n            setOutput(getX(outC - start));\n          }\n        }\n      ";
-  };
-}(),
-    Pool2DProgram = function () {
-  return function (e, t, n) {
-    if (this.variableNames = ["x"], "avg" === t && n) throw new Error("Cannot compute positions for average pool.");var r = e.filterHeight,
-        o = e.filterWidth,
-        a = e.strideHeight,
-        i = e.strideWidth,
-        s = e.padInfo.top,
-        u = e.padInfo.left;this.outputShape = e.outShape;var c = "avg" === t,
-        l = "0.0";if (c || (l = "-1.0 / 0.0"), n) this.userCode = "\n        const ivec2 strides = ivec2(" + a + ", " + i + ");\n        const ivec2 pads = ivec2(" + s + ", " + u + ");\n\n        void main() {\n          ivec4 coords = getOutputCoords();\n          int batch = coords[0];\n          int d = coords[3];\n\n          ivec2 xRCCorner = coords.yz * strides - pads;\n          int xRCorner = xRCCorner.x;\n          int xCCorner = xRCCorner.y;\n\n          // max/min x(?, ?, d) to get y(yR, yC, d).\n          // ? = to be determined\n          float minMaxValue = 0.0;\n          float minMaxValueFound = 0.0;\n          int minMaxPosition = 0;\n          float avgValue = 0.0;\n\n          for (int wR = 0; wR < " + r + "; wR++) {\n            int xR = xRCorner + wR;\n\n            if (xR < 0 || xR >= " + e.inHeight + ") {\n              continue;\n            }\n\n            for (int wC = 0; wC < " + o + "; wC++) {\n              int xC = xCCorner + wC;\n\n              if (xC < 0 || xC >= " + e.inWidth + ") {\n                continue;\n              }\n\n              float value = getX(batch, xR, xC, d);\n\n              // If a min / max value has already been found, use it. If not,\n              // use the current value.\n              float currMinMaxValue = mix(\n                  value, minMaxValue, minMaxValueFound);\n              if (value >= currMinMaxValue) {\n                minMaxValue = value;\n                minMaxValueFound = 1.0;\n                minMaxPosition = wR * " + o + " + wC;\n              }\n            }\n          }\n          setOutput(float(minMaxPosition));\n        }\n      ";else {
-      var d = t + "(" + t + "(" + t + "(minMaxValue[0], minMaxValue[1]), minMaxValue[2]), minMaxValue[3])";"avg" === t && (d = "avgValue / count");var p = 4 * Math.floor(o / 4),
-          h = o % 4,
-          f = "\n      if (" + c + ") {\n        avgValue += dot(values, ones);\n      } else {\n        minMaxValue = max(values, minMaxValue);\n      }\n    ";this.userCode = "\n      const ivec2 strides = ivec2(" + a + ", " + i + ");\n      const ivec2 pads = ivec2(" + s + ", " + u + ");\n      const float initializationValue = " + l + ";\n      const vec4 ones = vec4(1.0, 1.0, 1.0, 1.0);\n\n      float count = 0.0;\n\n      float getValue(int batch, int xR, int xC, int d) {\n        if (xC < 0 || xC >= " + e.inWidth + ") {\n          return initializationValue;\n        }\n        count += 1.0;\n        return getX(batch, xR, xC, d);\n      }\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int batch = coords[0];\n        int d = coords[3];\n\n        ivec2 xRCCorner = coords.yz * strides - pads;\n        int xRCorner = xRCCorner.x;\n        int xCCorner = xRCCorner.y;\n\n        // max/min x(?, ?, d) to get y(yR, yC, d).\n        // ? = to be determined\n        vec4 minMaxValue = vec4(" + l + ");\n        float avgValue = 0.0;\n        count = 0.0;\n\n        for (int wR = 0; wR < " + r + "; wR++) {\n          int xR = xRCorner + wR;\n\n          if (xR < 0 || xR >= " + e.inHeight + ") {\n            continue;\n          }\n\n          for (int wC = 0; wC < " + p + "; wC += 4) {\n            int xC = xCCorner + wC;\n\n            vec4 values = vec4(\n              getValue(batch, xR, xC, d),\n              getValue(batch, xR, xC + 1, d),\n              getValue(batch, xR, xC + 2, d),\n              getValue(batch, xR, xC + 3, d)\n            );\n\n            " + f + "\n          }\n\n          int xC = xCCorner + " + p + ";\n          if (" + (1 === h) + ") {\n            vec4 values = vec4(\n              getValue(batch, xR, xC, d),\n              initializationValue,\n              initializationValue,\n              initializationValue\n            );\n\n            " + f + "\n          } else if (" + (2 === h) + ") {\n            vec4 values = vec4(\n              getValue(batch, xR, xC, d),\n              getValue(batch, xR, xC + 1, d),\n              initializationValue,\n              initializationValue\n            );\n\n            " + f + "\n          } else if (" + (3 === h) + ") {\n            vec4 values = vec4(\n              getValue(batch, xR, xC, d),\n              getValue(batch, xR, xC + 1, d),\n              getValue(batch, xR, xC + 2, d),\n              initializationValue\n            );\n\n            " + f + "\n          }\n        }\n        setOutput(" + d + ");\n      }\n    ";
-    }
-  };
-}(),
-    ReduceProgram = function () {
-  return function (e, t) {
-    this.variableNames = ["x"];var n = e.windowSize,
-        r = e.batchSize,
-        o = e.inSize,
-        a = Math.ceil(o / n);this.outputShape = [r, a];var i = "0.0",
-        s = "";"min" === t ? (i = "1.0 / 0.0", s = "min") : "max" === t && (i = "-1.0 / 0.0", s = "max");var u = t + "(" + t + "(" + t + "(minMaxValue[0], minMaxValue[1]), minMaxValue[2]), minMaxValue[3])";"sum" === t ? u = "sumValue" : "all" === t ? u = "allValue" : "any" === t && (u = "anyValue");var c = 4 * Math.floor(n / 4),
-        l = n % 4,
-        d = "\n      if (" + ("sum" === t) + ") {\n        sumValue += dot(values, ones);\n      } else {\n        minMaxValue = " + s + "(values, minMaxValue);\n      }\n    ",
-        p = "vec4";"all" === t ? (i = "1.0", d = "\n        bool reducedAllValue = all(values);\n        float floatedReducedAllValue = float(reducedAllValue);\n        allValue = float(allValue >= 1.0 && floatedReducedAllValue >= 1.0);\n      ", p = "bvec4") : "any" === t && (i = "0.0", d = "\n        bool reducedAnyValue = any(values);\n        float floatedReducedAnyValue = float(reducedAnyValue);\n        anyValue = float(anyValue >= 1.0 || floatedReducedAnyValue >= 1.0);\n      ", p = "bvec4");var h = "";o % n > 0 && (h = "\n        if (inIdx < 0 || inIdx >= " + o + ") {\n          return initializationValue;\n        }\n      "), this.userCode = "\n      const float initializationValue = " + i + ";\n      const vec4 ones = vec4(1.0, 1.0, 1.0, 1.0);\n\n      float getValue(int batch, int inIdx) {\n        " + h + "\n        return getX(batch, inIdx);\n      }\n\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int batch = coords[0];\n        int outIdx = coords[1];\n        int inOffset = outIdx * " + n + ";\n\n        vec4 minMaxValue = vec4(" + i + ");\n        float sumValue = 0.0;\n        float allValue = 1.0;\n        float anyValue = 0.0;\n\n        for (int i = 0; i < " + c + "; i += 4) {\n          int inIdx = inOffset + i;\n          " + p + " values = " + p + "(\n            getValue(batch, inIdx),\n            getValue(batch, inIdx + 1),\n            getValue(batch, inIdx + 2),\n            getValue(batch, inIdx + 3)\n          );\n\n          " + d + "\n        }\n\n        int inIdx = inOffset + " + c + ";\n        if (" + (1 === l) + ") {\n          " + p + " values = " + p + "(\n            getValue(batch, inIdx),\n            initializationValue,\n            initializationValue,\n            initializationValue\n          );\n\n          " + d + "\n        } else if (" + (2 === l) + ") {\n          " + p + " values = " + p + "(\n            getValue(batch, inIdx),\n            getValue(batch, inIdx + 1),\n            initializationValue,\n            initializationValue\n          );\n\n          " + d + "\n        } else if (" + (3 === l) + ") {\n          " + p + " values = " + p + "(\n            getValue(batch, inIdx),\n            getValue(batch, inIdx + 1),\n            getValue(batch, inIdx + 2),\n            initializationValue\n          );\n\n          " + d + "\n        }\n        setOutput(" + u + ");\n      }\n    ";
-  };
-}(),
-    ResizeBilinearBackpropProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["dy"], this.outputShape = [], this.outputShape = t.shape;var r = t.shape,
-        o = r[1],
-        a = r[2],
-        i = e.shape,
-        s = i[1],
-        u = i[2],
-        c = [n && s > 1 ? o - 1 : o, n && u > 1 ? a - 1 : a],
-        l = [n && s > 1 ? s - 1 : s, n && u > 1 ? u - 1 : u],
-        d = c[0] / l[0],
-        p = c[1] / l[1],
-        h = 1 / d,
-        f = 1 / p,
-        g = 2 * Math.ceil(h) + 2,
-        m = 2 * Math.ceil(f) + 2;this.userCode = "\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int d = coords[3];\n        int r = coords[1];\n        int c = coords[2];\n\n        float accumulator = 0.0;\n\n        const float heightScale = float(" + d + ");\n        const float widthScale = float(" + p + ");\n\n        const float invHeightScale = float(" + h + ");\n        const float invWidthScale = float(" + f + ");\n\n        const int winHeight = int(" + g + ");\n        const int winWidth = int(" + m + ");\n\n        // Compute bounds for where in dy we will look\n        float startRLerp = floor(float(r) * invHeightScale);\n        int startDyR = int(startRLerp - float(winHeight / 2));\n\n        float startCLerp = floor(float(c) * invWidthScale);\n        int startDyC = int(startCLerp - float(winWidth / 2));\n\n        // Loop over dy\n        for (int dyROffset = 0; dyROffset < winHeight; dyROffset++) {\n          int dyR = dyROffset + startDyR;\n\n          // Guard against the window exceeding the bounds of dy\n          if (dyR < 0 || dyR >= " + s + ") {\n            continue;\n          }\n\n          for (int dyCOffset = 0; dyCOffset < winWidth; dyCOffset++) {\n            int dyC = dyCOffset + startDyC;\n\n            // Guard against the window exceeding the bounds of dy\n            if (dyC < 0 || dyC >= " + u + ") {\n              continue;\n            }\n\n            float dxR = float(dyR) * heightScale;\n            int topDxRIndex = int(floor(dxR));\n            int bottomDxRIndex = int(min(ceil(dxR), " + (o - 1) + ".0));\n            float dxRLerp = dxR - float(topDxRIndex);\n            float inverseDxRLerp = 1.0 - dxRLerp;\n\n            float dxC = float(dyC) * widthScale;\n            int leftDxCIndex = int(floor(dxC));\n            int rightDxCIndex = int(min(ceil(dxC), " + (a - 1) + ".0));\n            float dxCLerp = dxC - float(leftDxCIndex);\n            float inverseDxCLerp = 1.0 - dxCLerp;\n\n            if (r == topDxRIndex && c == leftDxCIndex) {\n              // topLeft\n              accumulator +=\n                getDy(b, dyR, dyC, d) * inverseDxRLerp * inverseDxCLerp;\n            }\n\n            if (r == topDxRIndex && c == rightDxCIndex) {\n              // topRight\n              accumulator += getDy(b, dyR, dyC, d) * inverseDxRLerp * dxCLerp;\n            }\n\n            if (r == bottomDxRIndex && c == leftDxCIndex) {\n              // bottomLeft\n              accumulator += getDy(b, dyR, dyC, d) * dxRLerp * inverseDxCLerp;\n            }\n\n            if (r == bottomDxRIndex && c == rightDxCIndex) {\n              // bottomRight\n              accumulator += getDy(b, dyR, dyC, d) * dxRLerp * dxCLerp;\n            }\n          }\n        }\n        // End loop over dy\n\n        setOutput(accumulator);\n      }\n    ";
-  };
-}(),
-    ResizeBilinearProgram = function () {
-  return function (e, t, n, r) {
-    this.variableNames = ["A"], this.outputShape = [];var o = e[0],
-        a = e[1],
-        i = e[2],
-        s = e[3];this.outputShape = [o, t, n, s];var u = [r && t > 1 ? a - 1 : a, r && n > 1 ? i - 1 : i],
-        c = [r && t > 1 ? t - 1 : t, r && n > 1 ? n - 1 : n];this.userCode = "\n      const vec2 effectiveInputOverOutputRatioRC = vec2(\n          " + u[0] / c[0] + ",\n          " + u[1] / c[1] + ");\n      const vec2 inputShapeRC = vec2(" + a + ".0, " + i + ".0);\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int d = coords[3];\n        ivec2 yRC = coords.yz;\n\n        // Fractional source index.\n        vec2 sourceFracIndexRC = vec2(yRC) * effectiveInputOverOutputRatioRC;\n\n        // Compute the four integer indices.\n        ivec2 sourceFloorRC = ivec2(sourceFracIndexRC);\n        ivec2 sourceCeilRC = ivec2(\n          min(inputShapeRC - 1.0, ceil(sourceFracIndexRC)));\n\n        float topLeft = getA(b, sourceFloorRC.x, sourceFloorRC.y, d);\n        float bottomLeft = getA(b, sourceCeilRC.x, sourceFloorRC.y, d);\n        float topRight = getA(b, sourceFloorRC.x, sourceCeilRC.y, d);\n        float bottomRight = getA(b, sourceCeilRC.x, sourceCeilRC.y, d);\n\n        vec2 fracRC = sourceFracIndexRC - vec2(sourceFloorRC);\n\n        float top = topLeft + (topRight - topLeft) * fracRC.y;\n        float bottom = bottomLeft + (bottomRight - bottomLeft) * fracRC.y;\n        float newValue = top + (bottom - top) * fracRC.x;\n\n        setOutput(newValue);\n      }\n    ";
-  };
-}(),
-    ResizeNearestNeigborBackpropProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["dy"], this.outputShape = [], this.outputShape = t.shape;var r = t.shape,
-        o = r[1],
-        a = r[2],
-        i = e.shape,
-        s = i[1],
-        u = i[2],
-        c = [n && s > 1 ? o - 1 : o, n && u > 1 ? a - 1 : a],
-        l = [n && s > 1 ? s - 1 : s, n && u > 1 ? u - 1 : u],
-        d = c[0] / l[0],
-        p = c[1] / l[1],
-        h = 1 / d,
-        f = 1 / p,
-        g = 2 * Math.ceil(h) + 2,
-        m = 2 * Math.ceil(f) + 2;this.userCode = "\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int d = coords[3];\n        int r = coords[1];\n        int c = coords[2];\n\n        float accumulator = 0.0;\n\n        const float heightScale = float(" + d + ");\n        const float widthScale = float(" + p + ");\n\n        const float invHeightScale = float(" + h + ");\n        const float invWidthScale = float(" + f + ");\n\n        const int winHeight = int(" + g + ");\n        const int winWidth = int(" + m + ");\n\n        // Compute bounds for where in dy we will look\n        float startRLerp = floor(float(r) * invHeightScale);\n        int startDyR = int(floor(startRLerp - float(winHeight / 2)));\n\n        float startCLerp = floor(float(c) * invWidthScale);\n        int startDyC = int(floor(startCLerp - float(winWidth / 2)));\n\n        // Loop over dy\n        for (int dyROffset = 0; dyROffset < winHeight; dyROffset++) {\n          int dyR = dyROffset + startDyR;\n\n          // Guard against the window exceeding the bounds of dy\n          if (dyR < 0 || dyR >= " + s + ") {\n            continue;\n          }\n\n          for (int dyCOffset = 0; dyCOffset < winWidth; dyCOffset++) {\n            int dyC = dyCOffset + startDyC;\n\n            // Guard against the window exceeding the bounds of dy\n            if (dyC < 0 || dyC >= " + u + ") {\n              continue;\n            }\n\n            float sourceFracRow =\n              float(" + c[0] + ") *\n                (float(dyR) / float(" + l[0] + "));\n\n            float sourceFracCol =\n                float(" + c[1] + ") *\n                  (float(dyC) / float(" + l[1] + "));\n\n            int sourceNearestRow = int(min(\n                float(int(" + o + ") - 1),\n                " + n + " ? float(round(sourceFracRow)) :\n                                  float(floor(sourceFracRow))));\n\n            int sourceNearestCol = int(min(\n                float(int(" + a + ") - 1),\n                " + n + " ? float(round(sourceFracCol)) :\n                                  float(floor(sourceFracCol))));\n\n            if (r == sourceNearestRow && c == sourceNearestCol) {\n              accumulator += getDy(b, dyR, dyC, d);\n            }\n          }\n        }\n        // End loop over dy\n\n        setOutput(accumulator);\n      }\n    ";
-  };
-}(),
-    ResizeNearestNeighborProgram = function () {
-  return function (e, t, n, r) {
-    this.variableNames = ["A"], this.outputShape = [];var o = e[0],
-        a = e[1],
-        i = e[2],
-        s = e[3];this.outputShape = [o, t, n, s];var u = [r && t > 1 ? a - 1 : a, r && n > 1 ? i - 1 : i],
-        c = [r && t > 1 ? t - 1 : t, r && n > 1 ? n - 1 : n],
-        l = r ? "0.5" : "0.0";this.userCode = "\n      const vec2 effectiveInputOverOutputRatioRC = vec2(\n          " + u[0] / c[0] + ",\n          " + u[1] / c[1] + ");\n      const vec2 inputShapeRC = vec2(" + a + ".0, " + i + ".0);\n\n      void main() {\n        ivec4 coords = getOutputCoords();\n        int b = coords[0];\n        int d = coords[3];\n        ivec2 yRC = coords.yz;\n\n        // Fractional source index.\n        vec2 sourceFracIndexRC = vec2(yRC) * effectiveInputOverOutputRatioRC;\n\n        // Compute the coordinators of nearest neighbor point.\n        ivec2 sourceNearestRC = ivec2(\n          min(inputShapeRC - 1.0, floor(sourceFracIndexRC + " + l + ")));\n\n        float newValue = getA(b, sourceNearestRC.x, sourceNearestRC.y, d);\n\n        setOutput(newValue);\n      }\n    ";
-  };
-}(),
-    ReverseProgram = function () {
-  return function (e, t) {
-    this.variableNames = ["x"];var n = e.length;if (n > 4) throw new Error("WebGL backend: Reverse of rank-" + n + " tensor is not yet supported");if (this.outputShape = e, 1 !== n) {
-      var r = e.map(function (n, r) {
-        return function (n) {
-          return -1 !== t.indexOf(n) && 1 !== e[n] ? e[n] + " - coords[" + n + "] - 1" : "coords[" + n + "]";
-        }(r);
-      }).join(","),
-          o = getCoordsDataType(n);this.userCode = "\n      void main() {\n        " + o + " coords = getOutputCoords();\n        setOutput(getX(" + r + "));\n      }\n    ";
-    } else this.userCode = "\n        void main() {\n          int coord = getOutputCoords();\n          setOutput(getX(" + e[0] + " - coord - 1));\n        }\n      ";
-  };
-}(),
-    SegmentOpProgram = function () {
-  return function (e, t) {
-    this.variableNames = ["x", "segmentIds"];var n = e.windowSize,
-        r = e.batchSize,
-        o = e.inSize,
-        a = e.numSegments,
-        i = a * Math.ceil(o / n);this.outputShape = [r, i];var s = 4 * Math.floor(n / 4),
-        u = n % 4,
-        c = "\n        sumValue += dot(values, filter);\n    ",
-        l = "";o % n > 0 && (l = "\n        if (inIdx < 0 || inIdx >= " + o + ") {\n          return initializationValue;\n        }\n      ");var d = "";o % n > 0 && (d = "\n        if (inIdx < 0 || inIdx >= " + o + ") {\n          return -1.0;\n        }\n      "), this.userCode = "\n      const float initializationValue = 0.0;\n\n      float getValue(int batch, int inIdx) {\n        " + l + "\n        return getX(batch, inIdx);\n      }\n\n      float getSegmentIdAtIndex(int inIdx) {\n        " + d + "\n        return getSegmentIds(inIdx);\n      }\n\n      void main() {\n        ivec2 coords = getOutputCoords();\n        int batch = coords[0];\n        int outIdx = coords[1];\n        int inOffset = int(floor(float(outIdx) / float(\n          " + a + ")) * float(" + n + "));\n        int currentSeg = int(mod(float(outIdx), float(" + a + ")));\n\n        float sumValue = 0.0;\n\n        for (int i = 0; i < " + s + "; i += 4) {\n          int inIdx = inOffset + i;\n          vec4 values = vec4(\n            getValue(batch, inIdx),\n            getValue(batch, inIdx + 1),\n            getValue(batch, inIdx + 2),\n            getValue(batch, inIdx + 3)\n          );\n\n          vec4 filter = vec4(\n            int(getSegmentIdAtIndex(inIdx)) == currentSeg ? 1 : 0,\n            int(getSegmentIdAtIndex(inIdx + 1)) == currentSeg ? 1 : 0,\n            int(getSegmentIdAtIndex(inIdx + 2)) == currentSeg ? 1 : 0,\n            int(getSegmentIdAtIndex(inIdx + 3)) == currentSeg ? 1 : 0\n          );\n\n          " + c + "\n        }\n\n        int inIdx = inOffset + " + s + ";\n        if (" + (1 === u) + ") {\n          vec4 values = vec4(\n            getValue(batch, inIdx),\n            initializationValue,\n            initializationValue,\n            initializationValue\n          );\n\n          int inIdxSeg = int(getSegmentIdAtIndex(inIdx));\n\n          vec4 filter = vec4(\n            int(getSegmentIdAtIndex(inIdx)) == currentSeg ? 1 : 0,\n            0,\n            0,\n            0\n          );\n\n          " + c + "\n        } else if (" + (2 === u) + ") {\n          vec4 values = vec4(\n            getValue(batch, inIdx),\n            getValue(batch, inIdx + 1),\n            initializationValue,\n            initializationValue\n          );\n\n          vec4 filter = vec4(\n            int(getSegmentIdAtIndex(inIdx)) == currentSeg ? 1 : 0,\n            int(getSegmentIdAtIndex(inIdx + 1)) == currentSeg ? 1 : 0,\n              0,\n              0\n          );\n\n          " + c + "\n        } else if (" + (3 === u) + ") {\n          vec4 values = vec4(\n            getValue(batch, inIdx),\n            getValue(batch, inIdx + 1),\n            getValue(batch, inIdx + 2),\n            initializationValue\n          );\n\n          vec4 filter = vec4(\n            int(getSegmentIdAtIndex(inIdx)) == currentSeg ? 1 : 0,\n            int(getSegmentIdAtIndex(inIdx + 1)) == currentSeg ? 1 : 0,\n            int(getSegmentIdAtIndex(inIdx + 2)) == currentSeg ? 1 : 0,\n            0\n          );\n\n          " + c + "\n        }\n        setOutput(sumValue);\n      }\n    ";
-  };
-}(),
-    SliceProgram = function () {
-  function e(e) {
-    this.variableNames = ["source"], this.outputShape = e, this.rank = e.length;var t = getCoordsDataType(this.rank),
-        n = getCoords$1(this.rank);this.userCode = "\n      uniform " + t + " start;\n\n      void main() {\n        " + t + " sourceLoc = start + getOutputCoords();\n        setOutput(getSource(" + n + "));\n      }\n    ";
-  }return e.prototype.getCustomSetupFunc = function (e) {
-    var t = this;if (e.length !== this.rank) throw Error("The rank (" + this.rank + ") of the program must match the length of start (" + e.length + ")");return function (n, r) {
-      if (null != t.startLoc || (t.startLoc = n.getUniformLocationNoThrow(r, "start"), null != t.startLoc)) if (1 === t.rank) n.gl.uniform1i(t.startLoc, e[0]);else if (2 === t.rank) n.gl.uniform2i(t.startLoc, e[0], e[1]);else if (3 === t.rank) n.gl.uniform3i(t.startLoc, e[0], e[1], e[2]);else {
-        if (4 !== t.rank) throw Error("Slicing for rank " + t.rank + " is not yet supported");n.gl.uniform4i(t.startLoc, e[0], e[1], e[2], e[3]);
-      }
-    };
-  }, e;
-}();function getCoords$1(e) {
-  if (1 === e) return "sourceLoc";if (2 === e) return "sourceLoc.x, sourceLoc.y";if (3 === e) return "sourceLoc.x, sourceLoc.y, sourceLoc.z";if (4 === e) return "sourceLoc.x, sourceLoc.y, sourceLoc.z, sourceLoc.w";throw Error("Slicing for rank " + e + " is not yet supported");
-}var StridedSliceProgram = function () {
-  return function (e, t, n) {
-    this.variableNames = ["x"], this.outputShape = n, this.rank = n.length;var r = getCoordsDataType(this.rank),
-        o = "";o = 1 === this.rank ? "coords * strides + begin" : n.map(function (e, t) {
-      return "coords[" + t + "] * strides[" + t + "] + begin[" + t + "]";
-    }).join(","), this.userCode = "\n      " + r + " begin = " + r + "(" + e + ");\n      " + r + " strides = " + r + "(" + t + ");\n\n      void main() {\n        " + r + " coords = getOutputCoords();\n        setOutput(getX(" + o + "));\n      }\n    ";
-  };
-}(),
-    TextureManager = function () {
-  function e(e) {
-    this.gpgpu = e, this.numUsedTextures = 0, this.numFreeTextures = 0, this.freeTextures = {}, this.logEnabled = !1, this.usedTextures = {};
-  }return e.prototype.acquireTexture = function (e, t) {
-    var n,
-        r = getPhysicalFromLogicalTextureType(t),
-        o = getKeyFromTextureShape(e, r);if (o in this.freeTextures || (this.freeTextures[o] = []), o in this.usedTextures || (this.usedTextures[o] = []), this.freeTextures[o].length > 0) {
-      this.numFreeTextures--, this.numUsedTextures++, this.log();var a = this.freeTextures[o].shift();return this.usedTextures[o].push(a), a;
-    }return this.numUsedTextures++, this.log(), r === PhysicalTextureType.FLOAT32 ? n = this.gpgpu.createFloat32MatrixTexture(e[0], e[1]) : r === PhysicalTextureType.FLOAT16 ? n = this.gpgpu.createFloat16MatrixTexture(e[0], e[1]) : r === PhysicalTextureType.UNSIGNED_BYTE && (n = this.gpgpu.createUnsignedBytesMatrixTexture(e[0], e[1])), this.usedTextures[o].push(n), n;
-  }, e.prototype.releaseTexture = function (e, t, n) {
-    var r = getKeyFromTextureShape(t, getPhysicalFromLogicalTextureType(n));r in this.freeTextures || (this.freeTextures[r] = []), this.freeTextures[r].push(e), this.numFreeTextures++, this.numUsedTextures--;var o = this.usedTextures[r],
-        a = o.indexOf(e);if (a < 0) throw new Error("Cannot release a texture that was never provided by this texture manager");o.splice(a, 1), this.log();
-  }, e.prototype.log = function () {
-    if (this.logEnabled) {
-      var e = this.numFreeTextures + this.numUsedTextures;console.log("Free/Used", this.numFreeTextures + " / " + this.numUsedTextures, "(" + e + ")");
-    }
-  }, e.prototype.getNumUsedTextures = function () {
-    return this.numUsedTextures;
-  }, e.prototype.getNumFreeTextures = function () {
-    return this.numFreeTextures;
-  }, e.prototype.dispose = function () {
-    var e = this;if (null != this.freeTextures) {
-      for (var t in this.freeTextures) this.freeTextures[t].forEach(function (t) {
-        e.gpgpu.deleteMatrixTexture(t);
-      });for (var t in this.usedTextures) this.usedTextures[t].forEach(function (t) {
-        e.gpgpu.deleteMatrixTexture(t);
-      });this.freeTextures = null, this.usedTextures = null, this.numUsedTextures = 0, this.numFreeTextures = 0;
-    }
-  }, e;
-}();function getPhysicalFromLogicalTextureType(e) {
-  if (e === TextureUsage.DOWNLOAD || e === TextureUsage.PIXELS) return PhysicalTextureType.UNSIGNED_BYTE;if (e === TextureUsage.UPLOAD) return PhysicalTextureType.FLOAT32;if (e === TextureUsage.RENDER) return ENV.get("WEBGL_RENDER_FLOAT32_ENABLED") ? PhysicalTextureType.FLOAT32 : PhysicalTextureType.FLOAT16;throw new Error("Unknown logical texture type " + e);
-}function getKeyFromTextureShape(e, t) {
-  return e[0] + "_" + e[1] + "_" + t;
-}var TileProgram = function () {
-  return function (e, t) {
-    this.variableNames = ["A"];for (var n = new Array(e.length), r = 0; r < n.length; r++) n[r] = e[r] * t[r];this.outputShape = n, this.rank = n.length;var o = getCoordsDataType(this.rank),
-        a = getSourceCoords$1(e);this.userCode = "\n      void main() {\n        " + o + " resRC = getOutputCoords();\n        setOutput(getA(" + a + "));\n      }\n    ";
-  };
-}();function getSourceCoords$1(e) {
-  var t = e.length;if (t > 5) throw Error("Tile for rank " + t + " is not yet supported");if (1 === t) return "imod(resRC, " + e[0] + ")";for (var n = ["resRC.x", "resRC.y", "resRC.z", "resRC.w", "resRC.u"], r = [], o = 0; o < e.length; o++) r.push("imod(" + n[o] + ", " + e[o] + ")");return r.join();
-}var TransposeProgram = function () {
-  return function (e, t) {
-    this.variableNames = ["A"];for (var n = new Array(e.length), r = 0; r < n.length; r++) n[r] = e[t[r]];this.outputShape = n, this.rank = n.length;var o = getCoordsDataType(this.rank),
-        a = getSwitchedCoords(t);this.userCode = "\n    void main() {\n      " + o + " resRC = getOutputCoords();\n      setOutput(getA(" + a + "));\n    }\n    ";
-  };
-}();function getSwitchedCoords(e) {
-  var t = e.length;if (t > 6) throw Error("Transpose for rank " + t + " is not yet supported");for (var n = ["resRC.x", "resRC.y", "resRC.z", "resRC.w", "resRC.u", "resRC.v"], r = new Array(t), o = 0; o < e.length; o++) r[e[o]] = n[o];return r.join();
-}var ERF_P = .3275911,
-    ERF_A1 = .254829592,
-    ERF_A2 = -.284496736,
-    ERF_A3 = 1.421413741,
-    ERF_A4 = -1.453152027,
-    ERF_A5 = 1.061405429,
-    UnaryOpProgram = function () {
-  function e(e, t) {
-    this.variableNames = ["A"], this.outputShape = e, this.userCode = "\n      uniform float NAN;\n      float unaryOperation(float x) {\n        " + t + "\n      }\n\n      void main() {\n        float x = getAAtOutCoords();\n        float y = unaryOperation(x);\n\n        setOutput(y);\n      }\n    ";
-  }return e.prototype.getCustomSetupFunc = function () {
-    var e = this;return function (t, n) {
-      null == e.startLoc && (e.startLoc = t.getUniformLocationNoThrow(n, "NAN"), null == e.startLoc) || t.gl.uniform1f(e.startLoc, NaN);
-    };
-  }, e;
-}(),
-    CHECK_NAN_SNIPPET$1 = "if (isNaN(x)) return x;",
-    ABS = "return abs(x);",
-    RELU = CHECK_NAN_SNIPPET$1 + "\n  return (x < 0.0) ? 0.0 : x;\n",
-    ELU = "return (x >= 0.0) ? x : (exp(x) - 1.0);",
-    SELU = "\n  // Stable and Attracting Fixed Point (0, 1) for Normalized Weights.\n  // see: https://arxiv.org/abs/1706.02515\n  float scaleAlpha = " + SELU_SCALEALPHA + ";\n  float scale = " + SELU_SCALE + ";\n  return (x >= 0.0) ? scale * x : scaleAlpha * (exp(x) - 1.0);\n";function STEP(e) {
-  return void 0 === e && (e = 0), CHECK_NAN_SNIPPET$1 + "\n    return x > 0.0 ? 1.0 : float(" + e + ");\n  ";
-}var NEG = "return -x;",
-    CEIL = "return ceil(x);",
-    FLOOR = "return floor(x);",
-    SIGN = "\n  if (isNaN(x)) { return 0.0; }\n  return sign(x);\n",
-    ROUND = "\n  // OpenGL ES does not support round function.\n  // The algorithm is based on banker's rounding.\n  float base = floor(x);\n  if ((x - base) < 0.5) {\n    return floor(x);\n  } else if ((x - base) > 0.5) {\n    return ceil(x);\n  } else {\n    if (mod(base, 2.0) == 0.0) {\n      return base;\n    } else {\n      return base + 1.0;\n    }\n  }\n",
-    EXP = "return exp(x);",
-    EXPM1 = "return exp(x) - 1.0;",
-    LOG = "if (x < 0.0) return NAN;\n  return log(x);",
-    LOG1P = "return log(1.0 + x);",
-    SQRT = "return sqrt(x);",
-    RSQRT = "return inversesqrt(x);",
-    SIGMOID = "return 1.0 / (1.0 + exp(-1.0 * x));",
-    SOFTPLUS = "\n  float epsilon = 1.1920928955078125e-7;\n  float threshold = log(epsilon) + 2.0;\n\n  bool too_large = x > -threshold;\n  bool too_small = x < threshold;\n\n  float result;\n  float exp_x = exp(x);\n\n  if (too_large){\n    result = x;\n  }\n  else if (too_small){\n    result = exp_x;\n  }\n  else{\n    result = log(exp_x + 1.0);\n  }\n  return result;\n",
-    SIN = CHECK_NAN_SNIPPET$1 + "\n  return sin(x);\n",
-    COS = CHECK_NAN_SNIPPET$1 + "\n  return cos(x);\n",
-    TAN = "return tan(x);",
-    ASIN = "return asin(x);",
-    ACOS = "return acos(x);",
-    ATAN = CHECK_NAN_SNIPPET$1 + "\n  return atan(x);\n",
-    SINH = "\n  float e2x = exp(x);\n  return (e2x - 1.0 / e2x) / 2.0;\n",
-    COSH = "\n  float e2x = exp(-x);\n  return (e2x + 1.0 / e2x) / 2.0;\n",
-    TANH = "\n  float e2x = exp(-2.0 * abs(x));\n  return sign(x) * (1.0 - e2x) / (1.0 + e2x);\n",
-    ASINH = "return log(x + sqrt(x * x + 1.0));",
-    ACOSH = CHECK_NAN_SNIPPET$1 + "\n  if (x < 1.0) return NAN;\n  return log(x + sqrt(x * x - 1.0));",
-    ATANH = CHECK_NAN_SNIPPET$1 + "\n  if ((x < -1.0) || (x > 1.0)) return NAN;\n  return (log(1.0 + x) - log(1.0 - x)) / 2.0;",
-    ERF = '\n  // Error function is calculated approximately with elementary function.\n  // See "Handbook of Mathematical Functions with Formulas,\n  // Graphs, and Mathematical Tables", Abramowitz and Stegun.\n  float p = ' + ERF_P + ";\n  float a1 = " + ERF_A1 + ";\n  float a2 = " + ERF_A2 + ";\n  float a3 = " + ERF_A3 + ";\n  float a4 = " + ERF_A4 + ";\n  float a5 = " + ERF_A5 + ";\n\n  float t = 1.0 / (1.0 + p * x);\n  return 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-x*x);\n",
-    SQUARE = "return x * x;",
-    RECIPROCAL = "return 1.0 / x;",
-    LOGICAL_NOT = "return float(!(x >= 1.0));",
-    TO_INT = "return float(int(x));",
-    BEFORE_PAGING_CONSTANT = 300,
-    SIZE_UPLOAD_UNIFORM = 32,
-    MathBackendWebGL = function () {
-  function e(e, t) {
-    if (void 0 === t && (t = !0), this.gpgpu = e, this.delayedStorage = t, this.texData = new WeakMap(), this.pendingRead = new WeakMap(), this.pendingDisposal = new WeakSet(), this.lruDataGPU = [], this.numBytesInGPU = 0, this.uploadWaitMs = 0, this.downloadWaitMs = 0, this.binaryCache = {}, this.disposed = !1, ENV.get("WEBGL_VERSION") < 1) throw new Error("WebGL is not supported on this device");ENV.get("IS_BROWSER") && (this.canvas = document.createElement("canvas")), null == e ? (this.gpgpu = new GPGPUContext(createWebGLContext(this.canvas)), this.gpgpuCreatedLocally = !0) : this.gpgpuCreatedLocally = !1, this.NUM_BYTES_BEFORE_PAGING = window.screen.height * window.screen.width * window.devicePixelRatio * BEFORE_PAGING_CONSTANT, this.textureManager = new TextureManager(this.gpgpu);
-  }return e.prototype.register = function (e, t, n) {
-    if (this.texData.has(e)) throw new Error("Data buffer is already registered");this.texData.set(e, { shape: t, dtype: n, values: null, texture: null, texShape: null, usage: TextureUsage.RENDER });
-  }, e.prototype.fromPixels = function (e, t) {
-    if (null == e) throw new Error("pixels passed to tf.fromPixels() can not be null");var n = [e.height, e.width],
-        r = [e.height, e.width, t];if (!(e instanceof HTMLVideoElement || e instanceof HTMLImageElement || e instanceof HTMLCanvasElement || e instanceof ImageData)) throw new Error("pixels passed to tf.fromPixels() must be either an HTMLVideoElement, HTMLImageElement, HTMLCanvasElement or ImageData, but was " + e.constructor.name);if (e instanceof HTMLVideoElement) {
-      if (null == this.fromPixelsCanvas) {
-        if (!ENV.get("IS_BROWSER")) throw new Error("Can't read pixels from HTMLImageElement outside the browser.");if ("complete" !== document.readyState) throw new Error("The DOM is not ready yet. Please call tf.fromPixels() once the DOM is ready. One way to do that is to add an event listener for `DOMContentLoaded` on the document object");this.fromPixelsCanvas = document.createElement("canvas");
-      }this.fromPixelsCanvas.width = e.width, this.fromPixelsCanvas.height = e.height, this.fromPixelsCanvas.getContext("2d").drawImage(e, 0, 0, e.width, e.height), e = this.fromPixelsCanvas;
-    }var o = Tensor.make(n, {}, "int32");this.texData.get(o.dataId).usage = TextureUsage.PIXELS, this.gpgpu.uploadPixelDataToTexture(this.getTexture(o.dataId), e);var a = new FromPixelsProgram(r),
-        i = this.compileAndRun(a, [o]);return o.dispose(), i;
-  }, e.prototype.write = function (e, t) {
-    if (null == t) throw new Error("MathBackendWebGL.write(): values can not be null");this.throwIfNoData(e);var n = this.texData.get(e),
-        r = n.texture,
-        o = n.texShape,
-        a = n.usage;null != r && (this.releaseTexture(e, r, o, a), n.texture = null, n.texShape = null), n.usage = TextureUsage.UPLOAD, n.values = t, this.delayedStorage || this.uploadToGPU(e);
-  }, e.prototype.readSync = function (e) {
-    this.throwIfNoData(e);var t = this.texData.get(e),
-        n = t.shape,
-        r = t.texture,
-        o = t.values,
-        a = t.texShape,
-        i = t.dtype;if (null != o) return this.cacheOnCPU(e), o;var s,
-        u,
-        c = null != this.activeTimers;if (c && (s = performance.now()), ENV.get("WEBGL_DOWNLOAD_FLOAT_ENABLED")) u = this.gpgpu.downloadFloat32MatrixFromOutputTexture(r, a[0], a[1]);else {
-      var l = Tensor.make(n, {});this.texData.get(l.dataId).usage = TextureUsage.DOWNLOAD;var d = Tensor.make(n, { dataId: e }, i),
-          p = new EncodeFloatProgram(n);this.compileAndRun(p, [d], l, null, !1);var h = this.texData.get(l.dataId);u = this.gpgpu.downloadByteEncodedFloatMatrixFromOutputTexture(h.texture, h.texShape[0], h.texShape[1]), d.dispose(), l.dispose();
-    }return c && (this.downloadWaitMs += performance.now() - s), this.cacheOnCPU(e, u), t.values;
-  }, e.prototype.read = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n, r, o, a, i, s, u;return __generator(this, function (c) {
-        switch (c.label) {case 0:
-            return this.pendingRead.has(e) ? (t = this.pendingRead.get(e), [2, new Promise(function (e) {
-              return t.push(e);
-            })]) : (this.throwIfNoData(e), n = this.texData.get(e), r = n.texture, o = n.values, a = n.texShape, null != o ? (this.cacheOnCPU(e), [2, o]) : ENV.get("WEBGL_GET_BUFFER_SUB_DATA_ASYNC_EXTENSION_ENABLED") ? [4, this.gpgpu.downloadMatrixFromTextureAsync(r, a[0], a[1])] : [3, 2]);case 1:
-            return i = c.sent(), this.cacheOnCPU(e, i), [2, n.values];case 2:
-            return 0 === ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION") ? [2, this.readSync(e)] : (this.pendingRead.set(e, []), [4, this.gpgpu.runQuery(function () {})]);case 3:
-            return c.sent(), s = this.pendingRead.get(e), this.pendingRead.delete(e), u = this.readSync(e), s.forEach(function (e) {
-              return e(u);
-            }), this.pendingDisposal.has(e) && (this.pendingDisposal.delete(e), this.disposeData(e)), [2, u];}
-      });
-    });
-  }, e.prototype.time = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n, r, o, a, i;return __generator(this, function (s) {
-        switch (s.label) {case 0:
-            return t = this.activeTimers, n = [], r = !1, null == this.programTimersStack ? (this.programTimersStack = n, r = !0) : this.activeTimers.push(n), this.activeTimers = n, e(), o = flatten(this.activeTimers), this.activeTimers = t, r && (this.programTimersStack = null), [4, Promise.all(o).then(function (e) {
-              var t = 0;return e.forEach(function (e) {
-                return t += e;
-              }), t;
-            })];case 1:
-            return a = s.sent(), i = { uploadWaitMs: this.uploadWaitMs, downloadWaitMs: this.downloadWaitMs, kernelMs: a, wallMs: null }, this.uploadWaitMs = 0, this.downloadWaitMs = 0, [2, i];}
-      });
-    });
-  }, e.prototype.memory = function () {
-    return { unreliable: !1, numBytesInGPU: this.numBytesInGPU };
-  }, e.prototype.startTimer = function () {
-    return ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION") > 0 ? this.gpgpu.beginQuery() : { startMs: performance.now(), endMs: null };
-  }, e.prototype.endTimer = function (e) {
-    return ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION") > 0 ? (this.gpgpu.endQuery(), e) : (e.endMs = performance.now(), e);
-  }, e.prototype.getQueryTime = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t;return __generator(this, function (n) {
-        return ENV.get("WEBGL_DISJOINT_QUERY_TIMER_EXTENSION_VERSION") > 0 ? [2, this.gpgpu.pollQueryTime(e)] : [2, (t = e).endMs - t.startMs];
-      });
-    });
-  }, e.prototype.disposeData = function (e) {
-    if (!this.pendingDisposal.has(e)) if (this.pendingRead.has(e)) this.pendingDisposal.add(e);else if (this.texData.has(e)) {
-      var t = this.texData.get(e),
-          n = t.texture,
-          r = t.texShape,
-          o = t.usage;null != n && this.releaseTexture(e, n, r, o), this.texData.delete(e);
-    }
-  }, e.prototype.getTexture = function (e) {
-    return this.uploadToGPU(e), this.texData.get(e).texture;
-  }, e.prototype.getGPGPUContext = function () {
-    return this.gpgpu;
-  }, e.prototype.getCanvas = function () {
-    return this.canvas;
-  }, e.prototype.slice = function (e, t, n) {
-    var r = new SliceProgram(n),
-        o = r.getCustomSetupFunc(t);return this.compileAndRun(r, [e], null, o);
-  }, e.prototype.stridedSlice = function (e, t, n, r, o, a) {
-    var i = getStridedSlicedInfo(e.shape, t, n, r, o, a),
-        s = i[0],
-        u = i[1];if (u.some(function (e) {
-      return 0 === e;
-    })) return tensor([], u);var c = new StridedSliceProgram(s, r, u);return this.compileAndRun(c, [e]);
-  }, e.prototype.reverse = function (e, t) {
-    var n = new ReverseProgram(e.shape, t);return this.compileAndRun(n, [e]);
-  }, e.prototype.concat = function (e, t) {
-    var n = new ConcatProgram(e.shape, t.shape);return this.compileAndRun(n, [e, t]);
-  }, e.prototype.neg = function (e) {
-    var t = new UnaryOpProgram(e.shape, NEG);return this.compileAndRun(t, [e]);
-  }, e.prototype.matMul = function (e, t, n, r) {
-    var o = new MatMulProgram(e.shape, t.shape, n, r);return this.compileAndRun(o, [e, t]);
-  }, e.prototype.multiply = function (e, t) {
-    var n = new BinaryOpProgram(MUL, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, upcastType(e.dtype, t.dtype));return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.batchNormalization = function (e, t, n, r, o, a) {
-    var i = [e, t, n],
-        s = null;null != a && (s = a.shape, i.push(a));var u = null;null != o && (u = o.shape, i.push(o));var c = new BatchNormProgram(e.shape, t.shape, n.shape, s, u, r);return this.compileAndRun(c, i);
-  }, e.prototype.localResponseNormalization4D = function (e, t, n, r, o) {
-    var a = new LRNProgram(e.shape, t, n, r, o);return this.compileAndRun(a, [e]);
-  }, e.prototype.tile = function (e, t) {
-    var n = new TileProgram(e.shape, t);return this.compileAndRun(n, [e]);
-  }, e.prototype.pad = function (e, t, n) {
-    var r = new PadProgram(e.shape, t, n);return this.compileAndRun(r, [e]);
-  }, e.prototype.transpose = function (e, t) {
-    var n = new TransposeProgram(e.shape, t);return this.compileAndRun(n, [e]);
-  }, e.prototype.gather = function (e, t, n) {
-    var r = new GatherProgram(e.shape, t.size, n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.reduce = function (e, t, n) {
-    var r = e.shape[0],
-        o = e.shape[1],
-        a = computeOptimalWindowSize(o),
-        i = new ReduceProgram({ windowSize: a, inSize: o, batchSize: r }, t),
-        s = i.outputShape,
-        u = s[0],
-        c = s[1],
-        l = this.makeOutputArray([u, c], n);return this.compileAndRun(i, [e], l), 1 === l.shape[1] ? l : this.reduce(l, t, n);
-  }, e.prototype.argReduce = function (e, t, n) {
-    void 0 === n && (n = null);var r = e.shape[0],
-        o = e.shape[1];null != n && (r = n.shape[0], o = n.shape[1]);var a = computeOptimalWindowSize(o),
-        i = new ArgMinMaxProgram({ windowSize: a, inSize: o, batchSize: r }, t, null == n),
-        s = i.outputShape,
-        u = s[0],
-        c = s[1],
-        l = this.makeOutputArray([u, c], "int32"),
-        d = [e];return null != n && d.push(n), this.compileAndRun(i, d, l), 1 === l.shape[1] ? l : this.argReduce(e, t, l);
-  }, e.prototype.sum = function (e, t) {
-    assertAxesAreInnerMostDims("sum", t, e.rank);var n = computeOutAndReduceShapes(e.shape, t),
-        r = n[0],
-        o = sizeFromShape(n[1]),
-        a = e.as2D(-1, o),
-        i = sumOutType(e.dtype);return this.reduce(a, "sum", i).reshape(r);
-  }, e.prototype.unsortedSegmentSum = function (e, t, n) {
-    var r = 0,
-        o = getAxesPermutation([r], e.rank),
-        a = e;null != o && (a = e.transpose(o), r = getInnerMostAxes(1, e.rank)[0]);var i = computeOutShape$1(a.shape, r, n),
-        s = sizeFromShape([a.shape[r]]),
-        u = a.as2D(-1, s),
-        c = sumOutType(e.dtype),
-        l = this.segOpCompute(u, "unsortedSegmentSum", t, c, n).reshape(i);return null != o && (l = l.transpose(getUndoAxesPermutation(o))), l;
-  }, e.prototype.segOpCompute = function (e, t, n, r, o) {
-    var a = e.shape[0],
-        i = e.shape[1],
-        s = segOpComputeOptimalWindowSize(i, o),
-        u = new SegmentOpProgram({ windowSize: s, inSize: i, batchSize: a, numSegments: o }, t),
-        c = u.outputShape,
-        l = c[0],
-        d = c[1],
-        p = this.makeOutputArray([l, d], r);return this.compileAndRun(u, [e, n], p), p.shape[1] === o ? p : (n = range(0, o).tile([i / s]), this.segOpCompute(p, t, n, r, o));
-  }, e.prototype.argMin = function (e, t) {
-    var n = [t];assertAxesAreInnerMostDims("argMin", n, e.rank);var r = computeOutAndReduceShapes(e.shape, n),
-        o = r[0],
-        a = sizeFromShape(r[1]),
-        i = e.as2D(-1, a);return this.argReduce(i, "min").reshape(o);
-  }, e.prototype.argMax = function (e, t) {
-    var n = [t];assertAxesAreInnerMostDims("argMax", n, e.rank);var r = computeOutAndReduceShapes(e.shape, n),
-        o = r[0],
-        a = sizeFromShape(r[1]),
-        i = e.as2D(-1, a);return this.argReduce(i, "max").reshape(o);
-  }, e.prototype.cumsum = function (e, t, n, r) {
-    if (t !== e.rank - 1) throw new Error("WebGL cumsum shader expects an inner-most axis=" + (e.rank - 1) + " but got axis=" + t);var o = new CumSumProgram(e.shape, n, r);return this.compileAndRun(o, [e]);
-  }, e.prototype.equal = function (e, t) {
-    var n = new BinaryOpProgram(EQUAL, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.notEqual = function (e, t) {
-    var n = new BinaryOpProgram(NOT_EQUAL, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.less = function (e, t) {
-    var n = new BinaryOpProgram(LESS, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.lessEqual = function (e, t) {
-    var n = new BinaryOpProgram(LESS_EQUAL, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.greater = function (e, t) {
-    var n = new BinaryOpProgram(GREATER, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.greaterEqual = function (e, t) {
-    var n = new BinaryOpProgram(GREATER_EQUAL, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.logicalNot = function (e) {
-    var t = new UnaryOpProgram(e.shape, LOGICAL_NOT);return this.compileAndRun(t, [e]);
-  }, e.prototype.logicalAnd = function (e, t) {
-    var n = new BinaryOpProgram(LOGICAL_AND, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.logicalOr = function (e, t) {
-    var n = new BinaryOpProgram(LOGICAL_OR, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "bool");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.where = function (e, t, n, r) {
-    var o = new WhereProgram(e.rank, t.shape, t.rank),
-        a = this.makeOutputArray(o.outputShape, r);return this.compileAndRun(o, [e, t, n], a);
-  }, e.prototype.topKValues = function (e, t) {
-    throw new Error("topKValues GPU not yet implemented!");
-  }, e.prototype.topKIndices = function (e, t) {
-    throw new Error("topKIndices GPU not yet implemented!");
-  }, e.prototype.min = function (e, t) {
-    assertAxesAreInnerMostDims("min", t, e.rank);var n = computeOutAndReduceShapes(e.shape, t),
-        r = n[0],
-        o = sizeFromShape(n[1]),
-        a = e.as2D(-1, o);return this.reduce(a, "min", a.dtype).reshape(r);
-  }, e.prototype.minimum = function (e, t) {
-    var n = new BinaryOpProgram(MIN, e.shape, t.shape);return this.compileAndRun(n, [e, t]);
-  }, e.prototype.mod = function (e, t) {
-    var n = new BinaryOpProgram(MOD, e.shape, t.shape),
-        r = n.getCustomSetupFunc();return this.compileAndRun(n, [e, t], null, r);
-  }, e.prototype.max = function (e, t) {
-    assertAxesAreInnerMostDims("max", t, e.rank);var n = computeOutAndReduceShapes(e.shape, t),
-        r = n[0],
-        o = sizeFromShape(n[1]),
-        a = e.as2D(-1, o);return this.reduce(a, "max", a.dtype).reshape(r);
-  }, e.prototype.maximum = function (e, t) {
-    var n = new BinaryOpProgram(MAX, e.shape, t.shape);return this.compileAndRun(n, [e, t]);
-  }, e.prototype.all = function (e, t) {
-    assertAxesAreInnerMostDims("all", t, e.rank);var n = computeOutAndReduceShapes(e.shape, t),
-        r = n[0],
-        o = sizeFromShape(n[1]),
-        a = e.as2D(-1, o);return this.reduce(a, "all", a.dtype).reshape(r);
-  }, e.prototype.any = function (e, t) {
-    assertAxesAreInnerMostDims("any", t, e.rank);var n = computeOutAndReduceShapes(e.shape, t),
-        r = n[0],
-        o = sizeFromShape(n[1]),
-        a = e.as2D(-1, o);return this.reduce(a, "any", a.dtype).reshape(r);
-  }, e.prototype.squaredDifference = function (e, t) {
-    var n = new BinaryOpProgram(SQUARED_DIFFERENCE, e.shape, t.shape);return this.compileAndRun(n, [e, t]);
-  }, e.prototype.realDivide = function (e, t) {
-    var n = new BinaryOpProgram(DIV, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "float32");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.floorDiv = function (e, t) {
-    var n = new BinaryOpProgram(INT_DIV, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, "int32");return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.add = function (e, t) {
-    var n = new BinaryOpProgram(ADD, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, upcastType(e.dtype, t.dtype));return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.subtract = function (e, t) {
-    var n = new BinaryOpProgram(SUB, e.shape, t.shape),
-        r = this.makeOutputArray(n.outputShape, upcastType(e.dtype, t.dtype));return this.compileAndRun(n, [e, t], r);
-  }, e.prototype.pow = function (e, t) {
-    var n = new BinaryOpProgram(POW, e.shape, t.shape),
-        r = n.getCustomSetupFunc(),
-        o = this.makeOutputArray(n.outputShape, upcastType(e.dtype, t.dtype));return this.compileAndRun(n, [e, t], o, r);
-  }, e.prototype.ceil = function (e) {
-    var t = new UnaryOpProgram(e.shape, CEIL);return this.compileAndRun(t, [e]);
-  }, e.prototype.floor = function (e) {
-    var t = new UnaryOpProgram(e.shape, FLOOR);return this.compileAndRun(t, [e]);
-  }, e.prototype.sign = function (e) {
-    var t = new UnaryOpProgram(e.shape, SIGN);return this.compileAndRun(t, [e]);
-  }, e.prototype.round = function (e) {
-    var t = new UnaryOpProgram(e.shape, ROUND);return this.compileAndRun(t, [e]);
-  }, e.prototype.exp = function (e) {
-    var t = new UnaryOpProgram(e.shape, EXP);return this.compileAndRun(t, [e]);
-  }, e.prototype.expm1 = function (e) {
-    var t = new UnaryOpProgram(e.shape, EXPM1);return this.compileAndRun(t, [e]);
-  }, e.prototype.log = function (e) {
-    var t = new UnaryOpProgram(e.shape, LOG),
-        n = t.getCustomSetupFunc();return this.compileAndRun(t, [e], null, n);
-  }, e.prototype.log1p = function (e) {
-    var t = new UnaryOpProgram(e.shape, LOG1P);return this.compileAndRun(t, [e]);
-  }, e.prototype.sqrt = function (e) {
-    var t = new UnaryOpProgram(e.shape, SQRT);return this.compileAndRun(t, [e]);
-  }, e.prototype.rsqrt = function (e) {
-    var t = new UnaryOpProgram(e.shape, RSQRT);return this.compileAndRun(t, [e]);
-  }, e.prototype.square = function (e) {
-    var t = new UnaryOpProgram(e.shape, SQUARE);return this.compileAndRun(t, [e]);
-  }, e.prototype.reciprocal = function (e) {
-    var t = new UnaryOpProgram(e.shape, RECIPROCAL);return this.compileAndRun(t, [e]);
-  }, e.prototype.relu = function (e) {
-    var t = new UnaryOpProgram(e.shape, RELU);return this.compileAndRun(t, [e]);
-  }, e.prototype.elu = function (e) {
-    var t = new UnaryOpProgram(e.shape, ELU);return this.compileAndRun(t, [e]);
-  }, e.prototype.eluDer = function (e, t) {
-    var n = new BinaryOpProgram(ELU_DER, e.shape, t.shape);return this.compileAndRun(n, [e, t]);
-  }, e.prototype.selu = function (e) {
-    var t = new UnaryOpProgram(e.shape, SELU);return this.compileAndRun(t, [e]);
-  }, e.prototype.int = function (e) {
-    var t = new UnaryOpProgram(e.shape, TO_INT),
-        n = this.makeOutputArray(t.outputShape, "int32");return this.compileAndRun(t, [e], n);
-  }, e.prototype.clip = function (e, t, n) {
-    var r = new ClipProgram(e.shape, t, n);return this.compileAndRun(r, [e]);
-  }, e.prototype.abs = function (e) {
-    var t = new UnaryOpProgram(e.shape, ABS);return this.compileAndRun(t, [e]);
-  }, e.prototype.sigmoid = function (e) {
-    var t = new UnaryOpProgram(e.shape, SIGMOID);return this.compileAndRun(t, [e]);
-  }, e.prototype.softplus = function (e) {
-    var t = new UnaryOpProgram(e.shape, SOFTPLUS);return this.compileAndRun(t, [e]);
-  }, e.prototype.sin = function (e) {
-    var t = new UnaryOpProgram(e.shape, SIN);return this.compileAndRun(t, [e]);
-  }, e.prototype.cos = function (e) {
-    var t = new UnaryOpProgram(e.shape, COS);return this.compileAndRun(t, [e]);
-  }, e.prototype.tan = function (e) {
-    var t = new UnaryOpProgram(e.shape, TAN);return this.compileAndRun(t, [e]);
-  }, e.prototype.asin = function (e) {
-    var t = new UnaryOpProgram(e.shape, ASIN);return this.compileAndRun(t, [e]);
-  }, e.prototype.acos = function (e) {
-    var t = new UnaryOpProgram(e.shape, ACOS);return this.compileAndRun(t, [e]);
-  }, e.prototype.atan = function (e) {
-    var t = new UnaryOpProgram(e.shape, ATAN);return this.compileAndRun(t, [e]);
-  }, e.prototype.atan2 = function (e, t) {
-    var n = new BinaryOpProgram(ATAN2, e.shape, t.shape);return this.compileAndRun(n, [e, t]);
-  }, e.prototype.sinh = function (e) {
-    var t = new UnaryOpProgram(e.shape, SINH);return this.compileAndRun(t, [e]);
-  }, e.prototype.cosh = function (e) {
-    var t = new UnaryOpProgram(e.shape, COSH);return this.compileAndRun(t, [e]);
-  }, e.prototype.tanh = function (e) {
-    var t = new UnaryOpProgram(e.shape, TANH);return this.compileAndRun(t, [e]);
-  }, e.prototype.asinh = function (e) {
-    var t = new UnaryOpProgram(e.shape, ASINH);return this.compileAndRun(t, [e]);
-  }, e.prototype.acosh = function (e) {
-    var t = new UnaryOpProgram(e.shape, ACOSH),
-        n = t.getCustomSetupFunc();return this.compileAndRun(t, [e], null, n);
-  }, e.prototype.atanh = function (e) {
-    var t = new UnaryOpProgram(e.shape, ATANH),
-        n = t.getCustomSetupFunc();return this.compileAndRun(t, [e], null, n);
-  }, e.prototype.erf = function (e) {
-    var t = new UnaryOpProgram(e.shape, ERF);return this.compileAndRun(t, [e]);
-  }, e.prototype.step = function (e, t) {
-    var n = new UnaryOpProgram(e.shape, STEP(t));return this.compileAndRun(n, [e]);
-  }, e.prototype.conv2d = function (e, t, n) {
-    var r = new Conv2DProgram(n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.conv2dDerInput = function (e, t, n) {
-    var r = new Conv2DDerInputProgram(n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.conv2dDerFilter = function (e, t, n) {
-    var r = new Conv2DDerFilterProgram(n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.depthwiseConv2D = function (e, t, n) {
-    var r = new DepthwiseConv2DProgram(n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.depthwiseConv2DDerInput = function (e, t, n) {
-    var r = new DepthwiseConv2DDerInputProgram(n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.depthwiseConv2DDerFilter = function (e, t, n) {
-    var r = new DepthwiseConv2DDerFilterProgram(n);return this.compileAndRun(r, [e, t]);
-  }, e.prototype.maxPool = function (e, t) {
-    var n = new Pool2DProgram(t, "max", !1),
-        r = this.makeOutputArray(n.outputShape, e.dtype);return this.compileAndRun(n, [e], r);
-  }, e.prototype.avgPool = function (e, t) {
-    var n = new Pool2DProgram(t, "avg", !1),
-        r = this.makeOutputArray(n.outputShape, "float32");return this.compileAndRun(n, [e], r);
-  }, e.prototype.maxPoolBackprop = function (e, t, n, r) {
-    var o = new Pool2DProgram(r, "max", !0),
-        a = this.compileAndRun(o, [t]),
-        i = new MaxPool2DBackpropProgram(r),
-        s = this.makeOutputArray(i.outputShape, t.dtype),
-        u = this.compileAndRun(i, [e, a], s);return a.dispose(), u;
-  }, e.prototype.avgPoolBackprop = function (e, t, n) {
-    var r = new AvgPool2DBackpropProgram(n),
-        o = this.makeOutputArray(r.outputShape, t.dtype);return this.compileAndRun(r, [e], o);
-  }, e.prototype.cast = function (e, t) {
-    return castTensor(e, t, this);
-  }, e.prototype.reshape = function (e, t) {
-    return reshapeTensor(e, t);
-  }, e.prototype.resizeBilinear = function (e, t, n, r) {
-    var o = new ResizeBilinearProgram(e.shape, t, n, r);return this.compileAndRun(o, [e]);
-  }, e.prototype.resizeBilinearBackprop = function (e, t, n) {
-    var r = new ResizeBilinearBackpropProgram(e, t, n);return this.compileAndRun(r, [e]);
-  }, e.prototype.resizeNearestNeighbor = function (e, t, n, r) {
-    var o = new ResizeNearestNeighborProgram(e.shape, t, n, r);return this.compileAndRun(o, [e]);
-  }, e.prototype.resizeNearestNeighborBackprop = function (e, t, n) {
-    var r = new ResizeNearestNeigborBackpropProgram(e, t, n);return this.compileAndRun(r, [e]);
-  }, e.prototype.multinomial = function (e, t, n, r) {
-    var o = t ? e : softmax(e),
-        a = o.shape[0],
-        i = o.shape[1],
-        s = new MultinomialProgram(a, i, n),
-        u = this.makeOutputArray(s.outputShape, "int32"),
-        c = s.getCustomSetupFunc(r);return this.compileAndRun(s, [o], u, c);
-  }, e.prototype.oneHot = function (e, t, n, r) {
-    var o = new OneHotProgram(e.size, t, n, r);return this.compileAndRun(o, [e]);
-  }, e.prototype.makeOutputArray = function (e, t) {
-    return Tensor.make(e, {}, t);
-  }, e.prototype.compileAndRun = function (e, t, n, r, o) {
-    var a = this;void 0 === o && (o = !0), null == n && (n = this.makeOutputArray(e.outputShape, t[0].dtype));var i = t.map(function (e) {
-      var t = a.texData.get(e.dataId);return null == t.texture && e.size <= SIZE_UPLOAD_UNIFORM ? { tensor: e, texData: null, isUniform: !0 } : (a.uploadToGPU(e.dataId), { tensor: e, texData: t, isUniform: !1 });
-    });this.uploadToGPU(n.dataId);var s,
-        u = { tensor: n, texData: this.texData.get(n.dataId), isUniform: !1 },
-        c = makeShaderKey(e, i, u),
-        l = this.getAndSaveBinary(c, function () {
-      return compileProgram(a.gpgpu, e, i, u);
-    }),
-        d = null != this.activeTimers;if (d && (s = this.startTimer()), runProgram(l, i, u, r), o && this.numBytesInGPU > this.NUM_BYTES_BEFORE_PAGING) for (var p = this.numBytesInGPU - this.NUM_BYTES_BEFORE_PAGING; p > 0 && this.lruDataGPU.length > 0;) {
-      var h = this.lruDataGPU.shift(),
-          f = this.texData.get(h),
-          g = f.shape,
-          m = f.dtype;p -= this.computeBytes(g, m), this.read(h);
-    }return d && (s = this.endTimer(s), this.activeTimers.push(this.getQueryTime(s))), n;
-  }, e.prototype.getAndSaveBinary = function (e, t) {
-    return e in this.binaryCache || (this.binaryCache[e] = t()), this.binaryCache[e];
-  }, e.prototype.getTextureManager = function () {
-    return this.textureManager;
-  }, e.prototype.dispose = function () {
-    if (!this.disposed) {
-      for (var e in this.binaryCache) this.gpgpu.deleteProgram(this.binaryCache[e].webGLProgram);this.textureManager.dispose(), this.canvas.remove(), null != this.fromPixelsCanvas && this.fromPixelsCanvas.remove(), this.gpgpuCreatedLocally && this.gpgpu.dispose(), this.disposed = !0;
-    }
-  }, e.prototype.throwIfNoData = function (e) {
-    if (!this.texData.has(e)) throw new Error("WebGL backend: No data found for this tensor. Did you change your backend in the middle of the program? New backends can't use Tensors created with previous backends");
-  }, e.prototype.uploadToGPU = function (e) {
-    this.throwIfNoData(e);var t = this.texData.get(e),
-        n = t.shape,
-        r = t.values,
-        o = t.texture,
-        a = t.dtype,
-        i = t.usage;if (null == o) {
-      var s,
-          u = null != this.activeTimers;u && (s = performance.now());var c = getTextureShapeFromLogicalShape(this.gpgpu.gl, n);t.texShape = c;var l = this.acquireTexture(e, c, i);t.texture = l, null != r && (this.gpgpu.uploadMatrixToTexture(l, c[0], c[1], typedArrayToFloat32(r, a)), t.values = null, u && (this.uploadWaitMs += performance.now() - s));
-    } else {
-      this.lruDataGPU.indexOf(e) >= 0 && (this.lruDataGPU.splice(this.lruDataGPU.indexOf(e), 1), this.lruDataGPU.push(e));
-    }
-  }, e.prototype.cacheOnCPU = function (e, t) {
-    var n = this.delayedStorage,
-        r = this.texData.get(e),
-        o = r.texture,
-        a = r.texShape,
-        i = r.dtype,
-        s = r.usage;n && null != o && (this.releaseTexture(e, o, a, s), r.texture = null, r.texShape = null), null != t && (r.values = float32ToTypedArray(t, i));
-  }, e.prototype.releaseTexture = function (e, t, n, r) {
-    var o = this.texData.get(e),
-        a = o.shape,
-        i = o.dtype,
-        s = this.lruDataGPU.indexOf(e);s >= 0 && this.lruDataGPU.splice(s, 1), this.numBytesInGPU -= this.computeBytes(a, i), this.textureManager.releaseTexture(t, n, r);
-  }, e.prototype.acquireTexture = function (e, t, n) {
-    var r = this.texData.get(e),
-        o = r.shape,
-        a = r.dtype;return this.lruDataGPU.push(e), this.numBytesInGPU += this.computeBytes(o, a), this.textureManager.acquireTexture(t, n);
-  }, e.prototype.computeBytes = function (e, t) {
-    return sizeFromShape(e) * bytesPerElement(t);
-  }, e;
-}();function float32ToTypedArray(e, t) {
-  if ("float32" === t) return e;if ("int32" === t || "bool" === t) {
-    for (var n = "int32" === t ? new Int32Array(e.length) : new Uint8Array(e.length), r = 0; r < n.length; ++r) n[r] = Math.round(e[r]);return n;
-  }throw new Error("Unknown dtype " + t);
-}function typedArrayToFloat32(e, t) {
-  return e instanceof Float32Array ? e : new Float32Array(e);
-}ENV.get("IS_BROWSER") && ENV.registerBackend("webgl", function () {
-  return new MathBackendWebGL();
-}, 2, setTensorTracker);var MathBackendCPU = function () {
-  function e() {
-    this.data = new WeakMap(), this.firstUse = !0, ENV.get("IS_BROWSER") && (this.canvas = document.createElement("canvas"));
-  }return e.prototype.register = function (e, t, n) {
-    if (this.firstUse && (this.firstUse = !1, ENV.get("IS_NODE") && !ENV.get("IS_TEST") && console.warn("\n============================\nHi there 👋. Looks like you are running TensorFlow.js in Node.js. To speed things up dramatically, install our node backend, which binds to TensorFlow C++, by running npm i @tensorflow/tfjs-node, or npm i @tensorflow/tfjs-node-gpu if you have CUDA. Then call require('@tensorflow/tfjs-node'); (-gpu suffix for CUDA) at the start of your program. Visit https://github.com/tensorflow/tfjs-node for more details.\n============================\n")), this.data.has(e)) throw new Error("Data buffer is already registered");this.data.set(e, null);
-  }, e.prototype.write = function (e, t) {
-    if (null == t) throw new Error("MathBackendCPU.write(): values can not be null");this.throwIfNoData(e), this.data.set(e, t);
-  }, e.prototype.fromPixels = function (e, t) {
-    if (null == e) throw new Error("pixels passed to tf.fromPixels() can not be null");var n, r;if (ENV.get("IS_NODE") && null == e.getContext) throw new Error("When running in node, pixels must be an HTMLCanvasElement like the one returned by the `canvas` npm package");if (null != e.getContext) n = e.getContext("2d").getImageData(0, 0, e.width, e.height).data;else if (e instanceof ImageData) n = e.data;else {
-      if (!(e instanceof HTMLImageElement || e instanceof HTMLVideoElement)) throw new Error("pixels passed to tf.fromPixels() must be either an HTMLVideoElement, HTMLImageElement, HTMLCanvasElement or ImageData, but was " + e.constructor.name);if (null == this.canvas) throw new Error("Can't read pixels from HTMLImageElement outside the browser.");this.canvas.width = e.width, this.canvas.height = e.height, this.canvas.getContext("2d").drawImage(e, 0, 0, e.width, e.height), n = this.canvas.getContext("2d").getImageData(0, 0, e.width, e.height).data;
-    }if (4 === t) r = new Int32Array(n);else {
-      var o = e.width * e.height;r = new Int32Array(o * t);for (var a = 0; a < o; a++) for (var i = 0; i < t; ++i) r[a * t + i] = n[4 * a + i];
-    }var s = [e.height, e.width, t];return tensor3d(r, s, "int32");
-  }, e.prototype.read = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (t) {
-        return [2, this.readSync(e)];
-      });
-    });
-  }, e.prototype.readSync = function (e) {
-    return this.throwIfNoData(e), this.data.get(e);
-  }, e.prototype.disposeData = function (e) {
-    this.data.has(e) && this.data.delete(e);
-  }, e.prototype.time = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t;return __generator(this, function (n) {
-        return t = now(), e(), [2, { kernelMs: now() - t }];
-      });
-    });
-  }, e.prototype.memory = function () {
-    return { unreliable: !0 };
-  }, e.prototype.throwIfNoData = function (e) {
-    if (!this.data.has(e)) throw new Error("CPU backend: No data found for this tensor. Did you change your backend in the middle of the program? New backends can't use Tensors created with previous backends");
-  }, e.prototype.slice = function (e, t, n) {
-    for (var r = buffer(n, e.dtype), o = 0; o < r.size; ++o) {
-      var a = r.indexToLoc(o),
-          i = a.map(function (e, n) {
-        return e + t[n];
-      });r.set.apply(r, [e.get.apply(e, i)].concat(a));
-    }return r.toTensor();
-  }, e.prototype.stridedSlice = function (e, t, n, r, o, a) {
-    var i = getStridedSlicedInfo(e.shape, t, n, r, o, a),
-        s = i[0],
-        u = i[1];if (u.some(function (e) {
-      return 0 === e;
-    })) return tensor([], u);for (var c = buffer(u, e.dtype), l = 0; l < c.size; l++) {
-      for (var d = c.indexToLoc(l), p = new Array(d.length), h = 0; h < p.length; h++) p[h] = d[h] * r[h] + s[h];c.set.apply(c, [e.get.apply(e, p)].concat(d));
-    }return c.toTensor();
-  }, e.prototype.reverse = function (e, t) {
-    for (var n = buffer(e.shape, e.dtype), r = e.buffer(), o = function (o) {
-      var a = n.indexToLoc(o),
-          i = a.slice();t.forEach(function (t) {
-        return i[t] = e.shape[t] - 1 - i[t];
-      }), n.set.apply(n, [r.get.apply(r, i)].concat(a));
-    }, a = 0; a < n.size; a++) o(a);return n.toTensor();
-  }, e.prototype.concat = function (e, t) {
-    var n = computeOutShape(e.shape, t.shape, 1),
-        r = buffer(n, e.dtype);if (1 === e.shape[0] && 1 === t.shape[0]) {
-      var o = e.dataSync(),
-          a = t.dataSync(),
-          i = r.values;return i.set(o, 0), i.set(a, e.size), r.toTensor();
-    }for (var s = 0; s < n[0]; ++s) {
-      for (var u = 0; u < e.shape[1]; ++u) r.set(e.get(s, u), s, u);for (u = 0; u < t.shape[1]; ++u) r.set(t.get(s, u), s, u + e.shape[1]);
-    }return r.toTensor();
-  }, e.prototype.neg = function (e) {
-    return this.multiply(scalar(-1), e);
-  }, e.prototype.add = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, upcastType(e.dtype, t.dtype), function (e, t) {
-      return e + t;
-    });
-  }, e.prototype.subtract = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, upcastType(e.dtype, t.dtype), function (e, t) {
-      return e - t;
-    });
-  }, e.prototype.pow = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, e.dtype, function (e, t) {
-      return Math.pow(e, t);
-    });
-  }, e.prototype.matMul = function (e, t, n, r) {
-    for (var o = n ? e.shape[0] : e.shape[1], a = n ? e.shape[1] : e.shape[0], i = r ? t.shape[0] : t.shape[1], s = e.dataSync(), u = t.dataSync(), c = n ? [1, e.strides[0]] : [e.strides[0], 1], l = c[0], d = c[1], p = r ? [t.strides[0], 1] : [1, t.strides[0]], h = p[0], f = p[1], g = a * l, m = i * h, v = new Float32Array(a * i), y = 0, x = 0; x < g; x += l) for (var T = 0; T < m; T += h) {
-      for (var b = x, S = T, E = 0, w = 0; w < o; ++w) E += s[b] * u[S], b += d, S += f;v[y++] = E;
-    }return tensor2d(v, [a, i]);
-  }, e.prototype.multiply = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, upcastType(e.dtype, t.dtype), function (e, t) {
-      return e * t;
-    });
-  }, e.prototype.realDivide = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "float32", function (e, t) {
-      return e / t;
-    });
-  }, e.prototype.floorDiv = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "int32", function (e, t) {
-      return Math.floor(e / t);
-    });
-  }, e.prototype.sum = function (e, t) {
-    assertAxesAreInnerMostDims("sum", t, e.rank);for (var n = computeOutAndReduceShapes(e.shape, t), r = n[0], o = n[1], a = upcastType(e.dtype, "int32"), i = zeros(r, a), s = sizeFromShape(o), u = i.dataSync(), c = e.dataSync(), l = 0; l < u.length; ++l) {
-      for (var d = l * s, p = 0, h = 0; h < s; ++h) p += c[d + h];u[l] = p;
-    }return i;
-  }, e.prototype.unsortedSegmentSum = function (e, t, n) {
-    for (var r = [], o = e.rank - t.rank, a = 0; a < o; ++a) t = t.expandDims(a + 1);for (a = 0; a < n; ++a) {
-      var i = scalar(a, "int32"),
-          s = equal(i, t).asType("float32").mul(e).sum(0);r.push(s);
-    }return stack(r);
-  }, e.prototype.argMin = function (e, t) {
-    var n = [t];assertAxesAreInnerMostDims("argMin", n, e.rank);for (var r = computeOutAndReduceShapes(e.shape, n), o = r[0], a = r[1], i = zeros(o, "int32"), s = sizeFromShape(a), u = i.dataSync(), c = e.dataSync(), l = 0; l < u.length; ++l) {
-      for (var d = l * s, p = c[d], h = 0, f = 0; f < s; ++f) {
-        var g = c[d + f];g < p && (p = g, h = f);
-      }u[l] = h;
-    }return i;
-  }, e.prototype.argMax = function (e, t) {
-    var n = [t];assertAxesAreInnerMostDims("argMax", n, e.rank);for (var r = computeOutAndReduceShapes(e.shape, n), o = r[0], a = r[1], i = zeros(o, "int32"), s = sizeFromShape(a), u = i.dataSync(), c = e.dataSync(), l = 0; l < u.length; ++l) {
-      for (var d = l * s, p = c[d], h = 0, f = 0; f < s; ++f) {
-        var g = c[d + f];g > p && (p = g, h = f);
-      }u[l] = h;
-    }return i;
-  }, e.prototype.cumsum = function (e, t, n, r) {
-    if (t !== e.rank - 1) throw new Error("backend.cumsum in CPU expects an inner-most axis=" + (e.rank - 1) + " but got axis=" + t);for (var o = upcastType(e.dtype, "int32"), a = zeros(e.shape, o), i = a.dataSync(), s = e.dataSync(), u = e.shape[e.rank - 1], c = r ? function (e, t) {
-      return e + u - t - 1;
-    } : function (e, t) {
-      return e + t;
-    }, l = 0; l < s.length; l += u) for (var d = 0; d < u; d++) {
-      var p = c(l, d);if (0 === d) i[p] = n ? 0 : s[p];else {
-        var h = c(l, d - 1);i[p] = n ? s[h] + i[h] : s[p] + i[h];
-      }
-    }return a;
-  }, e.prototype.equal = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e === t ? 1 : 0;
-    });
-  }, e.prototype.notEqual = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e !== t ? 1 : 0;
-    });
-  }, e.prototype.less = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e < t ? 1 : 0;
-    });
-  }, e.prototype.lessEqual = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e <= t ? 1 : 0;
-    });
-  }, e.prototype.greater = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e > t ? 1 : 0;
-    });
-  }, e.prototype.greaterEqual = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e >= t ? 1 : 0;
-    });
-  }, e.prototype.logicalNot = function (e) {
-    for (var t = e.dataSync(), n = new Int32Array(t.length), r = 0; r < t.length; ++r) n[r] = t[r] ? 0 : 1;return Tensor.make(e.shape, { values: n }, "bool");
-  }, e.prototype.logicalAnd = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e && t;
-    });
-  }, e.prototype.logicalOr = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, "bool", function (e, t) {
-      return e || t;
-    });
-  }, e.prototype.where = function (e, t, n, r) {
-    for (var o = e.dataSync(), a = t.dataSync(), i = n.dataSync(), s = zeros(t.shape, r), u = s.dataSync(), c = 0, l = 0 === e.rank || e.rank > 1 || 1 === t.rank ? 1 : t.shape[1], d = 0; d < o.length; d++) for (var p = 0; p < l; p++) 1 === o[d] ? u[c++] = a[d] : u[c++] = i[d];return s;
-  }, e.prototype.topKValues = function (e, t) {
-    return this.topK(e, t).values;
-  }, e.prototype.topKIndices = function (e, t) {
-    return this.topK(e, t).indices;
-  }, e.prototype.topK = function (e, t) {
-    for (var n = e.dataSync(), r = [], o = 0; o < n.length; o++) r.push({ value: n[o], index: o });r.sort(function (e, t) {
-      return t.value - e.value;
-    });var a = getTypedArrayFromDType(e.dtype, t),
-        i = new Int32Array(t);for (o = 0; o < t; o++) a[o] = r[o].value, i[o] = r[o].index;return { values: tensor1d(a, e.dtype), indices: tensor1d(i, "int32") };
-  }, e.prototype.min = function (e, t) {
-    assertAxesAreInnerMostDims("min", t, e.rank);for (var n = computeOutAndReduceShapes(e.shape, t), r = n[0], o = n[1], a = zeros(r, e.dtype), i = sizeFromShape(o), s = a.dataSync(), u = e.dataSync(), c = 0; c < s.length; ++c) {
-      for (var l = c * i, d = u[l], p = 0; p < i; ++p) {
-        var h = u[l + p];h < d && (d = h);
-      }s[c] = d;
-    }return a;
-  }, e.prototype.minimum = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, e.dtype, function (e, t) {
-      return Math.min(e, t);
-    });
-  }, e.prototype.mod = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, e.dtype, function (e, t) {
-      var n = e % t;return e < 0 && t < 0 || e >= 0 && t >= 0 ? n : (n + t) % t;
-    });
-  }, e.prototype.max = function (e, t) {
-    assertAxesAreInnerMostDims("max", t, e.rank);for (var n = computeOutAndReduceShapes(e.shape, t), r = n[0], o = n[1], a = zeros(r, e.dtype), i = sizeFromShape(o), s = a.dataSync(), u = e.dataSync(), c = 0; c < s.length; ++c) {
-      for (var l = c * i, d = u[l], p = 0; p < i; ++p) {
-        var h = u[l + p];h > d && (d = h);
-      }s[c] = d;
-    }return a;
-  }, e.prototype.maximum = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, e.dtype, function (e, t) {
-      return Math.max(e, t);
-    });
-  }, e.prototype.all = function (e, t) {
-    assertAxesAreInnerMostDims("all", t, e.rank);for (var n = computeOutAndReduceShapes(e.shape, t), r = n[0], o = n[1], a = zeros(r, e.dtype), i = sizeFromShape(o), s = a.dataSync(), u = e.dataSync(), c = 0; c < s.length; ++c) {
-      for (var l = c * i, d = u[l], p = 0; p < i; ++p) {
-        var h = u[l + p];d = d && h;
-      }s[c] = d;
-    }return a;
-  }, e.prototype.any = function (e, t) {
-    assertAxesAreInnerMostDims("any", t, e.rank);for (var n = computeOutAndReduceShapes(e.shape, t), r = n[0], o = n[1], a = zeros(r, e.dtype), i = sizeFromShape(o), s = a.dataSync(), u = e.dataSync(), c = 0; c < s.length; ++c) {
-      for (var l = c * i, d = u[l], p = 0; p < i; ++p) {
-        var h = u[l + p];d = d || h;
-      }s[c] = d;
-    }return a;
-  }, e.prototype.squaredDifference = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, e.dtype, function (e, t) {
-      var n = e - t;return n * n;
-    });
-  }, e.prototype.ceil = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) n[r] = Math.ceil(t[r]);return Tensor.make(e.shape, { values: n });
-  }, e.prototype.floor = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) n[r] = Math.floor(t[r]);return Tensor.make(e.shape, { values: n });
-  }, e.prototype.sign = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) t[r] < 0 ? n[r] = -1 : t[r] > 0 ? n[r] = 1 : n[r] = 0;return Tensor.make(e.shape, { values: n });
-  }, e.prototype.round = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) {
-      var o = Math.floor(t[r]);t[r] - o < .5 ? n[r] = Math.floor(t[r]) : t[r] - o > .5 ? n[r] = Math.ceil(t[r]) : n[r] = o % 2 == 0 ? o : o + 1;
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.exp = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) n[r] = Math.exp(t[r]);return Tensor.make(e.shape, { values: n });
-  }, e.prototype.expm1 = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) n[r] = Math.expm1(t[r]);return Tensor.make(e.shape, { values: n });
-  }, e.prototype.log = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) {
-      var o = t[r];n[r] = Math.log(o);
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.log1p = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) {
-      var o = t[r];n[r] = Math.log1p(o);
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.sqrt = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) {
-      var o = t[r];n[r] = Math.sqrt(o);
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.rsqrt = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) {
-      var o = t[r];n[r] = 1 / Math.sqrt(o);
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.square = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) {
-      var o = t[r];n[r] = o * o;
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.reciprocal = function (e) {
-    for (var t = e.dataSync(), n = new Float32Array(t.length), r = 0; r < t.length; ++r) n[r] = 1 / t[r];return Tensor.make(e.shape, { values: n });
-  }, e.prototype.relu = function (e) {
-    for (var t = zeros(e.shape, e.dtype), n = t.dataSync(), r = e.dataSync(), o = 0; o < r.length; ++o) n[o] = Math.max(0, r[o]);return t;
-  }, e.prototype.elu = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) {
-      var o = n[r];t[r] = o >= 0 ? o : Math.exp(o) - 1;
-    }return Tensor.make(e.shape, { values: t });
-  }, e.prototype.eluDer = function (e, t) {
-    for (var n = new Float32Array(t.size), r = t.dataSync(), o = e.dataSync(), a = 0; a < r.length; ++a) {
-      var i = r[a];n[a] = i >= 1 ? o[a] : o[a] * (i + 1);
-    }return Tensor.make(t.shape, { values: n });
-  }, e.prototype.selu = function (e) {
-    for (var t = SELU_SCALEALPHA, n = SELU_SCALE, r = new Float32Array(e.size), o = e.dataSync(), a = 0; a < o.length; ++a) {
-      var i = o[a];r[a] = i >= 0 ? n * i : t * (Math.exp(i) - 1);
-    }return Tensor.make(e.shape, { values: r });
-  }, e.prototype.clip = function (e, t, n) {
-    for (var r = new Float32Array(e.size), o = e.dataSync(), a = 0; a < o.length; ++a) r[a] = Math.min(n, Math.max(t, o[a]));return Tensor.make(e.shape, { values: r });
-  }, e.prototype.abs = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.abs(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.int = function (e) {
-    for (var t = new Int32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = n[r];return Tensor.make(e.shape, { values: t }, "int32");
-  }, e.prototype.sigmoid = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = 1 / (1 + Math.exp(-n[r]));return Tensor.make(e.shape, { values: t });
-  }, e.prototype.softplus = function (e) {
-    for (var t = Math.log(1.1920928955078125e-7) + 2, n = new Float32Array(e.size), r = e.dataSync(), o = 0; o < r.length; ++o) {
-      var a = r[o] > -t,
-          i = r[o] < t,
-          s = Math.exp(r[o]),
-          u = void 0;u = i ? s : a ? r[o] : Math.log(1 + s), n[o] = u;
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.sin = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.sin(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.cos = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.cos(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.tan = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.tan(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.asin = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.asin(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.acos = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.acos(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.atan = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.atan(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.atan2 = function (e, t) {
-    return this.broadcastedBinaryOp(e, t, e.dtype, function (e, t) {
-      return Math.atan2(e, t);
-    });
-  }, e.prototype.sinh = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.sinh(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.cosh = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.cosh(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.tanh = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = tanh(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.asinh = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.asinh(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.acosh = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.acosh(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.atanh = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = 0; r < n.length; ++r) t[r] = Math.atanh(n[r]);return Tensor.make(e.shape, { values: t });
-  }, e.prototype.erf = function (e) {
-    for (var t = new Float32Array(e.size), n = e.dataSync(), r = ERF_P, o = ERF_A1, a = ERF_A2, i = ERF_A3, s = ERF_A4, u = ERF_A5, c = 0; c < n.length; ++c) {
-      var l = n[c],
-          d = 1 / (1 + r * l);t[c] = 1 - ((((u * d + s) * d + i) * d + a) * d + o) * d * Math.exp(-l * l);
-    }return Tensor.make(e.shape, { values: t });
-  }, e.prototype.step = function (e, t) {
-    void 0 === t && (t = 0);for (var n = new Float32Array(e.size), r = e.dataSync(), o = 0; o < r.length; ++o) {
-      var a = r[o];isNaN(a) ? n[o] = NaN : n[o] = a > 0 ? 1 : t;
-    }return Tensor.make(e.shape, { values: n });
-  }, e.prototype.conv2d = function (e, t, n) {
-    for (var r = n.filterHeight, o = n.filterWidth, a = n.dilationHeight, i = n.dilationWidth, s = n.padInfo.left, u = n.padInfo.top, c = buffer(n.outShape, e.dtype), l = 0; l < n.batchSize; ++l) for (var d = 0; d < n.outChannels; ++d) for (var p = 0; p < n.outHeight; ++p) for (var h = p * n.strideHeight - s, f = 0; f < n.outWidth; ++f) {
-      for (var g = f * n.strideWidth - u, m = 0, v = 0; v < r; v++) {
-        var y = h + v * a;if (!(y < 0 || y >= n.inHeight)) for (var x = 0; x < o; x++) {
-          var T = g + x * i;if (!(T < 0 || T >= n.inWidth)) for (var b = 0; b < n.inChannels; ++b) {
-            m += e.get(l, y, T, b) * t.get(v, x, b, d);
-          }
-        }
-      }c.set(m, l, p, f, d);
-    }return c.toTensor();
-  }, e.prototype.conv2dDerInput = function (e, t, n) {
-    for (var r = buffer(n.inShape, "float32"), o = r.values, a = r.strides, i = a[0], s = a[1], u = a[2], c = e.dataSync(), l = e.strides, d = l[0], p = l[1], h = l[2], f = t.dataSync(), g = t.strides, m = g[0], v = g[1], y = g[2], x = n.batchSize, T = n.filterHeight, b = n.filterWidth, S = n.inChannels, E = n.inHeight, w = n.inWidth, A = n.outChannels, _ = n.outHeight, R = n.outWidth, C = n.strideHeight, O = n.strideWidth, N = T - 1 - n.padInfo.top, k = b - 1 - n.padInfo.left, I = 0; I < x; ++I) for (var M = 0; M < S; ++M) for (var D = 0; D < E; ++D) for (var P = D - N, F = Math.max(0, Math.ceil(P / C)), L = Math.min(_, (T + P) / C), B = 0; B < w; ++B) {
-      for (var U = B - k, z = Math.max(0, Math.ceil(U / O)), V = Math.min(R, (b + U) / O), G = 0, H = F; H < L; ++H) for (var W = H * C - P, q = z; q < V; ++q) for (var $ = d * I + p * H + h * q, X = m * (T - 1 - W) + v * (b - 1 - (q * O - U)) + y * M, j = 0; j < A; ++j) {
-        G += c[$ + j] * f[X + j];
-      }o[i * I + s * D + u * B + M] = G;
-    }return r.toTensor();
-  }, e.prototype.conv2dDerFilter = function (e, t, n) {
-    for (var r = n.strideHeight, o = n.strideWidth, a = n.filterHeight, i = n.filterWidth, s = buffer(n.filterShape, "float32"), u = n.padInfo.left, c = n.padInfo.top, l = 0; l < a; ++l) for (var d = Math.max(0, Math.ceil((c - l) / r)), p = Math.min(n.outHeight, (n.inHeight + c - l) / r), h = 0; h < i; ++h) for (var f = Math.max(0, Math.ceil((u - h) / o)), g = Math.min(n.outWidth, (n.inWidth + u - h) / o), m = 0; m < n.inChannels; ++m) for (var v = 0; v < n.outChannels; ++v) {
-      for (var y = 0, x = 0; x < n.batchSize; ++x) for (var T = d; T < p; ++T) for (var b = l + T * r - c, S = f; S < g; ++S) {
-        var E = h + S * o - u;y += e.get(x, b, E, m) * t.get(x, T, S, v);
-      }s.set(y, l, h, m, v);
-    }return s.toTensor();
-  }, e.prototype.depthwiseConv2D = function (e, t, n) {
-    for (var r = n.filterHeight, o = n.filterWidth, a = n.dilationHeight, i = n.dilationWidth, s = n.padInfo.left, u = n.padInfo.top, c = n.outChannels / n.inChannels, l = buffer(n.outShape, e.dtype), d = 0; d < n.batchSize; ++d) for (var p = 0; p < n.inChannels; ++p) for (var h = 0; h < n.outHeight; ++h) for (var f = h * n.strideHeight - s, g = 0; g < n.outWidth; ++g) for (var m = g * n.strideWidth - u, v = 0; v < c; ++v) {
-      for (var y = 0, x = 0; x < r; ++x) {
-        var T = f + x * a;if (!(T < 0 || T >= n.inHeight)) for (var b = 0; b < o; ++b) {
-          var S = m + b * i;if (!(S < 0 || S >= n.inWidth)) y += e.get(d, T, S, p) * t.get(x, b, p, v);
-        }
-      }l.set(y, d, h, g, p * c + v);
-    }return l.toTensor();
-  }, e.prototype.depthwiseConv2DDerInput = function (e, t, n) {
-    for (var r = buffer(n.inShape, "float32"), o = r.values, a = r.strides, i = a[0], s = a[1], u = a[2], c = e.dataSync(), l = e.strides, d = l[0], p = l[1], h = l[2], f = t.dataSync(), g = t.strides, m = g[0], v = g[1], y = g[2], x = n.batchSize, T = n.filterHeight, b = n.filterWidth, S = n.inChannels, E = n.inHeight, w = n.inWidth, A = n.outChannels, _ = n.outHeight, R = n.outWidth, C = n.strideHeight, O = n.strideWidth, N = T - 1 - n.padInfo.top, k = b - 1 - n.padInfo.left, I = A / S, M = 0; M < x; ++M) for (var D = 0; D < S; ++D) for (var P = 0; P < E; ++P) for (var F = P - N, L = Math.max(0, Math.ceil(F / C)), B = Math.min(_, (T + F) / C), U = 0; U < w; ++U) {
-      for (var z = U - k, V = Math.max(0, Math.ceil(z / O)), G = Math.min(R, (b + z) / O), H = 0, W = L; W < B; ++W) for (var q = W * C - F, $ = V; $ < G; ++$) for (var X = d * M + p * W + h * $, j = m * (T - 1 - q) + v * (b - 1 - ($ * O - z)) + y * D, K = 0; K < I; ++K) {
-        H += c[X + (D * I + K)] * f[j + K];
-      }o[i * M + s * P + u * U + D] = H;
-    }return r.toTensor();
-  }, e.prototype.depthwiseConv2DDerFilter = function (e, t, n) {
-    for (var r = n.strideHeight, o = n.strideWidth, a = n.filterHeight, i = n.filterWidth, s = buffer(n.filterShape, "float32"), u = n.padInfo.left, c = n.padInfo.top, l = n.outChannels / n.inChannels, d = 0; d < a; ++d) for (var p = Math.max(0, Math.ceil((c - d) / r)), h = Math.min(n.outHeight, (n.inHeight + c - d) / r), f = 0; f < i; ++f) for (var g = Math.max(0, Math.ceil((u - f) / o)), m = Math.min(n.outWidth, (n.inWidth + u - f) / o), v = 0; v < n.outChannels; ++v) {
-      for (var y = Math.trunc(v / l), x = v % l, T = 0, b = 0; b < n.batchSize; ++b) for (var S = p; S < h; ++S) for (var E = d + S * r - c, w = g; w < m; ++w) {
-        var A = f + w * o - u;T += e.get(b, E, A, y) * t.get(b, S, w, v);
-      }s.set(T, d, f, y, x);
-    }return s.toTensor();
-  }, e.prototype.tile = function (e, t) {
-    for (var n = new Array(e.rank), r = 0; r < n.length; r++) n[r] = e.shape[r] * t[r];var o = buffer(n, e.dtype),
-        a = e.buffer();for (r = 0; r < o.values.length; ++r) {
-      for (var i = o.indexToLoc(r), s = new Array(e.rank), u = 0; u < s.length; u++) s[u] = i[u] % e.shape[u];var c = a.locToIndex(s);o.values[r] = a.values[c];
-    }return o.toTensor();
-  }, e.prototype.pad = function (e, t, n) {
-    var r = t.map(function (t, n) {
-      return t[0] + e.shape[n] + t[1];
-    }),
-        o = t.map(function (e) {
-      return e[0];
-    }),
-        a = e.buffer(),
-        i = buffer(r, e.dtype);0 !== n && i.values.fill(n);for (var s = 0; s < e.size; s++) {
-      var u = a.indexToLoc(s),
-          c = u.map(function (e, t) {
-        return e + o[t];
-      });i.set.apply(i, [e.get.apply(e, u)].concat(c));
-    }return i.toTensor();
-  }, e.prototype.transpose = function (e, t) {
-    for (var n = new Array(e.rank), r = 0; r < n.length; r++) n[r] = e.shape[t[r]];var o = e.dataSync(),
-        a = buffer(n, e.dtype),
-        i = e.buffer();for (r = 0; r < e.size; ++r) {
-      for (var s = i.indexToLoc(r), u = new Array(s.length), c = 0; c < u.length; c++) u[c] = s[t[c]];var l = a.locToIndex(u);a.values[l] = o[r];
-    }return a.toTensor();
-  }, e.prototype.gather = function (e, t, n) {
-    var r = e.shape.slice(),
-        o = t.dataSync();r[n] = o.length;for (var a = buffer(r, e.dtype), i = e.buffer(), s = 0; s < a.size; ++s) {
-      var u = a.indexToLoc(s),
-          c = u.slice();c[n] = o[u[n]];var l = i.locToIndex(c);a.values[s] = i.values[l];
-    }return a.toTensor();
-  }, e.prototype.pool = function (e, t, n) {
-    for (var r = t.strideHeight, o = t.strideWidth, a = t.filterHeight, i = t.filterWidth, s = buffer(t.outShape, "float32"), u = t.padInfo.top, c = t.padInfo.left, l = 0; l < t.batchSize; ++l) for (var d = 0; d < t.inChannels; ++d) for (var p = 0; p < t.outHeight; ++p) for (var h = p * r - u, f = Math.max(0, h), g = Math.min(t.inHeight, a + h), m = 0; m < t.outWidth; ++m) {
-      for (var v = m * o - c, y = Math.max(0, v), x = Math.min(t.inWidth, i + v), T = "max" === n ? Number.NEGATIVE_INFINITY : Number.POSITIVE_INFINITY, b = 0, S = 0, E = f; E < g; ++E) {
-        for (var w = y; w < x; ++w) {
-          var A = e.get(l, E, w, d);"max" === n && A > T ? T = A : "avg" === n && (b += A, S++);
-        }if (isNaN(T)) break;
-      }s.set("avg" === n ? b / S : T, l, p, m, d);
-    }return s.toTensor();
-  }, e.prototype.maxPool = function (e, t) {
-    return this.pool(e, t, "max");
-  }, e.prototype.maxPoolPositions = function (e, t) {
-    for (var n = buffer(t.outShape, "int32"), r = t.strideHeight, o = t.strideWidth, a = t.filterHeight, i = t.filterWidth, s = t.padInfo.top, u = t.padInfo.left, c = 0; c < t.batchSize; ++c) for (var l = 0; l < t.inChannels; ++l) for (var d = 0; d < t.outHeight; ++d) for (var p = d * r - s, h = Math.max(0, p), f = Math.min(t.inHeight, a + p), g = 0; g < t.outWidth; ++g) {
-      for (var m = g * o - u, v = Math.max(0, m), y = Math.min(t.inWidth, i + m), x = Number.NEGATIVE_INFINITY, T = -1, b = h; b < f; ++b) for (var S = b - p, E = v; E < y; ++E) {
-        var w = E - m,
-            A = e.get(c, b, E, l);A > x && (x = A, T = S * i + w);
-      }n.set(T, c, d, g, l);
-    }return n.toTensor();
-  }, e.prototype.maxPoolBackprop = function (e, t, n, r) {
-    for (var o = this.maxPoolPositions(t, r), a = r.strideHeight, i = r.strideWidth, s = r.filterHeight, u = r.filterWidth, c = u - 1 - r.padInfo.left, l = s - 1 - r.padInfo.top, d = buffer(t.shape, "float32"), p = 0; p < r.batchSize; ++p) for (var h = 0; h < r.inChannels; ++h) for (var f = 0; f < r.inHeight; ++f) for (var g = 0; g < r.inWidth; ++g) {
-      for (var m = f - l, v = g - c, y = 0, x = 0; x < s; ++x) {
-        var T = (m + x) / a;if (!(T < 0 || T >= r.outHeight || Math.floor(T) !== T)) for (var b = 0; b < u; ++b) {
-          var S = (v + b) / i;if (!(S < 0 || S >= r.outWidth || Math.floor(S) !== S)) {
-            var E = s * u - 1 - o.get(p, T, S, h) === x * u + b ? 1 : 0;if (0 !== E) y += e.get(p, T, S, h) * E;
-          }
-        }
-      }d.set(y, p, f, g, h);
-    }return d.toTensor();
-  }, e.prototype.avgPoolBackprop = function (e, t, n) {
-    for (var r = n.strideHeight, o = n.strideWidth, a = n.filterHeight, i = n.filterWidth, s = i - 1 - n.padInfo.left, u = a - 1 - n.padInfo.top, c = buffer(t.shape, "float32"), l = 1 / (a * i), d = 0; d < n.batchSize; ++d) for (var p = 0; p < n.inChannels; ++p) for (var h = 0; h < n.inHeight; ++h) for (var f = 0; f < n.inWidth; ++f) {
-      for (var g = h - u, m = f - s, v = 0, y = 0; y < a; ++y) {
-        var x = (g + y) / r;if (!(x < 0 || x >= n.outHeight || Math.floor(x) !== x)) for (var T = 0; T < i; ++T) {
-          var b = (m + T) / o;if (!(b < 0 || b >= n.outWidth || Math.floor(b) !== b)) v += e.get(d, x, b, p);
-        }
-      }c.set(v * l, d, h, f, p);
-    }return c.toTensor();
-  }, e.prototype.cast = function (e, t) {
-    return castTensor(e, t, this);
-  }, e.prototype.reshape = function (e, t) {
-    return reshapeTensor(e, t);
-  }, e.prototype.avgPool = function (e, t) {
-    return this.pool(e, t, "avg").toFloat();
-  }, e.prototype.resizeBilinear = function (e, t, n, r) {
-    for (var o = e.shape, a = o[0], i = o[1], s = o[2], u = o[3], c = buffer([a, t, n, u], e.dtype), l = [r && t > 1 ? i - 1 : i, r && n > 1 ? s - 1 : s], d = [r && t > 1 ? t - 1 : t, r && n > 1 ? n - 1 : n], p = 0; p < a; p++) for (var h = 0; h < t; h++) for (var f = 0; f < n; f++) for (var g = 0; g < u; g++) {
-      var m = l[0] * h / d[0],
-          v = l[1] * f / d[1],
-          y = Math.floor(m),
-          x = Math.min(i - 1, Math.ceil(m)),
-          T = Math.floor(v),
-          b = Math.min(s - 1, Math.ceil(v)),
-          S = e.get(p, y, T, g),
-          E = e.get(p, x, T, g),
-          w = v - T,
-          A = S + (e.get(p, y, b, g) - S) * w,
-          _ = A + (E + (e.get(p, x, b, g) - E) * w - A) * (m - y);c.set(_, p, h, f, g);
-    }return c.toTensor();
-  }, e.prototype.resizeBilinearBackprop = function (e, t, n) {
-    for (var r = t.shape, o = r[0], a = r[1], i = r[2], s = r[3], u = e.shape, c = u[1], l = u[2], d = buffer([o, a, i, s], t.dtype), p = [n && c > 1 ? a - 1 : a, n && l > 1 ? i - 1 : i], h = [n && c > 1 ? c - 1 : c, n && l > 1 ? l - 1 : l], f = p[0] / h[0], g = p[1] / h[1], m = 0; m < o; m++) for (var v = 0; v < c; v++) for (var y = v * f, x = Math.floor(y), T = Math.min(Math.ceil(y), a - 1), b = y - x, S = 1 - b, E = 0; E < l; E++) for (var w = E * g, A = Math.floor(w), _ = Math.min(Math.ceil(w), i - 1), R = w - A, C = 1 - R, O = 0; O < s; O++) {
-      var N = e.get(m, v, E, O),
-          k = d.get(m, x, A, O);k += N * S * C, d.set(k, m, x, A, O);var I = d.get(m, x, _, O);I += N * S * R, d.set(I, m, x, _, O);var M = d.get(m, T, A, O);M += N * b * C, d.set(M, m, T, A, O);var D = d.get(m, T, _, O);D += N * b * R, d.set(D, m, T, _, O);
-    }return d.toTensor();
-  }, e.prototype.resizeNearestNeighbor = function (e, t, n, r) {
-    for (var o = e.shape, a = o[0], i = o[1], s = o[2], u = o[3], c = buffer([a, t, n, u], e.dtype), l = [r && t > 1 ? i - 1 : i, r && n > 1 ? s - 1 : s], d = [r && t > 1 ? t - 1 : t, r && n > 1 ? n - 1 : n], p = 0; p < a; p++) for (var h = 0; h < t; h++) for (var f = 0; f < n; f++) for (var g = 0; g < u; g++) {
-      var m = l[0] * h / d[0],
-          v = l[1] * f / d[1],
-          y = Math.min(i - 1, r ? Math.round(m) : Math.floor(m)),
-          x = Math.min(s - 1, r ? Math.round(v) : Math.floor(v)),
-          T = e.get(p, y, x, g);c.set(T, p, h, f, g);
-    }return c.toTensor();
-  }, e.prototype.resizeNearestNeighborBackprop = function (e, t, n) {
-    for (var r = t.shape, o = r[0], a = r[1], i = r[2], s = r[3], u = e.shape, c = u[1], l = u[2], d = buffer([o, a, i, s], t.dtype), p = [n && c > 1 ? a - 1 : a, n && l > 1 ? i - 1 : i], h = [n && c > 1 ? c - 1 : c, n && l > 1 ? l - 1 : l], f = 1 / (p[0] / h[0]), g = 1 / (p[1] / h[1]), m = 2 * Math.ceil(f) + 2, v = 2 * Math.ceil(g) + 2, y = 0; y < o; y++) for (var x = 0; x < a; x++) for (var T = 0; T < i; T++) for (var b = Math.floor(x * f), S = Math.floor(b - m / 2), E = Math.floor(T * g), w = Math.floor(E - v / 2), A = 0; A < s; A++) {
-      for (var _ = 0, R = 0; R < m; R++) {
-        var C = R + S;if (!(C < 0 || C >= c)) for (var O = 0; O < v; O++) {
-          var N = O + w;if (!(N < 0 || N >= l)) {
-            var k = p[0] * (C / h[0]),
-                I = p[1] * (N / h[1]),
-                M = Math.min(a - 1, n ? Math.round(k) : Math.floor(k)),
-                D = Math.min(i - 1, n ? Math.round(I) : Math.floor(I));x === M && T === D && (_ += e.get(y, C, N, A));
-          }
-        }
-      }d.set(_, y, x, T, A);
-    }return d.toTensor();
-  }, e.prototype.batchNormalization = function (e, t, n, r, o, a) {
-    for (var i = e.dataSync(), s = t.dataSync(), u = n.dataSync(), c = o ? o.dataSync() : new Float32Array([1]), l = a ? a.dataSync() : new Float32Array([0]), d = new Float32Array(i.length), p = 0; p < i.length; p++) d[p] = l[p % l.length] + (i[p] - s[p % s.length]) * c[p % c.length] / Math.sqrt(u[p % u.length] + r);return tensor4d(d, e.shape);
-  }, e.prototype.localResponseNormalization4D = function (e, t, n, r, o) {
-    var a = buffer(e.shape, "float32"),
-        i = t,
-        s = a.shape[3] - 1;function u(t, n, r, o) {
-      for (var a = 0, u = Math.max(0, o - i); u <= Math.min(o + i, s); u++) {
-        var c = e.get(t, n, r, u);a += c * c;
-      }return a;
-    }for (var c = 0; c < a.shape[0]; c++) for (var l = 0; l <= a.shape[1]; l++) for (var d = 0; d < a.shape[2]; d++) for (var p = 0; p < a.shape[3]; p++) {
-      var h = u(c, l, d, p),
-          f = e.get(c, l, d, p) * Math.pow(n + r * h, -o);a.set(f, c, l, d, p);
-    }return a.toTensor();
-  }, e.prototype.multinomial = function (e, t, n, r) {
-    for (var o = t ? e : softmax(e), a = o.shape[0], i = o.shape[1], s = zeros([a, n], "int32"), u = s.dataSync(), c = o.dataSync(), l = 0; l < a; ++l) {
-      var d = l * i,
-          p = new Float32Array(i - 1);p[0] = c[d];for (var h = 1; h < p.length; ++h) p[h] = p[h - 1] + c[d + h];for (var f = seedrandom_1(r.toString()), g = l * n, m = 0; m < n; ++m) {
-        var v = f();u[g + m] = p.length;for (var y = 0; y < p.length; y++) if (v < p[y]) {
-          u[g + m] = y;break;
-        }
-      }
-    }return s;
-  }, e.prototype.oneHot = function (e, t, n, r) {
-    var o = new Float32Array(e.size * t);o.fill(r);for (var a = 0; a < e.size; ++a) e.get(a) >= 0 && e.get(a) < t && (o[a * t + e.get(a)] = n);return tensor2d(o, [e.size, t], "int32");
-  }, e.prototype.broadcastedBinaryOp = function (e, t, n, r) {
-    for (var o = assertAndGetBroadcastShape(e.shape, t.shape), a = buffer(o, n), i = e.dataSync(), s = t.dataSync(), u = getBroadcastDims(e.shape, o), c = getBroadcastDims(t.shape, o), l = e.buffer(), d = t.buffer(), p = function (n) {
-      var o = a.indexToLoc(n),
-          p = o.slice(-e.rank);u.forEach(function (e) {
-        return p[e] = 0;
-      });var h = l.locToIndex(p),
-          f = o.slice(-t.rank);c.forEach(function (e) {
-        return f[e] = 0;
-      });var g = d.locToIndex(f);a.values[n] = r(i[h], s[g]);
-    }, h = 0; h < a.values.length; ++h) p(h);return a.toTensor();
-  }, e.prototype.dispose = function () {}, e;
-}();ENV.registerBackend("cpu", function () {
-  return new MathBackendCPU();
-}, 1, setTensorTracker);var BrowserUtil = function () {
-  function e() {}return e.nextFrame = function () {
-    return new Promise(function (e) {
-      return requestAnimationFrame(function () {
-        return e();
-      });
-    });
-  }, __decorate([doc({ heading: "Performance", subheading: "Timing" })], e, "nextFrame", null), e;
-}(),
-    DTYPE_VALUE_SIZE_MAP = { float32: 4, int32: 4, uint16: 2, uint8: 1, bool: 1 };function encodeWeights(e) {
-  return __awaiter(this, void 0, void 0, function () {
-    var t, n, r, o;return __generator(this, function (a) {
-      switch (a.label) {case 0:
-          for (r in t = [], n = [], e) {
-            if ("float32" !== (o = e[r]).dtype && "int32" !== o.dtype && "bool" !== o.dtype) throw new Error("Unsupported dtype in weight '" + r + "': " + o.dtype);t.push({ name: r, shape: o.shape, dtype: o.dtype }), n.push(o.data());
-          }return [4, Promise.all(n)];case 1:
-          return [2, { data: concatenateTypedArrays(a.sent()), specs: t }];}
-    });
-  });
-}function decodeWeights(e, t) {
-  for (var n = {}, r = 0, o = 0, a = t; o < a.length; o++) {
-    var i = a[o],
-        s = i.name,
-        u = i.dtype,
-        c = i.shape;if (null != i.quantization) throw new Error("decodeWeights does not support quantization yet, but encountered weight '" + s + " with quantization.'");var l = sizeFromShape(c),
-        d = void 0;if ("float32" === u) d = TensorOps.tensor(new Float32Array(e, r, l), c, "float32");else if ("int32" === u) d = TensorOps.tensor(new Int32Array(e, r, l), c, "int32");else {
-      if ("bool" !== u) throw new Error("Unsupported dtype in weight '" + s + "': " + u);d = TensorOps.tensor(new Uint8Array(e, r, l), c, "bool");
-    }n[s] = d, r += l * DTYPE_VALUE_SIZE_MAP[u];
-  }return n;
-}function concatenateTypedArrays(e) {
-  if (null === e) throw new Error("Invalid input value: " + JSON.stringify(e));var t = 0;e.forEach(function (e) {
-    if (e instanceof Float32Array || e instanceof Int32Array) t += e.buffer.byteLength;else {
-      if (!(e instanceof Uint8Array)) throw new Error("Unsupported TypedArray subtype: " + e.constructor.name);t += e.buffer.byteLength;
-    }
-  });var n = new Uint8Array(t),
-      r = 0;return e.forEach(function (e) {
-    n.set(new Uint8Array(e.buffer), r), r += e.buffer.byteLength;
-  }), n.buffer;
-}var useNodeBuffer = "undefined" != typeof Buffer && ("undefined" == typeof Blob || "undefined" == typeof atob || "undefined" == typeof btoa);function stringByteLength(e) {
-  return useNodeBuffer ? Buffer.byteLength(e) : new Blob([e]).size;
-}function arrayBufferToBase64String(e) {
-  return useNodeBuffer ? Buffer.from(e).toString("base64") : btoa(String.fromCharCode.apply(null, new Uint8Array(e)));
-}function base64StringToArrayBuffer(e) {
-  if (useNodeBuffer) {
-    var t = Buffer.from(e, "base64");return t.buffer.slice(t.byteOffset, t.byteOffset + t.byteLength);
-  }for (var n = atob(e), r = new Uint8Array(n.length), o = 0; o < n.length; ++o) r.set([n.charCodeAt(o)], o);return r.buffer;
-}function concatenateArrayBuffers(e) {
-  var t = 0;e.forEach(function (e) {
-    t += e.byteLength;
-  });var n = new Uint8Array(t),
-      r = 0;return e.forEach(function (e) {
-    n.set(new Uint8Array(e), r), r += e.byteLength;
-  }), n.buffer;
-}function basename(e) {
-  for (e = e.trim(); e.endsWith("/");) e = e.slice(0, e.length - 1);var t = e.split("/");return t[t.length - 1];
-}function getModelArtifactsInfoForJSON(e) {
-  if (e.modelTopology instanceof ArrayBuffer) throw new Error("Expected JSON model topology, received ArrayBuffer.");return { dateSaved: new Date(), modelTopologyType: "JSON", modelTopologyBytes: null == e.modelTopology ? 0 : stringByteLength(JSON.stringify(e.modelTopology)), weightSpecsBytes: null == e.weightSpecs ? 0 : stringByteLength(JSON.stringify(e.weightSpecs)), weightDataBytes: null == e.weightData ? 0 : e.weightData.byteLength };
-}var IORouterRegistry = function () {
-  function e() {
-    this.saveRouters = [], this.loadRouters = [];
-  }return e.getInstance = function () {
-    return null == e.instance && (e.instance = new e()), e.instance;
-  }, e.registerSaveRouter = function (t) {
-    e.getInstance().saveRouters.push(t);
-  }, e.registerLoadRouter = function (t) {
-    e.getInstance().loadRouters.push(t);
-  }, e.getSaveHandlers = function (t) {
-    return e.getHandlers(t, "save");
-  }, e.getLoadHandlers = function (t) {
-    return e.getHandlers(t, "load");
-  }, e.getHandlers = function (e, t) {
-    var n = [];return ("load" === t ? this.getInstance().loadRouters : this.getInstance().saveRouters).forEach(function (t) {
-      var r = t(e);null !== r && n.push(r);
-    }), n;
-  }, e;
-}(),
-    URL_SCHEME_SUFFIX = "://",
-    ModelStoreManagerRegistry = function () {
-  function e() {
-    this.managers = {};
-  }return e.getInstance = function () {
-    return null == e.instance && (e.instance = new e()), e.instance;
-  }, e.registerManager = function (t, n) {
-    assert(null != t, "scheme must not be undefined or null."), t.endsWith(URL_SCHEME_SUFFIX) && (t = t.slice(0, t.indexOf(URL_SCHEME_SUFFIX))), assert(t.length > 0, "scheme must not be an empty string.");var r = e.getInstance();assert(null == r.managers[t], "A model store manager is already registered for scheme '" + t + "'."), r.managers[t] = n;
-  }, e.getManager = function (e) {
-    var t = this.getInstance().managers[e];if (null == t) throw new Error("Cannot find model manager for scheme '" + e + "'");return t;
-  }, e.getSchemes = function () {
-    return Object.keys(this.getInstance().managers);
-  }, e;
-}();function parseURL(e) {
-  if (-1 === e.indexOf(URL_SCHEME_SUFFIX)) throw new Error("The url string provided does not contain a scheme. Supported schemes are: " + ModelStoreManagerRegistry.getSchemes().join(","));return { scheme: e.split(URL_SCHEME_SUFFIX)[0], path: e.split(URL_SCHEME_SUFFIX)[1] };
-}function cloneModelInternal(e, t, n) {
-  return void 0 === n && (n = !1), __awaiter(this, void 0, void 0, function () {
-    var r, o, a, i, s, u, c, l, d;return __generator(this, function (p) {
-      switch (p.label) {case 0:
-          return assert(e !== t, "Old path and new path are the same: '" + e + "'"), assert((r = IORouterRegistry.getLoadHandlers(e)).length > 0, "Copying failed because no load handler is found for source URL " + e + "."), assert(r.length < 2, "Copying failed because more than one (" + r.length + ") load handlers for source URL " + e + "."), o = r[0], assert((a = IORouterRegistry.getSaveHandlers(t)).length > 0, "Copying failed because no save handler is found for destination URL " + t + "."), assert(a.length < 2, "Copying failed because more than one (" + r.length + ") save handlers for destination URL " + t + "."), i = a[0], s = parseURL(e).scheme, u = parseURL(e).path, c = s === parseURL(e).scheme, [4, o.load()];case 1:
-          return l = p.sent(), n && c ? [4, ModelStoreManagerRegistry.getManager(s).removeModel(u)] : [3, 3];case 2:
-          p.sent(), p.label = 3;case 3:
-          return [4, i.save(l)];case 4:
-          return d = p.sent(), !n || c ? [3, 6] : [4, ModelStoreManagerRegistry.getManager(s).removeModel(u)];case 5:
-          p.sent(), p.label = 6;case 6:
-          return [2, d.modelArtifactsInfo];}
-    });
-  });
-}var ModelManagement = function () {
-  function e() {}return e.listModels = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var e, t, n, r, o, a, i;return __generator(this, function (s) {
-        switch (s.label) {case 0:
-            e = ModelStoreManagerRegistry.getSchemes(), t = {}, n = 0, r = e, s.label = 1;case 1:
-            return n < r.length ? (o = r[n], [4, ModelStoreManagerRegistry.getManager(o).listModels()]) : [3, 4];case 2:
-            for (i in a = s.sent()) t[o + URL_SCHEME_SUFFIX + i] = a[i];s.label = 3;case 3:
-            return n++, [3, 1];case 4:
-            return [2, t];}
-      });
-    });
-  }, e.removeModel = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t;return __generator(this, function (n) {
-        switch (n.label) {case 0:
-            return t = parseURL(e), [4, ModelStoreManagerRegistry.getManager(t.scheme).removeModel(t.path)];case 1:
-            return [2, n.sent()];}
-      });
-    });
-  }, e.copyModel = function (e, t) {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (n) {
-        switch (n.label) {case 0:
-            return [4, cloneModelInternal(e, t, !1)];case 1:
-            return [2, n.sent()];}
-      });
-    });
-  }, e.moveModel = function (e, t) {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (n) {
-        switch (n.label) {case 0:
-            return [4, cloneModelInternal(e, t, !0)];case 1:
-            return [2, n.sent()];}
-      });
-    });
-  }, __decorate([doc({ heading: "Models", subheading: "Management", namespace: "io" })], e, "listModels", null), __decorate([doc({ heading: "Models", subheading: "Management", namespace: "io" })], e, "removeModel", null), __decorate([doc({ heading: "Models", subheading: "Management", namespace: "io" })], e, "copyModel", null), __decorate([doc({ heading: "Models", subheading: "Management", namespace: "io" })], e, "moveModel", null), e;
-}(),
-    DATABASE_NAME = "tensorflowjs",
-    DATABASE_VERSION = 1,
-    MODEL_STORE_NAME = "models_store",
-    INFO_STORE_NAME = "model_info_store";function getIndexedDBFactory() {
-  if (!ENV.get("IS_BROWSER")) throw new Error("Failed to obtain IndexedDB factory because the current environmentis not a web browser.");var e = window,
-      t = e.indexedDB || e.mozIndexedDB || e.webkitIndexedDB || e.msIndexedDB || e.shimIndexedDB;if (null == t) throw new Error("The current browser does not appear to support IndexedDB.");return t;
-}function setUpDatabase(e) {
-  var t = e.result;t.createObjectStore(MODEL_STORE_NAME, { keyPath: "modelPath" }), t.createObjectStore(INFO_STORE_NAME, { keyPath: "modelPath" });
-}var BrowserIndexedDB = function () {
-  function e(e) {
-    if (this.indexedDB = getIndexedDBFactory(), null == e || !e) throw new Error("For IndexedDB, modelPath must not be null, undefined or empty.");this.modelPath = e;
-  }return e.prototype.save = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (t) {
-        if (e.modelTopology instanceof ArrayBuffer) throw new Error("BrowserLocalStorage.save() does not support saving model topology in binary formats yet.");return [2, this.databaseAction(this.modelPath, e)];
-      });
-    });
-  }, e.prototype.load = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      return __generator(this, function (e) {
-        return [2, this.databaseAction(this.modelPath)];
-      });
-    });
-  }, e.prototype.databaseAction = function (e, t) {
-    var n = this;return new Promise(function (e, r) {
-      var o = n.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);o.onupgradeneeded = function () {
-        return setUpDatabase(o);
-      }, o.onsuccess = function () {
-        var a = o.result;if (null == t) {
-          var i = a.transaction(MODEL_STORE_NAME, "readonly"),
-              s = i.objectStore(MODEL_STORE_NAME).get(n.modelPath);s.onsuccess = function () {
-            if (null == s.result) return a.close(), r(new Error("Cannot find model with path '" + n.modelPath + "' in IndexedDB."));e(s.result.modelArtifacts);
-          }, s.onerror = function (e) {
-            return a.close(), r(s.error);
-          }, i.oncomplete = function () {
-            return a.close();
-          };
-        } else {
-          var u,
-              c = getModelArtifactsInfoForJSON(t),
-              l = a.transaction(INFO_STORE_NAME, "readwrite"),
-              d = l.objectStore(INFO_STORE_NAME),
-              p = d.put({ modelPath: n.modelPath, modelArtifactsInfo: c });p.onsuccess = function () {
-            var o = (u = a.transaction(MODEL_STORE_NAME, "readwrite")).objectStore(MODEL_STORE_NAME).put({ modelPath: n.modelPath, modelArtifacts: t, modelArtifactsInfo: c });o.onsuccess = function () {
-              return e({ modelArtifactsInfo: c });
-            }, o.onerror = function (e) {
-              var t = (d = l.objectStore(INFO_STORE_NAME)).delete(n.modelPath);t.onsuccess = function () {
-                return a.close(), r(o.error);
-              }, t.onerror = function (e) {
-                return a.close(), r(o.error);
-              };
-            };
-          }, p.onerror = function (e) {
-            return a.close(), r(p.error);
-          }, l.oncomplete = function () {
-            null == u ? a.close() : u.oncomplete = function () {
-              return a.close();
-            };
-          };
-        }
-      }, o.onerror = function (e) {
-        return r(o.error);
-      };
-    });
-  }, e.URL_SCHEME = "indexeddb://", e;
-}(),
-    indexedDBRouter = function (e) {
-  return ENV.get("IS_BROWSER") && e.startsWith(BrowserIndexedDB.URL_SCHEME) ? browserIndexedDB(e.slice(BrowserIndexedDB.URL_SCHEME.length)) : null;
-};function browserIndexedDB(e) {
-  return new BrowserIndexedDB(e);
-}function maybeStripScheme(e) {
-  return e.startsWith(BrowserIndexedDB.URL_SCHEME) ? e.slice(BrowserIndexedDB.URL_SCHEME.length) : e;
-}IORouterRegistry.registerSaveRouter(indexedDBRouter), IORouterRegistry.registerLoadRouter(indexedDBRouter);var BrowserIndexedDBManager = function () {
-  function e() {
-    this.indexedDB = getIndexedDBFactory();
-  }return e.prototype.listModels = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var e = this;return __generator(this, function (t) {
-        return [2, new Promise(function (t, n) {
-          var r = e.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);r.onupgradeneeded = function () {
-            return setUpDatabase(r);
-          }, r.onsuccess = function () {
-            var e = r.result,
-                o = e.transaction(INFO_STORE_NAME, "readonly"),
-                a = o.objectStore(INFO_STORE_NAME).getAll();a.onsuccess = function () {
-              for (var e = {}, n = 0, r = a.result; n < r.length; n++) {
-                var o = r[n];e[o.modelPath] = o.modelArtifactsInfo;
-              }t(e);
-            }, a.onerror = function (t) {
-              return e.close(), n(a.error);
-            }, o.oncomplete = function () {
-              return e.close();
-            };
-          }, r.onerror = function (e) {
-            return n(r.error);
-          };
-        })];
-      });
-    });
-  }, e.prototype.removeModel = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t = this;return __generator(this, function (n) {
-        return e = maybeStripScheme(e), [2, new Promise(function (n, r) {
-          var o = t.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);o.onupgradeneeded = function () {
-            return setUpDatabase(o);
-          }, o.onsuccess = function () {
-            var t,
-                a = o.result,
-                i = a.transaction(INFO_STORE_NAME, "readwrite"),
-                s = i.objectStore(INFO_STORE_NAME),
-                u = s.get(e);u.onsuccess = function () {
-              if (null == u.result) return a.close(), r(new Error("Cannot find model with path '" + e + "' in IndexedDB."));var o = s.delete(e),
-                  i = function () {
-                var o = (t = a.transaction(MODEL_STORE_NAME, "readwrite")).objectStore(MODEL_STORE_NAME).delete(e);o.onsuccess = function () {
-                  return n(u.result.modelArtifactsInfo);
-                }, o.onerror = function (e) {
-                  return r(u.error);
-                };
-              };o.onsuccess = i, o.onerror = function (e) {
-                return i(), a.close(), r(u.error);
-              };
-            }, u.onerror = function (e) {
-              return a.close(), r(u.error);
-            }, i.oncomplete = function () {
-              null == t ? a.close() : t.oncomplete = function () {
-                return a.close();
-              };
-            };
-          }, o.onerror = function (e) {
-            return r(o.error);
-          };
-        })];
-      });
-    });
-  }, e;
-}();if (ENV.get("IS_BROWSER")) try {
-  ModelStoreManagerRegistry.registerManager(BrowserIndexedDB.URL_SCHEME, new BrowserIndexedDBManager());
-} catch (e) {}var PATH_SEPARATOR = "/",
-    PATH_PREFIX = "tensorflowjs_models",
-    INFO_SUFFIX = "info",
-    MODEL_TOPOLOGY_SUFFIX = "model_topology",
-    WEIGHT_SPECS_SUFFIX = "weight_specs",
-    WEIGHT_DATA_SUFFIX = "weight_data";function getModelKeys(e) {
-  return { info: [PATH_PREFIX, e, INFO_SUFFIX].join(PATH_SEPARATOR), topology: [PATH_PREFIX, e, MODEL_TOPOLOGY_SUFFIX].join(PATH_SEPARATOR), weightSpecs: [PATH_PREFIX, e, WEIGHT_SPECS_SUFFIX].join(PATH_SEPARATOR), weightData: [PATH_PREFIX, e, WEIGHT_DATA_SUFFIX].join(PATH_SEPARATOR) };
-}function getModelPathFromKey(e) {
-  var t = e.split(PATH_SEPARATOR);if (t.length < 3) throw new Error("Invalid key format: " + e);return t.slice(1, t.length - 1).join(PATH_SEPARATOR);
-}function maybeStripScheme$1(e) {
-  return e.startsWith(BrowserLocalStorage.URL_SCHEME) ? e.slice(BrowserLocalStorage.URL_SCHEME.length) : e;
-}var BrowserLocalStorage = function () {
-  function e(e) {
-    if (!ENV.get("IS_BROWSER") || void 0 === window.localStorage) throw new Error("The current environment does not support local storage.");if (this.LS = window.localStorage, null == e || !e) throw new Error("For local storage, modelPath must not be null, undefined or empty.");this.modelPath = e, this.keys = getModelKeys(this.modelPath);
-  }return e.prototype.save = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n, r, o;return __generator(this, function (a) {
-        if (e.modelTopology instanceof ArrayBuffer) throw new Error("BrowserLocalStorage.save() does not support saving model topology in binary formats yet.");t = JSON.stringify(e.modelTopology), n = JSON.stringify(e.weightSpecs), r = getModelArtifactsInfoForJSON(e);try {
-          return this.LS.setItem(this.keys.info, JSON.stringify(r)), this.LS.setItem(this.keys.topology, t), this.LS.setItem(this.keys.weightSpecs, n), this.LS.setItem(this.keys.weightData, arrayBufferToBase64String(e.weightData)), [2, { modelArtifactsInfo: r }];
-        } catch (e) {
-          for (o in this.keys) this.LS.removeItem(this.keys[o]);throw new Error("Failed to save model '" + this.modelPath + "' to local storage: size quota being exceeded is a possible cause of this failure: modelTopologyBytes=" + r.modelTopologyBytes + ", weightSpecsBytes=" + r.weightSpecsBytes + ", weightDataBytes=" + r.weightDataBytes + ".");
-        }return [2];
-      });
-    });
-  }, e.prototype.load = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var e, t, n, r, o;return __generator(this, function (a) {
-        if (null == (e = JSON.parse(this.LS.getItem(this.keys.info)))) throw new Error("In local storage, there is no model with name '" + this.modelPath + "'");if ("JSON" !== e.modelTopologyType) throw new Error("BrowserLocalStorage does not support loading non-JSON model topology yet.");if (t = {}, null == (n = JSON.parse(this.LS.getItem(this.keys.topology)))) throw new Error("In local storage, the topology of model '" + this.modelPath + "' is missing.");if (t.modelTopology = n, null == (r = JSON.parse(this.LS.getItem(this.keys.weightSpecs)))) throw new Error("In local storage, the weight specs of model '" + this.modelPath + "' are missing.");if (t.weightSpecs = r, null == (o = this.LS.getItem(this.keys.weightData))) throw new Error("In local storage, the binary weight values of model '" + this.modelPath + "' are missing.");return t.weightData = base64StringToArrayBuffer(o), [2, t];
-      });
-    });
-  }, e.URL_SCHEME = "localstorage://", e;
-}(),
-    localStorageRouter = function (e) {
-  return ENV.get("IS_BROWSER") && e.startsWith(BrowserLocalStorage.URL_SCHEME) ? browserLocalStorage(e.slice(BrowserLocalStorage.URL_SCHEME.length)) : null;
-};function browserLocalStorage(e) {
-  return new BrowserLocalStorage(e);
-}IORouterRegistry.registerSaveRouter(localStorageRouter), IORouterRegistry.registerLoadRouter(localStorageRouter);var BrowserLocalStorageManager = function () {
-  function e() {
-    assert(ENV.get("IS_BROWSER"), "Current environment is not a web browser"), assert(void 0 !== window.localStorage, "Current browser does not appear to support localStorage"), this.LS = window.localStorage;
-  }return e.prototype.listModels = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var e, t, n, r, o, a;return __generator(this, function (i) {
-        for (e = {}, t = PATH_PREFIX + PATH_SEPARATOR, n = PATH_SEPARATOR + INFO_SUFFIX, r = 0; r < this.LS.length; ++r) (o = this.LS.key(r)).startsWith(t) && o.endsWith(n) && (a = getModelPathFromKey(o), e[a] = JSON.parse(this.LS.getItem(o)));return [2, e];
-      });
-    });
-  }, e.prototype.removeModel = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n;return __generator(this, function (r) {
-        if (e = maybeStripScheme$1(e), t = getModelKeys(e), null == this.LS.getItem(t.info)) throw new Error("Cannot find model at path '" + e + "'");return n = JSON.parse(this.LS.getItem(t.info)), this.LS.removeItem(t.info), this.LS.removeItem(t.topology), this.LS.removeItem(t.weightSpecs), this.LS.removeItem(t.weightData), [2, n];
-      });
-    });
-  }, e;
-}();if (ENV.get("IS_BROWSER")) try {
-  ModelStoreManagerRegistry.registerManager(BrowserLocalStorage.URL_SCHEME, new BrowserLocalStorageManager());
-} catch (e) {}var DEFAULT_FILE_NAME_PREFIX = "model",
-    DEFAULT_JSON_EXTENSION_NAME = ".json",
-    DEFAULT_WEIGHT_DATA_EXTENSION_NAME = ".weights.bin",
-    BrowserDownloads = function () {
-  function e(t) {
-    if (!ENV.get("IS_BROWSER")) throw new Error("triggerDownloads() cannot proceed because the current environment is not a browser.");t.startsWith(e.URL_SCHEME) && (t = t.slice(e.URL_SCHEME.length)), null != t && 0 !== t.length || (t = DEFAULT_FILE_NAME_PREFIX), this.modelTopologyFileName = t + DEFAULT_JSON_EXTENSION_NAME, this.weightDataFileName = t + DEFAULT_WEIGHT_DATA_EXTENSION_NAME;
-  }return e.prototype.save = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n, r, o, a, i;return __generator(this, function (s) {
-        if (t = window.URL.createObjectURL(new Blob([e.weightData], { type: "application/octet-stream" })), e.modelTopology instanceof ArrayBuffer) throw new Error("DownloadTrigger.save() does not support saving model topology in binary formats yet.");return n = [{ paths: ["./" + this.weightDataFileName], weights: e.weightSpecs }], r = { modelTopology: e.modelTopology, weightsManifest: n }, o = window.URL.createObjectURL(new Blob([JSON.stringify(r)], { type: "application/json" })), (a = null == this.jsonAnchor ? document.createElement("a") : this.jsonAnchor).download = this.modelTopologyFileName, a.href = o, a.click(), null != e.weightData && ((i = null == this.weightDataAnchor ? document.createElement("a") : this.weightDataAnchor).download = this.weightDataFileName, i.href = t, i.click()), [2, { modelArtifactsInfo: getModelArtifactsInfoForJSON(e) }];
-      });
-    });
-  }, e.URL_SCHEME = "downloads://", e;
-}(),
-    BrowserFiles = function () {
-  function e(e) {
-    if (null == e || e.length < 1) throw new Error("When calling browserFiles, at least 1 file is required, but received " + e);this.files = e;
-  }return e.prototype.load = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var e,
-          t,
-          n = this;return __generator(this, function (r) {
-        return e = this.files[0], t = this.files.slice(1), [2, new Promise(function (r, o) {
-          var a = new FileReader();a.onload = function (a) {
-            var i = JSON.parse(a.target.result),
-                s = i.modelTopology;if (null != s) {
-              0 === t.length && r({ modelTopology: s });var u = i.weightsManifest;if (null != u) {
-                var c;try {
-                  c = n.checkManifestAndWeightFiles(u, t);
-                } catch (e) {
-                  return void o(e);
-                }var l = [],
-                    d = [],
-                    p = [];u.forEach(function (e) {
-                  e.paths.forEach(function (e) {
-                    d.push(e), p.push(null);
-                  }), l.push.apply(l, e.weights);
-                }), u.forEach(function (e) {
-                  e.paths.forEach(function (e) {
-                    var t = new FileReader();t.onload = function (t) {
-                      var n = t.target.result,
-                          o = d.indexOf(e);p[o] = n, -1 === p.indexOf(null) && r({ modelTopology: s, weightSpecs: l, weightData: concatenateArrayBuffers(p) });
-                    }, t.onerror = function (t) {
-                      o("Failed to weights data from file of path '" + e + "'.");
-                    }, t.readAsArrayBuffer(c[e]);
-                  });
-                });
-              } else o(new Error("weightManifest field is missing from file " + e.name));
-            } else o(new Error("modelTopology field is missing from file " + e.name));
-          }, a.onerror = function (t) {
-            o("Failed to read model topology and weights manifest JSON from file '" + e.name + "'. BrowserFiles supports loading Keras-style tf.Model artifacts only.");
-          }, a.readAsText(e);
-        })];
-      });
-    });
-  }, e.prototype.checkManifestAndWeightFiles = function (e, t) {
-    for (var n = [], r = t.map(function (e) {
-      return basename(e.name);
-    }), o = {}, a = 0, i = e; a < i.length; a++) {
-      i[a].paths.forEach(function (e) {
-        var a = basename(e);if (-1 !== n.indexOf(a)) throw new Error("Duplicate file basename found in weights manifest: '" + a + "'");if (n.push(a), -1 === r.indexOf(a)) throw new Error("Weight file with basename '" + a + "' is not provided.");o[e] = t[r.indexOf(a)];
-      });
-    }if (n.length !== t.length) throw new Error("Mismatch in the number of files in weights manifest (" + n.length + ") and the number of weight files provided (" + t.length + ").");return o;
-  }, e;
-}(),
-    browserDownloadsRouter = function (e) {
-  return ENV.get("IS_BROWSER") && e.startsWith(BrowserDownloads.URL_SCHEME) ? browserDownloads(e.slice(BrowserDownloads.URL_SCHEME.length)) : null;
-};function browserDownloads(e) {
-  return void 0 === e && (e = "model"), new BrowserDownloads(e);
-}function browserFiles(e) {
-  return new BrowserFiles(e);
-}function loadWeightsAsArrayBuffer(e, t) {
-  return __awaiter(this, void 0, void 0, function () {
-    var n, r;return __generator(this, function (o) {
-      switch (o.label) {case 0:
-          return n = e.map(function (e) {
-            return fetch(e, t);
-          }), [4, Promise.all(n)];case 1:
-          return r = o.sent(), [4, Promise.all(r.map(function (e) {
-            return e.arrayBuffer();
-          }))];case 2:
-          return [2, o.sent()];}
-    });
-  });
-}function loadWeights(e, t, n, r) {
-  return void 0 === t && (t = ""), __awaiter(this, void 0, void 0, function () {
-    var o, a, i, s, u, c, l, d, p, h;return __generator(this, function (f) {
-      switch (f.label) {case 0:
-          if (o = e.map(function () {
-            return !1;
-          }), a = {}, i = null != n ? n.map(function () {
-            return !1;
-          }) : [], s = [], e.forEach(function (e, t) {
-            var r = 0;e.weights.forEach(function (e) {
-              var u = "quantization" in e ? e.quantization.dtype : e.dtype,
-                  c = DTYPE_VALUE_SIZE_MAP[u] * sizeFromShape(e.shape),
-                  l = function () {
-                o[t] = !0, null == a[t] && (a[t] = []), a[t].push({ manifestEntry: e, groupOffset: r, sizeBytes: c });
-              };null != n ? n.forEach(function (t, n) {
-                t === e.name && (l(), i[n] = !0);
-              }) : l(), s.push(e.name), r += c;
-            });
-          }), !i.every(function (e) {
-            return e;
-          })) throw u = n.filter(function (e, t) {
-            return !i[t];
-          }), new Error("Could not find weights in manifest with names: " + u.join(", ") + ". \nManifest JSON has weights with names: " + s.join(", ") + ".");return c = o.reduce(function (e, t, n) {
-            return t && e.push(n), e;
-          }, []), l = [], c.forEach(function (n) {
-            e[n].paths.forEach(function (e) {
-              var n = t + (t.endsWith("/") ? "" : "/") + e;l.push(n);
-            });
-          }), [4, loadWeightsAsArrayBuffer(l, r)];case 1:
-          return d = f.sent(), p = {}, h = 0, c.forEach(function (t) {
-            for (var n = e[t].paths.length, r = 0, o = 0; o < n; o++) r += d[h + o].byteLength;for (var i = new ArrayBuffer(r), s = new Uint8Array(i), u = 0, c = 0; c < n; c++) {
-              var l = new Uint8Array(d[h + c]);s.set(l, u), u += l.byteLength;
-            }a[t].forEach(function (e) {
-              var t,
-                  n = i.slice(e.groupOffset, e.groupOffset + e.sizeBytes),
-                  r = e.manifestEntry.dtype;if ("quantization" in e.manifestEntry) {
-                var o = e.manifestEntry.quantization;if ("uint8" !== o.dtype && "uint16" !== o.dtype) throw new Error("Weight " + e.manifestEntry.name + " has unknown quantization dtype " + o.dtype + ".");var a = "uint8" === o.dtype ? new Uint8Array(n) : new Uint16Array(n);if ("float32" === r) t = Float32Array.from(a, function (e) {
-                  return e * o.scale + o.min;
-                });else {
-                  if ("int32" !== r) throw new Error("Weight " + e.manifestEntry.name + " has a dtype not supported by quantization: " + r);t = Int32Array.from(a, function (e) {
-                    return Math.round(e * o.scale + o.min);
-                  });
-                }
-              } else if ("float32" === r) t = new Float32Array(n);else {
-                if ("int32" !== r) throw new Error("Weight " + e.manifestEntry.name + " has unknown dtype " + r + ".");t = new Int32Array(n);
-              }var s = e.manifestEntry.name;if (null != p[s]) throw new Error("Duplicate weight with name " + s + ". Please make sure weights names are unique in the manifest JSON.");p[s] = tensor(t, e.manifestEntry.shape, e.manifestEntry.dtype);
-            }), h += n;
-          }), [2, p];}
-    });
-  });
-}IORouterRegistry.registerSaveRouter(browserDownloadsRouter);var BrowserHTTPRequest = function () {
-  function e(e, t) {
-    if (this.DEFAULT_METHOD = "POST", !ENV.get("IS_BROWSER")) throw new Error("browserHTTPRequest is not supported outside the web browser.");if (assert(null != e && e.length > 0, "URL path for browserHTTPRequest must not be null, undefined or empty."), this.path = e, null != t && null != t.body) throw new Error("requestInit is expected to have no pre-existing body, but has one.");this.requestInit = t || {};
-  }return e.prototype.save = function (e) {
-    return __awaiter(this, void 0, void 0, function () {
-      var t, n, r, o;return __generator(this, function (a) {
-        switch (a.label) {case 0:
-            if (e.modelTopology instanceof ArrayBuffer) throw new Error("BrowserHTTPRequest.save() does not support saving model topology in binary formats yet.");return (t = Object.assign({ method: this.DEFAULT_METHOD }, this.requestInit)).body = new FormData(), n = [{ paths: ["./model.weights.bin"], weights: e.weightSpecs }], r = { modelTopology: e.modelTopology, weightsManifest: n }, t.body.append("model.json", new Blob([JSON.stringify(r)], { type: "application/json" }), "model.json"), null != e.weightData && t.body.append("model.weights.bin", new Blob([e.weightData], { type: "application/octet-stream" }), "model.weights.bin"), [4, fetch(this.path, t)];case 1:
-            if (200 === (o = a.sent()).status) return [2, { modelArtifactsInfo: getModelArtifactsInfoForJSON(e), responses: [o] }];throw new Error("BrowserHTTPRequest.save() failed due to HTTP response status " + o.status + ".");}
-      });
-    });
-  }, e.prototype.load = function () {
-    return __awaiter(this, void 0, void 0, function () {
-      var e, t, n, r, o, a, i, s, u, c, l, d;return __generator(this, function (p) {
-        switch (p.label) {case 0:
-            return [4, fetch(this.path, this.requestInit)];case 1:
-            return [4, p.sent().json()];case 2:
-            if (e = p.sent(), t = e.modelTopology, n = e.weightsManifest, null == t && null == n) throw new Error("The JSON from HTTP path " + this.path + " contains neither model topology or manifest for weights.");if (null == n) return [3, 4];for (a = e.weightsManifest, r = [], i = 0, s = a; i < s.length; i++) u = s[i], r.push.apply(r, u.weights);return (c = this.path.substring(0, this.path.lastIndexOf("/"))).endsWith("/") || (c += "/"), l = [], a.forEach(function (e) {
-              e.paths.forEach(function (e) {
-                l.push(c + e);
-              });
-            }), d = concatenateArrayBuffers, [4, loadWeightsAsArrayBuffer(l, this.requestInit)];case 3:
-            o = d.apply(void 0, [p.sent()]), p.label = 4;case 4:
-            return [2, { modelTopology: t, weightSpecs: r, weightData: o }];}
-      });
-    });
-  }, e.URL_SCHEMES = ["http://", "https://"], e;
-}(),
-    httpRequestRouter = function (e) {
-  if (ENV.get("IS_BROWSER")) {
-    for (var t = 0, n = BrowserHTTPRequest.URL_SCHEMES; t < n.length; t++) {
-      var r = n[t];if (e.startsWith(r)) return browserHTTPRequest(e);
-    }return null;
-  }return null;
-};function browserHTTPRequest(e, t) {
-  return new BrowserHTTPRequest(e, t);
-}IORouterRegistry.registerSaveRouter(httpRequestRouter), IORouterRegistry.registerLoadRouter(httpRequestRouter);var registerSaveRouter = IORouterRegistry.registerSaveRouter,
-    registerLoadRouter = IORouterRegistry.registerLoadRouter,
-    getSaveHandlers = IORouterRegistry.getSaveHandlers,
-    getLoadHandlers = IORouterRegistry.getLoadHandlers,
-    copyModel = ModelManagement.copyModel,
-    listModels = ModelManagement.listModels,
-    moveModel = ModelManagement.moveModel,
-    removeModel = ModelManagement.removeModel,
-    io = Object.freeze({ browserFiles: browserFiles, browserHTTPRequest: browserHTTPRequest, concatenateArrayBuffers: concatenateArrayBuffers, copyModel: copyModel, decodeWeights: decodeWeights, encodeWeights: encodeWeights, getLoadHandlers: getLoadHandlers, getModelArtifactsInfoForJSON: getModelArtifactsInfoForJSON, getSaveHandlers: getSaveHandlers, listModels: listModels, loadWeights: loadWeights, moveModel: moveModel, registerLoadRouter: registerLoadRouter, registerSaveRouter: registerSaveRouter, removeModel: removeModel }),
-    Serializable = function () {
-  function e() {}return e.prototype.getClassName = function () {
-    return this.constructor.className;
-  }, e.fromConfig = function (e, t) {
-    return new e(t);
-  }, e;
-}(),
-    SerializationMap = function () {
-  function e() {
-    this.classNameMap = {};
-  }return e.getMap = function () {
-    return null == e.instance && (e.instance = new e()), e.instance;
-  }, e.register = function (e) {
-    this.getMap().classNameMap[e.className] = [e, e.fromConfig];
-  }, e;
-}(),
-    serialization = Object.freeze({ Serializable: Serializable, SerializationMap: SerializationMap }),
-    WEBGL_ENVS = { HAS_WEBGL: !0 },
-    NODE_ENVS = { IS_NODE: !0 },
-    CHROME_ENVS = { IS_CHROME: !0 },
-    BROWSER_ENVS = { IS_BROWSER: !0 },
-    CPU_ENVS = { HAS_WEBGL: !1 },
-    ALL_ENVS = {};function expectArraysClose(e, t, n) {
-  if (null == n && (n = ENV.get("TEST_EPSILON")), e instanceof Tensor || t instanceof Tensor) {
-    if (e instanceof Tensor && t instanceof Tensor) {
-      if (e.dtype !== t.dtype) throw new Error("Arrays are of different type actual: " + e.dtype + " vs expected: " + t.dtype + ".");if (!arraysEqual(e.shape, t.shape)) throw new Error("Arrays are of different shape actual: " + e.shape + " vs expected: " + t.shape + ".");
-    }
-  } else {
-    var r = e.constructor.name,
-        o = t.constructor.name;if (r !== o) throw new Error("Arrays are of different type actual: " + r + " vs expected: " + o);
-  }var a, i;if (a = e instanceof Tensor ? e.dataSync() : e, i = t instanceof Tensor ? t.dataSync() : t, a.length !== i.length) throw new Error("Arrays have different lengths actual: " + a.length + " vs expected: " + i.length + ".\nActual:   " + a + ".\nExpected: " + i + ".");for (var s = 0; s < i.length; ++s) {
-    var u = a[s],
-        c = i[s];if (!areClose(u, Number(c), n)) throw new Error("Arrays differ: actual[" + s + "] = " + u + ", expected[" + s + "] = " + c + ".\nActual:   " + a + ".\nExpected: " + i + ".");
-  }
-}function expectPromiseToFail(e, t) {
-  e().then(function () {
-    return t.fail();
-  }, function () {
-    return t();
-  });
-}function expectArraysEqual(e, t) {
-  return expectArraysClose(e, t, 0);
-}function expectNumbersClose(e, t, n) {
-  if (null == n && (n = ENV.get("TEST_EPSILON")), !areClose(e, t, n)) throw new Error("Numbers differ: actual === " + e + ", expected === " + t);
-}function areClose(e, t, n) {
-  return !(!isNaN(e) || !isNaN(t)) || !(isNaN(e) || isNaN(t) || Math.abs(e - t) > n);
-}function expectValuesInRange(e, t, n) {
-  var r;r = e instanceof Tensor ? e.dataSync() : e;for (var o = 0; o < r.length; o++) if (r[o] < t || r[o] > n) throw new Error("Value out of range:" + r[o] + " low: " + t + ", high: " + n);
-}function expectArrayBuffersEqual(e, t) {
-  expect(new Float32Array(e)).toEqual(new Float32Array(t));
-}var test_util = Object.freeze({ WEBGL_ENVS: WEBGL_ENVS, NODE_ENVS: NODE_ENVS, CHROME_ENVS: CHROME_ENVS, BROWSER_ENVS: BROWSER_ENVS, CPU_ENVS: CPU_ENVS, ALL_ENVS: ALL_ENVS, expectArraysClose: expectArraysClose, expectPromiseToFail: expectPromiseToFail, expectArraysEqual: expectArraysEqual, expectNumbersClose: expectNumbersClose, expectValuesInRange: expectValuesInRange, expectArrayBuffersEqual: expectArrayBuffersEqual }),
-    version = "0.12.1",
-    webgl = Object.freeze({ gpgpu_util: gpgpu_util, webgl_util: webgl_util, MathBackendWebGL: MathBackendWebGL, GPGPUContext: GPGPUContext }),
-    Optimizer = function (e) {
-  function t() {
-    return null !== e && e.apply(this, arguments) || this;
-  }return __extends(t, e), t.prototype.minimize = function (e, t, n) {
-    void 0 === t && (t = !1);var r = this.computeGradients(e, n),
-        o = r.value,
-        a = r.grads;return this.applyGradients(a), Object.keys(a).forEach(function (e) {
-      return a[e].dispose();
-    }), t ? o : (o.dispose(), null);
-  }, t.prototype.computeGradients = function (e, t) {
-    return variableGrads(e, t);
-  }, __decorate([doc({ heading: "Training", subheading: "Optimizers" })], t.prototype, "minimize", null), t = __decorate([doc({ heading: "Training", subheading: "Classes", namespace: "train" })], t);
-}(Serializable),
-    DEFAULT_FLOAT32_EPSILON = 1e-8,
-    DEFAULT_FLOAT16_EPSILON = 1e-4;function getOptimizerDefaultEpsilonValue() {
-  return ENV.get("WEBGL_RENDER_FLOAT32_ENABLED") ? DEFAULT_FLOAT32_EPSILON : DEFAULT_FLOAT16_EPSILON;
-}var AdadeltaOptimizer = function (e) {
-  function t(t, n, r) {
-    void 0 === r && (r = null);var o = e.call(this) || this;return o.learningRate = t, o.rho = n, o.epsilon = r, o.accumulatedGrads = {}, o.accumulatedUpdates = {}, o.c = keep(scalar(-t)), o.rhoScalar = keep(scalar(n)), o.oneMinusRho = keep(scalar(1 - n)), null === r && (r = getOptimizerDefaultEpsilonValue()), o.epsilonScalar = keep(scalar(r)), o;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this,
-        n = function (n) {
-      var o = ENV.engine.registeredVariables[n];if (null == r.accumulatedGrads[n]) {
-        tidy(function () {
-          t.accumulatedGrads[n] = zerosLike(o).variable(!1);
-        });
-      }if (null == r.accumulatedUpdates[n]) {
-        tidy(function () {
-          t.accumulatedUpdates[n] = zerosLike(o).variable(!1);
-        });
-      }var a = e[n],
-          i = r.accumulatedGrads[n],
-          s = r.accumulatedUpdates[n];tidy(function () {
-        var e = t.rhoScalar.mul(i).add(t.oneMinusRho.mul(a.square())),
-            r = s.add(t.epsilonScalar).sqrt().div(i.add(t.epsilonScalar).sqrt()).mul(a),
-            u = t.rhoScalar.mul(s).add(t.oneMinusRho.mul(r.square()));t.accumulatedGrads[n].assign(e), t.accumulatedUpdates[n].assign(u);var c = t.c.mul(r).add(o);o.assign(c);
-      });
-    },
-        r = this;for (var o in e) n(o);
-  }, t.prototype.dispose = function () {
-    var e = this;this.c.dispose(), this.epsilonScalar.dispose(), this.rhoScalar.dispose(), this.oneMinusRho.dispose(), null != this.accumulatedUpdates && (Object.keys(this.accumulatedUpdates).forEach(function (t) {
-      return e.accumulatedUpdates[t].dispose();
-    }), Object.keys(this.accumulatedGrads).forEach(function (t) {
-      return e.accumulatedGrads[t].dispose();
-    }));
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate, rho: this.rho, epsilon: this.epsilon };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate, t.rho, t.epsilon);
-  }, t.className = "AdadeltaOptimizer", t;
-}(Optimizer);SerializationMap.register(AdadeltaOptimizer);var AdagradOptimizer = function (e) {
-  function t(t, n) {
-    void 0 === n && (n = .1);var r = e.call(this) || this;r.learningRate = t, r.initialAccumulatorValue = n, r.accumulatedGrads = {}, r.c = keep(scalar(-t));var o = getOptimizerDefaultEpsilonValue();return r.epsilon = keep(scalar(o)), r;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this,
-        n = function (n) {
-      var o = ENV.engine.registeredVariables[n];if (null == r.accumulatedGrads[n]) {
-        tidy(function () {
-          t.accumulatedGrads[n] = fill(o.shape, t.initialAccumulatorValue).variable(!1);
-        });
-      }var a = e[n],
-          i = r.accumulatedGrads[n];tidy(function () {
-        var e = i.add(a.square());t.accumulatedGrads[n].assign(e);var r = t.c.mul(a.div(e.add(t.epsilon).sqrt())).add(o);o.assign(r);
-      });
-    },
-        r = this;for (var o in e) n(o);
-  }, t.prototype.dispose = function () {
-    var e = this;this.epsilon.dispose(), this.c.dispose(), null != this.accumulatedGrads && Object.keys(this.accumulatedGrads).forEach(function (t) {
-      return e.accumulatedGrads[t].dispose();
-    });
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate, initialAccumulatorValue: this.initialAccumulatorValue };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate, t.initialAccumulatorValue);
-  }, t.className = "AdagradOptimizer", t;
-}(Optimizer);SerializationMap.register(AdagradOptimizer);var AdamOptimizer = function (e) {
-  function t(t, n, r, o) {
-    void 0 === o && (o = null);var a = e.call(this) || this;return a.learningRate = t, a.beta1 = n, a.beta2 = r, a.epsilon = o, a.accumulatedFirstMoment = {}, a.accumulatedSecondMoment = {}, a.c = keep(scalar(-t)), a.beta1Scalar = keep(scalar(n)), a.beta2Scalar = keep(scalar(r)), tidy(function () {
-      a.accBeta1 = scalar(n).variable(), a.accBeta2 = scalar(r).variable();
-    }), a.oneMinusBeta1 = keep(scalar(1 - n)), a.oneMinusBeta2 = keep(scalar(1 - r)), a.one = keep(scalar(1)), null === o && (o = getOptimizerDefaultEpsilonValue()), a.epsScalar = keep(scalar(o)), a;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this;tidy(function () {
-      var n = t.one.sub(t.accBeta1),
-          r = t.one.sub(t.accBeta2);for (var o in e) {
-        var a = ENV.engine.registeredVariables[o];if (null == t.accumulatedFirstMoment[o]) {
-          var i = !1;t.accumulatedFirstMoment[o] = zerosLike(a).variable(i);
-        }if (null == t.accumulatedSecondMoment[o]) {
-          i = !1;t.accumulatedSecondMoment[o] = zerosLike(a).variable(i);
-        }var s = e[o],
-            u = t.accumulatedFirstMoment[o],
-            c = t.accumulatedSecondMoment[o],
-            l = t.beta1Scalar.mul(u).add(t.oneMinusBeta1.mul(s)),
-            d = t.beta2Scalar.mul(c).add(t.oneMinusBeta2.mul(s.square())),
-            p = l.div(n),
-            h = d.div(r);t.accumulatedFirstMoment[o].assign(l), t.accumulatedSecondMoment[o].assign(d);var f = t.c.mul(p.div(t.epsScalar.add(h.sqrt()))).add(a);a.assign(f);
-      }t.accBeta1.assign(t.accBeta1.mul(t.beta1Scalar)), t.accBeta2.assign(t.accBeta2.mul(t.beta2Scalar));
-    });
-  }, t.prototype.dispose = function () {
-    var e = this;this.c.dispose(), this.epsScalar.dispose(), this.beta1Scalar.dispose(), this.beta2Scalar.dispose(), this.accBeta1.dispose(), this.accBeta2.dispose(), this.oneMinusBeta1.dispose(), this.oneMinusBeta2.dispose(), this.one.dispose(), null != this.accumulatedFirstMoment && Object.keys(this.accumulatedFirstMoment).forEach(function (t) {
-      return e.accumulatedFirstMoment[t].dispose();
-    }), null != this.accumulatedSecondMoment && Object.keys(this.accumulatedSecondMoment).forEach(function (t) {
-      return e.accumulatedSecondMoment[t].dispose();
-    });
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate, beta1: this.beta1, beta2: this.beta2, epsilon: this.epsilon };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate, t.beta1, t.beta2, t.epsilon);
-  }, t.className = "AdamOptimizer", t;
-}(Optimizer);SerializationMap.register(AdamOptimizer);var AdamaxOptimizer = function (e) {
-  function t(t, n, r, o, a) {
-    void 0 === o && (o = null), void 0 === a && (a = 0);var i = e.call(this) || this;return i.learningRate = t, i.beta1 = n, i.beta2 = r, i.epsilon = o, i.decay = a, i.accumulatedFirstMoment = {}, i.accumulatedWeightedInfNorm = {}, i.c = keep(scalar(-t)), i.beta1Scalar = keep(scalar(n)), i.beta2Scalar = keep(scalar(r)), i.decayScalar = keep(scalar(a)), tidy(function () {
-      i.iteration = scalar(0).variable(), i.accBeta1 = scalar(n).variable();
-    }), i.oneMinusBeta1 = keep(scalar(1 - n)), i.one = keep(scalar(1)), null === o && (o = getOptimizerDefaultEpsilonValue()), i.epsScalar = keep(scalar(o)), i;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this;tidy(function () {
-      var n = t.one.sub(t.accBeta1),
-          r = t.c.div(t.one.add(t.decayScalar.mul(t.iteration)));for (var o in e) {
-        var a = ENV.engine.registeredVariables[o];if (null == t.accumulatedFirstMoment[o]) {
-          var i = !1;t.accumulatedFirstMoment[o] = zerosLike(a).variable(i);
-        }if (null == t.accumulatedWeightedInfNorm[o]) {
-          i = !1;t.accumulatedWeightedInfNorm[o] = zerosLike(a).variable(i);
-        }var s = e[o],
-            u = t.accumulatedFirstMoment[o],
-            c = t.accumulatedWeightedInfNorm[o],
-            l = t.beta1Scalar.mul(u).add(t.oneMinusBeta1.mul(s)),
-            d = t.beta2Scalar.mul(c),
-            p = s.abs(),
-            h = d.maximum(p);t.accumulatedFirstMoment[o].assign(l), t.accumulatedWeightedInfNorm[o].assign(h);var f = r.div(n).mul(l.div(t.epsScalar.add(h))).add(a);a.assign(f);
-      }t.iteration.assign(t.iteration.add(t.one)), t.accBeta1.assign(t.accBeta1.mul(t.beta1Scalar));
-    });
-  }, t.prototype.dispose = function () {
-    var e = this;this.c.dispose(), this.epsScalar.dispose(), this.accBeta1.dispose(), this.beta1Scalar.dispose(), this.beta2Scalar.dispose(), this.oneMinusBeta1.dispose(), this.decayScalar.dispose(), this.iteration.dispose(), this.one.dispose(), null != this.accumulatedFirstMoment && Object.keys(this.accumulatedFirstMoment).forEach(function (t) {
-      return e.accumulatedFirstMoment[t].dispose();
-    }), null != this.accumulatedWeightedInfNorm && Object.keys(this.accumulatedWeightedInfNorm).forEach(function (t) {
-      return e.accumulatedWeightedInfNorm[t].dispose();
-    });
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate, beta1: this.beta1, beta2: this.beta2, epsilon: this.epsilon, decay: this.decay };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate, t.beta1, t.beta2, t.epsilon, t.decay);
-  }, t.className = "AdamaxOptimizer", t;
-}(Optimizer);SerializationMap.register(AdamaxOptimizer);var SGDOptimizer = function (e) {
-  function t(t) {
-    var n = e.call(this) || this;return n.learningRate = t, n.setLearningRate(t), n;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this;Object.keys(e).forEach(function (n) {
-      var r = e[n],
-          o = ENV.engine.registeredVariables[n];tidy(function () {
-        var e = t.c.mul(r).add(o);o.assign(e);
-      });
-    });
-  }, t.prototype.setLearningRate = function (e) {
-    this.learningRate = e, null != this.c && this.c.dispose(), this.c = keep(scalar(-e));
-  }, t.prototype.dispose = function () {
-    this.c.dispose();
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate);
-  }, t.className = "SGDOptimizer", t;
-}(Optimizer);SerializationMap.register(SGDOptimizer);var MomentumOptimizer = function (e) {
-  function t(t, n, r) {
-    void 0 === r && (r = !1);var o = e.call(this, t) || this;return o.learningRate = t, o.momentum = n, o.useNesterov = r, o.m = scalar(o.momentum), o.accumulations = {}, o;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this,
-        n = function (n) {
-      var o = ENV.engine.registeredVariables[n];if (null == r.accumulations[n]) {
-        tidy(function () {
-          t.accumulations[n] = zerosLike(o).variable(!1);
-        });
-      }var a = r.accumulations[n],
-          i = e[n];tidy(function () {
-        var e,
-            r = t.m.mul(a).add(i);e = t.useNesterov ? t.c.mul(i.add(r.mul(t.m))).add(o) : t.c.mul(r).add(o), t.accumulations[n].assign(r), o.assign(e);
-      });
-    },
-        r = this;for (var o in e) n(o);
-  }, t.prototype.dispose = function () {
-    if (e.prototype.dispose.call(this), this.m.dispose(), null != this.accumulations) for (var t in this.accumulations) this.accumulations[t].dispose();
-  }, t.prototype.setMomentum = function (e) {
-    this.momentum = e;
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate, momentum: this.momentum, useNesterov: this.useNesterov };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate, t.momentum, t.useNesterov);
-  }, t.className = "MomentumOptimizer", t;
-}(SGDOptimizer);SerializationMap.register(MomentumOptimizer);var RMSPropOptimizer = function (e) {
-  function t(t, n, r, o, a) {
-    void 0 === n && (n = .9), void 0 === r && (r = 0), void 0 === o && (o = null), void 0 === a && (a = !1);var i = e.call(this) || this;return i.learningRate = t, i.decay = n, i.momentum = r, i.epsilon = o, i.accumulatedMeanSquares = {}, i.accumulatedMeanGrads = {}, i.accumulatedMoments = {}, i.c = keep(scalar(t)), i.decayScalar = keep(scalar(n)), i.momentumScalar = keep(scalar(r)), i.oneMinusDecay = keep(scalar(1 - n)), i.centered = a, null === o && (o = getOptimizerDefaultEpsilonValue()), i.epsilonScalar = keep(scalar(o)), i;
-  }return __extends(t, e), t.prototype.applyGradients = function (e) {
-    var t = this,
-        n = function (n) {
-      var o = ENV.engine.registeredVariables[n];if (null == r.accumulatedMeanSquares[n]) {
-        tidy(function () {
-          t.accumulatedMeanSquares[n] = zerosLike(o).variable(!1);
-        });
-      }if (null == r.accumulatedMeanGrads[n] && r.centered) {
-        tidy(function () {
-          t.accumulatedMeanGrads[n] = zerosLike(o).variable(!1);
-        });
-      }if (null == r.accumulatedMoments[n]) {
-        tidy(function () {
-          t.accumulatedMoments[n] = zerosLike(o).variable(!1);
-        });
-      }var a = r.accumulatedMeanSquares[n],
-          i = r.accumulatedMeanGrads[n],
-          s = r.accumulatedMoments[n],
-          u = e[n];tidy(function () {
-        var e = t.decayScalar.mul(a).add(t.oneMinusDecay.mul(u.square()));if (t.centered) {
-          var r = t.decayScalar.mul(i).add(t.oneMinusDecay.mul(u)),
-              c = t.momentumScalar.mul(s).add(t.c.mul(u).div(e.sub(r.square().add(t.epsilonScalar)).sqrt()));t.accumulatedMeanSquares[n].assign(e), t.accumulatedMeanGrads[n].assign(r), t.accumulatedMoments[n].assign(c);var l = o.sub(c);o.assign(l);
-        } else {
-          var d = t.decayScalar.mul(a).add(t.oneMinusDecay.mul(u.square()));c = t.momentumScalar.mul(s).add(t.c.mul(u).div(d.add(t.epsilonScalar).sqrt()));t.accumulatedMeanSquares[n].assign(d), t.accumulatedMoments[n].assign(c);l = o.sub(c);o.assign(l);
-        }
-      });
-    },
-        r = this;for (var o in e) n(o);
-  }, t.prototype.dispose = function () {
-    var e = this;this.c.dispose(), this.epsilonScalar.dispose(), this.decayScalar.dispose(), this.momentumScalar.dispose(), this.oneMinusDecay.dispose(), null != this.accumulatedMeanSquares && Object.keys(this.accumulatedMeanSquares).forEach(function (t) {
-      return e.accumulatedMeanSquares[t].dispose();
-    }), null != this.accumulatedMeanGrads && this.centered && Object.keys(this.accumulatedMeanGrads).forEach(function (t) {
-      return e.accumulatedMeanGrads[t].dispose();
-    }), null != this.accumulatedMoments && Object.keys(this.accumulatedMoments).forEach(function (t) {
-      return e.accumulatedMoments[t].dispose();
-    });
-  }, t.prototype.getConfig = function () {
-    return { learningRate: this.learningRate, decay: this.decay, momentum: this.momentum, epsilon: this.epsilon, centered: this.centered };
-  }, t.fromConfig = function (e, t) {
-    return new e(t.learningRate, t.decay, t.momentum, t.epsilon, t.centered);
-  }, t.className = "RMSPropOptimizer", t;
-}(Optimizer);SerializationMap.register(RMSPropOptimizer);var OptimizerConstructors = function () {
-  function e() {}return e.sgd = function (e) {
-    return new SGDOptimizer(e);
-  }, e.momentum = function (e, t, n) {
-    return void 0 === n && (n = !1), new MomentumOptimizer(e, t, n);
-  }, e.rmsprop = function (e, t, n, r, o) {
-    return void 0 === t && (t = .9), void 0 === n && (n = 0), void 0 === r && (r = null), void 0 === o && (o = !1), new RMSPropOptimizer(e, t, n, r, o);
-  }, e.adam = function (e, t, n, r) {
-    return void 0 === e && (e = .001), void 0 === t && (t = .9), void 0 === n && (n = .999), void 0 === r && (r = null), new AdamOptimizer(e, t, n, r);
-  }, e.adadelta = function (e, t, n) {
-    return void 0 === e && (e = .001), void 0 === t && (t = .95), void 0 === n && (n = null), new AdadeltaOptimizer(e, t, n);
-  }, e.adamax = function (e, t, n, r, o) {
-    return void 0 === e && (e = .002), void 0 === t && (t = .9), void 0 === n && (n = .999), void 0 === r && (r = null), void 0 === o && (o = 0), new AdamaxOptimizer(e, t, n, r, o);
-  }, e.adagrad = function (e, t) {
-    return void 0 === t && (t = .1), new AdagradOptimizer(e, t);
-  }, __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "sgd", null), __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "momentum", null), __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "rmsprop", null), __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "adam", null), __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "adadelta", null), __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "adamax", null), __decorate([doc({ heading: "Training", subheading: "Optimizers", namespace: "train" })], e, "adagrad", null), e;
-}(),
-    train = { sgd: OptimizerConstructors.sgd, momentum: OptimizerConstructors.momentum, adadelta: OptimizerConstructors.adadelta, adagrad: OptimizerConstructors.adagrad, rmsprop: OptimizerConstructors.rmsprop, adamax: OptimizerConstructors.adamax, adam: OptimizerConstructors.adam },
-    setBackend = Environment.setBackend,
-    getBackend = Environment.getBackend,
-    disposeVariables = Environment.disposeVariables,
-    memory = Environment.memory,
-    nextFrame = BrowserUtil.nextFrame;setOpHandler(ops);exports.setBackend = setBackend;
-exports.getBackend = getBackend;
-exports.disposeVariables = disposeVariables;
-exports.memory = memory;
-exports.version_core = version;
-exports.nextFrame = nextFrame;
-exports.environment = environment;
-exports.io = io;
-exports.serialization = serialization;
-exports.test_util = test_util;
-exports.util = util;
-exports.webgl = webgl;
-exports.AdadeltaOptimizer = AdadeltaOptimizer;
-exports.AdagradOptimizer = AdagradOptimizer;
-exports.AdamOptimizer = AdamOptimizer;
-exports.AdamaxOptimizer = AdamaxOptimizer;
-exports.MomentumOptimizer = MomentumOptimizer;
-exports.Optimizer = Optimizer;
-exports.RMSPropOptimizer = RMSPropOptimizer;
-exports.SGDOptimizer = SGDOptimizer;
-exports.Tensor = Tensor;
-exports.TensorBuffer = TensorBuffer;
-exports.variable = variable;
-exports.Variable = Variable;
-exports.Rank = Rank;
-exports.Reduction = Reduction;
-exports.ENV = ENV;
-exports.Environment = Environment;
-exports.doc = doc;
-exports.batchNormalization = batchNormalization;
-exports.batchNormalization2d = batchNormalization2d;
-exports.batchNormalization3d = batchNormalization3d;
-exports.batchNormalization4d = batchNormalization4d;
-exports.concat = concat;
-exports.concat1d = concat1d;
-exports.concat2d = concat2d;
-exports.concat3d = concat3d;
-exports.concat4d = concat4d;
-exports.conv1d = conv1d;
-exports.conv2d = conv2d;
-exports.conv2dTranspose = conv2dTranspose;
-exports.depthwiseConv2d = depthwiseConv2d;
-exports.separableConv2d = separableConv2d;
-exports.matMul = matMul;
-exports.matrixTimesVector = matrixTimesVector;
-exports.outerProduct = outerProduct;
-exports.vectorTimesMatrix = vectorTimesMatrix;
-exports.dot = dot;
-exports.avgPool = avgPool;
-exports.maxPool = maxPool;
-exports.transpose = transpose;
-exports.reverse = reverse;
-exports.reverse1d = reverse1d;
-exports.reverse2d = reverse2d;
-exports.reverse3d = reverse3d;
-exports.reverse4d = reverse4d;
-exports.slice = slice;
-exports.slice1d = slice1d;
-exports.slice2d = slice2d;
-exports.slice3d = slice3d;
-exports.slice4d = slice4d;
-exports.stridedSlice = stridedSlice;
-exports.argMax = argMax;
-exports.argMin = argMin;
-exports.logSumExp = logSumExp;
-exports.max = max;
-exports.mean = mean;
-exports.min = min;
-exports.all = all;
-exports.any = any;
-exports.moments = moments;
-exports.sum = sum;
-exports.equal = equal;
-exports.equalStrict = equalStrict;
-exports.greater = greater;
-exports.greaterStrict = greaterStrict;
-exports.greaterEqual = greaterEqual;
-exports.greaterEqualStrict = greaterEqualStrict;
-exports.less = less;
-exports.lessStrict = lessStrict;
-exports.lessEqual = lessEqual;
-exports.lessEqualStrict = lessEqualStrict;
-exports.notEqual = notEqual;
-exports.notEqualStrict = notEqualStrict;
-exports.logicalNot = logicalNot;
-exports.logicalAnd = logicalAnd;
-exports.logicalOr = logicalOr;
-exports.logicalXor = logicalXor;
-exports.where = where;
-exports.abs = abs;
-exports.acos = acos;
-exports.acosh = acosh;
-exports.asin = asin;
-exports.asinh = asinh;
-exports.atan = atan;
-exports.atanh = atanh;
-exports.ceil = ceil;
-exports.clipByValue = clipByValue;
-exports.cos = cos;
-exports.cosh = cosh;
-exports.elu = elu;
-exports.exp = exp;
-exports.expm1 = expm1;
-exports.floor = floor;
-exports.sign = sign;
-exports.leakyRelu = leakyRelu;
-exports.log = log;
-exports.log1p = log1p;
-exports.logSigmoid = logSigmoid;
-exports.neg = neg;
-exports.prelu = prelu;
-exports.relu = relu;
-exports.reciprocal = reciprocal;
-exports.round = round;
-exports.selu = selu;
-exports.sigmoid = sigmoid;
-exports.sin = sin;
-exports.sinh = sinh;
-exports.softplus = softplus;
-exports.sqrt = sqrt;
-exports.rsqrt = rsqrt;
-exports.square = square;
-exports.step = step;
-exports.tan = tan;
-exports.tanh = tanh$1;
-exports.erf = erf;
-exports.add = add;
-exports.addStrict = addStrict;
-exports.atan2 = atan2;
-exports.div = div;
-exports.floorDiv = floorDiv;
-exports.divStrict = divStrict;
-exports.maximum = maximum;
-exports.maximumStrict = maximumStrict;
-exports.minimum = minimum;
-exports.minimumStrict = minimumStrict;
-exports.mod = mod;
-exports.modStrict = modStrict;
-exports.mul = mul;
-exports.mulStrict = mulStrict;
-exports.pow = pow;
-exports.powStrict = powStrict;
-exports.sub = sub;
-exports.subStrict = subStrict;
-exports.squaredDifference = squaredDifference;
-exports.squaredDifferenceStrict = squaredDifferenceStrict;
-exports.norm = norm;
-exports.cast = cast;
-exports.clone = clone;
-exports.fromPixels = fromPixels;
-exports.toPixels = toPixels;
-exports.ones = ones;
-exports.onesLike = onesLike;
-exports.zeros = zeros;
-exports.zerosLike = zerosLike;
-exports.eye = eye;
-exports.rand = rand;
-exports.randomNormal = randomNormal;
-exports.truncatedNormal = truncatedNormal;
-exports.randomUniform = randomUniform;
-exports.multinomial = multinomial;
-exports.reshape = reshape;
-exports.squeeze = squeeze;
-exports.tile = tile;
-exports.gather = gather;
-exports.oneHot = oneHot;
-exports.linspace = linspace;
-exports.range = range;
-exports.buffer = buffer;
-exports.fill = fill;
-exports.tensor = tensor;
-exports.scalar = scalar;
-exports.tensor1d = tensor1d;
-exports.tensor2d = tensor2d;
-exports.tensor3d = tensor3d;
-exports.tensor4d = tensor4d;
-exports.tensor5d = tensor5d;
-exports.tensor6d = tensor6d;
-exports.print = print;
-exports.expandDims = expandDims;
-exports.stack = stack;
-exports.unstack = unstack;
-exports.split = split;
-exports.cumsum = cumsum;
-exports.pad = pad;
-exports.pad1d = pad1d;
-exports.pad2d = pad2d;
-exports.pad3d = pad3d;
-exports.pad4d = pad4d;
-exports.unsortedSegmentSum = unsortedSegmentSum;
-exports.movingAverage = movingAverage;
-exports.basicLSTMCell = basicLSTMCell;
-exports.multiRNNCell = multiRNNCell;
-exports.softmax = softmax;
-exports.sigmoidCrossEntropyWithLogits = sigmoidCrossEntropyWithLogits;
-exports.localResponseNormalization = localResponseNormalization;
-exports.linalg = linalg;
-exports.losses = losses;
-exports.image = image;
-exports.operation = operation;
-exports.train = train;
-exports.tidy = tidy;
-exports.keep = keep;
-exports.dispose = dispose;
-exports.time = time;
-exports.grad = grad;
-exports.valueAndGrad = valueAndGrad;
-exports.grads = grads;
-exports.valueAndGrads = valueAndGrads;
-exports.variableGrads = variableGrads;
-exports.customGrad = customGrad;
-},{"crypto":49,"process":18,"buffer":17}],12:[function(require,module,exports) {
+},{"crypto":34,"process":23,"buffer":22}],36:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36298,7 +30255,7 @@ function getTextureType(gl) {
 function getTextureTypeUByte(gl) {
     return gl.UNSIGNED_BYTE;
 }
-},{"@tensorflow/tfjs-core":64}],10:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12}],35:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36397,7 +30354,7 @@ function generateKNNLineData(numPoints, numNeighbors) {
     }
     return { distances: distances, indices: indices };
 }
-},{"@tensorflow/tfjs-core":64,"./gl_util":12}],11:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./gl_util":36}],37:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36531,7 +30488,7 @@ function executeCopyIndicesProgram(gpgpu, program, knnTex, knnShape, targetTex) 
     gl.uniform1f(numRowsLoc, knnShape.numRows);
     gpgpu.executeProgram();
 }
-},{"@tensorflow/tfjs-core":64,"./gl_util":12}],6:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./gl_util":36}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -36738,7 +30695,7 @@ var KNNEstimator = function () {
     return KNNEstimator;
 }();
 exports.KNNEstimator = KNNEstimator;
-},{"@tensorflow/tfjs-core":64,"./dataset_util":10,"./gl_util":12,"./knn_util":11}],13:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./dataset_util":35,"./gl_util":36,"./knn_util":37}],38:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36869,7 +30826,7 @@ function tensorToDataTexture(tensor) {
         });
     });
 }
-},{"@tensorflow/tfjs-core":64,"./gl_util":12}],14:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./gl_util":36}],39:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -37119,7 +31076,7 @@ function executeGaussiaDistributionsFromDistancesProgram(gpgpu, program, knnGrap
         console.log('Error executing Gaussian Dist From Distances Program ' + e.toString());
     }
 }
-},{"@tensorflow/tfjs-core":64,"./gl_util":12}],8:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./gl_util":36}],16:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37861,7 +31818,7 @@ var TSNEOptimizer = function () {
     return TSNEOptimizer;
 }();
 exports.TSNEOptimizer = TSNEOptimizer;
-},{"@tensorflow/tfjs-core":64,"./gl_util":12,"./knn_util":11,"./tsne_optimizer_util":14}],7:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./gl_util":36,"./knn_util":37,"./tsne_optimizer_util":39}],15:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38264,7 +32221,7 @@ var TSNE = function () {
     return TSNE;
 }();
 exports.TSNE = TSNE;
-},{"@tensorflow/tfjs-core":64,"./knn":6,"./tensor_to_data_texture":13,"./tsne_optimizer":8}],5:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":12,"./knn":14,"./tensor_to_data_texture":38,"./tsne_optimizer":16}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38282,14 +32239,14 @@ exports.KNNEstimator = _knn.KNNEstimator;
 exports.maximumPerplexity = _tsne.maximumPerplexity;
 exports.tsne = _tsne.tsne;
 exports.TSNEOptimizer = _tsne_optimizer.TSNEOptimizer;
-},{"./knn":6,"./tsne":7,"./tsne_optimizer":8}],24:[function(require,module,exports) {
+},{"./knn":14,"./tsne":15,"./tsne_optimizer":16}],41:[function(require,module,exports) {
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],15:[function(require,module,exports) {
+},{}],20:[function(require,module,exports) {
 var global = (1,eval)("this");
 var process = require("process");
 // Copyright Joyent, Inc. and other Node contributors.
@@ -38836,7 +32793,7 @@ exports._extend = function (origin, add) {
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
-},{"./support/isBuffer":24,"inherits":50,"process":18}],36:[function(require,module,exports) {
+},{"./support/isBuffer":41,"inherits":64,"process":23}],52:[function(require,module,exports) {
 var global = (1,eval)("this");
 'use strict';
 
@@ -39329,7 +33286,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":15}],99:[function(require,module,exports) {
+},{"util/":20}],139:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -39378,7 +33335,7 @@ function ZStream() {
 
 module.exports = ZStream;
 
-},{}],102:[function(require,module,exports) {
+},{}],147:[function(require,module,exports) {
 'use strict';
 
 
@@ -39485,7 +33442,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],107:[function(require,module,exports) {
+},{}],150:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -40707,7 +34664,7 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":102}],103:[function(require,module,exports) {
+},{"../utils/common":147}],148:[function(require,module,exports) {
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -40760,7 +34717,7 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],104:[function(require,module,exports) {
+},{}],151:[function(require,module,exports) {
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -40821,7 +34778,7 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],108:[function(require,module,exports) {
+},{}],149:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -40855,7 +34812,7 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],101:[function(require,module,exports) {
+},{}],137:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -42731,7 +36688,7 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":102,"./trees":107,"./adler32":103,"./crc32":104,"./messages":108}],105:[function(require,module,exports) {
+},{"../utils/common":147,"./trees":150,"./adler32":148,"./crc32":151,"./messages":149}],152:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -43078,7 +37035,7 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],106:[function(require,module,exports) {
+},{}],153:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -43423,7 +37380,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":102}],98:[function(require,module,exports) {
+},{"../utils/common":147}],140:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -44981,7 +38938,7 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":102,"./adler32":103,"./crc32":104,"./inffast":105,"./inftrees":106}],100:[function(require,module,exports) {
+},{"../utils/common":147,"./adler32":148,"./crc32":151,"./inffast":152,"./inftrees":153}],138:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -45051,7 +39008,7 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],37:[function(require,module,exports) {
+},{}],54:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var process = require("process");
 'use strict';
@@ -45463,7 +39420,7 @@ Zlib.prototype._reset = function () {
 };
 
 exports.Zlib = Zlib;
-},{"assert":36,"pako/lib/zlib/zstream":99,"pako/lib/zlib/deflate.js":101,"pako/lib/zlib/inflate.js":98,"pako/lib/zlib/constants":100,"buffer":17,"process":18}],26:[function(require,module,exports) {
+},{"assert":52,"pako/lib/zlib/zstream":139,"pako/lib/zlib/deflate.js":137,"pako/lib/zlib/inflate.js":140,"pako/lib/zlib/constants":138,"buffer":22,"process":23}],42:[function(require,module,exports) {
 
 var process = require("process");
 'use strict';
@@ -46075,7 +40032,7 @@ util.inherits(Gunzip, Zlib);
 util.inherits(DeflateRaw, Zlib);
 util.inherits(InflateRaw, Zlib);
 util.inherits(Unzip, Zlib);
-},{"buffer":17,"stream":16,"./binding":37,"util":15,"assert":36,"process":18}],27:[function(require,module,exports) {
+},{"buffer":22,"stream":21,"./binding":54,"util":20,"assert":52,"process":23}],43:[function(require,module,exports) {
 var process = require("process");
 var Buffer = require("buffer").Buffer;
 'use strict';
@@ -46288,7 +40245,7 @@ ChunkStream.prototype._process = function() {
   }
 };
 
-},{"util":15,"stream":16,"process":18,"buffer":17}],39:[function(require,module,exports) {
+},{"util":20,"stream":21,"process":23,"buffer":22}],57:[function(require,module,exports) {
 'use strict';
 
 // Adam 7
@@ -46376,7 +40333,7 @@ exports.getInterlaceIterator = function(width) {
     return (outerX * 4) + (outerY * width * 4);
   };
 };
-},{}],46:[function(require,module,exports) {
+},{}],62:[function(require,module,exports) {
 'use strict';
 
 module.exports = function paethPredictor(left, above, upLeft) {
@@ -46394,7 +40351,7 @@ module.exports = function paethPredictor(left, above, upLeft) {
   }
   return upLeft;
 };
-},{}],38:[function(require,module,exports) {
+},{}],61:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -46568,7 +40525,7 @@ Filter.prototype._reverseFilterLine = function(rawData) {
   }
 };
 
-},{"./interlace":39,"./paeth-predictor":46,"buffer":17}],28:[function(require,module,exports) {
+},{"./interlace":57,"./paeth-predictor":62,"buffer":22}],44:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -46596,7 +40553,7 @@ var FilterAsync = module.exports = function(bitmapInfo) {
 };
 util.inherits(FilterAsync, ChunkStream);
 
-},{"util":15,"./chunkstream":27,"./filter-parse":38,"buffer":17}],32:[function(require,module,exports) {
+},{"util":20,"./chunkstream":43,"./filter-parse":61,"buffer":22}],48:[function(require,module,exports) {
 'use strict';
 
 
@@ -46632,7 +40589,7 @@ module.exports = {
   GAMMA_DIVISION: 100000
 };
 
-},{}],40:[function(require,module,exports) {
+},{}],53:[function(require,module,exports) {
 'use strict';
 
 var crcTable = [];
@@ -46678,7 +40635,7 @@ CrcCalculator.crc32 = function(buf) {
   return crc ^ -1;
 };
 
-},{}],29:[function(require,module,exports) {
+},{}],45:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -46970,7 +40927,7 @@ Parser.prototype._parseIEND = function(data) {
   }
 };
 
-},{"./constants":32,"./crc":40,"buffer":17}],30:[function(require,module,exports) {
+},{"./constants":48,"./crc":53,"buffer":22}],46:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -47170,7 +41127,7 @@ exports.dataToBitMap = function(data, bitmapInfo) {
   return pxData;
 };
 
-},{"./interlace":39,"buffer":17}],31:[function(require,module,exports) {
+},{"./interlace":57,"buffer":22}],47:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -47262,7 +41219,7 @@ module.exports = function(indata, imageData) {
   return outdata;
 };
 
-},{"buffer":17}],19:[function(require,module,exports) {
+},{"buffer":22}],28:[function(require,module,exports) {
 'use strict';
 
 var util = require('util');
@@ -47418,7 +41375,7 @@ ParserAsync.prototype._complete = function(filteredData) {
   this.emit('parsed', normalisedBitmapData);
 };
 
-},{"util":15,"zlib":26,"./chunkstream":27,"./filter-parse-async":28,"./parser":29,"./bitmapper":30,"./format-normaliser":31}],41:[function(require,module,exports) {
+},{"util":20,"zlib":42,"./chunkstream":43,"./filter-parse-async":44,"./parser":45,"./bitmapper":46,"./format-normaliser":47}],55:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -47555,7 +41512,7 @@ module.exports = function(dataIn, width, height, options) {
   return outData;
 };
 
-},{"./constants":32,"buffer":17}],42:[function(require,module,exports) {
+},{"./constants":48,"buffer":22}],56:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -47746,7 +41703,7 @@ module.exports = function(pxData, width, height, options, bpp) {
   return rawData;
 };
 
-},{"./paeth-predictor":46,"buffer":17}],33:[function(require,module,exports) {
+},{"./paeth-predictor":62,"buffer":22}],49:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -47856,7 +41813,7 @@ Packer.prototype.packIEND = function() {
   return this._packChunk(constants.TYPE_IEND, null);
 };
 
-},{"./constants":32,"./crc":40,"./bitpacker":41,"./filter-pack":42,"zlib":26,"buffer":17}],20:[function(require,module,exports) {
+},{"./constants":48,"./crc":53,"./bitpacker":55,"./filter-pack":56,"zlib":42,"buffer":22}],29:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -47904,7 +41861,7 @@ PackerAsync.prototype.pack = function(data, width, height, gamma) {
   this._deflate.end(filteredData);
 };
 
-},{"util":15,"stream":16,"./constants":32,"./packer":33,"buffer":17}],43:[function(require,module,exports) {
+},{"util":20,"stream":21,"./constants":48,"./packer":49,"buffer":22}],58:[function(require,module,exports) {
 var process = require("process");
 var Buffer = require("buffer").Buffer;
 'use strict';
@@ -48069,7 +42026,7 @@ exports.Inflate = Inflate;
 exports.createInflate = createInflate;
 exports.inflateSync = inflateSync;
 
-},{"assert":36,"zlib":26,"util":15,"buffer":17,"process":18}],44:[function(require,module,exports) {
+},{"assert":52,"zlib":42,"util":20,"buffer":22,"process":23}],59:[function(require,module,exports) {
 'use strict';
 
 var SyncReader = module.exports = function(buffer) {
@@ -48122,7 +42079,7 @@ SyncReader.prototype.process = function() {
 
 };
 
-},{}],45:[function(require,module,exports) {
+},{}],60:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -48148,7 +42105,7 @@ exports.process = function(inBuffer, bitmapInfo) {
 
   return Buffer.concat(outBuffers);
 };
-},{"./sync-reader":44,"./filter-parse":38,"buffer":17}],34:[function(require,module,exports) {
+},{"./sync-reader":59,"./filter-parse":61,"buffer":22}],50:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -48250,7 +42207,7 @@ module.exports = function(buffer, options) {
   return metaData;
 };
 
-},{"zlib":26,"./sync-inflate":43,"./sync-reader":44,"./filter-parse-sync":45,"./parser":29,"./bitmapper":30,"./format-normaliser":31,"buffer":17}],35:[function(require,module,exports) {
+},{"zlib":42,"./sync-inflate":58,"./sync-reader":59,"./filter-parse-sync":60,"./parser":45,"./bitmapper":46,"./format-normaliser":47,"buffer":22}],51:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -48301,7 +42258,7 @@ module.exports = function(metaData, opt) {
   return Buffer.concat(chunks);
 };
 
-},{"zlib":26,"./constants":32,"./packer":33,"buffer":17}],21:[function(require,module,exports) {
+},{"zlib":42,"./constants":48,"./packer":49,"buffer":22}],30:[function(require,module,exports) {
 'use strict';
 
 
@@ -48319,7 +42276,7 @@ exports.write = function(png, options) {
   return pack(png, options);
 };
 
-},{"./parser-sync":34,"./packer-sync":35}],9:[function(require,module,exports) {
+},{"./parser-sync":50,"./packer-sync":51}],10:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var process = require("process");
 'use strict';
@@ -48496,7 +42453,7 @@ PNG.prototype.adjustGamma = function() {
   PNG.adjustGamma(this);
 };
 
-},{"util":15,"stream":16,"./parser-async":19,"./packer-async":20,"./png-sync":21,"buffer":17,"process":18}],2:[function(require,module,exports) {
+},{"util":20,"stream":21,"./parser-async":28,"./packer-async":29,"./png-sync":30,"buffer":22,"process":23}],2:[function(require,module,exports) {
 'use strict';
 
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
@@ -48864,4 +42821,4 @@ window.onload = (0, _asyncToGenerator3.default)(function* () {
   document.getElementById('stopButton').addEventListener('click', stop);
   yield runTsne(plotCtx);
 });
-},{"babel-runtime/helpers/asyncToGenerator":3,"babel-runtime/core-js/promise":4,"@tensorflow/tfjs-core":23,"../../src/index":5,"pngjs":9}]},{},[2])
+},{"babel-runtime/helpers/asyncToGenerator":4,"babel-runtime/core-js/promise":5,"@tensorflow/tfjs-core":12,"../../src/index":8,"pngjs":10}]},{},[2])
