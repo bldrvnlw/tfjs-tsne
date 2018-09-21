@@ -282,7 +282,7 @@ export class KNNEstimator {
   }
 
   private downloadTextureToMatrix(texture: WebGLTexture): Float32Array {
-      return this.gpgpu.downloadMatrixFromTexture(texture,
+      return this.gpgpu.downloadFloat32MatrixFromOutputTexture(texture,
           this.knnDataShape.numRows,
           this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
   }

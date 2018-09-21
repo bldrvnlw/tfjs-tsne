@@ -9,7 +9,7 @@
     "node": ">=8.9.0"
   },
   "dependencies": {
-    "@tensorflow/tfjs-core": "^0.10.1",
+    "@tensorflow/tfjs-core": "^0.12.1",
     "babel-core": "^6.26.3",
     "pngjs": "^3.3.3"
   },
