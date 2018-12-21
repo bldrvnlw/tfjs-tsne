@@ -22,9 +22,15 @@ import {RearrangedData} from './interfaces';
 import * as knn_util from './knn_util';
 import * as tsne_util from './tsne_optimizer_util';
 
+interface SplatDims {
+    [key: string]: number;
+    width: number;
+    height: number;
+}
 export class TSNEOptimizer {
   // Interactive parameters
   private _eta: number; // used as uniform in the shaders
+  private _spacePerPixel: number;
   private _momentum: tf.Scalar;
   private _exaggeration: tf.Scalar;
 
@@ -36,6 +42,8 @@ export class TSNEOptimizer {
   private pointsPerRow: number;
   private numRows: number;
   private splatTextureDiameter: number;
+
+  private splatTextureDims: SplatDims;
   private kernelTextureDiameter: number;
   private kernelSupport: number;
 
@@ -69,6 +77,7 @@ export class TSNEOptimizer {
   private _maxY: number;
   private _normQ: number;
   private _iteration: number;
+  //private _aspect: number;
 
   ////////////////////////////////
 
@@ -155,6 +164,14 @@ export class TSNEOptimizer {
     this._eta = eta;
   }
 
+  get spacePerPixel(): number {return this._spacePerPixel;}
+  set spacePerPixel(spacePerPixel: number) {
+      if (spacePerPixel <= 0) {
+          throw Error('Space Per Pixel must be greater then zero');
+      }
+      this._spacePerPixel = spacePerPixel;
+  }
+
   ////////////////////////////////
   ///// PUBLIC INTERFACE  ////////
   ////////////////////////////////
@@ -201,6 +218,7 @@ export class TSNEOptimizer {
 
     // Default values for the gradient descent parameters
     this._eta = 2500;
+    this._spacePerPixel = 0.35;
     this._momentum = tf.scalar(0.8);
     this.rawExaggeration =
         [ {iteration : 200, value : 4}, {iteration : 600, value : 1} ];
@@ -211,7 +229,9 @@ export class TSNEOptimizer {
     if (splatTextureDiameter == null) {
       splatTextureDiameter = 5;
     }
+
     this.splatTextureDiameter = splatTextureDiameter;
+    this.splatTextureDims = {width: 5, height: 5};
     if (kernelTextureRadius == null) {
       kernelTextureRadius = 50;
     }
@@ -278,6 +298,7 @@ export class TSNEOptimizer {
       const randomData =
           tf.randomUniform([ this.numRows, this.pointsPerRow * 2 ]);
       const embedding = tf.zeros([ this.numRows, this.pointsPerRow * 2 ]);
+      // <bvl2 - In the C++ version there is a multiplier here 0.1>
       this.initializeEmbeddingPositions(embedding, randomData);
       return embedding;
     });
@@ -288,6 +309,7 @@ export class TSNEOptimizer {
     this._minY = -maxEmbeddingAbsCoordinate;
     this._maxX = maxEmbeddingAbsCoordinate;
     this._maxY = maxEmbeddingAbsCoordinate;
+    //this._aspect = 1;
     this.log('\tmin X', this._minX);
     this.log('\tmax X', this._maxX);
     this.log('\tmin Y', this._minY);
@@ -540,7 +562,8 @@ export class TSNEOptimizer {
       throw new Error('No neighborhoods defined. You may want to call\
                     initializeNeighbors or initializeNeighborsFromKNNGraph');
     }
-
+    // 8) update the bounding box
+    await this.computeBoundaries();
     // check if the current splat texture is of the right size
     this.updateSplatTextureDiameter();
     this.updateExaggeration();
@@ -591,9 +614,7 @@ export class TSNEOptimizer {
       this.embedding.dispose();
       return embedding;
     });
-
-    // 8) update the bounding box
-    await this.computeBoundaries();
+    await this.centerEmbedding();
 
     // Increase the iteration counter
     ++this._iteration;
@@ -619,9 +640,10 @@ export class TSNEOptimizer {
   private initializeRepulsiveForceTextures() {
     // The splat texture holds the scalar fields used
     // for computing the gradient.
+    //  <bvl>
     this._splatTexture = gl_util.createAndConfigureInterpolatedTexture(
-        this.gpgpu.gl, this.splatTextureDiameter, this.splatTextureDiameter, 4,
-        null);
+      this.gpgpu.gl, this.splatTextureDiameter, this.splatTextureDiameter, 4,
+      null);
 
     // Computation of the kernel to splat.
     // First channel  - 1/(1+d^2)
@@ -719,6 +741,8 @@ export class TSNEOptimizer {
 
     const minData = await min.data();
     const maxData = await max.data();
+    //<bvl3 equivalent to the padding/2 in C++
+    // implementation computeEmbeddingBounds>
     const percentageOffset = 0.05;
 
     const offsetX = (maxData[0] - minData[0]) * percentageOffset;
@@ -732,26 +756,103 @@ export class TSNEOptimizer {
     min.dispose();
     max.dispose();
   }
+  // @ts-ignore
+  private async centerEmbedding() : Promise<void> {
+      this.embedding = tf.tidy(() => {
+          // 2d tensor with some extra points
+          const embedding2D =
+              this.embedding.reshape([ this.numRows * this.pointsPerRow, 2 ])
+                  .slice([ 0, 0 ], [ this.numPoints, 2 ]);
+
+          const min = embedding2D.min(0);
+          const max = embedding2D.max(0);
+          const shifts = min.add(max).div(tf.tensor([2., 2.]));
+          const centered2D = embedding2D.sub(shifts);
+
+          // Scaling causes problems with small number of points
+          /*const centeredScaled2D = (() => {
+              // for high exaggeration values we upscale
+              // a small embedding
+              const range = max.sub(min).min();
+              const rangeVal = range.dataSync();
+              const exagVal = this._exaggeration.dataSync();
+              let scaleFactor = 1.0;
+              if ((exagVal[0] > 1.2) && (rangeVal[0] < 0.1)) {
+                      scaleFactor = 0.1 / rangeVal[0];
+              }
+              if (scaleFactor !== 1.0) {
+                  console.log('Rescale embedding factor: ' + scaleFactor);
+                  const scaled2D = centered2D.mul(
+                      tf.tensor([scaleFactor, scaleFactor]));
+                  return scaled2D;
+              }
+              else {
+                  return centered2D;
+              }
+          })();*/
+          const paddingPoints = (this.numRows * this.pointsPerRow)
+              - this.numPoints;
+          if (paddingPoints > 0) {
+              const padded2D = centered2D.concat(
+                  tf.zeros([paddingPoints, 2]), 0);
+              return padded2D.reshape(
+                  [this.numRows, this.pointsPerRow * 2]);
+          }
+          return centered2D.reshape(
+              [this.numRows, this.pointsPerRow * 2]);
+      });
+  }
+  private adaptResolution(size: number) {
+      //const spacePerPixel = 0.35; //was 0.35
+      // The maximum texture diameter is limited to 5k pixels
+      // It is big enough to contain any reasonable sized embedding,
+      // while avoids being too large due to instable
+      // points during the optimization
+      const maxTextureDiameter = 5000;
+      const minTextureDiameter = 5;
+      return Math.min(
+          Math.ceil(Math.max(size / this._spacePerPixel, minTextureDiameter)),
+          maxTextureDiameter);
+  }
 
   private updateSplatTextureDiameter() {
-    const maxSpace = Math.max(this._maxX - this._minX, this._maxY - this._minY);
-    const spacePerPixel = 0.35;
-    // The maximum texture diameter is limited to 5k pixels
-    // It is big enough to contain any reasonable sized embedding, while avoids
-    // being too large due to instable points during the optimization
-    const maxTextureDiameter = 5000;
-    const textureDiameter = Math.min(
-        Math.ceil(Math.max(maxSpace / spacePerPixel, 5)), maxTextureDiameter);
+    const rangeX = this._maxX - this._minX;
+    const rangeY = this._maxY - this._minY;
+    const maxSpace = Math.max(rangeX, rangeY);
 
-    const percChange = Math.abs(this.splatTextureDiameter - textureDiameter) /
-                       this.splatTextureDiameter;
+    //const textureDiameter = this.adaptResolution(maxSpace)
+
+    // Should we scale width and height? The case for this is with
+    // small numbers of points where the distribution in space may be less
+    // uniformly blobby.
+    const textureDiameter = this.adaptResolution(maxSpace);
+    //const textureWidth = this.adaptResolution(rangeX);
+    //const textureHeight = this.adaptResolution(rangeY);
+
+    /*const percChange = Math.max(
+        Math.abs(this.splatTextureDims.width - textureWidth) /
+                    this.splatTextureDims.width,
+               Math.abs(this.splatTextureDims.height - textureHeight) /
+                    this.splatTextureDims.height
+    );*/
+
+    const percChange = Math.abs(this.splatTextureDiameter - textureDiameter)/
+      this.splatTextureDiameter;
 
     if (percChange >= 0.2) {
-      this.log('Updating splat-texture diameter', textureDiameter);
+      this.log('Updating splat-texture width', textureDiameter);
+        this.log('embedding width', rangeX);
+        this.log('embedding height', rangeY);
+      //this.log('splat-texture scaled width', textureWidth);
+      //this.log('splat-texture scaled height', textureHeight);
       this.gpgpu.gl.deleteTexture(this._splatTexture);
       this.splatTextureDiameter = textureDiameter;
+      this.splatTextureDims.width = textureDiameter;
+      this.splatTextureDims.height = textureDiameter;
       this._splatTexture = gl_util.createAndConfigureInterpolatedTexture(
-          this.gpgpu.gl, this.splatTextureDiameter, this.splatTextureDiameter,
+          this.gpgpu.gl,
+          this.splatTextureDiameter,
+          this.splatTextureDiameter,
           4, null);
     }
   }
@@ -766,10 +867,12 @@ export class TSNEOptimizer {
   }
 
   private splatPoints() {
+    //<bvl>
     tsne_util.executeEmbeddingSplatterProgram(
         this.gpgpu, this.embeddingSplatterProgram, this._splatTexture,
         this.backend.getTexture(this.embedding.dataId), this.kernelTexture,
-        this.splatTextureDiameter, this.numPoints, this._minX, this._minY,
+        this.splatTextureDiameter, this.splatTextureDiameter,
+        this.numPoints, this._minX, this._minY,
         this._maxX, this._maxY, this.kernelSupport, this.pointsPerRow,
         this.numRows, this.splatVertexIdBuffer);
   }

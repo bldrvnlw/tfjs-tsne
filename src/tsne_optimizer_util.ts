@@ -82,7 +82,8 @@ export function createEmbeddingSplatterProgram(gpgpu: tf.webgl.GPGPUContext):
 export function executeEmbeddingSplatterProgram(
     gpgpu: tf.webgl.GPGPUContext, program: WebGLProgram,
     targetTex: WebGLTexture, embeddingTex: WebGLTexture,
-    kernelTex: WebGLTexture, targetTexDiameter: number, numPoints: number,
+    kernelTex: WebGLTexture, targetTexWidth: number, targetTexHeight:
+    number, numPoints: number,
     minX: number, minY: number, maxX: number, maxY: number,
     kernelSupport: number, pntsPerRow: number, numRows: number,
     vertexIdBuffer: WebGLBuffer) {
@@ -91,7 +92,7 @@ export function executeEmbeddingSplatterProgram(
 
   if (targetTex != null) {
     gpgpu.setOutputMatrixTexture(
-        targetTex, targetTexDiameter, targetTexDiameter);
+        targetTex, targetTexWidth, targetTexHeight);
   } else {
     tf.webgl.webgl_util.bindCanvasToFramebuffer(gpgpu.gl);
   }
@@ -179,7 +180,7 @@ export function createQInterpolatorProgram(gpgpu: tf.webgl.GPGPUContext):
       float emb_width = (points_per_row * 2.0);
       float emb_row_coord = (pnt_location.y + 0.5) / num_rows;
       vec2 emb_coords_x
-              = vec2((pnt_location.x * 2.+0.5) / emb_width, emb_row_coord);
+              = vec2((pnt_location.x * 2. + 0.5) / emb_width, emb_row_coord);
       vec2 emb_coords_y
               = vec2((pnt_location.x * 2. + 1.5) / emb_width, emb_row_coord);
 
@@ -436,8 +437,10 @@ export function createAttractiveForcesComputationProgram(
         //the update depends on the dimension that this fragment represents
         if(dimension < 0.5) {
           // * 4 / (num_points*2) -> * 2 / num_points
-          sum_pos += eta * 2. * pij * qij * dist_x / (num_points);
+          //<bvl 1- fix attractive force calculation>
+          sum_pos += eta * 2. * pij * qij * dist_x / (num_points); 
         }else{
+          //<bvl 1- fix attractive force calculation>
           sum_pos += eta * 2. * pij * qij * dist_y / (num_points);
         }
 

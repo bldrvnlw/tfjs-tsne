@@ -186,6 +186,9 @@ export class TSNE {
       this.optimizer.eta = minimumEta +
           (maximumEta - minimumEta) * (this.numPoints / numPointsMaximumEta);
     }
+
+    const spacePerPixel = 0.35 * 10000/this.numPoints;
+    this.optimizer.spacePerPixel = spacePerPixel;
     this.initialized = true;
   }
 
