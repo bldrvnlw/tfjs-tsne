@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "clang-format": "~1.2.2",
+    "cross-env": "^5.2.0",
     "jasmine-core": "^2.99",
     "karma": "^2.0.2",
     "karma-chrome-launcher": "^2.2.0",
@@ -37,6 +38,7 @@
   "scripts": {
     "build": "tsc --project tsconfig-es5.json && tsc",
     "build-npm": "./scripts/build-npm.sh",
+    "build-npm-win": "rimraf dist/ && yarn && yarn build && rollup -c && uglifyjs dist/tfjs-tsne.js -c -m -o dist/tfjs-tsne.min.js",
     "link-local": "yalc link",
     "publish-local": "yarn build-npm && yalc push",
     "lint": "tslint -p . -t verbose",
@@ -45,6 +47,13 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@tensorflow/tfjs-core": "0.12.18"
+    "@tensorflow/tfjs-core": "0.12.18",
+    "buffer-hexdump": "^1.0.0",
+    "hex-view": "^1.0.0",
+    "hexdump": "^0.1.0",
+    "hexdump-js": "^0.1.0",
+    "hxd": "^1.4.2",
+    "uupaa.hexdump.js": "^0.0.5",
+    "xorshift": "^1.1.1"
   }
 }

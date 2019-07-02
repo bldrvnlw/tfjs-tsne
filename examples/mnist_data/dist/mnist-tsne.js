@@ -71,46 +71,51 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({175:[function(require,module,exports) {
+})({231:[function(require,module,exports) {
+module.exports = function () { /* empty */ };
 
-},{}],211:[function(require,module,exports) {
-// 7.1.4 ToInteger
-var ceil = Math.ceil;
-var floor = Math.floor;
-module.exports = function (it) {
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+},{}],229:[function(require,module,exports) {
+module.exports = function (done, value) {
+  return { value: value, done: !!done };
 };
 
-},{}],212:[function(require,module,exports) {
+},{}],201:[function(require,module,exports) {
+module.exports = {};
+
+},{}],240:[function(require,module,exports) {
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+},{}],255:[function(require,module,exports) {
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = require('./_cof');
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+},{"./_cof":240}],230:[function(require,module,exports) {
 // 7.2.1 RequireObjectCoercible(argument)
 module.exports = function (it) {
   if (it == undefined) throw TypeError("Can't call method on  " + it);
   return it;
 };
 
-},{}],190:[function(require,module,exports) {
-var toInteger = require('./_to-integer');
+},{}],232:[function(require,module,exports) {
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = require('./_iobject');
 var defined = require('./_defined');
-// true  -> String#at
-// false -> String#codePointAt
-module.exports = function (TO_STRING) {
-  return function (that, pos) {
-    var s = String(defined(that));
-    var i = toInteger(pos);
-    var l = s.length;
-    var a, b;
-    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
-    a = s.charCodeAt(i);
-    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-      ? TO_STRING ? s.charAt(i) : a
-      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-  };
+module.exports = function (it) {
+  return IObject(defined(it));
 };
 
-},{"./_to-integer":211,"./_defined":212}],192:[function(require,module,exports) {
+},{"./_iobject":255,"./_defined":230}],207:[function(require,module,exports) {
 module.exports = true;
 
-},{}],186:[function(require,module,exports) {
+},{}],197:[function(require,module,exports) {
 
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global = module.exports = typeof window != 'undefined' && window.Math == Math
@@ -119,17 +124,17 @@ var global = module.exports = typeof window != 'undefined' && window.Math == Mat
   : Function('return this')();
 if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
-},{}],179:[function(require,module,exports) {
+},{}],185:[function(require,module,exports) {
 var core = module.exports = { version: '2.5.7' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
-},{}],197:[function(require,module,exports) {
+},{}],210:[function(require,module,exports) {
 module.exports = function (it) {
   if (typeof it != 'function') throw TypeError(it + ' is not a function!');
   return it;
 };
 
-},{}],193:[function(require,module,exports) {
+},{}],208:[function(require,module,exports) {
 // optional / simple context binding
 var aFunction = require('./_a-function');
 module.exports = function (fn, that, length) {
@@ -151,19 +156,19 @@ module.exports = function (fn, that, length) {
   };
 };
 
-},{"./_a-function":197}],195:[function(require,module,exports) {
+},{"./_a-function":210}],211:[function(require,module,exports) {
 module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
 
-},{}],213:[function(require,module,exports) {
+},{}],222:[function(require,module,exports) {
 var isObject = require('./_is-object');
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
 };
 
-},{"./_is-object":195}],240:[function(require,module,exports) {
+},{"./_is-object":211}],258:[function(require,module,exports) {
 module.exports = function (exec) {
   try {
     return !!exec();
@@ -172,13 +177,13 @@ module.exports = function (exec) {
   }
 };
 
-},{}],220:[function(require,module,exports) {
+},{}],235:[function(require,module,exports) {
 // Thank's IE8 for his funny defineProperty
 module.exports = !require('./_fails')(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
 
-},{"./_fails":240}],229:[function(require,module,exports) {
+},{"./_fails":258}],243:[function(require,module,exports) {
 var isObject = require('./_is-object');
 var document = require('./_global').document;
 // typeof document.createElement is 'object' in old IE
@@ -187,12 +192,12 @@ module.exports = function (it) {
   return is ? document.createElement(it) : {};
 };
 
-},{"./_is-object":195,"./_global":186}],238:[function(require,module,exports) {
+},{"./_is-object":211,"./_global":197}],256:[function(require,module,exports) {
 module.exports = !require('./_descriptors') && !require('./_fails')(function () {
   return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
-},{"./_descriptors":220,"./_fails":240,"./_dom-create":229}],239:[function(require,module,exports) {
+},{"./_descriptors":235,"./_fails":258,"./_dom-create":243}],257:[function(require,module,exports) {
 // 7.1.1 ToPrimitive(input [, PreferredType])
 var isObject = require('./_is-object');
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
@@ -206,7 +211,7 @@ module.exports = function (it, S) {
   throw TypeError("Can't convert object to primitive value");
 };
 
-},{"./_is-object":195}],219:[function(require,module,exports) {
+},{"./_is-object":211}],234:[function(require,module,exports) {
 var anObject = require('./_an-object');
 var IE8_DOM_DEFINE = require('./_ie8-dom-define');
 var toPrimitive = require('./_to-primitive');
@@ -224,7 +229,7 @@ exports.f = require('./_descriptors') ? Object.defineProperty : function defineP
   return O;
 };
 
-},{"./_an-object":213,"./_ie8-dom-define":238,"./_to-primitive":239,"./_descriptors":220}],233:[function(require,module,exports) {
+},{"./_an-object":222,"./_ie8-dom-define":256,"./_to-primitive":257,"./_descriptors":235}],233:[function(require,module,exports) {
 module.exports = function (bitmap, value) {
   return {
     enumerable: !(bitmap & 1),
@@ -234,7 +239,7 @@ module.exports = function (bitmap, value) {
   };
 };
 
-},{}],208:[function(require,module,exports) {
+},{}],200:[function(require,module,exports) {
 var dP = require('./_object-dp');
 var createDesc = require('./_property-desc');
 module.exports = require('./_descriptors') ? function (object, key, value) {
@@ -244,13 +249,13 @@ module.exports = require('./_descriptors') ? function (object, key, value) {
   return object;
 };
 
-},{"./_object-dp":219,"./_property-desc":233,"./_descriptors":220}],210:[function(require,module,exports) {
+},{"./_object-dp":234,"./_property-desc":233,"./_descriptors":235}],238:[function(require,module,exports) {
 var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
 
-},{}],183:[function(require,module,exports) {
+},{}],202:[function(require,module,exports) {
 
 var global = require('./_global');
 var core = require('./_core');
@@ -315,36 +320,18 @@ $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
 
-},{"./_global":186,"./_core":179,"./_ctx":193,"./_hide":208,"./_has":210}],214:[function(require,module,exports) {
+},{"./_global":197,"./_core":185,"./_ctx":208,"./_hide":200,"./_has":238}],228:[function(require,module,exports) {
 module.exports = require('./_hide');
 
-},{"./_hide":208}],209:[function(require,module,exports) {
-module.exports = {};
-
-},{}],218:[function(require,module,exports) {
-var toString = {}.toString;
-
+},{"./_hide":200}],225:[function(require,module,exports) {
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
 module.exports = function (it) {
-  return toString.call(it).slice(8, -1);
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
 
-},{}],241:[function(require,module,exports) {
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = require('./_cof');
-// eslint-disable-next-line no-prototype-builtins
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-
-},{"./_cof":218}],232:[function(require,module,exports) {
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = require('./_iobject');
-var defined = require('./_defined');
-module.exports = function (it) {
-  return IObject(defined(it));
-};
-
-},{"./_iobject":241,"./_defined":212}],222:[function(require,module,exports) {
+},{}],242:[function(require,module,exports) {
 // 7.1.15 ToLength
 var toInteger = require('./_to-integer');
 var min = Math.min;
@@ -352,7 +339,7 @@ module.exports = function (it) {
   return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 };
 
-},{"./_to-integer":211}],274:[function(require,module,exports) {
+},{"./_to-integer":225}],286:[function(require,module,exports) {
 var toInteger = require('./_to-integer');
 var max = Math.max;
 var min = Math.min;
@@ -361,7 +348,7 @@ module.exports = function (index, length) {
   return index < 0 ? max(index + length, 0) : min(index, length);
 };
 
-},{"./_to-integer":211}],271:[function(require,module,exports) {
+},{"./_to-integer":225}],285:[function(require,module,exports) {
 // false -> Array#indexOf
 // true  -> Array#includes
 var toIObject = require('./_to-iobject');
@@ -386,7 +373,7 @@ module.exports = function (IS_INCLUDES) {
   };
 };
 
-},{"./_to-iobject":232,"./_to-length":222,"./_to-absolute-index":274}],225:[function(require,module,exports) {
+},{"./_to-iobject":232,"./_to-length":242,"./_to-absolute-index":286}],236:[function(require,module,exports) {
 
 var core = require('./_core');
 var global = require('./_global');
@@ -401,21 +388,21 @@ var store = global[SHARED] || (global[SHARED] = {});
   copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
 });
 
-},{"./_core":179,"./_global":186,"./_library":192}],226:[function(require,module,exports) {
+},{"./_core":185,"./_global":197,"./_library":207}],237:[function(require,module,exports) {
 var id = 0;
 var px = Math.random();
 module.exports = function (key) {
   return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
 };
 
-},{}],237:[function(require,module,exports) {
+},{}],254:[function(require,module,exports) {
 var shared = require('./_shared')('keys');
 var uid = require('./_uid');
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
 
-},{"./_shared":225,"./_uid":226}],265:[function(require,module,exports) {
+},{"./_shared":236,"./_uid":237}],284:[function(require,module,exports) {
 var has = require('./_has');
 var toIObject = require('./_to-iobject');
 var arrayIndexOf = require('./_array-includes')(false);
@@ -434,13 +421,13 @@ module.exports = function (object, names) {
   return result;
 };
 
-},{"./_has":210,"./_to-iobject":232,"./_array-includes":271,"./_shared-key":237}],244:[function(require,module,exports) {
+},{"./_has":238,"./_to-iobject":232,"./_array-includes":285,"./_shared-key":254}],275:[function(require,module,exports) {
 // IE 8- don't enum bug keys
 module.exports = (
   'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
 ).split(',');
 
-},{}],250:[function(require,module,exports) {
+},{}],268:[function(require,module,exports) {
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
 var $keys = require('./_object-keys-internal');
 var enumBugKeys = require('./_enum-bug-keys');
@@ -449,7 +436,7 @@ module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
 };
 
-},{"./_object-keys-internal":265,"./_enum-bug-keys":244}],243:[function(require,module,exports) {
+},{"./_object-keys-internal":284,"./_enum-bug-keys":275}],274:[function(require,module,exports) {
 var dP = require('./_object-dp');
 var anObject = require('./_an-object');
 var getKeys = require('./_object-keys');
@@ -464,11 +451,11 @@ module.exports = require('./_descriptors') ? Object.defineProperties : function 
   return O;
 };
 
-},{"./_object-dp":219,"./_an-object":213,"./_object-keys":250,"./_descriptors":220}],228:[function(require,module,exports) {
+},{"./_object-dp":234,"./_an-object":222,"./_object-keys":268,"./_descriptors":235}],244:[function(require,module,exports) {
 var document = require('./_global').document;
 module.exports = document && document.documentElement;
 
-},{"./_global":186}],235:[function(require,module,exports) {
+},{"./_global":197}],252:[function(require,module,exports) {
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = require('./_an-object');
 var dPs = require('./_object-dps');
@@ -511,7 +498,7 @@ module.exports = Object.create || function create(O, Properties) {
   return Properties === undefined ? result : dPs(result, Properties);
 };
 
-},{"./_an-object":213,"./_object-dps":243,"./_enum-bug-keys":244,"./_shared-key":237,"./_dom-create":229,"./_html":228}],201:[function(require,module,exports) {
+},{"./_an-object":222,"./_object-dps":274,"./_enum-bug-keys":275,"./_shared-key":254,"./_dom-create":243,"./_html":244}],199:[function(require,module,exports) {
 var store = require('./_shared')('wks');
 var uid = require('./_uid');
 var Symbol = require('./_global').Symbol;
@@ -524,7 +511,7 @@ var $exports = module.exports = function (name) {
 
 $exports.store = store;
 
-},{"./_shared":225,"./_uid":226,"./_global":186}],206:[function(require,module,exports) {
+},{"./_shared":236,"./_uid":237,"./_global":197}],217:[function(require,module,exports) {
 var def = require('./_object-dp').f;
 var has = require('./_has');
 var TAG = require('./_wks')('toStringTag');
@@ -533,7 +520,7 @@ module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
 };
 
-},{"./_object-dp":219,"./_has":210,"./_wks":201}],215:[function(require,module,exports) {
+},{"./_object-dp":234,"./_has":238,"./_wks":199}],226:[function(require,module,exports) {
 'use strict';
 var create = require('./_object-create');
 var descriptor = require('./_property-desc');
@@ -548,14 +535,14 @@ module.exports = function (Constructor, NAME, next) {
   setToStringTag(Constructor, NAME + ' Iterator');
 };
 
-},{"./_object-create":235,"./_property-desc":233,"./_set-to-string-tag":206,"./_hide":208,"./_wks":201}],236:[function(require,module,exports) {
+},{"./_object-create":252,"./_property-desc":233,"./_set-to-string-tag":217,"./_hide":200,"./_wks":199}],253:[function(require,module,exports) {
 // 7.1.13 ToObject(argument)
 var defined = require('./_defined');
 module.exports = function (it) {
   return Object(defined(it));
 };
 
-},{"./_defined":212}],216:[function(require,module,exports) {
+},{"./_defined":230}],227:[function(require,module,exports) {
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has = require('./_has');
 var toObject = require('./_to-object');
@@ -570,7 +557,7 @@ module.exports = Object.getPrototypeOf || function (O) {
   } return O instanceof Object ? ObjectProto : null;
 };
 
-},{"./_has":210,"./_to-object":236,"./_shared-key":237}],191:[function(require,module,exports) {
+},{"./_has":238,"./_to-object":253,"./_shared-key":254}],198:[function(require,module,exports) {
 'use strict';
 var LIBRARY = require('./_library');
 var $export = require('./_export');
@@ -641,34 +628,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
   return methods;
 };
 
-},{"./_library":192,"./_export":183,"./_redefine":214,"./_hide":208,"./_iterators":209,"./_iter-create":215,"./_set-to-string-tag":206,"./_object-gpo":216,"./_wks":201}],177:[function(require,module,exports) {
-'use strict';
-var $at = require('./_string-at')(true);
-
-// 21.1.3.27 String.prototype[@@iterator]()
-require('./_iter-define')(String, 'String', function (iterated) {
-  this._t = String(iterated); // target
-  this._i = 0;                // next index
-// 21.1.5.2.1 %StringIteratorPrototype%.next()
-}, function () {
-  var O = this._t;
-  var index = this._i;
-  var point;
-  if (index >= O.length) return { value: undefined, done: true };
-  point = $at(O, index);
-  this._i += point.length;
-  return { value: point, done: false };
-});
-
-},{"./_string-at":190,"./_iter-define":191}],230:[function(require,module,exports) {
-module.exports = function () { /* empty */ };
-
-},{}],231:[function(require,module,exports) {
-module.exports = function (done, value) {
-  return { value: value, done: !!done };
-};
-
-},{}],207:[function(require,module,exports) {
+},{"./_library":207,"./_export":202,"./_redefine":228,"./_hide":200,"./_iterators":201,"./_iter-create":226,"./_set-to-string-tag":217,"./_object-gpo":227,"./_wks":199}],196:[function(require,module,exports) {
 'use strict';
 var addToUnscopables = require('./_add-to-unscopables');
 var step = require('./_iter-step');
@@ -704,7 +664,7 @@ addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
 
-},{"./_add-to-unscopables":230,"./_iter-step":231,"./_iterators":209,"./_to-iobject":232,"./_iter-define":191}],180:[function(require,module,exports) {
+},{"./_add-to-unscopables":231,"./_iter-step":229,"./_iterators":201,"./_to-iobject":232,"./_iter-define":198}],182:[function(require,module,exports) {
 
 require('./es6.array.iterator');
 var global = require('./_global');
@@ -726,7 +686,45 @@ for (var i = 0; i < DOMIterables.length; i++) {
   Iterators[NAME] = Iterators.Array;
 }
 
-},{"./es6.array.iterator":207,"./_global":186,"./_hide":208,"./_iterators":209,"./_wks":201}],194:[function(require,module,exports) {
+},{"./es6.array.iterator":196,"./_global":197,"./_hide":200,"./_iterators":201,"./_wks":199}],195:[function(require,module,exports) {
+var toInteger = require('./_to-integer');
+var defined = require('./_defined');
+// true  -> String#at
+// false -> String#codePointAt
+module.exports = function (TO_STRING) {
+  return function (that, pos) {
+    var s = String(defined(that));
+    var i = toInteger(pos);
+    var l = s.length;
+    var a, b;
+    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+},{"./_to-integer":225,"./_defined":230}],181:[function(require,module,exports) {
+'use strict';
+var $at = require('./_string-at')(true);
+
+// 21.1.3.27 String.prototype[@@iterator]()
+require('./_iter-define')(String, 'String', function (iterated) {
+  this._t = String(iterated); // target
+  this._i = 0;                // next index
+// 21.1.5.2.1 %StringIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var index = this._i;
+  var point;
+  if (index >= O.length) return { value: undefined, done: true };
+  point = $at(O, index);
+  this._i += point.length;
+  return { value: point, done: false };
+});
+
+},{"./_string-at":195,"./_iter-define":198}],209:[function(require,module,exports) {
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = require('./_cof');
 var TAG = require('./_wks')('toStringTag');
@@ -751,14 +749,482 @@ module.exports = function (it) {
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
 
-},{"./_cof":218,"./_wks":201}],198:[function(require,module,exports) {
+},{"./_cof":240,"./_wks":199}],223:[function(require,module,exports) {
+var classof = require('./_classof');
+var ITERATOR = require('./_wks')('iterator');
+var Iterators = require('./_iterators');
+module.exports = require('./_core').getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+},{"./_classof":209,"./_wks":199,"./_iterators":201,"./_core":185}],193:[function(require,module,exports) {
+var anObject = require('./_an-object');
+var get = require('./core.get-iterator-method');
+module.exports = require('./_core').getIterator = function (it) {
+  var iterFn = get(it);
+  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
+  return anObject(iterFn.call(it));
+};
+
+},{"./_an-object":222,"./core.get-iterator-method":223,"./_core":185}],180:[function(require,module,exports) {
+require('../modules/web.dom.iterable');
+require('../modules/es6.string.iterator');
+module.exports = require('../modules/core.get-iterator');
+
+},{"../modules/web.dom.iterable":182,"../modules/es6.string.iterator":181,"../modules/core.get-iterator":193}],11:[function(require,module,exports) {
+module.exports = { "default": require("core-js/library/fn/get-iterator"), __esModule: true };
+},{"core-js/library/fn/get-iterator":180}],264:[function(require,module,exports) {
+exports.f = require('./_wks');
+
+},{"./_wks":199}],303:[function(require,module,exports) {
+require('../../modules/es6.string.iterator');
+require('../../modules/web.dom.iterable');
+module.exports = require('../../modules/_wks-ext').f('iterator');
+
+},{"../../modules/es6.string.iterator":181,"../../modules/web.dom.iterable":182,"../../modules/_wks-ext":264}],12:[function(require,module,exports) {
+module.exports = { "default": require("core-js/library/fn/symbol/iterator"), __esModule: true };
+},{"core-js/library/fn/symbol/iterator":303}],266:[function(require,module,exports) {
+var META = require('./_uid')('meta');
+var isObject = require('./_is-object');
+var has = require('./_has');
+var setDesc = require('./_object-dp').f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+var FREEZE = !require('./_fails')(function () {
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  } });
+};
+var fastKey = function (it, create) {
+  // return primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
+  onFreeze: onFreeze
+};
+
+},{"./_uid":237,"./_is-object":211,"./_has":238,"./_object-dp":234,"./_fails":258}],263:[function(require,module,exports) {
+
+var global = require('./_global');
+var core = require('./_core');
+var LIBRARY = require('./_library');
+var wksExt = require('./_wks-ext');
+var defineProperty = require('./_object-dp').f;
+module.exports = function (name) {
+  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
+  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
+};
+
+},{"./_global":197,"./_core":185,"./_library":207,"./_wks-ext":264,"./_object-dp":234}],272:[function(require,module,exports) {
+exports.f = Object.getOwnPropertySymbols;
+
+},{}],273:[function(require,module,exports) {
+exports.f = {}.propertyIsEnumerable;
+
+},{}],265:[function(require,module,exports) {
+// all enumerable object keys, includes symbols
+var getKeys = require('./_object-keys');
+var gOPS = require('./_object-gops');
+var pIE = require('./_object-pie');
+module.exports = function (it) {
+  var result = getKeys(it);
+  var getSymbols = gOPS.f;
+  if (getSymbols) {
+    var symbols = getSymbols(it);
+    var isEnum = pIE.f;
+    var i = 0;
+    var key;
+    while (symbols.length > i) if (isEnum.call(it, key = symbols[i++])) result.push(key);
+  } return result;
+};
+
+},{"./_object-keys":268,"./_object-gops":272,"./_object-pie":273}],267:[function(require,module,exports) {
+// 7.2.2 IsArray(argument)
+var cof = require('./_cof');
+module.exports = Array.isArray || function isArray(arg) {
+  return cof(arg) == 'Array';
+};
+
+},{"./_cof":240}],270:[function(require,module,exports) {
+// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+var $keys = require('./_object-keys-internal');
+var hiddenKeys = require('./_enum-bug-keys').concat('length', 'prototype');
+
+exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  return $keys(O, hiddenKeys);
+};
+
+},{"./_object-keys-internal":284,"./_enum-bug-keys":275}],269:[function(require,module,exports) {
+// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
+var toIObject = require('./_to-iobject');
+var gOPN = require('./_object-gopn').f;
+var toString = {}.toString;
+
+var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
+  ? Object.getOwnPropertyNames(window) : [];
+
+var getWindowNames = function (it) {
+  try {
+    return gOPN(it);
+  } catch (e) {
+    return windowNames.slice();
+  }
+};
+
+module.exports.f = function getOwnPropertyNames(it) {
+  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
+};
+
+},{"./_to-iobject":232,"./_object-gopn":270}],271:[function(require,module,exports) {
+var pIE = require('./_object-pie');
+var createDesc = require('./_property-desc');
+var toIObject = require('./_to-iobject');
+var toPrimitive = require('./_to-primitive');
+var has = require('./_has');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var gOPD = Object.getOwnPropertyDescriptor;
+
+exports.f = require('./_descriptors') ? gOPD : function getOwnPropertyDescriptor(O, P) {
+  O = toIObject(O);
+  P = toPrimitive(P, true);
+  if (IE8_DOM_DEFINE) try {
+    return gOPD(O, P);
+  } catch (e) { /* empty */ }
+  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
+};
+
+},{"./_object-pie":273,"./_property-desc":233,"./_to-iobject":232,"./_to-primitive":257,"./_has":238,"./_ie8-dom-define":256,"./_descriptors":235}],247:[function(require,module,exports) {
+
+'use strict';
+// ECMAScript 6 symbols shim
+var global = require('./_global');
+var has = require('./_has');
+var DESCRIPTORS = require('./_descriptors');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var META = require('./_meta').KEY;
+var $fails = require('./_fails');
+var shared = require('./_shared');
+var setToStringTag = require('./_set-to-string-tag');
+var uid = require('./_uid');
+var wks = require('./_wks');
+var wksExt = require('./_wks-ext');
+var wksDefine = require('./_wks-define');
+var enumKeys = require('./_enum-keys');
+var isArray = require('./_is-array');
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var toIObject = require('./_to-iobject');
+var toPrimitive = require('./_to-primitive');
+var createDesc = require('./_property-desc');
+var _create = require('./_object-create');
+var gOPNExt = require('./_object-gopn-ext');
+var $GOPD = require('./_object-gopd');
+var $DP = require('./_object-dp');
+var $keys = require('./_object-keys');
+var gOPD = $GOPD.f;
+var dP = $DP.f;
+var gOPN = gOPNExt.f;
+var $Symbol = global.Symbol;
+var $JSON = global.JSON;
+var _stringify = $JSON && $JSON.stringify;
+var PROTOTYPE = 'prototype';
+var HIDDEN = wks('_hidden');
+var TO_PRIMITIVE = wks('toPrimitive');
+var isEnum = {}.propertyIsEnumerable;
+var SymbolRegistry = shared('symbol-registry');
+var AllSymbols = shared('symbols');
+var OPSymbols = shared('op-symbols');
+var ObjectProto = Object[PROTOTYPE];
+var USE_NATIVE = typeof $Symbol == 'function';
+var QObject = global.QObject;
+// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
+var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
+
+// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
+var setSymbolDesc = DESCRIPTORS && $fails(function () {
+  return _create(dP({}, 'a', {
+    get: function () { return dP(this, 'a', { value: 7 }).a; }
+  })).a != 7;
+}) ? function (it, key, D) {
+  var protoDesc = gOPD(ObjectProto, key);
+  if (protoDesc) delete ObjectProto[key];
+  dP(it, key, D);
+  if (protoDesc && it !== ObjectProto) dP(ObjectProto, key, protoDesc);
+} : dP;
+
+var wrap = function (tag) {
+  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
+  sym._k = tag;
+  return sym;
+};
+
+var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function (it) {
+  return typeof it == 'symbol';
+} : function (it) {
+  return it instanceof $Symbol;
+};
+
+var $defineProperty = function defineProperty(it, key, D) {
+  if (it === ObjectProto) $defineProperty(OPSymbols, key, D);
+  anObject(it);
+  key = toPrimitive(key, true);
+  anObject(D);
+  if (has(AllSymbols, key)) {
+    if (!D.enumerable) {
+      if (!has(it, HIDDEN)) dP(it, HIDDEN, createDesc(1, {}));
+      it[HIDDEN][key] = true;
+    } else {
+      if (has(it, HIDDEN) && it[HIDDEN][key]) it[HIDDEN][key] = false;
+      D = _create(D, { enumerable: createDesc(0, false) });
+    } return setSymbolDesc(it, key, D);
+  } return dP(it, key, D);
+};
+var $defineProperties = function defineProperties(it, P) {
+  anObject(it);
+  var keys = enumKeys(P = toIObject(P));
+  var i = 0;
+  var l = keys.length;
+  var key;
+  while (l > i) $defineProperty(it, key = keys[i++], P[key]);
+  return it;
+};
+var $create = function create(it, P) {
+  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
+};
+var $propertyIsEnumerable = function propertyIsEnumerable(key) {
+  var E = isEnum.call(this, key = toPrimitive(key, true));
+  if (this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return false;
+  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
+};
+var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key) {
+  it = toIObject(it);
+  key = toPrimitive(key, true);
+  if (it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return;
+  var D = gOPD(it, key);
+  if (D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) D.enumerable = true;
+  return D;
+};
+var $getOwnPropertyNames = function getOwnPropertyNames(it) {
+  var names = gOPN(toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META) result.push(key);
+  } return result;
+};
+var $getOwnPropertySymbols = function getOwnPropertySymbols(it) {
+  var IS_OP = it === ObjectProto;
+  var names = gOPN(IS_OP ? OPSymbols : toIObject(it));
+  var result = [];
+  var i = 0;
+  var key;
+  while (names.length > i) {
+    if (has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true)) result.push(AllSymbols[key]);
+  } return result;
+};
+
+// 19.4.1.1 Symbol([description])
+if (!USE_NATIVE) {
+  $Symbol = function Symbol() {
+    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor!');
+    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
+    var $set = function (value) {
+      if (this === ObjectProto) $set.call(OPSymbols, value);
+      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
+      setSymbolDesc(this, tag, createDesc(1, value));
+    };
+    if (DESCRIPTORS && setter) setSymbolDesc(ObjectProto, tag, { configurable: true, set: $set });
+    return wrap(tag);
+  };
+  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
+    return this._k;
+  });
+
+  $GOPD.f = $getOwnPropertyDescriptor;
+  $DP.f = $defineProperty;
+  require('./_object-gopn').f = gOPNExt.f = $getOwnPropertyNames;
+  require('./_object-pie').f = $propertyIsEnumerable;
+  require('./_object-gops').f = $getOwnPropertySymbols;
+
+  if (DESCRIPTORS && !require('./_library')) {
+    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
+  }
+
+  wksExt.f = function (name) {
+    return wrap(wks(name));
+  };
+}
+
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Symbol: $Symbol });
+
+for (var es6Symbols = (
+  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
+  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
+).split(','), j = 0; es6Symbols.length > j;)wks(es6Symbols[j++]);
+
+for (var wellKnownSymbols = $keys(wks.store), k = 0; wellKnownSymbols.length > k;) wksDefine(wellKnownSymbols[k++]);
+
+$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
+  // 19.4.2.1 Symbol.for(key)
+  'for': function (key) {
+    return has(SymbolRegistry, key += '')
+      ? SymbolRegistry[key]
+      : SymbolRegistry[key] = $Symbol(key);
+  },
+  // 19.4.2.5 Symbol.keyFor(sym)
+  keyFor: function keyFor(sym) {
+    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol!');
+    for (var key in SymbolRegistry) if (SymbolRegistry[key] === sym) return key;
+  },
+  useSetter: function () { setter = true; },
+  useSimple: function () { setter = false; }
+});
+
+$export($export.S + $export.F * !USE_NATIVE, 'Object', {
+  // 19.1.2.2 Object.create(O [, Properties])
+  create: $create,
+  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
+  defineProperty: $defineProperty,
+  // 19.1.2.3 Object.defineProperties(O, Properties)
+  defineProperties: $defineProperties,
+  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
+  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
+  // 19.1.2.7 Object.getOwnPropertyNames(O)
+  getOwnPropertyNames: $getOwnPropertyNames,
+  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+  getOwnPropertySymbols: $getOwnPropertySymbols
+});
+
+// 24.3.2 JSON.stringify(value [, replacer [, space]])
+$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
+  var S = $Symbol();
+  // MS Edge converts symbol values to JSON as {}
+  // WebKit converts symbol values to JSON as null
+  // V8 throws on boxed symbols
+  return _stringify([S]) != '[null]' || _stringify({ a: S }) != '{}' || _stringify(Object(S)) != '{}';
+})), 'JSON', {
+  stringify: function stringify(it) {
+    var args = [it];
+    var i = 1;
+    var replacer, $replacer;
+    while (arguments.length > i) args.push(arguments[i++]);
+    $replacer = replacer = args[1];
+    if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
+    if (!isArray(replacer)) replacer = function (key, value) {
+      if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
+      if (!isSymbol(value)) return value;
+    };
+    args[1] = replacer;
+    return _stringify.apply($JSON, args);
+  }
+});
+
+// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || require('./_hide')($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+// 19.4.3.5 Symbol.prototype[@@toStringTag]
+setToStringTag($Symbol, 'Symbol');
+// 20.2.1.9 Math[@@toStringTag]
+setToStringTag(Math, 'Math', true);
+// 24.3.3 JSON[@@toStringTag]
+setToStringTag(global.JSON, 'JSON', true);
+
+},{"./_global":197,"./_has":238,"./_descriptors":235,"./_export":202,"./_redefine":228,"./_meta":266,"./_fails":258,"./_shared":236,"./_set-to-string-tag":217,"./_uid":237,"./_wks":199,"./_wks-ext":264,"./_wks-define":263,"./_enum-keys":265,"./_is-array":267,"./_an-object":222,"./_is-object":211,"./_to-iobject":232,"./_to-primitive":257,"./_property-desc":233,"./_object-create":252,"./_object-gopn-ext":269,"./_object-gopd":271,"./_object-dp":234,"./_object-keys":268,"./_object-gopn":270,"./_object-pie":273,"./_object-gops":272,"./_library":207,"./_hide":200}],183:[function(require,module,exports) {
+
+},{}],248:[function(require,module,exports) {
+require('./_wks-define')('asyncIterator');
+
+},{"./_wks-define":263}],249:[function(require,module,exports) {
+require('./_wks-define')('observable');
+
+},{"./_wks-define":263}],221:[function(require,module,exports) {
+require('../../modules/es6.symbol');
+require('../../modules/es6.object.to-string');
+require('../../modules/es7.symbol.async-iterator');
+require('../../modules/es7.symbol.observable');
+module.exports = require('../../modules/_core').Symbol;
+
+},{"../../modules/es6.symbol":247,"../../modules/es6.object.to-string":183,"../../modules/es7.symbol.async-iterator":248,"../../modules/es7.symbol.observable":249,"../../modules/_core":185}],10:[function(require,module,exports) {
+module.exports = { "default": require("core-js/library/fn/symbol"), __esModule: true };
+},{"core-js/library/fn/symbol":221}],6:[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var _getIterator2 = require("../core-js/get-iterator");
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+var _iterator = require("../core-js/symbol/iterator");
+
+var _iterator2 = _interopRequireDefault(_iterator);
+
+var _symbol = require("../core-js/symbol");
+
+var _symbol2 = _interopRequireDefault(_symbol);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (iterable) {
+  if (typeof _symbol2.default === "function") {
+    if (_symbol2.default.asyncIterator) {
+      var method = iterable[_symbol2.default.asyncIterator];
+      if (method != null) return method.call(iterable);
+    }
+
+    if (_iterator2.default) {
+      return (0, _getIterator3.default)(iterable);
+    }
+  }
+
+  throw new TypeError("Object is not async iterable");
+};
+},{"../core-js/get-iterator":11,"../core-js/symbol/iterator":12,"../core-js/symbol":10}],213:[function(require,module,exports) {
 module.exports = function (it, Constructor, name, forbiddenField) {
   if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
     throw TypeError(name + ': incorrect invocation!');
   } return it;
 };
 
-},{}],221:[function(require,module,exports) {
+},{}],239:[function(require,module,exports) {
 // call something on iterator step with safe closing on error
 var anObject = require('./_an-object');
 module.exports = function (iterator, fn, value, entries) {
@@ -772,7 +1238,7 @@ module.exports = function (iterator, fn, value, entries) {
   }
 };
 
-},{"./_an-object":213}],223:[function(require,module,exports) {
+},{"./_an-object":222}],241:[function(require,module,exports) {
 // check on default Array iterator
 var Iterators = require('./_iterators');
 var ITERATOR = require('./_wks')('iterator');
@@ -782,17 +1248,7 @@ module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
 };
 
-},{"./_iterators":209,"./_wks":201}],224:[function(require,module,exports) {
-var classof = require('./_classof');
-var ITERATOR = require('./_wks')('iterator');
-var Iterators = require('./_iterators');
-module.exports = require('./_core').getIteratorMethod = function (it) {
-  if (it != undefined) return it[ITERATOR]
-    || it['@@iterator']
-    || Iterators[classof(it)];
-};
-
-},{"./_classof":194,"./_wks":201,"./_iterators":209,"./_core":179}],196:[function(require,module,exports) {
+},{"./_iterators":201,"./_wks":199}],212:[function(require,module,exports) {
 var ctx = require('./_ctx');
 var call = require('./_iter-call');
 var isArrayIter = require('./_is-array-iter');
@@ -819,7 +1275,7 @@ var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) 
 exports.BREAK = BREAK;
 exports.RETURN = RETURN;
 
-},{"./_ctx":193,"./_iter-call":221,"./_is-array-iter":223,"./_an-object":213,"./_to-length":222,"./core.get-iterator-method":224}],187:[function(require,module,exports) {
+},{"./_ctx":208,"./_iter-call":239,"./_is-array-iter":241,"./_an-object":222,"./_to-length":242,"./core.get-iterator-method":223}],203:[function(require,module,exports) {
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject = require('./_an-object');
 var aFunction = require('./_a-function');
@@ -830,7 +1286,7 @@ module.exports = function (O, D) {
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
 };
 
-},{"./_an-object":213,"./_a-function":197,"./_wks":201}],227:[function(require,module,exports) {
+},{"./_an-object":222,"./_a-function":210,"./_wks":199}],245:[function(require,module,exports) {
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
 module.exports = function (fn, args, that) {
   var un = that === undefined;
@@ -848,7 +1304,7 @@ module.exports = function (fn, args, that) {
   } return fn.apply(that, args);
 };
 
-},{}],199:[function(require,module,exports) {
+},{}],215:[function(require,module,exports) {
 
 
 var ctx = require('./_ctx');
@@ -936,7 +1392,7 @@ module.exports = {
   clear: clearTask
 };
 
-},{"./_ctx":193,"./_invoke":227,"./_html":228,"./_dom-create":229,"./_global":186,"./_cof":218}],200:[function(require,module,exports) {
+},{"./_ctx":208,"./_invoke":245,"./_html":244,"./_dom-create":243,"./_global":197,"./_cof":240}],214:[function(require,module,exports) {
 
 
 var global = require('./_global');
@@ -1009,7 +1465,7 @@ module.exports = function () {
   };
 };
 
-},{"./_global":186,"./_task":199,"./_cof":218}],184:[function(require,module,exports) {
+},{"./_global":197,"./_task":215,"./_cof":240}],205:[function(require,module,exports) {
 'use strict';
 // 25.4.1.5 NewPromiseCapability(C)
 var aFunction = require('./_a-function');
@@ -1029,7 +1485,7 @@ module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
 
-},{"./_a-function":197}],185:[function(require,module,exports) {
+},{"./_a-function":210}],204:[function(require,module,exports) {
 module.exports = function (exec) {
   try {
     return { e: false, v: exec() };
@@ -1038,14 +1494,14 @@ module.exports = function (exec) {
   }
 };
 
-},{}],202:[function(require,module,exports) {
+},{}],218:[function(require,module,exports) {
 
 var global = require('./_global');
 var navigator = global.navigator;
 
 module.exports = navigator && navigator.userAgent || '';
 
-},{"./_global":186}],188:[function(require,module,exports) {
+},{"./_global":197}],206:[function(require,module,exports) {
 var anObject = require('./_an-object');
 var isObject = require('./_is-object');
 var newPromiseCapability = require('./_new-promise-capability');
@@ -1059,7 +1515,7 @@ module.exports = function (C, x) {
   return promiseCapability.promise;
 };
 
-},{"./_an-object":213,"./_is-object":195,"./_new-promise-capability":184}],203:[function(require,module,exports) {
+},{"./_an-object":222,"./_is-object":211,"./_new-promise-capability":205}],216:[function(require,module,exports) {
 var hide = require('./_hide');
 module.exports = function (target, src, safe) {
   for (var key in src) {
@@ -1068,7 +1524,7 @@ module.exports = function (target, src, safe) {
   } return target;
 };
 
-},{"./_hide":208}],204:[function(require,module,exports) {
+},{"./_hide":200}],219:[function(require,module,exports) {
 
 'use strict';
 var global = require('./_global');
@@ -1085,7 +1541,7 @@ module.exports = function (KEY) {
   });
 };
 
-},{"./_global":186,"./_core":179,"./_object-dp":219,"./_descriptors":220,"./_wks":201}],205:[function(require,module,exports) {
+},{"./_global":197,"./_core":185,"./_object-dp":234,"./_descriptors":235,"./_wks":199}],220:[function(require,module,exports) {
 var ITERATOR = require('./_wks')('iterator');
 var SAFE_CLOSING = false;
 
@@ -1109,7 +1565,7 @@ module.exports = function (exec, skipClosing) {
   return safe;
 };
 
-},{"./_wks":201}],176:[function(require,module,exports) {
+},{"./_wks":199}],184:[function(require,module,exports) {
 
 
 'use strict';
@@ -1399,7 +1855,7 @@ $export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(functi
   }
 });
 
-},{"./_library":192,"./_global":186,"./_ctx":193,"./_classof":194,"./_export":183,"./_is-object":195,"./_a-function":197,"./_an-instance":198,"./_for-of":196,"./_species-constructor":187,"./_task":199,"./_microtask":200,"./_new-promise-capability":184,"./_perform":185,"./_user-agent":202,"./_promise-resolve":188,"./_wks":201,"./_redefine-all":203,"./_set-to-string-tag":206,"./_set-species":204,"./_core":179,"./_iter-detect":205}],181:[function(require,module,exports) {
+},{"./_library":207,"./_global":197,"./_ctx":208,"./_classof":209,"./_export":202,"./_is-object":211,"./_a-function":210,"./_an-instance":213,"./_for-of":212,"./_species-constructor":203,"./_task":215,"./_microtask":214,"./_new-promise-capability":205,"./_perform":204,"./_user-agent":218,"./_promise-resolve":206,"./_wks":199,"./_redefine-all":216,"./_set-to-string-tag":217,"./_set-species":219,"./_core":185,"./_iter-detect":220}],186:[function(require,module,exports) {
 
 // https://github.com/tc39/proposal-promise-finally
 'use strict';
@@ -1422,7 +1878,7 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
   );
 } });
 
-},{"./_export":183,"./_core":179,"./_global":186,"./_species-constructor":187,"./_promise-resolve":188}],178:[function(require,module,exports) {
+},{"./_export":202,"./_core":185,"./_global":197,"./_species-constructor":203,"./_promise-resolve":206}],187:[function(require,module,exports) {
 'use strict';
 // https://github.com/tc39/proposal-promise-try
 var $export = require('./_export');
@@ -1436,7 +1892,7 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
   return promiseCapability.promise;
 } });
 
-},{"./_export":183,"./_new-promise-capability":184,"./_perform":185}],168:[function(require,module,exports) {
+},{"./_export":202,"./_new-promise-capability":205,"./_perform":204}],177:[function(require,module,exports) {
 require('../modules/es6.object.to-string');
 require('../modules/es6.string.iterator');
 require('../modules/web.dom.iterable');
@@ -1445,9 +1901,136 @@ require('../modules/es7.promise.finally');
 require('../modules/es7.promise.try');
 module.exports = require('../modules/_core').Promise;
 
-},{"../modules/es6.object.to-string":175,"../modules/es6.string.iterator":177,"../modules/web.dom.iterable":180,"../modules/es6.promise":176,"../modules/es7.promise.finally":181,"../modules/es7.promise.try":178,"../modules/_core":179}],5:[function(require,module,exports) {
+},{"../modules/es6.object.to-string":183,"../modules/es6.string.iterator":181,"../modules/web.dom.iterable":182,"../modules/es6.promise":184,"../modules/es7.promise.finally":186,"../modules/es7.promise.try":187,"../modules/_core":185}],7:[function(require,module,exports) {
 module.exports = { "default": require("core-js/library/fn/promise"), __esModule: true };
-},{"core-js/library/fn/promise":168}],4:[function(require,module,exports) {
+},{"core-js/library/fn/promise":177}],5:[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var _symbol = require("../core-js/symbol");
+
+var _symbol2 = _interopRequireDefault(_symbol);
+
+var _promise = require("../core-js/promise");
+
+var _promise2 = _interopRequireDefault(_promise);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new _promise2.default(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          _promise2.default.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof _symbol2.default === "function" && _symbol2.default.asyncIterator) {
+    AsyncGenerator.prototype[_symbol2.default.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function wrap(fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function _await(value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+},{"../core-js/symbol":10,"../core-js/promise":7}],4:[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
@@ -1486,7 +2069,7 @@ exports.default = function (fn) {
     });
   };
 };
-},{"../core-js/promise":5}],67:[function(require,module,exports) {
+},{"../core-js/promise":7}],59:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -1639,7 +2222,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],65:[function(require,module,exports) {
+},{}],60:[function(require,module,exports) {
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = (nBytes * 8) - mLen - 1
@@ -1725,14 +2308,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],66:[function(require,module,exports) {
+},{}],58:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],22:[function(require,module,exports) {
+},{}],21:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 /*!
@@ -3525,7 +4108,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":67,"ieee754":65,"isarray":66,"buffer":22}],113:[function(require,module,exports) {
+},{"base64-js":59,"ieee754":60,"isarray":58,"buffer":21}],114:[function(require,module,exports) {
 
 /* eslint-disable node/no-deprecated-api */
 var buffer = require('buffer')
@@ -3590,7 +4173,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
   return buffer.SlowBuffer(size)
 }
 
-},{"buffer":22}],23:[function(require,module,exports) {
+},{"buffer":21}],20:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -3777,7 +4360,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],72:[function(require,module,exports) {
+},{}],78:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -3820,7 +4403,7 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-},{"safe-buffer":113,"process":23}],64:[function(require,module,exports) {
+},{"safe-buffer":114,"process":20}],57:[function(require,module,exports) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -3845,7 +4428,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],40:[function(require,module,exports) {
+},{}],28:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4149,7 +4732,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],157:[function(require,module,exports) {
+},{}],145:[function(require,module,exports) {
 var process = require("process");
 'use strict';
 
@@ -4196,10 +4779,10 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 
-},{"process":23}],107:[function(require,module,exports) {
+},{"process":20}],73:[function(require,module,exports) {
 module.exports = require('events').EventEmitter;
 
-},{"events":40}],156:[function(require,module,exports) {
+},{"events":28}],144:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -4309,7 +4892,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-},{"buffer":22}],110:[function(require,module,exports) {
+},{"buffer":21}],75:[function(require,module,exports) {
 
 'use strict';
 
@@ -4390,7 +4973,7 @@ if (util && util.inspect && util.inspect.custom) {
     return this.constructor.name + ' ' + obj;
   };
 }
-},{"safe-buffer":113,"util":175}],108:[function(require,module,exports) {
+},{"safe-buffer":114,"util":183}],74:[function(require,module,exports) {
 'use strict';
 
 /*<replacement>*/
@@ -4465,7 +5048,7 @@ module.exports = {
   destroy: destroy,
   undestroy: undestroy
 };
-},{"process-nextick-args":157}],158:[function(require,module,exports) {
+},{"process-nextick-args":145}],146:[function(require,module,exports) {
 var global = (1,eval)("this");
 
 /**
@@ -4535,7 +5118,7 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-},{}],95:[function(require,module,exports) {
+},{}],68:[function(require,module,exports) {
 var process = require("process");
 
 var global = (1,eval)("this");
@@ -5226,7 +5809,7 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-},{"process-nextick-args":157,"core-util-is":156,"inherits":64,"util-deprecate":158,"./internal/streams/stream":107,"safe-buffer":113,"./internal/streams/destroy":108,"./_stream_duplex":96,"process":23}],96:[function(require,module,exports) {
+},{"process-nextick-args":145,"core-util-is":144,"inherits":57,"util-deprecate":146,"./internal/streams/stream":73,"safe-buffer":114,"./internal/streams/destroy":74,"./_stream_duplex":69,"process":20}],69:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -5358,7 +5941,7 @@ Duplex.prototype._destroy = function (err, cb) {
 
   pna.nextTick(cb, err);
 };
-},{"process-nextick-args":157,"core-util-is":156,"inherits":64,"./_stream_readable":97,"./_stream_writable":95}],117:[function(require,module,exports) {
+},{"process-nextick-args":145,"core-util-is":144,"inherits":57,"./_stream_readable":67,"./_stream_writable":68}],125:[function(require,module,exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -5656,7 +6239,7 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
-},{"safe-buffer":113}],97:[function(require,module,exports) {
+},{"safe-buffer":114}],67:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -6679,7 +7262,7 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-},{"process-nextick-args":157,"isarray":66,"events":40,"./internal/streams/stream":107,"safe-buffer":113,"core-util-is":156,"inherits":64,"util":175,"./internal/streams/BufferList":110,"./internal/streams/destroy":108,"./_stream_duplex":96,"string_decoder/":117,"process":23}],98:[function(require,module,exports) {
+},{"process-nextick-args":145,"isarray":58,"events":28,"./internal/streams/stream":73,"safe-buffer":114,"core-util-is":144,"inherits":57,"util":183,"./internal/streams/BufferList":75,"./internal/streams/destroy":74,"./_stream_duplex":69,"string_decoder/":125,"process":20}],70:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6894,7 +7477,7 @@ function done(stream, er, data) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":96,"core-util-is":156,"inherits":64}],99:[function(require,module,exports) {
+},{"./_stream_duplex":69,"core-util-is":144,"inherits":57}],71:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6942,7 +7525,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":98,"core-util-is":156,"inherits":64}],84:[function(require,module,exports) {
+},{"./_stream_transform":70,"core-util-is":144,"inherits":57}],63:[function(require,module,exports) {
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = exports;
 exports.Readable = exports;
@@ -6951,19 +7534,19 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_readable.js":97,"./lib/_stream_writable.js":95,"./lib/_stream_duplex.js":96,"./lib/_stream_transform.js":98,"./lib/_stream_passthrough.js":99}],79:[function(require,module,exports) {
+},{"./lib/_stream_readable.js":67,"./lib/_stream_writable.js":68,"./lib/_stream_duplex.js":69,"./lib/_stream_transform.js":70,"./lib/_stream_passthrough.js":71}],62:[function(require,module,exports) {
 module.exports = require('./lib/_stream_writable.js');
 
-},{"./lib/_stream_writable.js":95}],80:[function(require,module,exports) {
+},{"./lib/_stream_writable.js":68}],61:[function(require,module,exports) {
 module.exports = require('./lib/_stream_duplex.js');
 
-},{"./lib/_stream_duplex.js":96}],78:[function(require,module,exports) {
+},{"./lib/_stream_duplex.js":69}],64:[function(require,module,exports) {
 module.exports = require('./readable').Transform
 
-},{"./readable":84}],83:[function(require,module,exports) {
+},{"./readable":63}],65:[function(require,module,exports) {
 module.exports = require('./readable').PassThrough
 
-},{"./readable":84}],21:[function(require,module,exports) {
+},{"./readable":63}],19:[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -7092,7 +7675,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":40,"inherits":64,"readable-stream/readable.js":84,"readable-stream/writable.js":79,"readable-stream/duplex.js":80,"readable-stream/transform.js":78,"readable-stream/passthrough.js":83}],155:[function(require,module,exports) {
+},{"events":28,"inherits":57,"readable-stream/readable.js":63,"readable-stream/writable.js":62,"readable-stream/duplex.js":61,"readable-stream/transform.js":64,"readable-stream/passthrough.js":65}],178:[function(require,module,exports) {
 
 'use strict'
 var Buffer = require('safe-buffer').Buffer
@@ -7190,7 +7773,7 @@ HashBase.prototype._digest = function () {
 
 module.exports = HashBase
 
-},{"safe-buffer":113,"stream":21,"inherits":64}],118:[function(require,module,exports) {
+},{"safe-buffer":114,"stream":19,"inherits":57}],115:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict'
 var inherits = require('inherits')
@@ -7338,7 +7921,7 @@ function fnI (a, b, c, d, m, k, s) {
 
 module.exports = MD5
 
-},{"inherits":64,"hash-base":155,"buffer":22}],115:[function(require,module,exports) {
+},{"inherits":57,"hash-base":178,"buffer":21}],123:[function(require,module,exports) {
 
 'use strict'
 var Buffer = require('buffer').Buffer
@@ -7504,7 +8087,7 @@ function fn5 (a, b, c, d, e, m, k, s) {
 
 module.exports = RIPEMD160
 
-},{"buffer":22,"inherits":64,"hash-base":155}],286:[function(require,module,exports) {
+},{"buffer":21,"inherits":57,"hash-base":178}],143:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 
@@ -7588,7 +8171,7 @@ Hash.prototype._update = function () {
 
 module.exports = Hash
 
-},{"safe-buffer":113}],278:[function(require,module,exports) {
+},{"safe-buffer":114}],129:[function(require,module,exports) {
 
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -7685,7 +8268,7 @@ Sha.prototype._hash = function () {
 
 module.exports = Sha
 
-},{"inherits":64,"./hash":286,"safe-buffer":113}],279:[function(require,module,exports) {
+},{"inherits":57,"./hash":143,"safe-buffer":114}],131:[function(require,module,exports) {
 
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -7787,7 +8370,7 @@ Sha1.prototype._hash = function () {
 
 module.exports = Sha1
 
-},{"inherits":64,"./hash":286,"safe-buffer":113}],281:[function(require,module,exports) {
+},{"inherits":57,"./hash":143,"safe-buffer":114}],134:[function(require,module,exports) {
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -7925,7 +8508,7 @@ Sha256.prototype._hash = function () {
 
 module.exports = Sha256
 
-},{"inherits":64,"./hash":286,"safe-buffer":113}],280:[function(require,module,exports) {
+},{"inherits":57,"./hash":143,"safe-buffer":114}],133:[function(require,module,exports) {
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -7981,7 +8564,7 @@ Sha224.prototype._hash = function () {
 
 module.exports = Sha224
 
-},{"inherits":64,"./sha256":281,"./hash":286,"safe-buffer":113}],283:[function(require,module,exports) {
+},{"inherits":57,"./sha256":134,"./hash":143,"safe-buffer":114}],132:[function(require,module,exports) {
 
 var inherits = require('inherits')
 var Hash = require('./hash')
@@ -8244,7 +8827,7 @@ Sha512.prototype._hash = function () {
 
 module.exports = Sha512
 
-},{"inherits":64,"./hash":286,"safe-buffer":113}],282:[function(require,module,exports) {
+},{"inherits":57,"./hash":143,"safe-buffer":114}],130:[function(require,module,exports) {
 
 var inherits = require('inherits')
 var SHA512 = require('./sha512')
@@ -8304,7 +8887,7 @@ Sha384.prototype._hash = function () {
 
 module.exports = Sha384
 
-},{"inherits":64,"./sha512":283,"./hash":286,"safe-buffer":113}],116:[function(require,module,exports) {
+},{"inherits":57,"./sha512":132,"./hash":143,"safe-buffer":114}],124:[function(require,module,exports) {
 var exports = module.exports = function SHA (algorithm) {
   algorithm = algorithm.toLowerCase()
 
@@ -8321,7 +8904,7 @@ exports.sha256 = require('./sha256')
 exports.sha384 = require('./sha384')
 exports.sha512 = require('./sha512')
 
-},{"./sha":278,"./sha1":279,"./sha224":280,"./sha256":281,"./sha384":282,"./sha512":283}],114:[function(require,module,exports) {
+},{"./sha":129,"./sha1":131,"./sha224":133,"./sha256":134,"./sha384":130,"./sha512":132}],116:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var Transform = require('stream').Transform
@@ -8423,7 +9006,7 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 
 module.exports = CipherBase
 
-},{"safe-buffer":113,"stream":21,"string_decoder":117,"inherits":64}],69:[function(require,module,exports) {
+},{"safe-buffer":114,"stream":19,"string_decoder":125,"inherits":57}],79:[function(require,module,exports) {
 'use strict'
 var inherits = require('inherits')
 var MD5 = require('md5.js')
@@ -8455,7 +9038,7 @@ module.exports = function createHash (alg) {
   return new Hash(sha(alg))
 }
 
-},{"inherits":64,"md5.js":118,"ripemd160":115,"sha.js":116,"cipher-base":114}],81:[function(require,module,exports) {
+},{"inherits":57,"md5.js":115,"ripemd160":123,"sha.js":124,"cipher-base":116}],87:[function(require,module,exports) {
 
 'use strict'
 var inherits = require('inherits')
@@ -8504,14 +9087,14 @@ Hmac.prototype._final = function () {
 }
 module.exports = Hmac
 
-},{"inherits":64,"safe-buffer":113,"cipher-base":114}],125:[function(require,module,exports) {
+},{"inherits":57,"safe-buffer":114,"cipher-base":116}],137:[function(require,module,exports) {
 var MD5 = require('md5.js')
 
 module.exports = function (buffer) {
   return new MD5().update(buffer).digest()
 }
 
-},{"md5.js":118}],68:[function(require,module,exports) {
+},{"md5.js":115}],76:[function(require,module,exports) {
 
 'use strict'
 var inherits = require('inherits')
@@ -8576,7 +9159,7 @@ module.exports = function createHmac (alg, key) {
   return new Hmac(alg, key)
 }
 
-},{"inherits":64,"./legacy":81,"cipher-base":114,"safe-buffer":113,"create-hash/md5":125,"ripemd160":115,"sha.js":116}],90:[function(require,module,exports) {
+},{"inherits":57,"./legacy":87,"cipher-base":116,"safe-buffer":114,"create-hash/md5":137,"ripemd160":123,"sha.js":124}],91:[function(require,module,exports) {
 module.exports = {
   "sha224WithRSAEncryption": {
     "sign": "rsa",
@@ -8730,10 +9313,10 @@ module.exports = {
   }
 }
 ;
-},{}],82:[function(require,module,exports) {
+},{}],98:[function(require,module,exports) {
 module.exports = require('./browser/algorithms.json')
 
-},{"./browser/algorithms.json":90}],106:[function(require,module,exports) {
+},{"./browser/algorithms.json":91}],104:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
 
@@ -8764,7 +9347,7 @@ module.exports = function (password, salt, iterations, keylen) {
   }
 }
 
-},{"buffer":22}],105:[function(require,module,exports) {
+},{"buffer":21}],103:[function(require,module,exports) {
 var process = require("process");
 var defaultEncoding
 /* istanbul ignore next */
@@ -8777,7 +9360,7 @@ if (process.browser) {
 }
 module.exports = defaultEncoding
 
-},{"process":23}],93:[function(require,module,exports) {
+},{"process":20}],93:[function(require,module,exports) {
 
 var md5 = require('create-hash/md5')
 var rmd160 = require('ripemd160')
@@ -8881,7 +9464,7 @@ function pbkdf2 (password, salt, iterations, keylen, digest) {
 
 module.exports = pbkdf2
 
-},{"create-hash/md5":125,"ripemd160":115,"sha.js":116,"./precondition":106,"./default-encoding":105,"safe-buffer":113}],94:[function(require,module,exports) {
+},{"create-hash/md5":137,"ripemd160":123,"sha.js":124,"./precondition":104,"./default-encoding":103,"safe-buffer":114}],92:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -8986,11 +9569,11 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
   }), callback)
 }
 
-},{"./precondition":106,"./default-encoding":105,"./sync":93,"safe-buffer":113,"process":23}],73:[function(require,module,exports) {
+},{"./precondition":104,"./default-encoding":103,"./sync":93,"safe-buffer":114,"process":20}],77:[function(require,module,exports) {
 exports.pbkdf2 = require('./lib/async')
 exports.pbkdf2Sync = require('./lib/sync')
 
-},{"./lib/async":94,"./lib/sync":93}],169:[function(require,module,exports) {
+},{"./lib/async":92,"./lib/sync":93}],188:[function(require,module,exports) {
 'use strict';
 
 exports.readUInt32BE = function readUInt32BE(bytes, off) {
@@ -9248,7 +9831,7 @@ exports.padSplit = function padSplit(num, size, group) {
   return out.join(' ');
 };
 
-},{}],275:[function(require,module,exports) {
+},{}],288:[function(require,module,exports) {
 module.exports = assert;
 
 function assert(val, msg) {
@@ -9261,7 +9844,7 @@ assert.equal = function assertEqual(l, r, msg) {
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
 
-},{}],170:[function(require,module,exports) {
+},{}],190:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9404,7 +9987,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
   return this._unpad(out);
 };
 
-},{"minimalistic-assert":275}],171:[function(require,module,exports) {
+},{"minimalistic-assert":288}],189:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9549,7 +10132,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
   utils.rip(l, r, out, off);
 };
 
-},{"minimalistic-assert":275,"inherits":64,"../des":154}],172:[function(require,module,exports) {
+},{"minimalistic-assert":288,"inherits":57,"../des":179}],192:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9616,7 +10199,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
   }
 };
 
-},{"minimalistic-assert":275,"inherits":64}],173:[function(require,module,exports) {
+},{"minimalistic-assert":288,"inherits":57}],191:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -9673,7 +10256,7 @@ EDE.prototype._update = function _update(inp, inOff, out, outOff) {
 EDE.prototype._pad = DES.prototype._pad;
 EDE.prototype._unpad = DES.prototype._unpad;
 
-},{"minimalistic-assert":275,"inherits":64,"../des":154}],154:[function(require,module,exports) {
+},{"minimalistic-assert":288,"inherits":57,"../des":179}],179:[function(require,module,exports) {
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -9682,7 +10265,7 @@ exports.DES = require('./des/des');
 exports.CBC = require('./des/cbc');
 exports.EDE = require('./des/ede');
 
-},{"./des/utils":169,"./des/cipher":170,"./des/des":171,"./des/cbc":172,"./des/ede":173}],111:[function(require,module,exports) {
+},{"./des/utils":188,"./des/cipher":190,"./des/des":189,"./des/cbc":192,"./des/ede":191}],119:[function(require,module,exports) {
 
 var CipherBase = require('cipher-base')
 var des = require('des.js')
@@ -9735,7 +10318,7 @@ DES.prototype._final = function () {
   return Buffer.from(this._des.final())
 }
 
-},{"cipher-base":114,"des.js":154,"inherits":64,"safe-buffer":113}],161:[function(require,module,exports) {
+},{"cipher-base":116,"des.js":179,"inherits":57,"safe-buffer":114}],169:[function(require,module,exports) {
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block)
 }
@@ -9744,7 +10327,7 @@ exports.decrypt = function (self, block) {
   return self._cipher.decryptBlock(block)
 }
 
-},{}],264:[function(require,module,exports) {
+},{}],246:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 module.exports = function xor (a, b) {
   var length = Math.min(a.length, b.length)
@@ -9757,7 +10340,7 @@ module.exports = function xor (a, b) {
   return buffer
 }
 
-},{"buffer":22}],162:[function(require,module,exports) {
+},{"buffer":21}],166:[function(require,module,exports) {
 var xor = require('buffer-xor')
 
 exports.encrypt = function (self, block) {
@@ -9776,7 +10359,7 @@ exports.decrypt = function (self, block) {
   return xor(out, pad)
 }
 
-},{"buffer-xor":264}],164:[function(require,module,exports) {
+},{"buffer-xor":246}],167:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var xor = require('buffer-xor')
@@ -9812,7 +10395,7 @@ exports.encrypt = function (self, data, decrypt) {
   return out
 }
 
-},{"safe-buffer":113,"buffer-xor":264}],163:[function(require,module,exports) {
+},{"safe-buffer":114,"buffer-xor":246}],168:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 
@@ -9840,7 +10423,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":113}],165:[function(require,module,exports) {
+},{"safe-buffer":114}],171:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 
@@ -9885,7 +10468,7 @@ exports.encrypt = function (self, chunk, decrypt) {
   return out
 }
 
-},{"safe-buffer":113}],166:[function(require,module,exports) {
+},{"safe-buffer":114}],173:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var xor = require('buffer-xor')
 
@@ -9904,7 +10487,7 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-},{"buffer-xor":264,"buffer":22}],174:[function(require,module,exports) {
+},{"buffer-xor":246,"buffer":21}],174:[function(require,module,exports) {
 function incr32 (iv) {
   var len = iv.length
   var item
@@ -9921,7 +10504,7 @@ function incr32 (iv) {
 }
 module.exports = incr32
 
-},{}],167:[function(require,module,exports) {
+},{}],170:[function(require,module,exports) {
 
 var xor = require('buffer-xor')
 var Buffer = require('safe-buffer').Buffer
@@ -9954,7 +10537,7 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad)
 }
 
-},{"buffer-xor":264,"safe-buffer":113,"../incr32":174}],160:[function(require,module,exports) {
+},{"buffer-xor":246,"safe-buffer":114,"../incr32":174}],148:[function(require,module,exports) {
 module.exports = {
   "aes-128-ecb": {
     "cipher": "AES",
@@ -10147,7 +10730,7 @@ module.exports = {
   }
 }
 ;
-},{}],132:[function(require,module,exports) {
+},{}],155:[function(require,module,exports) {
 var modeModules = {
   ECB: require('./ecb'),
   CBC: require('./cbc'),
@@ -10167,7 +10750,7 @@ for (var key in modes) {
 
 module.exports = modes
 
-},{"./ecb":161,"./cbc":162,"./cfb":164,"./cfb8":163,"./cfb1":165,"./ofb":166,"./ctr":167,"./list.json":160}],289:[function(require,module,exports) {
+},{"./ecb":169,"./cbc":166,"./cfb":167,"./cfb8":168,"./cfb1":171,"./ofb":173,"./ctr":170,"./list.json":148}],158:[function(require,module,exports) {
 
 // based on the aes implimentation in triple sec
 // https://github.com/keybase/triplesec
@@ -10398,7 +10981,7 @@ AES.prototype.scrub = function () {
 
 module.exports.AES = AES
 
-},{"safe-buffer":113}],290:[function(require,module,exports) {
+},{"safe-buffer":114}],175:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var ZEROES = Buffer.alloc(16, 0)
@@ -10490,7 +11073,7 @@ GHASH.prototype.final = function (abl, bl) {
 
 module.exports = GHASH
 
-},{"safe-buffer":113}],287:[function(require,module,exports) {
+},{"safe-buffer":114}],156:[function(require,module,exports) {
 
 var aes = require('./aes')
 var Buffer = require('safe-buffer').Buffer
@@ -10610,7 +11193,7 @@ StreamCipher.prototype.setAAD = function setAAD (buf) {
 
 module.exports = StreamCipher
 
-},{"./aes":289,"safe-buffer":113,"cipher-base":114,"inherits":64,"./ghash":290,"buffer-xor":264,"./incr32":174}],288:[function(require,module,exports) {
+},{"./aes":158,"safe-buffer":114,"cipher-base":116,"inherits":57,"./ghash":175,"buffer-xor":246,"./incr32":174}],157:[function(require,module,exports) {
 
 var aes = require('./aes')
 var Buffer = require('safe-buffer').Buffer
@@ -10640,7 +11223,7 @@ StreamCipher.prototype._final = function () {
 
 module.exports = StreamCipher
 
-},{"./aes":289,"safe-buffer":113,"cipher-base":114,"inherits":64}],112:[function(require,module,exports) {
+},{"./aes":158,"safe-buffer":114,"cipher-base":116,"inherits":57}],122:[function(require,module,exports) {
 
 var Buffer = require('safe-buffer').Buffer
 var MD5 = require('md5.js')
@@ -10688,7 +11271,7 @@ function EVP_BytesToKey (password, salt, keyBits, ivLen) {
 
 module.exports = EVP_BytesToKey
 
-},{"safe-buffer":113,"md5.js":118}],284:[function(require,module,exports) {
+},{"safe-buffer":114,"md5.js":115}],149:[function(require,module,exports) {
 
 var MODES = require('./modes')
 var AuthCipher = require('./authCipher')
@@ -10805,7 +11388,7 @@ function createCipher (suite, password) {
 exports.createCipheriv = createCipheriv
 exports.createCipher = createCipher
 
-},{"./modes":132,"./authCipher":287,"safe-buffer":113,"./streamCipher":288,"cipher-base":114,"./aes":289,"evp_bytestokey":112,"inherits":64}],285:[function(require,module,exports) {
+},{"./modes":155,"./authCipher":156,"safe-buffer":114,"./streamCipher":157,"cipher-base":116,"./aes":158,"evp_bytestokey":122,"inherits":57}],150:[function(require,module,exports) {
 
 var AuthCipher = require('./authCipher')
 var Buffer = require('safe-buffer').Buffer
@@ -10932,7 +11515,7 @@ function createDecipher (suite, password) {
 exports.createDecipher = createDecipher
 exports.createDecipheriv = createDecipheriv
 
-},{"./authCipher":287,"safe-buffer":113,"./modes":132,"./streamCipher":288,"cipher-base":114,"./aes":289,"evp_bytestokey":112,"inherits":64}],124:[function(require,module,exports) {
+},{"./authCipher":156,"safe-buffer":114,"./modes":155,"./streamCipher":157,"cipher-base":116,"./aes":158,"evp_bytestokey":122,"inherits":57}],138:[function(require,module,exports) {
 var ciphers = require('./encrypter')
 var deciphers = require('./decrypter')
 var modes = require('./modes/list.json')
@@ -10947,7 +11530,7 @@ exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"./encrypter":284,"./decrypter":285,"./modes/list.json":160}],123:[function(require,module,exports) {
+},{"./encrypter":149,"./decrypter":150,"./modes/list.json":148}],139:[function(require,module,exports) {
 exports['des-ecb'] = {
   key: 8,
   iv: 0
@@ -10973,7 +11556,7 @@ exports['des-ede'] = {
   iv: 0
 }
 
-},{}],70:[function(require,module,exports) {
+},{}],84:[function(require,module,exports) {
 var DES = require('browserify-des')
 var aes = require('browserify-aes/browser')
 var aesModes = require('browserify-aes/modes')
@@ -11042,7 +11625,7 @@ exports.createDecipher = exports.Decipher = createDecipher
 exports.createDecipheriv = exports.Decipheriv = createDecipheriv
 exports.listCiphers = exports.getCiphers = getCiphers
 
-},{"browserify-des":111,"browserify-aes/browser":124,"browserify-aes/modes":132,"browserify-des/modes":123,"evp_bytestokey":112}],120:[function(require,module,exports) {
+},{"browserify-des":119,"browserify-aes/browser":138,"browserify-aes/modes":155,"browserify-des/modes":139,"evp_bytestokey":122}],120:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 (function (module, exports) {
   'use strict';
@@ -14472,7 +15055,7 @@ var Buffer = require("buffer").Buffer;
   };
 })(typeof module === 'undefined' || module, this);
 
-},{"buffer":175}],189:[function(require,module,exports) {
+},{"buffer":183}],251:[function(require,module,exports) {
 var r;
 
 module.exports = function rand(len) {
@@ -14539,7 +15122,7 @@ if (typeof self === 'object') {
   }
 }
 
-},{"crypto":175}],141:[function(require,module,exports) {
+},{"crypto":183}],176:[function(require,module,exports) {
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -14656,7 +15239,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return false;
 };
 
-},{"bn.js":120,"brorand":189}],86:[function(require,module,exports) {
+},{"bn.js":120,"brorand":251}],94:[function(require,module,exports) {
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -14763,7 +15346,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"randombytes":72,"bn.js":120,"miller-rabin":141}],85:[function(require,module,exports) {
+},{"randombytes":78,"bn.js":120,"miller-rabin":176}],90:[function(require,module,exports) {
 module.exports = {
     "modp1": {
         "gen": "02",
@@ -14798,7 +15381,7 @@ module.exports = {
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 };
-},{}],87:[function(require,module,exports) {
+},{}],95:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -14965,7 +15548,7 @@ function formatReturnValue(bn, enc) {
   }
 }
 
-},{"bn.js":120,"miller-rabin":141,"./generatePrime":86,"randombytes":72,"buffer":22}],71:[function(require,module,exports) {
+},{"bn.js":120,"miller-rabin":176,"./generatePrime":94,"randombytes":78,"buffer":21}],81:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var generatePrime = require('./lib/generatePrime')
 var primes = require('./lib/primes.json')
@@ -15010,7 +15593,7 @@ function createDiffieHellman (prime, enc, generator, genc) {
 exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
-},{"./lib/generatePrime":86,"./lib/primes.json":85,"./lib/dh":87,"buffer":22}],122:[function(require,module,exports) {
+},{"./lib/generatePrime":94,"./lib/primes.json":90,"./lib/dh":95,"buffer":21}],128:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var bn = require('bn.js');
 var randomBytes = require('randombytes');
@@ -15053,7 +15636,7 @@ function getr(priv) {
   return r;
 }
 
-},{"bn.js":120,"randombytes":72,"buffer":22}],126:[function(require,module,exports) {
+},{"bn.js":120,"randombytes":78,"buffer":21}],126:[function(require,module,exports) {
 module.exports = {
   "name": "elliptic",
   "version": "6.4.1",
@@ -15113,7 +15696,7 @@ module.exports = {
   }
 }
 ;
-},{}],277:[function(require,module,exports) {
+},{}],287:[function(require,module,exports) {
 'use strict';
 
 var utils = exports;
@@ -15173,7 +15756,7 @@ utils.encode = function encode(arr, enc) {
     return arr;
 };
 
-},{}],130:[function(require,module,exports) {
+},{}],135:[function(require,module,exports) {
 'use strict';
 
 var utils = exports;
@@ -15295,7 +15878,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":120,"minimalistic-assert":275,"minimalistic-crypto-utils":277}],291:[function(require,module,exports) {
+},{"bn.js":120,"minimalistic-assert":288,"minimalistic-crypto-utils":287}],164:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -15672,7 +16255,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"bn.js":120,"../../elliptic":119}],292:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":117}],159:[function(require,module,exports) {
 'use strict';
 
 var curve = require('../curve');
@@ -16611,7 +17194,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../curve":134,"../../elliptic":119,"bn.js":120,"inherits":64}],293:[function(require,module,exports) {
+},{"../curve":151,"../../elliptic":117,"bn.js":120,"inherits":57}],161:[function(require,module,exports) {
 'use strict';
 
 var curve = require('../curve');
@@ -16793,7 +17376,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../curve":134,"bn.js":120,"inherits":64,"../../elliptic":119}],294:[function(require,module,exports) {
+},{"../curve":151,"bn.js":120,"inherits":57,"../../elliptic":117}],163:[function(require,module,exports) {
 'use strict';
 
 var curve = require('../curve');
@@ -17228,7 +17811,7 @@ Point.prototype.eqXToP = function eqXToP(x) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../curve":134,"../../elliptic":119,"bn.js":120,"inherits":64}],134:[function(require,module,exports) {
+},{"../curve":151,"../../elliptic":117,"bn.js":120,"inherits":57}],151:[function(require,module,exports) {
 'use strict';
 
 var curve = exports;
@@ -17238,7 +17821,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":291,"./short":292,"./mont":293,"./edwards":294}],259:[function(require,module,exports) {
+},{"./base":164,"./short":159,"./mont":161,"./edwards":163}],292:[function(require,module,exports) {
 'use strict';
 
 var assert = require('minimalistic-assert');
@@ -17493,7 +18076,7 @@ function shr64_lo(ah, al, num) {
 }
 exports.shr64_lo = shr64_lo;
 
-},{"minimalistic-assert":275,"inherits":64}],260:[function(require,module,exports) {
+},{"minimalistic-assert":288,"inherits":57}],291:[function(require,module,exports) {
 'use strict';
 
 var utils = require('./utils');
@@ -17587,7 +18170,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-},{"./utils":259,"minimalistic-assert":275}],273:[function(require,module,exports) {
+},{"./utils":292,"minimalistic-assert":288}],301:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17638,7 +18221,7 @@ function g1_256(x) {
 }
 exports.g1_256 = g1_256;
 
-},{"../utils":259}],266:[function(require,module,exports) {
+},{"../utils":292}],297:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17714,7 +18297,7 @@ SHA1.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../utils":259,"../common":260,"./common":273}],268:[function(require,module,exports) {
+},{"../utils":292,"../common":291,"./common":301}],296:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17821,7 +18404,7 @@ SHA256.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-},{"../utils":259,"../common":260,"./common":273,"minimalistic-assert":275}],267:[function(require,module,exports) {
+},{"../utils":292,"../common":291,"./common":301,"minimalistic-assert":288}],298:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -17853,7 +18436,7 @@ SHA224.prototype._digest = function digest(enc) {
 };
 
 
-},{"../utils":259,"./256":268}],270:[function(require,module,exports) {
+},{"../utils":292,"./256":296}],300:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -18185,7 +18768,7 @@ function g1_512_lo(xh, xl) {
   return r;
 }
 
-},{"../utils":259,"../common":260,"minimalistic-assert":275}],269:[function(require,module,exports) {
+},{"../utils":292,"../common":291,"minimalistic-assert":288}],299:[function(require,module,exports) {
 'use strict';
 
 var utils = require('../utils');
@@ -18222,7 +18805,7 @@ SHA384.prototype._digest = function digest(enc) {
     return utils.split32(this.h.slice(0, 12), 'big');
 };
 
-},{"../utils":259,"./512":270}],261:[function(require,module,exports) {
+},{"../utils":292,"./512":300}],294:[function(require,module,exports) {
 'use strict';
 
 exports.sha1 = require('./sha/1');
@@ -18231,7 +18814,7 @@ exports.sha256 = require('./sha/256');
 exports.sha384 = require('./sha/384');
 exports.sha512 = require('./sha/512');
 
-},{"./sha/1":266,"./sha/224":267,"./sha/256":268,"./sha/384":269,"./sha/512":270}],262:[function(require,module,exports) {
+},{"./sha/1":297,"./sha/224":298,"./sha/256":296,"./sha/384":299,"./sha/512":300}],293:[function(require,module,exports) {
 'use strict';
 
 var utils = require('./utils');
@@ -18379,7 +18962,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"./utils":259,"./common":260}],263:[function(require,module,exports) {
+},{"./utils":292,"./common":291}],295:[function(require,module,exports) {
 'use strict';
 
 var utils = require('./utils');
@@ -18428,7 +19011,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"./utils":259,"minimalistic-assert":275}],249:[function(require,module,exports) {
+},{"./utils":292,"minimalistic-assert":288}],289:[function(require,module,exports) {
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -18445,7 +19028,7 @@ hash.sha384 = hash.sha.sha384;
 hash.sha512 = hash.sha.sha512;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/utils":259,"./hash/common":260,"./hash/sha":261,"./hash/ripemd":262,"./hash/hmac":263}],133:[function(require,module,exports) {
+},{"./hash/utils":292,"./hash/common":291,"./hash/sha":294,"./hash/ripemd":293,"./hash/hmac":295}],147:[function(require,module,exports) {
 module.exports = {
   doubles: {
     step: 4,
@@ -19227,7 +19810,7 @@ module.exports = {
   }
 };
 
-},{}],131:[function(require,module,exports) {
+},{}],136:[function(require,module,exports) {
 'use strict';
 
 var curves = exports;
@@ -19434,7 +20017,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"hash.js":249,"../elliptic":119,"./precomputed/secp256k1":133}],276:[function(require,module,exports) {
+},{"hash.js":289,"../elliptic":117,"./precomputed/secp256k1":147}],302:[function(require,module,exports) {
 'use strict';
 
 var hash = require('hash.js');
@@ -19549,7 +20132,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"hash.js":249,"minimalistic-crypto-utils":277,"minimalistic-assert":275}],142:[function(require,module,exports) {
+},{"hash.js":289,"minimalistic-crypto-utils":287,"minimalistic-assert":288}],165:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -19670,7 +20253,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"bn.js":120,"../../elliptic":119}],145:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":117}],172:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -19807,7 +20390,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"bn.js":120,"../../elliptic":119}],135:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":117}],152:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -20049,7 +20632,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"bn.js":120,"hmac-drbg":276,"../../elliptic":119,"./key":142,"./signature":145}],144:[function(require,module,exports) {
+},{"bn.js":120,"hmac-drbg":302,"../../elliptic":117,"./key":165,"./signature":172}],160:[function(require,module,exports) {
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -20147,7 +20730,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":119}],143:[function(require,module,exports) {
+},{"../../elliptic":117}],162:[function(require,module,exports) {
 'use strict';
 
 var BN = require('bn.js');
@@ -20215,7 +20798,7 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"bn.js":120,"../../elliptic":119}],136:[function(require,module,exports) {
+},{"bn.js":120,"../../elliptic":117}],153:[function(require,module,exports) {
 'use strict';
 
 var hash = require('hash.js');
@@ -20335,7 +20918,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
   return val instanceof this.pointClass;
 };
 
-},{"hash.js":249,"../../elliptic":119,"./key":144,"./signature":143}],119:[function(require,module,exports) {
+},{"hash.js":289,"../../elliptic":117,"./key":160,"./signature":162}],117:[function(require,module,exports) {
 'use strict';
 
 var elliptic = exports;
@@ -20350,7 +20933,7 @@ elliptic.curves = require('./elliptic/curves');
 elliptic.ec = require('./elliptic/ec');
 elliptic.eddsa = require('./elliptic/eddsa');
 
-},{"../package.json":126,"./elliptic/utils":130,"brorand":189,"./elliptic/curve":134,"./elliptic/curves":131,"./elliptic/ec":135,"./elliptic/eddsa":136}],272:[function(require,module,exports) {
+},{"../package.json":126,"./elliptic/utils":135,"brorand":251,"./elliptic/curve":151,"./elliptic/curves":136,"./elliptic/ec":152,"./elliptic/eddsa":153}],290:[function(require,module,exports) {
 
 var indexOf = [].indexOf;
 
@@ -20361,7 +20944,7 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],242:[function(require,module,exports) {
+},{}],250:[function(require,module,exports) {
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -20501,7 +21084,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":272}],234:[function(require,module,exports) {
+},{"indexof":290}],224:[function(require,module,exports) {
 var asn1 = require('../asn1');
 var inherits = require('inherits');
 
@@ -20564,7 +21147,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":217,"inherits":64,"vm":242}],255:[function(require,module,exports) {
+},{"../asn1":194,"inherits":57,"vm":250}],276:[function(require,module,exports) {
 var inherits = require('inherits');
 
 function Reporter(options) {
@@ -20687,7 +21270,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"inherits":64}],256:[function(require,module,exports) {
+},{"inherits":57}],278:[function(require,module,exports) {
 
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
@@ -20806,7 +21389,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"inherits":64,"../base":245,"buffer":22}],257:[function(require,module,exports) {
+},{"inherits":57,"../base":260,"buffer":21}],279:[function(require,module,exports) {
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
 var DecoderBuffer = require('../base').DecoderBuffer;
@@ -21442,7 +22025,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
   return /^[A-Za-z0-9 '\(\)\+,\-\.\/:=\?]*$/.test(str);
 };
 
-},{"../base":245,"minimalistic-assert":275}],245:[function(require,module,exports) {
+},{"../base":260,"minimalistic-assert":288}],260:[function(require,module,exports) {
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -21450,7 +22033,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-},{"./reporter":255,"./buffer":256,"./node":257}],258:[function(require,module,exports) {
+},{"./reporter":276,"./buffer":278,"./node":279}],281:[function(require,module,exports) {
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -21494,7 +22077,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-},{"../constants":248}],248:[function(require,module,exports) {
+},{"../constants":262}],262:[function(require,module,exports) {
 var constants = exports;
 
 // Helper
@@ -21515,7 +22098,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-},{"./der":258}],253:[function(require,module,exports) {
+},{"./der":281}],277:[function(require,module,exports) {
 var inherits = require('inherits');
 
 var asn1 = require('../../asn1');
@@ -21841,7 +22424,7 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"inherits":64,"../../asn1":217}],254:[function(require,module,exports) {
+},{"inherits":57,"../../asn1":194}],280:[function(require,module,exports) {
 
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
@@ -21893,13 +22476,13 @@ PEMDecoder.prototype.decode = function decode(data, options) {
   return DERDecoder.prototype.decode.call(this, input, options);
 };
 
-},{"inherits":64,"buffer":22,"./der":253}],246:[function(require,module,exports) {
+},{"inherits":57,"buffer":21,"./der":277}],261:[function(require,module,exports) {
 var decoders = exports;
 
 decoders.der = require('./der');
 decoders.pem = require('./pem');
 
-},{"./der":253,"./pem":254}],251:[function(require,module,exports) {
+},{"./der":277,"./pem":280}],282:[function(require,module,exports) {
 
 var inherits = require('inherits');
 var Buffer = require('buffer').Buffer;
@@ -22197,7 +22780,7 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"inherits":64,"buffer":22,"../../asn1":217}],252:[function(require,module,exports) {
+},{"inherits":57,"buffer":21,"../../asn1":194}],283:[function(require,module,exports) {
 var inherits = require('inherits');
 
 var DEREncoder = require('./der');
@@ -22220,13 +22803,13 @@ PEMEncoder.prototype.encode = function encode(data, options) {
   return out.join('\n');
 };
 
-},{"inherits":64,"./der":251}],247:[function(require,module,exports) {
+},{"inherits":57,"./der":282}],259:[function(require,module,exports) {
 var encoders = exports;
 
 encoders.der = require('./der');
 encoders.pem = require('./pem');
 
-},{"./der":251,"./pem":252}],217:[function(require,module,exports) {
+},{"./der":282,"./pem":283}],194:[function(require,module,exports) {
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -22237,7 +22820,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-},{"bn.js":120,"./asn1/api":234,"./asn1/base":245,"./asn1/constants":248,"./asn1/decoders":246,"./asn1/encoders":247}],159:[function(require,module,exports) {
+},{"bn.js":120,"./asn1/api":224,"./asn1/base":260,"./asn1/constants":262,"./asn1/decoders":261,"./asn1/encoders":259}],154:[function(require,module,exports) {
 // from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
 // thanks to @Rantanen
 
@@ -22327,7 +22910,7 @@ var X509Certificate = asn.define('X509Certificate', function () {
 
 module.exports = X509Certificate
 
-},{"asn1.js":217}],128:[function(require,module,exports) {
+},{"asn1.js":194}],141:[function(require,module,exports) {
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 'use strict'
@@ -22451,7 +23034,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"asn1.js":217,"./certificate":159}],127:[function(require,module,exports) {
+},{"asn1.js":194,"./certificate":154}],140:[function(require,module,exports) {
 module.exports = {"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -22465,7 +23048,7 @@ module.exports = {"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 };
-},{}],129:[function(require,module,exports) {
+},{}],142:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
@@ -22498,7 +23081,7 @@ module.exports = function (okey, password) {
   }
 }
 
-},{"evp_bytestokey":112,"browserify-aes":124,"buffer":22}],121:[function(require,module,exports) {
+},{"evp_bytestokey":122,"browserify-aes":138,"buffer":21}],127:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -22607,7 +23190,7 @@ function decrypt (data, password) {
   return Buffer.concat(out)
 }
 
-},{"./asn1":128,"./aesid.json":127,"./fixProc":129,"browserify-aes":124,"pbkdf2":73,"buffer":22}],104:[function(require,module,exports) {
+},{"./asn1":141,"./aesid.json":140,"./fixProc":142,"browserify-aes":138,"pbkdf2":77,"buffer":21}],102:[function(require,module,exports) {
 module.exports = {
   "1.3.132.0.10": "secp256k1",
   "1.3.132.0.33": "p224",
@@ -22617,7 +23200,7 @@ module.exports = {
   "1.3.132.0.35": "p521"
 }
 ;
-},{}],91:[function(require,module,exports) {
+},{}],96:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var createHmac = require('create-hmac')
@@ -22765,7 +23348,7 @@ module.exports = sign
 module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
-},{"create-hmac":68,"browserify-rsa":122,"elliptic":119,"bn.js":120,"parse-asn1":121,"./curves.json":104,"buffer":22}],92:[function(require,module,exports) {
+},{"create-hmac":76,"browserify-rsa":128,"elliptic":117,"bn.js":120,"parse-asn1":127,"./curves.json":102,"buffer":21}],97:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = require('bn.js')
@@ -22851,7 +23434,7 @@ function checkValue (b, q) {
 
 module.exports = verify
 
-},{"bn.js":120,"elliptic":119,"parse-asn1":121,"./curves.json":104,"buffer":22}],74:[function(require,module,exports) {
+},{"bn.js":120,"elliptic":117,"parse-asn1":127,"./curves.json":102,"buffer":21}],80:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var createHash = require('create-hash')
 var stream = require('stream')
@@ -22945,7 +23528,7 @@ module.exports = {
   createVerify: createVerify
 }
 
-},{"create-hash":69,"stream":21,"inherits":64,"./sign":91,"./verify":92,"./algorithms.json":90,"buffer":22}],77:[function(require,module,exports) {
+},{"create-hash":79,"stream":19,"inherits":57,"./sign":96,"./verify":97,"./algorithms.json":91,"buffer":21}],83:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var elliptic = require('elliptic')
 var BN = require('bn.js')
@@ -23072,7 +23655,7 @@ function formatReturnValue (bn, enc, len) {
   }
 }
 
-},{"elliptic":119,"bn.js":120,"buffer":22}],101:[function(require,module,exports) {
+},{"elliptic":117,"bn.js":120,"buffer":21}],99:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -23090,7 +23673,7 @@ function i2ops(c) {
   out.writeUInt32BE(c,0);
   return out;
 }
-},{"create-hash":69,"buffer":22}],102:[function(require,module,exports) {
+},{"create-hash":79,"buffer":21}],100:[function(require,module,exports) {
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -23099,7 +23682,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-},{}],103:[function(require,module,exports) {
+},{}],101:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -23111,7 +23694,7 @@ function withPublic(paddedMsg, key) {
 }
 
 module.exports = withPublic;
-},{"bn.js":120,"buffer":22}],88:[function(require,module,exports) {
+},{"bn.js":120,"buffer":21}],88:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -23208,7 +23791,7 @@ function nonZero(len, crypto) {
   }
   return out;
 }
-},{"parse-asn1":121,"randombytes":72,"create-hash":69,"./mgf":101,"./xor":102,"bn.js":120,"./withPublic":103,"browserify-rsa":122,"buffer":22}],89:[function(require,module,exports) {
+},{"parse-asn1":127,"randombytes":78,"create-hash":79,"./mgf":99,"./xor":100,"bn.js":120,"./withPublic":101,"browserify-rsa":128,"buffer":21}],89:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -23318,7 +23901,7 @@ function compare(a, b){
   }
   return dif;
 }
-},{"parse-asn1":121,"./mgf":101,"./xor":102,"bn.js":120,"browserify-rsa":122,"create-hash":69,"./withPublic":103,"buffer":22}],76:[function(require,module,exports) {
+},{"parse-asn1":127,"./mgf":99,"./xor":100,"bn.js":120,"browserify-rsa":128,"create-hash":79,"./withPublic":101,"buffer":21}],82:[function(require,module,exports) {
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -23329,7 +23912,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-},{"./publicEncrypt":88,"./privateDecrypt":89}],75:[function(require,module,exports) {
+},{"./publicEncrypt":88,"./privateDecrypt":89}],85:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 var process = require("process");
@@ -23442,7 +24025,7 @@ function randomFillSync (buf, offset, size) {
   return actualFill(buf, offset, size)
 }
 
-},{"safe-buffer":113,"randombytes":72,"process":23}],34:[function(require,module,exports) {
+},{"safe-buffer":114,"randombytes":78,"process":20}],53:[function(require,module,exports) {
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -23541,7 +24124,7 @@ exports.constants = {
   'POINT_CONVERSION_HYBRID': 6
 }
 
-},{"randombytes":72,"create-hash":69,"create-hmac":68,"browserify-sign/algos":82,"pbkdf2":73,"browserify-cipher":70,"diffie-hellman":71,"browserify-sign":74,"create-ecdh":77,"public-encrypt":76,"randomfill":75}],12:[function(require,module,exports) {
+},{"randombytes":78,"create-hash":79,"create-hmac":76,"browserify-sign/algos":98,"pbkdf2":77,"browserify-cipher":84,"diffie-hellman":81,"browserify-sign":80,"create-ecdh":83,"public-encrypt":82,"randomfill":85}],24:[function(require,module,exports) {
 var process = require("process");
 var global = (1,eval)("this");
 var Buffer = require("buffer").Buffer;
@@ -30101,7 +30684,7 @@ exports.valueAndGrad = valueAndGrad;
 exports.valueAndGrads = valueAndGrads;
 exports.variableGrads = variableGrads;
 //# sourceMappingURL=tf-core.esm.js.map
-},{"crypto":34,"process":23,"buffer":22}],36:[function(require,module,exports) {
+},{"crypto":53,"process":20,"buffer":21}],8:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30255,7 +30838,7 @@ function getTextureType(gl) {
 function getTextureTypeUByte(gl) {
     return gl.UNSIGNED_BYTE;
 }
-},{"@tensorflow/tfjs-core":12}],35:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24}],22:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30354,7 +30937,7 @@ function generateKNNLineData(numPoints, numNeighbors) {
     }
     return { distances: distances, indices: indices };
 }
-},{"@tensorflow/tfjs-core":12,"./gl_util":36}],37:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./gl_util":8}],23:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30488,7 +31071,7 @@ function executeCopyIndicesProgram(gpgpu, program, knnTex, knnShape, targetTex) 
     gl.uniform1f(numRowsLoc, knnShape.numRows);
     gpgpu.executeProgram();
 }
-},{"@tensorflow/tfjs-core":12,"./gl_util":36}],14:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./gl_util":8}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -30676,9 +31259,8 @@ var KNNEstimator = function () {
             return indices.reshape([_this.knnDataShape.numRows * _this.knnDataShape.pointsPerRow, _this.knnDataShape.pixelsPerPoint]).slice([0, 0], [_this.knnDataShape.numPoints, _this.knnDataShape.pixelsPerPoint]);
         });
     };
-    KNNEstimator.prototype.forceFlush = function () {
+    KNNEstimator.prototype.forceSync = function () {
         var mat0 = this.downloadTextureToMatrix(this.knnTexture0);
-        console.log("Flush: " + mat0.length / mat0.length);
     };
     KNNEstimator.prototype.downloadTextureToMatrix = function (texture) {
         return this.gpgpu.downloadFloat32MatrixFromOutputTexture(texture, this.knnDataShape.numRows, this.knnDataShape.pointsPerRow * this.knnDataShape.pixelsPerPoint);
@@ -30695,7 +31277,7 @@ var KNNEstimator = function () {
     return KNNEstimator;
 }();
 exports.KNNEstimator = KNNEstimator;
-},{"@tensorflow/tfjs-core":12,"./dataset_util":35,"./gl_util":36,"./knn_util":37}],38:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./dataset_util":22,"./gl_util":8,"./knn_util":23}],51:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30826,12 +31408,13 @@ function tensorToDataTexture(tensor) {
         });
     });
 }
-},{"@tensorflow/tfjs-core":12,"./gl_util":36}],39:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./gl_util":8}],29:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.createEmbeddingSplatterProgramOrig = createEmbeddingSplatterProgramOrig;
 exports.createEmbeddingSplatterProgram = createEmbeddingSplatterProgram;
 exports.executeEmbeddingSplatterProgram = executeEmbeddingSplatterProgram;
 exports.createQInterpolatorProgram = createQInterpolatorProgram;
@@ -30857,16 +31440,21 @@ var gl_util = _interopRequireWildcard(_gl_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-function createEmbeddingSplatterProgram(gpgpu) {
-    var vertexShaderSource = "#version 300 es\n    precision highp float;\n    in float vertex_id;\n\n    uniform sampler2D embedding_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    uniform float kernel_support;\n    uniform float points_per_row;\n    uniform float num_rows;\n\n    out vec2 kernel_coords;\n\n    void main() {\n      //TODO Clean up and check performance loss due to the conversions\n      uint pnt_id = uint((vertex_id / 4.0) + 0.1);\n      uint quad_id = uint(mod(vertex_id + 0.1,4.));\n\n      uint row    = uint((float(pnt_id) + 0.1)/points_per_row);\n      uint column = uint(float(pnt_id) - float(row) * points_per_row);\n\n      float width = (points_per_row * 2.0);\n      float row_tex = (float(row) + 0.5) / num_rows;\n      vec2 tex_coords_x = vec2((float(column) * 2. + 0.5) / width, row_tex);\n      vec2 tex_coords_y = vec2((float(column) * 2. + 1.5) / width, row_tex);\n\n      float x_pnt = texture(embedding_tex,tex_coords_x).r;\n      float y_pnt = texture(embedding_tex,tex_coords_y).r;\n      vec2 vertex_coords = vec2(x_pnt,y_pnt);\n\n      if(quad_id == uint(0)) {kernel_coords = vec2(-1,-1);}\n      else if(quad_id == uint(1)) {kernel_coords = vec2(1,-1);}\n      else if(quad_id == uint(2)) {kernel_coords = vec2(1,1);}\n      else if(quad_id == uint(3)) {kernel_coords = vec2(-1,1);}\n\n      vertex_coords += kernel_coords * kernel_support;      // embedding space\n      vertex_coords = (vertex_coords - minV) / (maxV-minV); //  0:1 space\n      vertex_coords = vertex_coords * 2.0 - 1.0;            // -1:1 space\n\n      gl_Position = vec4(vertex_coords,0,1);\n    }\n  ";
+function createEmbeddingSplatterProgramOrig(gpgpu) {
+    var vertexShaderSource = "#version 300 es\n    precision highp float;\n    in float vertex_id;\n\n    uniform sampler2D embedding_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    uniform float kernel_support;\n    uniform float points_per_row;\n    //uniform float num_rows;\n\n    out vec2 kernel_coords;\n\n    void main() {\n      //TODO Clean up and check performance loss due to the conversions\n      uint pnt_id = uint((vertex_id / 4.0) + 0.1);\n      uint quad_id = uint(mod(vertex_id + 0.1,4.));\n\n      uint row    = uint((float(pnt_id) + 0.1)/points_per_row);\n      uint column = uint(float(pnt_id) - float(row) * points_per_row);\n\n      float x_pnt = texelFetch(embedding_tex, \n        ivec2(column * uint(2), row), 0).r;\n      float y_pnt = texelFetch(embedding_tex, \n        ivec2((column * uint(2)) + uint(1), row), 0).r;\n      \n      vec2 vertex_coords = vec2(x_pnt,y_pnt);\n\n      if(quad_id == uint(0)) {kernel_coords = vec2(-1,-1);}\n      else if(quad_id == uint(1)) {kernel_coords = vec2(1,-1);}\n      else if(quad_id == uint(2)) {kernel_coords = vec2(1,1);}\n      else if(quad_id == uint(3)) {kernel_coords = vec2(-1,1);}\n\n      // map the vertex coord to clip space by combining\n      // the kernel point offset (scaled by the support)\n      // with the  \n      vertex_coords += kernel_coords * kernel_support; //embedding space\n      vertex_coords = (vertex_coords - minV) / (maxV-minV); //  0:1 space\n      vertex_coords = vertex_coords * 2.0 - 1.0;            // -1:1 space\n\n      gl_Position = vec4(vertex_coords,0,1);\n    }\n  ";
     var fragmentShaderSource = "#version 300 es\n    precision highp float;\n    uniform sampler2D kernel_tex;\n    in vec2 kernel_coords;\n    out vec4 fragmentColor;\n\n    void main() {\n      fragmentColor = texture(kernel_tex,(kernel_coords + 1.) / 2.0);\n    }\n  ";
     return gl_util.createVertexProgram(gpgpu.gl, vertexShaderSource, fragmentShaderSource);
 }
-function executeEmbeddingSplatterProgram(gpgpu, program, targetTex, embeddingTex, kernelTex, targetTexDiameter, numPoints, minX, minY, maxX, maxY, kernelSupport, pntsPerRow, numRows, vertexIdBuffer) {
+function createEmbeddingSplatterProgram(gpgpu) {
+    var vertexShaderSource = "#version 300 es\n    precision highp float;\n    in float vertex_id;\n\n    uniform sampler2D embedding_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    //uniform float kernel_support;\n    uniform float points_per_row;\n\n    out vec2 kernel_coords;\n\n    void main() {\n      //TODO Clean up and check performance loss due to the conversions\n      uint emb_id = uint((vertex_id / 4.0) + 0.1);\n      uint quad_id = uint(mod(vertex_id + 0.1,4.));\n\n      uint row    = uint((float(emb_id) + 0.1)/points_per_row);\n      uint column = uint(float(emb_id) - float(row) * points_per_row);\n\n      float x_emb = texelFetch(embedding_tex, \n        ivec2(column * uint(2), row), 0).r;\n      float y_emb = texelFetch(embedding_tex, \n        ivec2((column * uint(2)) + uint(1), row), 0).r;\n      \n      vec2 embed_coords = vec2(x_emb,y_emb);\n\n      if(quad_id == uint(0)) {kernel_coords = vec2(-1,-1);}\n      else if(quad_id == uint(1)) {kernel_coords = vec2(1,-1);}\n      else if(quad_id == uint(2)) {kernel_coords = vec2(1,1);}\n      else if(quad_id == uint(3)) {kernel_coords = vec2(-1,1);}\n\n      // map the embedding vertex coord to clip space by combining\n      // the kernel point offset (scaled by the support)\n      // and scaling to get the quad corners in clip-space \n      // embedding space\n      embed_coords += kernel_coords * 2.5; //kernel_support;\n      embed_coords = (embed_coords - minV) / (maxV-minV); //  0:1 space   \n      embed_coords = embed_coords * 2.0 - 1.0;            // -1:1 space\n\n      // kernel quad corner vertex in clip space \n      gl_Position = vec4(embed_coords,0,1);\n    }\n  ";
+    var fragmentShaderSource = "#version 300 es\n    precision highp float;\n    uniform sampler2D kernel_tex;\n    in vec2 kernel_coords;\n    out vec4 fragmentColor;\n\n    void main() {\n      fragmentColor = texture(kernel_tex,(kernel_coords + 1.) / 2.0);\n    }\n  ";
+    return gl_util.createVertexProgram(gpgpu.gl, vertexShaderSource, fragmentShaderSource);
+}
+function executeEmbeddingSplatterProgram(gpgpu, program, targetTex, embeddingTex, kernelTex, targetTexWidth, targetTexHeight, numPoints, minX, minY, maxX, maxY, kernelSupport, pntsPerRow, numRows, vertexIdBuffer) {
     var gl = gpgpu.gl;
     var oldProgram = gpgpu.program;
     if (targetTex != null) {
-        gpgpu.setOutputMatrixTexture(targetTex, targetTexDiameter, targetTexDiameter);
+        gpgpu.setOutputMatrixTexture(targetTex, targetTexWidth, targetTexHeight);
     } else {
         tf.webgl.webgl_util.bindCanvasToFramebuffer(gpgpu.gl);
     }
@@ -30887,8 +31475,6 @@ function executeEmbeddingSplatterProgram(gpgpu, program, targetTex, embeddingTex
     gl.uniform1f(kernelSupportLoc, kernelSupport);
     var pntsPerRowLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'points_per_row');
     gl.uniform1f(pntsPerRowLoc, pntsPerRow);
-    var numRowsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'num_rows');
-    gl.uniform1f(numRowsLoc, numRows);
     var minLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'minV');
     gl.uniform2f(minLoc, minX, minY);
     var maxLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'maxV');
@@ -30903,7 +31489,7 @@ function executeEmbeddingSplatterProgram(gpgpu, program, targetTex, embeddingTex
     }
 }
 function createQInterpolatorProgram(gpgpu) {
-    var fragmentShaderSource = "\n    precision highp float;\n    uniform sampler2D embedding_tex;\n    uniform sampler2D splat_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n\n    void main() {\n      vec2 pnt_location = gl_FragCoord.xy - vec2(0.5,0.5);\n\n      if(pnt_location.y * points_per_row + pnt_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n\n      float emb_width = (points_per_row * 2.0);\n      float emb_row_coord = (pnt_location.y + 0.5) / num_rows;\n      vec2 emb_coords_x\n              = vec2((pnt_location.x * 2.+0.5) / emb_width, emb_row_coord);\n      vec2 emb_coords_y\n              = vec2((pnt_location.x * 2. + 1.5) / emb_width, emb_row_coord);\n\n      float x_pnt = texture2D(embedding_tex,emb_coords_x).r;\n      float y_pnt = texture2D(embedding_tex,emb_coords_y).r;\n\n      vec2 splat_coords = vec2(x_pnt,y_pnt);\n      splat_coords = (splat_coords - minV) / (maxV - minV); //  0:1 space\n\n      float q = (texture2D(splat_tex,splat_coords).r - 1.);\n\n      gl_FragColor = vec4(q, 0, 0, 1);\n    }\n  ";
+    var fragmentShaderSource = "\n    precision highp float;\n    uniform sampler2D embedding_tex;\n    uniform sampler2D splat_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n\n    void main() {\n      vec2 pnt_location = gl_FragCoord.xy - vec2(0.5,0.5);\n\n      if(pnt_location.y * points_per_row + pnt_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n\n      float emb_width = (points_per_row * 2.0);\n      float emb_row_coord = (pnt_location.y + 0.5) / num_rows;\n      vec2 emb_coords_x\n              = vec2((pnt_location.x * 2. + 0.5) / emb_width, emb_row_coord);\n      vec2 emb_coords_y\n              = vec2((pnt_location.x * 2. + 1.5) / emb_width, emb_row_coord);\n\n      float x_pnt = texture2D(embedding_tex,emb_coords_x).r;\n      float y_pnt = texture2D(embedding_tex,emb_coords_y).r;\n\n      vec2 splat_coords = vec2(x_pnt,y_pnt);\n      splat_coords = (splat_coords - minV) / (maxV - minV); //  0:1 space\n\n      float q = max(texture2D(splat_tex,splat_coords).r - 1., 0.);\n      \n      gl_FragColor = vec4(q, 0, 0, 1);\n    }\n  ";
     return gpgpu.createProgram(fragmentShaderSource);
 }
 function executeQInterpolatorProgram(gpgpu, program, splatTex, embeddingTex, numPoints, minX, minY, maxX, maxY, pntsPerRow, numRows, targetTex) {
@@ -30931,7 +31517,7 @@ function executeQInterpolatorProgram(gpgpu, program, splatTex, embeddingTex, num
     gpgpu.executeProgram();
 }
 function createXYInterpolatorProgram(gpgpu) {
-    var fragmentShaderSource = "\n    precision highp float;\n    uniform sampler2D embedding_tex;\n    uniform sampler2D splat_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n    uniform float eta;\n\n    void main() {\n      vec2 pnt_location = gl_FragCoord.xy - vec2(0.5,0.5);\n      pnt_location.x = floor(pnt_location.x/2.+0.1);\n\n      if(pnt_location.y*points_per_row + pnt_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n\n      float emb_width = (points_per_row * 2.0);\n      float emb_row_coord = (pnt_location.y + 0.5) / num_rows;\n      vec2 emb_coords_x\n              = vec2((pnt_location.x * 2. + 0.5) / emb_width, emb_row_coord);\n      vec2 emb_coords_y\n              = vec2((pnt_location.x * 2. + 1.5) / emb_width, emb_row_coord);\n\n      float x_pnt = texture2D(embedding_tex,emb_coords_x).r;\n      float y_pnt = texture2D(embedding_tex,emb_coords_y).r;\n\n      vec2 splat_coords = vec2(x_pnt,y_pnt);\n      splat_coords = (splat_coords - minV) / (maxV - minV); //  0:1 space\n\n      float q = 0.;\n      if(mod(gl_FragCoord.x - 0.5,2.) < 0.5 ) {\n        q = texture2D(splat_tex,splat_coords).g * eta * 2.;\n      }else{\n        q = texture2D(splat_tex,splat_coords).b * eta * 2.;\n      }\n\n      gl_FragColor = vec4(q,0.0,0.0,1);\n    }\n  ";
+    var fragmentShaderSource = "\n    precision highp float;\n    uniform sampler2D embedding_tex;\n    uniform sampler2D splat_tex;\n    uniform vec2 minV;\n    uniform vec2 maxV;\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n    //uniform float eta;\n\n    void main() {\n      vec2 pnt_location = gl_FragCoord.xy - vec2(0.5,0.5);\n      pnt_location.x = floor(pnt_location.x/2.+0.1);\n\n      if(pnt_location.y*points_per_row + pnt_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n\n      float emb_width = (points_per_row * 2.0);\n      float emb_row_coord = (pnt_location.y + 0.5) / num_rows;\n      vec2 emb_coords_x\n              = vec2((pnt_location.x * 2. + 0.5) / emb_width, emb_row_coord);\n      vec2 emb_coords_y\n              = vec2((pnt_location.x * 2. + 1.5) / emb_width, emb_row_coord);\n\n      float x_pnt = texture2D(embedding_tex,emb_coords_x).r;\n      float y_pnt = texture2D(embedding_tex,emb_coords_y).r;\n\n      vec2 splat_coords = vec2(x_pnt,y_pnt);\n      splat_coords = (splat_coords - minV) / (maxV - minV); //  0:1 space\n\n      float q = 0.;\n      // eta moved to updateEmbedding code\n      if(mod(gl_FragCoord.x - 0.5,2.) < 0.5 ) {\n        q = texture2D(splat_tex,splat_coords).g;\n      }else{\n        q = texture2D(splat_tex,splat_coords).b;\n      }\n\n      gl_FragColor = vec4(q,0.0,0.0,1);\n    }\n  ";
     return gpgpu.createProgram(fragmentShaderSource);
 }
 function executeXYInterpolatorProgram(gpgpu, program, splatTex, embeddingTex, targetTex, numPoints, minX, minY, maxX, maxY, pntsPerRow, numRows, eta) {
@@ -30952,8 +31538,6 @@ function executeXYInterpolatorProgram(gpgpu, program, splatTex, embeddingTex, ta
     gl.uniform1f(numRowsLoc, numRows);
     var numPointsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'num_points');
     gl.uniform1f(numPointsLoc, numPoints);
-    var etaLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'eta');
-    gl.uniform1f(etaLoc, eta);
     var minLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'minV');
     gl.uniform2f(minLoc, minX, minY);
     var maxLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'maxV');
@@ -30961,7 +31545,7 @@ function executeXYInterpolatorProgram(gpgpu, program, splatTex, embeddingTex, ta
     gpgpu.executeProgram();
 }
 function createAttractiveForcesComputationProgram(gpgpu) {
-    var fragmentShaderSource = "\n    precision highp float;\n\n    uniform sampler2D embedding_tex;\n    uniform sampler2D offset_tex;\n    uniform sampler2D neigh_id_tex;\n    uniform sampler2D neigh_prob_tex;\n\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n    uniform float num_neighs_per_row;\n    uniform float eta;\n\n    void main() {\n      //add for nearest pixel interpolation\n      vec2 half_pxl = vec2(0.5,0.5);\n\n      // Dimension of the fragment\n      // 0 -> x :1 -> y\n      float dimension = mod(gl_FragCoord.x - 0.4,2.);\n\n      //Point location in the [points_per_row,num_rows] space\n      vec2 i_location = gl_FragCoord.xy - half_pxl;\n      i_location.x = floor(i_location.x / 2. + 0.1);\n\n      //just an extra fragment -> return\n      if(i_location.y*points_per_row + i_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n\n      //Offset coordinates for the point\n      vec2 offset_coord = (i_location + half_pxl) /\n                                              vec2(points_per_row,num_rows);\n      //Offset information ...\n      vec4 offset_info  = texture2D(offset_tex,offset_coord);\n      //... contains the number of neighbors for the point ...\n      float num_neighs  = offset_info.z;\n      //... and the coordinates of the firts neigh in the neigh textures\n      vec2 offset_neigh = offset_info.xy;\n\n      //Computing the coordinates of the point in the texture\n      //_i represent the point to move, _j the neighbors\n      float emb_width = (points_per_row * 2.0);\n      float emb_row_i = (i_location.y + 0.5) / num_rows;\n      vec2 x_i_coord = vec2((i_location.x * 2. + 0.5) / emb_width, emb_row_i);\n      vec2 y_i_coord = vec2((i_location.x * 2. + 1.5) / emb_width, emb_row_i);\n      //getting the coordinates in the embedding\n      float x_i = texture2D(embedding_tex,x_i_coord).r;\n      float y_i = texture2D(embedding_tex,y_i_coord).r;\n\n      //Sum of all attractive forces\n      float sum_pos = 0.;\n\n      //Can't be higher than 1000 (perplexity is usually around 30)\n      //and a 'while' can't be used\n      for(int n = 0; n < 2000; ++n) {\n        //Actual check on number of neighbors\n        if(float(n) >= num_neighs) {\n          break;\n        }\n\n        //Get the id and the probability for the neighbor\n        float pij = texture2D(neigh_prob_tex,\n                              (offset_neigh + half_pxl) / num_neighs_per_row\n                             ).r;\n        float neigh_id = texture2D(neigh_id_tex,\n                                  (offset_neigh + half_pxl) / num_neighs_per_row\n                                  ).r;\n\n        //Getting the coordinates of the neighbor\n        vec2 j_location = vec2(mod(neigh_id + 0.1, points_per_row),\n                               floor(neigh_id / points_per_row + 0.1));\n        float emb_row_j = (j_location.y + 0.5) / num_rows;\n        vec2 x_j_coord = vec2((j_location.x * 2. + 0.5) / emb_width, emb_row_j);\n        vec2 y_j_coord = vec2((j_location.x * 2. + 1.5) / emb_width, emb_row_j);\n        float x_j = texture2D(embedding_tex,x_j_coord).r;\n        float y_j = texture2D(embedding_tex,y_j_coord).r;\n\n        //Actual computation of the attractive forces\n        float dist_x    = (x_i - x_j);\n        float dist_y    = (y_i - y_j);\n        float qij       = 1. / (1. + dist_x * dist_x + dist_y * dist_y);\n        //the update depends on the dimension that this fragment represents\n        if(dimension < 0.5) {\n          // * 4 / (num_points*2) -> * 2 / num_points\n          sum_pos += eta * 2. * pij * qij * dist_x / (num_points);\n        }else{\n          sum_pos += eta * 2. * pij * qij * dist_y / (num_points);\n        }\n\n        //Increase the coordinate of the neigh in the neigh_id texture\n        offset_neigh.x += 1.;\n        //check if the new neigh is in the next row\n        if(offset_neigh.x + 0.2 > num_neighs_per_row) {\n          //in that case reset the column and increase the row\n          offset_neigh.x = 0.1;\n          offset_neigh.y += 1.0;\n        }\n      }\n\n      //The output is the sum of the attractive forces\n      gl_FragColor = vec4(sum_pos,0,0,0);\n    }\n  ";
+    var fragmentShaderSource = "\n    precision highp float;\n\n    uniform sampler2D embedding_tex;\n    uniform sampler2D offset_tex;\n    uniform sampler2D neigh_id_tex;\n    uniform sampler2D neigh_prob_tex;\n\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n    uniform float num_neighs_per_row;\n    //uniform float eta;\n\n    void main() {\n      //add for nearest pixel interpolation\n      vec2 half_pxl = vec2(0.5,0.5);\n\n      // Dimension of the fragment\n      // 0 -> x :1 -> y\n      float dimension = mod(gl_FragCoord.x - 0.4,2.);\n\n      //Point location in the [points_per_row,num_rows] space\n      vec2 i_location = gl_FragCoord.xy - half_pxl;\n      i_location.x = floor(i_location.x / 2. + 0.1);\n\n      //just an extra fragment -> return\n      if(i_location.y*points_per_row + i_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n\n      //Offset coordinates for the point\n      vec2 offset_coord = (i_location + half_pxl) /\n                                              vec2(points_per_row,num_rows);\n      //Offset information ...\n      vec4 offset_info  = texture2D(offset_tex,offset_coord);\n      //... contains the number of neighbors for the point ...\n      float num_neighs  = offset_info.z;\n      //... and the coordinates of the firts neigh in the neigh textures\n      vec2 offset_neigh = offset_info.xy;\n\n      //Computing the coordinates of the point in the texture\n      //_i represent the point to move, _j the neighbors\n      float emb_width = (points_per_row * 2.0);\n      float emb_row_i = (i_location.y + 0.5) / num_rows;\n      vec2 x_i_coord = vec2((i_location.x * 2. + 0.5) / emb_width, emb_row_i);\n      vec2 y_i_coord = vec2((i_location.x * 2. + 1.5) / emb_width, emb_row_i);\n      //getting the coordinates in the embedding\n      float x_i = texture2D(embedding_tex,x_i_coord).r;\n      float y_i = texture2D(embedding_tex,y_i_coord).r;\n\n      //Sum of all attractive forces\n      float sum_pos = 0.;\n      float sum_qij = 0.;\n      float sum_distx2 = 0.;\n      float sum_disty2 = 0.;\n\n      //Can't be higher than 1000 (perplexity is usually around 30)\n      //and a 'while' can't be used\n      for(int n = 0; n < 2000; ++n) {\n        //Actual check on number of neighbors\n        if(float(n) >= num_neighs) {\n          break;\n        }\n\n        //Get the id and the probability for the neighbor\n        float pij = texture2D(neigh_prob_tex,\n                              (offset_neigh + half_pxl) / num_neighs_per_row\n                             ).r;\n        float neigh_id = texture2D(neigh_id_tex,\n                                  (offset_neigh + half_pxl) / num_neighs_per_row\n                                  ).r;\n\n        //Getting the coordinates of the neighbor\n        vec2 j_location = vec2(mod(neigh_id + 0.1, points_per_row),\n                               floor(neigh_id / points_per_row + 0.1));\n        float emb_row_j = (j_location.y + 0.5) / num_rows;\n        vec2 x_j_coord = vec2((j_location.x * 2. + 0.5) / emb_width, emb_row_j);\n        vec2 y_j_coord = vec2((j_location.x * 2. + 1.5) / emb_width, emb_row_j);\n        float x_j = texture2D(embedding_tex,x_j_coord).r;\n        float y_j = texture2D(embedding_tex,y_j_coord).r;\n\n        //Actual computation of the attractive forces\n        float dist_x    = (x_i - x_j);\n        float dist_y    = (y_i - y_j);\n        float qij       = 1. / (1. + (dist_x * dist_x) + (dist_y * dist_y));\n        sum_distx2 += dist_x * dist_x;\n        sum_disty2 += dist_y * dist_y;\n        sum_qij += qij;\n        //the update depends on the dimension that this fragment represents\n        if(dimension < 0.5) {\n          // * 4 / (num_points*2) -> * 2 / num_points\n          //<bvl 1- fix attractive force calculation>\n          //sum_pos += eta * 2. * pij * qij * dist_x / (num_points); \n          // <bvl> remove eta * 2.\n          sum_pos += pij * qij * dist_x / (2.0 * num_points);\n        } else {\n          //<bvl 1- fix attractive force calculation>\n          //sum_pos += eta * 2. * pij * qij * dist_y / (num_points);\n          // <bvl> remove eta * 2.\n          sum_pos += pij * qij * dist_y / (2.0 * num_points);\n        }\n\n        //Increase the coordinate of the neigh in the neigh_id texture\n        offset_neigh.x += 1.;\n        //check if the new neigh is in the next row\n        if(offset_neigh.x + 0.2 > num_neighs_per_row) {\n          //in that case reset the column and increase the row\n          offset_neigh.x = 0.1;\n          offset_neigh.y += 1.0;\n        }\n      }\n\n      //The output is the sum of the attractive forces\n      gl_FragColor = vec4(sum_pos,dimension,0,1);\n    }\n  ";
     return gpgpu.createProgram(fragmentShaderSource);
 }
 function executeAttractiveForcesComputationProgram(gpgpu, program, embeddingTex, offsetTex, neighIdTex, neighProbTex, numPoints, neighsPerRow, pntsPerRow, numRows, eta, targetTex) {
@@ -30982,8 +31566,6 @@ function executeAttractiveForcesComputationProgram(gpgpu, program, embeddingTex,
     gpgpu.setInputMatrixTexture(neighProbTex, neighProbLocation, 0);
     var numRowsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'num_rows');
     gl.uniform1f(numRowsLoc, numRows);
-    var etaLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'eta');
-    gl.uniform1f(etaLoc, eta);
     var neighsPerRowLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'num_neighs_per_row');
     gl.uniform1f(neighsPerRowLoc, neighsPerRow);
     var numPointsLoc = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, 'num_points');
@@ -31015,7 +31597,7 @@ function executeEmbeddingInitializationProgram(gpgpu, program, randomTex, numPoi
     gpgpu.executeProgram();
 }
 function createDistributionParametersComputationProgram(gpgpu) {
-    var fragmentShaderSource = "\n    precision highp float;\n\n    #define MAX_NEIGHBORS 128\n    #define MAX_ITERATIONS 500\n    #define FLOAT_MAX 10e30\n    #define TOLERANCE 1e-5\n\n    uniform sampler2D knn_graph_tex;\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n    uniform float num_neighs;\n    uniform float perplexity;\n\n    vec2 half_pixel = vec2(0.5,0.5);\n    float distances_squared[MAX_NEIGHBORS];\n\n    void readDistances(vec2 point_location) {\n      for(int n = 0; n < MAX_NEIGHBORS; ++n ) {\n        if(float(n) >= num_neighs-0.1) {\n          break;\n        }\n        vec2 knn_coordinates = vec2(\n            (point_location.x * num_neighs + float(n) + half_pixel.x)\n                                        /(points_per_row * num_neighs),\n            (point_location.y + half_pixel.y) / num_rows\n        );\n        distances_squared[n] = texture2D(knn_graph_tex,knn_coordinates).g;\n      }\n    }\n\n    void main() {\n      vec2 point_location = gl_FragCoord.xy - half_pixel;\n      //invalid points\n      if(point_location.y*points_per_row + point_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n      readDistances(point_location);\n\n      //Beta computation\n      float beta = 1.;\n      float max_beta = FLOAT_MAX;\n      float min_beta = -FLOAT_MAX;\n      //To avoid computing the log at every iteration\n      float log_perplexity = log(perplexity);\n      float entropy_diff = 0.;\n      float entropy = 0.;\n      float sum_probabilities = 0.;\n\n      //Binary search for a maximum of MAX_ITERATIONS\n      for(int iteration = 0; iteration < MAX_ITERATIONS; ++iteration) {\n        //At every iteration I compute the\n        //entropy enforced by the current beta\n        sum_probabilities = 0.;\n        entropy = 0.;\n        for(int n = 0; n < MAX_NEIGHBORS; ++n ) {\n          if(float(n) >= num_neighs-0.1) {\n            break;\n          }\n          float neigh_probability = exp(-beta * distances_squared[n]);\n          sum_probabilities += neigh_probability;\n          entropy += beta * distances_squared[n] * neigh_probability;\n        }\n\n        entropy = entropy / sum_probabilities + log(sum_probabilities);\n        entropy_diff = entropy - log_perplexity;\n\n        //the current beta is good enough!\n        if(entropy_diff < TOLERANCE && -entropy_diff < TOLERANCE) {\n          break;\n        }\n\n        if(entropy_diff > 0.) {\n          min_beta = beta;\n          if(max_beta == FLOAT_MAX || max_beta == -FLOAT_MAX) {\n            beta *= 2.;\n          }else{\n            beta = (beta + max_beta) / 2.;\n          }\n        }else{\n          max_beta = beta;\n          if(min_beta == -FLOAT_MAX || min_beta == FLOAT_MAX) {\n            beta /= 2.;\n          }else{\n            beta = (beta + min_beta) / 2.;\n          }\n        }\n      }\n      gl_FragColor = vec4(beta,sum_probabilities,0,1);\n    }\n  ";
+    var fragmentShaderSource = "\n    precision highp float;\n\n    #define MAX_NEIGHBORS 128\n    #define MAX_ITERATIONS 500\n    #define FLOAT_MAX 10e30\n    #define FLOAT_MIN 10e-30;\n    #define TOLERANCE 1e-5\n\n    uniform sampler2D knn_graph_tex;\n    uniform float points_per_row;\n    uniform float num_rows;\n    uniform float num_points;\n    uniform float num_neighs;\n    uniform float perplexity;\n\n    vec2 half_pixel = vec2(0.5,0.5);\n    float distances_squared[MAX_NEIGHBORS];\n\n    void readDistances(vec2 point_location) {\n      for(int n = 0; n < MAX_NEIGHBORS; ++n ) {\n        if(float(n) >= num_neighs-0.1) {\n          break;\n        }\n        vec2 knn_coordinates = vec2(\n            (point_location.x * num_neighs + float(n) + half_pixel.x)\n                                        /(points_per_row * num_neighs),\n            (point_location.y + half_pixel.y) / num_rows\n        );\n        distances_squared[n] = texture2D(knn_graph_tex,knn_coordinates).g;\n      }\n    }\n\n    void main() {\n      vec2 point_location = gl_FragCoord.xy - half_pixel;\n      //invalid points\n      if(point_location.y*points_per_row + point_location.x >= num_points) {\n        gl_FragColor = vec4(0,0,0,0);\n        return;\n      }\n      readDistances(point_location);\n\n      //Beta computation\n      float beta = 1.;\n      float max_beta = FLOAT_MAX;\n      float min_beta = -FLOAT_MAX;\n      //To avoid computing the log at every iteration\n      float log_perplexity = log(perplexity);\n      float entropy_diff = 0.;\n      float entropy = 0.;\n      float sum_probabilities = FLOAT_MIN;\n\n      //Binary search for a maximum of MAX_ITERATIONS\n      for(int iteration = 0; iteration < MAX_ITERATIONS; ++iteration) {\n        //At every iteration I compute the\n        //entropy enforced by the current beta\n        sum_probabilities = FLOAT_MIN;\n        entropy = 0.;\n        for(int n = 0; n < MAX_NEIGHBORS; ++n ) {\n          if(float(n) >= num_neighs-0.1) {\n            break;\n          }\n          float neigh_probability = exp(-beta * distances_squared[n]);\n          sum_probabilities += neigh_probability;\n          entropy += beta * distances_squared[n] * neigh_probability;\n        }\n\n        entropy = (entropy / sum_probabilities) + log(sum_probabilities);\n        entropy_diff = entropy - log_perplexity;\n\n        //the current beta is good enough!\n        if(entropy_diff < TOLERANCE && -entropy_diff < TOLERANCE) {\n          break;\n        }\n\n        if(entropy_diff > 0.) {\n          min_beta = beta;\n          if(max_beta == FLOAT_MAX || max_beta == -FLOAT_MAX) {\n            beta *= 2.;\n          }else{\n            beta = (beta + max_beta) / 2.;\n          }\n        }else{\n          max_beta = beta;\n          if(min_beta == -FLOAT_MAX || min_beta == FLOAT_MAX) {\n            beta /= 2.;\n          }else{\n            beta = (beta + min_beta) / 2.;\n          }\n        }\n      }\n      gl_FragColor = vec4(beta,sum_probabilities,0,1);\n    }\n  ";
     return gpgpu.createProgram(fragmentShaderSource);
 }
 function executeDistributionParametersComputationProgram(gpgpu, program, knnGraph, numPoints, numNeighs, pntsPerRow, numRows, perplexity, targetTex) {
@@ -31076,7 +31658,119 @@ function executeGaussiaDistributionsFromDistancesProgram(gpgpu, program, knnGrap
         console.log('Error executing Gaussian Dist From Distances Program ' + e.toString());
     }
 }
-},{"@tensorflow/tfjs-core":12,"./gl_util":36}],16:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./gl_util":8}],55:[function(require,module,exports) {
+
+/**
+ * Create a pseudorandom number generator, with a seed.
+ * @param {array} seed "128-bit" integer, composed of 4x32-bit
+ * integers in big endian order.
+ */
+function XorShift(seed) {
+  // Note the extension, this === module.exports is required because
+  // the `constructor` function will be used to generate new instances.
+  // In that case `this` will point to the default RNG, and `this` will
+  // be an instance of XorShift.
+  if (!(this instanceof XorShift) || this === module.exports) {
+    return new XorShift(seed);
+  }
+
+  if (!Array.isArray(seed) || seed.length !== 4) {
+    throw new TypeError('seed must be an array with 4 numbers');
+  }
+
+  // uint64_t s = [seed ...]
+  this._state0U = seed[0] | 0;
+  this._state0L = seed[1] | 0;
+  this._state1U = seed[2] | 0;
+  this._state1L = seed[3] | 0;
+}
+
+/**
+ * Returns a 64bit random number as a 2x32bit array
+ * @return {array}
+ */
+XorShift.prototype.randomint = function() {
+  // uint64_t s1 = s[0]
+  var s1U = this._state0U, s1L = this._state0L;
+  // uint64_t s0 = s[1]
+  var s0U = this._state1U, s0L = this._state1L;
+
+  // result = s0 + s1
+  var sumL = (s0L >>> 0) + (s1L >>> 0);
+  resU = (s0U + s1U + (sumL / 2 >>> 31)) >>> 0;
+  resL = sumL >>> 0;
+
+  // s[0] = s0
+  this._state0U = s0U;
+  this._state0L = s0L;
+
+  // - t1 = [0, 0]
+  var t1U = 0, t1L = 0;
+  // - t2 = [0, 0]
+  var t2U = 0, t2L = 0;
+
+  // s1 ^= s1 << 23;
+  // :: t1 = s1 << 23
+  var a1 = 23;
+  var m1 = 0xFFFFFFFF << (32 - a1);
+  t1U = (s1U << a1) | ((s1L & m1) >>> (32 - a1));
+  t1L = s1L << a1;
+  // :: s1 = s1 ^ t1
+  s1U = s1U ^ t1U;
+  s1L = s1L ^ t1L;
+
+  // t1 = ( s1 ^ s0 ^ ( s1 >> 17 ) ^ ( s0 >> 26 ) )
+  // :: t1 = s1 ^ s0
+  t1U = s1U ^ s0U;
+  t1L = s1L ^ s0L;
+  // :: t2 = s1 >> 18
+  var a2 = 18;
+  var m2 = 0xFFFFFFFF >>> (32 - a2);
+  t2U = s1U >>> a2;
+  t2L = (s1L >>> a2) | ((s1U & m2) << (32 - a2));
+  // :: t1 = t1 ^ t2
+  t1U = t1U ^ t2U;
+  t1L = t1L ^ t2L;
+  // :: t2 = s0 >> 5
+  var a3 = 5;
+  var m3 = 0xFFFFFFFF >>> (32 - a3);
+  t2U = s0U >>> a3;
+  t2L = (s0L >>> a3) | ((s0U & m3) << (32 - a3));
+  // :: t1 = t1 ^ t2
+  t1U = t1U ^ t2U;
+  t1L = t1L ^ t2L;
+
+  // s[1] = t1
+  this._state1U = t1U;
+  this._state1L = t1L;
+
+  // return result
+  return [resU, resL];
+};
+
+/**
+ * Returns a random number normalized [0, 1), just like Math.random()
+ * @return {number}
+ */
+XorShift.prototype.random = function() {
+  var t2 = this.randomint();
+  // Math.pow(2, -32) = 2.3283064365386963e-10
+  // Math.pow(2, -52) = 2.220446049250313e-16
+  return t2[0] * 2.3283064365386963e-10 + (t2[1] >>> 12) * 2.220446049250313e-16;
+};
+
+// Seed with Math.random() by default to prevent seed collision
+function getRandomSeed() {
+    return Math.random() * Math.pow(2, 32);
+}
+module.exports = new XorShift([
+  getRandomSeed(),
+  getRandomSeed(),
+  getRandomSeed(),
+  getRandomSeed()
+]);
+
+},{}],17:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31099,6 +31793,12 @@ var knn_util = _interopRequireWildcard(_knn_util);
 var _tsne_optimizer_util = require("./tsne_optimizer_util");
 
 var tsne_util = _interopRequireWildcard(_tsne_optimizer_util);
+
+var _xorshift = require("xorshift");
+
+var _xorshift2 = _interopRequireDefault(_xorshift);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31201,13 +31901,17 @@ var __read = undefined && undefined.__read || function (o, n) {
     }
     return ar;
 };
+var __spread = undefined && undefined.__spread || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
 
 var TSNEOptimizer = function () {
     function TSNEOptimizer(numPoints, verbose, splatTextureDiameter, kernelTextureRadius) {
         if (verbose != null) {
             this.verbose = verbose;
         } else {
-            verbose = false;
+            this.verbose = false;
         }
         this.log('Initializing the tSNE gradient descent computation...');
         this.numPoints = numPoints;
@@ -31230,8 +31934,12 @@ var TSNEOptimizer = function () {
         this.numRows = Math.ceil(numPoints / this.pointsPerRow);
         this.log('\t# points per row', this.pointsPerRow);
         this.log('\t# rows', this.numRows);
-        this._eta = 2500;
-        this._momentum = tf.scalar(0.8);
+        this._eta = 200;
+        this._spacePerPixel = 0.35;
+        this._minimumGain = 0.1;
+        this._momentum = tf.scalar(0.5);
+        this._finalMomentum = tf.scalar(0.5);
+        this._momSwitchIter = 250;
         this.rawExaggeration = [{ iteration: 200, value: 4 }, { iteration: 600, value: 1 }];
         this.updateExaggeration();
         if (splatTextureDiameter == null) {
@@ -31402,6 +32110,16 @@ var TSNEOptimizer = function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TSNEOptimizer.prototype, "applyGain", {
+        get: function () {
+            return this._applyGain;
+        },
+        set: function (applyGain) {
+            this._applyGain = applyGain;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TSNEOptimizer.prototype, "eta", {
         get: function () {
             return this._eta;
@@ -31415,9 +32133,24 @@ var TSNEOptimizer = function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TSNEOptimizer.prototype, "spacePerPixel", {
+        get: function () {
+            return this._spacePerPixel;
+        },
+        set: function (spacePerPixel) {
+            if (spacePerPixel <= 0) {
+                throw Error('Space Per Pixel must be greater then zero');
+            }
+            this._spacePerPixel = spacePerPixel;
+        },
+        enumerable: true,
+        configurable: true
+    });
     TSNEOptimizer.prototype.dispose = function () {
         this.embedding.dispose();
         this.gradient.dispose();
+        this.gain.dispose();
+        this.minGain.dispose();
         this._momentum.dispose();
         this._exaggeration.dispose();
         this.gpgpu.gl.deleteTexture(this._splatTexture);
@@ -31448,12 +32181,20 @@ var TSNEOptimizer = function () {
         if (this.gradient != null) {
             this.gradient.dispose();
         }
+        if (this.gain != null) {
+            this.gain.dispose();
+        }
+        if (this.minGain != null) {
+            this.minGain.dispose();
+        }
         this.gradient = tf.zeros([this.numRows, this.pointsPerRow * 2]);
+        this.gain = tf.ones([this.numRows, this.pointsPerRow * 2]);
+        this.minGain = tf.ones([this.numRows, this.pointsPerRow * 2]).mul(tf.scalar(this._minimumGain));
         this.embedding = tf.tidy(function () {
             var randomData = tf.randomUniform([_this.numRows, _this.pointsPerRow * 2]);
             var embedding = tf.zeros([_this.numRows, _this.pointsPerRow * 2]);
             _this.initializeEmbeddingPositions(embedding, randomData);
-            return embedding;
+            return embedding.mul(tf.scalar(0.1));
         });
         var maxEmbeddingAbsCoordinate = 3;
         this._minX = -maxEmbeddingAbsCoordinate;
@@ -31472,7 +32213,7 @@ var TSNEOptimizer = function () {
         this.probTexture = probabilities;
         this.probNeighIdTexture = neighIds;
     };
-    TSNEOptimizer.prototype.initializeNeighborsFromKNNGraph = function (numPoints, numNeighbors, distances, indices) {
+    TSNEOptimizer.prototype.initializeNeighborsFromKNNGraph = function (numPoints, numNeighbors, distances, indices, perplexity) {
         return __awaiter(this, void 0, Promise, function () {
             var pointsPerRow, numRows, dataShape, textureValues, i, n, id, knnGraphTexture;
             return __generator(this, function (_a) {
@@ -31490,7 +32231,7 @@ var TSNEOptimizer = function () {
                             }
                         }
                         knnGraphTexture = gl_util.createAndConfigureTexture(this.gpgpu.gl, pointsPerRow * numNeighbors, numRows, 2, textureValues);
-                        return [4, this.initializeNeighborsFromKNNTexture(dataShape, knnGraphTexture)];
+                        return [4, this.initializeNeighborsFromKNNTexture(dataShape, knnGraphTexture, perplexity)];
                     case 1:
                         _a.sent();
                         this.gpgpu.gl.deleteTexture(knnGraphTexture);
@@ -31499,9 +32240,12 @@ var TSNEOptimizer = function () {
             });
         });
     };
-    TSNEOptimizer.prototype.initializeNeighborsFromKNNTexture = function (shape, knnGraph) {
+    TSNEOptimizer.prototype.pairFunction = function (k1, k2) {
+        return (k1 + k2) * (k1 + k2 + 1) / 2;
+    };
+    TSNEOptimizer.prototype.initializeNeighborsFromKNNTexture = function (shape, knnGraph, perplexity) {
         return __awaiter(this, void 0, Promise, function () {
-            var distParamTexture, gaussianDistributions, perplexity, gaussianDistributionsData, knnIndices, copyIndicesProgram, knnIndicesData, asymNeighIds, i, d, linearId, neighborCounter, neighborLinearOffset, i, i, check, maxValue, maxId, i, offsets, pointOffset, i, totalNeighbors, probabilities, neighIds, assignedNeighborCounter, i, n, linearId, pointId, probability, symMatrixDirectId, symMatrixIndirectId;
+            var distParamTexture, gaussianDistributions, gaussianDistributionsData, knnIndices, copyIndicesProgram, knnDistances, copyDistancesProgram, knnIndicesData, knnDistanceData, asymNeighIds, i, d, linearId, neighLists, i, offset, n2pProbMap, i, n, offset, neighId, iOff, gaussOff, neighborCounter, neighborLinearOffset, i, i, check, maxValue, maxId, i, offsets, pointOffset, i, totalNeighbors, probabilities, neighIds, assignedNeighborCounter, i, n, linearId, pointId, probability, npProb, pij, symMatrixDirectId, symMatrixIndirectId;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -31509,14 +32253,15 @@ var TSNEOptimizer = function () {
                         if (shape.numPoints !== this.numPoints) {
                             throw new Error("KNN size and number of points must agree" + ("(" + shape.numPoints + "," + this.numPoints + ")"));
                         }
-                        this.log("Create distribution params texture: \n        " + shape.pointsPerRow + " x " + shape.numRows);
+                        this.log("Shape info: pixelsPerPoint " + shape.pixelsPerPoint);
+                        this.log("Create distribution params texture: \n        pointsPerRow: " + shape.pointsPerRow + " x numRows: " + shape.numRows);
                         distParamTexture = gl_util.createAndConfigureTexture(this.gpgpu.gl, shape.pointsPerRow, shape.numRows, 2);
                         this.log('Create zeroed distribution tensor');
                         gaussianDistributions = tf.zeros([shape.numRows, shape.pointsPerRow * shape.pixelsPerPoint]);
-                        perplexity = shape.pixelsPerPoint / 3;
                         this.gpgpu.enableAutomaticDebugValidation(true);
                         this.log('Computing distribution params');
                         this.computeDistributionParameters(distParamTexture, shape, perplexity, knnGraph);
+                        console.log("Perplexity: " + perplexity);
                         this.log('Computing Gaussian distn');
                         this.computeGaussianDistributions(gaussianDistributions, distParamTexture, shape, knnGraph);
                         this.log('Retrieve Gaussian distn');
@@ -31526,25 +32271,50 @@ var TSNEOptimizer = function () {
                         copyIndicesProgram = knn_util.createCopyIndicesProgram(this.gpgpu);
                         this.log('Execute copy indices program', knnIndices.shape);
                         knn_util.executeCopyIndicesProgram(this.gpgpu, copyIndicesProgram, knnGraph, shape, this.backend.getTexture(knnIndices.dataId));
+                        knnDistances = tf.zeros([shape.numRows, shape.pointsPerRow * shape.pixelsPerPoint]);
+                        copyDistancesProgram = knn_util.createCopyDistancesProgram(this.gpgpu);
+                        knn_util.executeCopyDistancesProgram(this.gpgpu, copyDistancesProgram, knnGraph, shape, this.backend.getTexture(knnDistances.dataId));
                         return [4, knnIndices.data()];
                     case 1:
                         knnIndicesData = _a.sent();
-                        this.log('knn Indices', knnIndices);
-                        asymNeighIds = new Float32Array(shape.numPoints * shape.pixelsPerPoint);
+                        return [4, knnDistances.data()];
+                    case 2:
+                        knnDistanceData = _a.sent();
+                        this.log("Type of knnIndicesData " + knnIndicesData.constructor.name);
+                        this.log('knn Indices', knnIndicesData);
+                        this.log('knn Distances', knnDistanceData);
+                        asymNeighIds = new Uint32Array(shape.numPoints * shape.pixelsPerPoint);
                         for (i = 0; i < this.numPoints; ++i) {
                             for (d = 0; d < shape.pixelsPerPoint; ++d) {
                                 linearId = i * shape.pixelsPerPoint + d;
                                 asymNeighIds[i * shape.pixelsPerPoint + d] = knnIndicesData[linearId];
                             }
                         }
-                        this.log('NeighIds', asymNeighIds);
+                        neighLists = [];
+                        for (i = 0; i < shape.numPoints; ++i) {
+                            offset = i * shape.pixelsPerPoint;
+                            neighLists.push(__spread(asymNeighIds.slice(offset, offset + shape.pixelsPerPoint)));
+                        }
+                        n2pProbMap = [];
+                        for (i = 0; i < shape.numPoints; ++i) {
+                            for (n = 0; n < shape.pixelsPerPoint; ++n) {
+                                offset = i * shape.pixelsPerPoint + n;
+                                neighId = asymNeighIds[offset];
+                                iOff = neighLists[neighId].indexOf(i);
+                                if (iOff > -1) {
+                                    gaussOff = neighId * shape.pixelsPerPoint + iOff;
+                                    n2pProbMap[this.pairFunction(neighId, i)] = gaussianDistributionsData[gaussOff];
+                                }
+                            }
+                        }
+                        this.log("Neig - point prob");
                         neighborCounter = new Uint32Array(this.numPoints);
                         neighborLinearOffset = new Uint32Array(this.numPoints);
                         for (i = 0; i < shape.numPoints * shape.pixelsPerPoint; ++i) {
                             ++neighborCounter[asymNeighIds[i]];
                         }
                         for (i = 1; i < shape.numPoints; ++i) {
-                            neighborLinearOffset[i] = neighborLinearOffset[i - 1] + neighborCounter[i - 1] + shape.pixelsPerPoint;
+                            neighborLinearOffset[i] = neighborLinearOffset[i - 1] + shape.pixelsPerPoint + neighborCounter[i - 1];
                         }
                         this.log('Counter', neighborCounter);
                         this.log('Linear offset', neighborLinearOffset);
@@ -31585,10 +32355,15 @@ var TSNEOptimizer = function () {
                                     linearId = i * shape.pixelsPerPoint + n;
                                     pointId = knnIndicesData[linearId];
                                     probability = gaussianDistributionsData[linearId];
+                                    npProb = n2pProbMap[this.pairFunction(pointId, i)];
+                                    if (!npProb) {
+                                        npProb = 0;
+                                    }
+                                    pij = (npProb + probability) / 2;
                                     symMatrixDirectId = neighborLinearOffset[i] + n;
                                     symMatrixIndirectId = neighborLinearOffset[pointId] + shape.pixelsPerPoint + assignedNeighborCounter[pointId];
-                                    probabilities[symMatrixDirectId] = probability;
-                                    probabilities[symMatrixIndirectId] = probability;
+                                    probabilities[symMatrixDirectId] = pij;
+                                    probabilities[symMatrixIndirectId] = pij;
                                     neighIds[symMatrixDirectId] = pointId;
                                     neighIds[symMatrixIndirectId] = i;
                                     ++assignedNeighborCounter[pointId];
@@ -31618,10 +32393,12 @@ var TSNEOptimizer = function () {
         }
         if (this._iteration <= this.rawExaggeration[0].iteration) {
             this._exaggeration = tf.scalar(this.rawExaggeration[0].value);
+            this.log("Exaggeration val: " + this.rawExaggeration[0].value);
             return;
         }
         if (this._iteration >= this.rawExaggeration[this.rawExaggeration.length - 1].iteration) {
             this._exaggeration = tf.scalar(this.rawExaggeration[this.rawExaggeration.length - 1].value);
+            this.log("Exaggeration val: \n        " + this.rawExaggeration[this.rawExaggeration.length - 1].value);
             return;
         }
         var i = 0;
@@ -31635,13 +32412,40 @@ var TSNEOptimizer = function () {
         var f = (it1 - this._iteration) / (it1 - it0);
         var v = v0 * f + v1 * (1 - f);
         this._exaggeration = tf.scalar(v);
+        this._exaggerationNumber = v;
+        this.log("Exaggeration val: " + v);
+    };
+    TSNEOptimizer.prototype.logForces = function (attr, rep) {
+        return __awaiter(this, void 0, void 0, function () {
+            var attrData, repData, i, i;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        return [4, attr.data()];
+                    case 1:
+                        attrData = _a.sent();
+                        return [4, rep.data()];
+                    case 2:
+                        repData = _a.sent();
+                        console.log('Repulsive forces');
+                        for (i = 0; i < repData.length; i++) {
+                            console.log("R" + i + ":" + repData[i]);
+                        }
+                        console.log('Attractive forces');
+                        for (i = 0; i < attrData.length; i++) {
+                            console.log("A" + i + ":" + attrData[i]);
+                        }
+                        return [2];
+                }
+            });
+        });
     };
     TSNEOptimizer.prototype.iterate = function () {
         return __awaiter(this, void 0, Promise, function () {
-            var _a, normQ, _b;
+            var _a, _b, normQ, gradientIter, _c;
             var _this = this;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         if (!this.initializedNeighborhoods()) {
                             throw new Error('No neighborhoods defined. You may want to call\
@@ -31656,30 +32460,57 @@ var TSNEOptimizer = function () {
                             _this.computeInterpolatedQ(interpQ);
                             _this.computeInterpolatedXY(interpXY);
                             var normQ = interpQ.sum();
-                            var repulsiveForces = interpXY.div(tf.tensor(normQ.dataSync(), normQ.shape));
+                            var repulsiveForces = interpXY.div(normQ.where(normQ.greater(tf.scalar(0)), tf.scalar(1)));
                             var attractiveForces = tf.zeros([_this.numRows, _this.pointsPerRow * 2]);
                             _this.computeAttractiveForces(attractiveForces);
-                            var gradientIter = attractiveForces.mul(_this._exaggeration).sub(repulsiveForces);
-                            var gradient = _this.gradient.mul(_this._momentum).sub(gradientIter);
-                            _this.gradient.dispose();
-                            return [gradient, normQ];
-                        }), 2), this.gradient = _a[0], normQ = _a[1];
-                        _b = this;
+                            var gradientIter = attractiveForces.mul(_this._exaggeration).sub(repulsiveForces).mul(tf.scalar(4));
+                            return [gradientIter, normQ];
+                        }), 2), gradientIter = _a[0], normQ = _a[1];
+                        _c = this;
                         return [4, normQ.data()];
                     case 1:
-                        _b._normQ = _c.sent()[0];
+                        _c._normQ = _d.sent()[0];
+                        this.log("Normalization: " + this._normQ);
+                        this.log("Iteration " + this._iteration);
                         normQ.dispose();
-                        this.embedding = tf.tidy(function () {
-                            var embedding = tf.add(tf.tensor(_this.embedding.dataSync(), _this.embedding.shape), tf.tensor(_this.gradient.dataSync(), _this.gradient.shape));
-                            _this.embedding.dispose();
-                            return embedding;
-                        });
-                        return [4, this.computeBoundaries()];
+                        return [4, this.updateEmbedding(gradientIter, this._iteration)];
                     case 2:
-                        _c.sent();
+                        _b = __read.apply(void 0, [_d.sent(), 3]), this.gradient = _b[0], this.gain = _b[1], this.embedding = _b[2];
+                        return [4, this.computeBoundaries()];
+                    case 3:
+                        _d.sent();
                         ++this._iteration;
                         return [2];
                 }
+            });
+        });
+    };
+    TSNEOptimizer.prototype.updateEmbedding = function (gradIter, iterCount) {
+        return __awaiter(this, void 0, void 0, function () {
+            var curMomentum;
+            var _this = this;
+            return __generator(this, function (_a) {
+                curMomentum = iterCount < this._momSwitchIter ? this._momentum : this._finalMomentum;
+                console.log("Iteration: " + this._iteration + " \n      Exaggeration: " + this._exaggerationNumber + "\n      Momentum: " + curMomentum);
+                return [2, tf.tidy(function () {
+                    var gradient;
+                    var gain = null;
+                    if (_this.applyGain) {
+                        gain = _this.gain.add(tf.scalar(0.2)).where(gradIter.sign().notEqual(_this.gradient.sign()), _this.gain.mul(tf.scalar(0.8)));
+                        var limitedGain = gain.where(gain.greaterEqual(tf.scalar(_this._minimumGain)), _this.minGain);
+                        _this.log("Eta: " + _this._eta);
+                        gradient = _this.gradient.mul(curMomentum).sub(gradIter.mul(limitedGain.mul(tf.scalar(_this._eta))));
+                    } else {
+                        gradient = _this.gradient.mul(curMomentum).sub(gradIter.mul(tf.scalar(_this._eta)));
+                    }
+                    var embedding = _this.embedding.add(gradient);
+                    _this.gradient.dispose();
+                    _this.embedding.dispose();
+                    if (_this.gain) {
+                        _this.gain.dispose();
+                    }
+                    return [gradient, gain, embedding];
+                })];
             });
         });
     };
@@ -31695,12 +32526,11 @@ var TSNEOptimizer = function () {
     TSNEOptimizer.prototype.initializeRepulsiveForceTextures = function () {
         this._splatTexture = gl_util.createAndConfigureInterpolatedTexture(this.gpgpu.gl, this.splatTextureDiameter, this.splatTextureDiameter, 4, null);
         this.kernelSupport = 2.5;
+        this.log("Kernel support: " + this.kernelSupport + " \n      Kernel diameter: " + this.kernelTextureDiameter);
         var kernel = new Float32Array(this.kernelTextureDiameter * this.kernelTextureDiameter * 4);
         var kernelRadius = Math.floor(this.kernelTextureDiameter / 2);
-        var j = 0;
-        var i = 0;
-        for (j = 0; j < this.kernelTextureDiameter; ++j) {
-            for (i = 0; i < this.kernelTextureDiameter; ++i) {
+        for (var j = 0; j < this.kernelTextureDiameter; ++j) {
+            for (var i = 0; i < this.kernelTextureDiameter; ++i) {
                 var x = (i - kernelRadius) / kernelRadius * this.kernelSupport;
                 var y = (j - kernelRadius) / kernelRadius * this.kernelSupport;
                 var euclSquared = x * x + y * y;
@@ -31717,12 +32547,11 @@ var TSNEOptimizer = function () {
     TSNEOptimizer.prototype.initilizeCustomWebGLPrograms = function () {
         this.log('\tCreating custom programs...');
         this.embeddingInitializationProgram = tsne_util.createEmbeddingInitializationProgram(this.gpgpu);
-        this.embeddingSplatterProgram = tsne_util.createEmbeddingSplatterProgram(this.gpgpu);
+        this.embeddingSplatterProgram = tsne_util.createEmbeddingSplatterProgramOrig(this.gpgpu);
         var splatVertexId = new Float32Array(this.numPoints * 6);
         {
-            var i = 0;
             var id = 0;
-            for (i = 0; i < this.numPoints; ++i) {
+            for (var i = 0; i < this.numPoints; ++i) {
                 id = i * 6;
                 splatVertexId[id + 0] = 0 + i * 4;
                 splatVertexId[id + 1] = 1 + i * 4;
@@ -31748,9 +32577,9 @@ var TSNEOptimizer = function () {
                     case 0:
                         _a = __read(tf.tidy(function () {
                             var embedding2D = _this.embedding.reshape([_this.numRows * _this.pointsPerRow, 2]).slice([0, 0], [_this.numPoints, 2]);
-                            var min = embedding2D.min(0);
-                            var max = embedding2D.max(0);
-                            return [min, max];
+                            var minn = embedding2D.min(0);
+                            var maxx = embedding2D.max(0);
+                            return [minn, maxx];
                         }), 2), min = _a[0], max = _a[1];
                         return [4, min.data()];
                     case 1:
@@ -31772,24 +32601,59 @@ var TSNEOptimizer = function () {
             });
         });
     };
+    TSNEOptimizer.prototype.calculateTexSize = function (range) {
+        var minSplatDiameter = 5;
+        var maxSplatDiameter = 5000;
+        return Math.min(maxSplatDiameter, Math.max(Math.floor(range / this._spacePerPixel), minSplatDiameter));
+    };
     TSNEOptimizer.prototype.updateSplatTextureDiameter = function () {
-        var maxSpace = Math.max(this._maxX - this._minX, this._maxY - this._minY);
-        var spacePerPixel = 0.35;
-        var maxTextureDiameter = 5000;
-        var textureDiameter = Math.min(Math.ceil(Math.max(maxSpace / spacePerPixel, 5)), maxTextureDiameter);
-        var percChange = Math.abs(this.splatTextureDiameter - textureDiameter) / this.splatTextureDiameter;
-        if (percChange >= 0.2) {
-            this.log('Updating splat-texture diameter', textureDiameter);
+        var rangeX = this._maxX - this._minX;
+        var rangeY = this._maxY - this._minY;
+        var maxRange = Math.max(rangeX, rangeY);
+        this.log("Embedding range: " + maxRange);
+        var textureDiam = this.calculateTexSize(maxRange);
+        if (Math.abs((textureDiam - this.splatTextureDiameter) / this.splatTextureDiameter) >= 0.2) {
+            this.log("Change splat size: " + this._iteration);
             this.gpgpu.gl.deleteTexture(this._splatTexture);
-            this.splatTextureDiameter = textureDiameter;
+            this.splatTextureDiameter = Math.ceil(textureDiam);
+            this.log("Splat diameter: " + this.splatTextureDiameter);
             this._splatTexture = gl_util.createAndConfigureInterpolatedTexture(this.gpgpu.gl, this.splatTextureDiameter, this.splatTextureDiameter, 4, null);
+        } else {
+            this.log("Splat diameter: " + this.splatTextureDiameter);
         }
+    };
+    TSNEOptimizer.prototype.initializeFixedXorEmbeddingPositions = function (numRows, pointsPerRow, numPoints) {
+        var xorgen = _xorshift2.default.constructor([0x00000000, 0x00000001, 0x00000000, 0x00000002]);
+        for (var i = 0; i < 9; i++) {
+            xorgen.random();
+        }
+        var embArray = new Float32Array(numRows * pointsPerRow * 2);
+        for (var i = 0; i < numPoints; i++) {
+            var x = 0.0;
+            var y = 0.0;
+            var radius = 0.0;
+            do {
+                x = 2 * xorgen.random() - 1;
+                y = 2 * xorgen.random() - 1;
+                radius = x * x + y * y;
+            } while (radius >= 1.0 || radius === 0.0);
+            radius = Math.sqrt(-2 * Math.log(radius) / radius);
+            x *= radius * 0.1;
+            y *= radius * 0.1;
+            embArray[2 * i] = x;
+            embArray[2 * i + 1] = y;
+        }
+        for (var i = numPoints; i < numRows * pointsPerRow; i++) {
+            embArray[2 * i] = 0.0;
+            embArray[2 * i + 1] = 0.0;
+        }
+        return tf.tensor(embArray, [numRows, pointsPerRow * 2]);
     };
     TSNEOptimizer.prototype.initializeEmbeddingPositions = function (embedding, random) {
         tsne_util.executeEmbeddingInitializationProgram(this.gpgpu, this.embeddingInitializationProgram, this.backend.getTexture(random.dataId), this.numPoints, this.pointsPerRow, this.numRows, this.backend.getTexture(embedding.dataId));
     };
     TSNEOptimizer.prototype.splatPoints = function () {
-        tsne_util.executeEmbeddingSplatterProgram(this.gpgpu, this.embeddingSplatterProgram, this._splatTexture, this.backend.getTexture(this.embedding.dataId), this.kernelTexture, this.splatTextureDiameter, this.numPoints, this._minX, this._minY, this._maxX, this._maxY, this.kernelSupport, this.pointsPerRow, this.numRows, this.splatVertexIdBuffer);
+        tsne_util.executeEmbeddingSplatterProgram(this.gpgpu, this.embeddingSplatterProgram, this._splatTexture, this.backend.getTexture(this.embedding.dataId), this.kernelTexture, this.splatTextureDiameter, this.splatTextureDiameter, this.numPoints, this._minX, this._minY, this._maxX, this._maxY, this.kernelSupport, this.pointsPerRow, this.numRows, this.splatVertexIdBuffer);
     };
     TSNEOptimizer.prototype.computeInterpolatedQ = function (interpolatedQ) {
         tsne_util.executeQInterpolatorProgram(this.gpgpu, this.qInterpolatorProgram, this._splatTexture, this.backend.getTexture(this.embedding.dataId), this.numPoints, this._minX, this._minY, this._maxX, this._maxY, this.pointsPerRow, this.numRows, this.backend.getTexture(interpolatedQ.dataId));
@@ -31801,24 +32665,16 @@ var TSNEOptimizer = function () {
         tsne_util.executeAttractiveForcesComputationProgram(this.gpgpu, this.attractiveForcesProgram, this.backend.getTexture(this.embedding.dataId), this.probOffsetTexture, this.probNeighIdTexture, this.probTexture, this.numPoints, this.numNeighPerRow, this.pointsPerRow, this.numRows, this._eta, this.backend.getTexture(attractiveForces.dataId));
     };
     TSNEOptimizer.prototype.computeDistributionParameters = function (distributionParameters, shape, perplexity, knnGraph) {
-        try {
-            tsne_util.executeDistributionParametersComputationProgram(this.gpgpu, this.distributionParameterssComputationProgram, knnGraph, shape.numPoints, shape.pixelsPerPoint, shape.pointsPerRow, shape.numRows, perplexity, distributionParameters);
-        } catch (e) {
-            console.log('Error in executeDistributionParametersComputationProgram' + e.toString());
-        }
+        tsne_util.executeDistributionParametersComputationProgram(this.gpgpu, this.distributionParameterssComputationProgram, knnGraph, shape.numPoints, shape.pixelsPerPoint, shape.pointsPerRow, shape.numRows, perplexity, distributionParameters);
     };
     TSNEOptimizer.prototype.computeGaussianDistributions = function (distributions, distributionParameters, shape, knnGraph) {
-        try {
-            var distTexture = this.backend.getTexture(distributions.dataId);
-            tsne_util.executeGaussiaDistributionsFromDistancesProgram(this.gpgpu, this.gaussiaDistributionsFromDistancesProgram, knnGraph, distributionParameters, shape.numPoints, shape.pixelsPerPoint, shape.pointsPerRow, shape.numRows, distTexture);
-        } catch (e) {
-            console.log('Error in executeGaussiaDistributionsFromDistancesProgram' + e.toString());
-        }
+        var distTexture = this.backend.getTexture(distributions.dataId);
+        tsne_util.executeGaussiaDistributionsFromDistancesProgram(this.gpgpu, this.gaussiaDistributionsFromDistancesProgram, knnGraph, distributionParameters, shape.numPoints, shape.pixelsPerPoint, shape.pointsPerRow, shape.numRows, distTexture);
     };
     return TSNEOptimizer;
 }();
 exports.TSNEOptimizer = TSNEOptimizer;
-},{"@tensorflow/tfjs-core":12,"./gl_util":36,"./knn_util":37,"./tsne_optimizer_util":39}],15:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./gl_util":8,"./knn_util":23,"./tsne_optimizer_util":29,"xorshift":55}],13:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31955,18 +32811,20 @@ var TSNE = function () {
         if (perplexity > maxPerplexity) {
             throw Error("computeTSNE: perplexity cannot be greater than" + (maxPerplexity + " on this machine"));
         }
+        this.appliedPerplexity = perplexity;
     }
     TSNE.prototype.initialize = function () {
         return __awaiter(this, void 0, Promise, function () {
-            var perplexity, exaggeration, exaggerationIter, exaggerationDecayIter, momentum, _a, exaggerationPolyline, maximumEta, minimumEta, numPointsMaximumEta;
+            var perplexity, exaggeration, exaggerationIter, exaggerationDecayIter, momentum, applyGain, _a, exaggerationPolyline, maximumEta, minimumEta, numPointsMaximumEta, spacePerPixel;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         perplexity = 18;
                         exaggeration = 4;
-                        exaggerationIter = 300;
-                        exaggerationDecayIter = 200;
-                        momentum = 0.8;
+                        exaggerationIter = 250;
+                        exaggerationDecayIter = 150;
+                        momentum = 0.5;
+                        applyGain = true;
                         this.verbose = false;
                         this.knnMode = 'auto';
                         if (this.config !== undefined) {
@@ -31985,6 +32843,9 @@ var TSNE = function () {
                             if (this.config.momentum !== undefined) {
                                 momentum = this.config.momentum;
                             }
+                            if (this.config.applyGain !== undefined) {
+                                applyGain = this.config.applyGain;
+                            }
                             if (this.config.verbose !== undefined) {
                                 this.verbose = this.config.verbose;
                             }
@@ -31992,6 +32853,7 @@ var TSNE = function () {
                                 this.knnMode = this.config.knnMode;
                             }
                         }
+                        this.appliedPerplexity = perplexity;
                         this.numNeighbors = Math.floor(perplexity * 3 / 4) * 4;
                         _a = this;
                         return [4, (0, _tensor_to_data_texture.tensorToDataTexture)(this.data)];
@@ -32011,14 +32873,17 @@ var TSNE = function () {
                         }
                         this.optimizer.exaggeration = exaggerationPolyline;
                         this.optimizer.momentum = momentum;
-                        maximumEta = 2500;
-                        minimumEta = 250;
+                        this.optimizer.applyGain = applyGain;
+                        maximumEta = 500;
+                        minimumEta = 200;
                         numPointsMaximumEta = 2000;
                         if (this.numPoints > numPointsMaximumEta) {
                             this.optimizer.eta = maximumEta;
                         } else {
                             this.optimizer.eta = minimumEta + (maximumEta - minimumEta) * (this.numPoints / numPointsMaximumEta);
                         }
+                        spacePerPixel = 0.2;
+                        this.optimizer.spacePerPixel = spacePerPixel;
                         this.initialized = true;
                         return [2];
                 }
@@ -32077,12 +32942,12 @@ var TSNE = function () {
                     case 3:
                         if (!(iter < iterations)) return [3, 6];
                         this.knnEstimator.iterateKNNDescent();
-                        syncCounter = 10;
+                        syncCounter = 5;
                         if (this.knnEstimator.iteration % 100 === 0 && this.verbose) {
                             console.log("Iteration KNN:\t" + this.knnEstimator.iteration);
                         }
-                        if (!(this.knnEstimator.iteration % syncCounter === 0)) return [3, 5];
-                        return [4, this.knnEstimator.forceFlush()];
+                        if (!(tf.ENV.get('IS_CHROME') && this.knnEstimator.iteration % syncCounter === 0)) return [3, 5];
+                        return [4, this.knnEstimator.forceSync()];
                     case 4:
                         _a.sent();
                         _a.label = 5;
@@ -32198,6 +33063,27 @@ var TSNE = function () {
             });
         });
     };
+    TSNE.prototype.setKnnData = function (numPoints, numNeighbors, distances, indices) {
+        return __awaiter(this, void 0, Promise, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!!this.initialized) return [3, 2];
+                        return [4, this.initialize()];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2:
+                        this.probabilitiesInitialized = false;
+                        return [4, this.optimizer.initializeNeighborsFromKNNGraph(numPoints, numNeighbors, distances, indices, this.appliedPerplexity)];
+                    case 3:
+                        _a.sent();
+                        this.probabilitiesInitialized = true;
+                        return [2];
+                }
+            });
+        });
+    };
     TSNE.prototype.initializeProbabilities = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -32206,7 +33092,7 @@ var TSNE = function () {
                         if (this.verbose) {
                             console.log("Initializing probabilities");
                         }
-                        return [4, this.optimizer.initializeNeighborsFromKNNTexture(this.knnEstimator.knnShape, this.knnEstimator.knn())];
+                        return [4, this.optimizer.initializeNeighborsFromKNNTexture(this.knnEstimator.knnShape, this.knnEstimator.knn(), this.appliedPerplexity)];
                     case 1:
                         _a.sent();
                         if (this.verbose) {
@@ -32221,7 +33107,7 @@ var TSNE = function () {
     return TSNE;
 }();
 exports.TSNE = TSNE;
-},{"@tensorflow/tfjs-core":12,"./knn":14,"./tensor_to_data_texture":38,"./tsne_optimizer":16}],8:[function(require,module,exports) {
+},{"@tensorflow/tfjs-core":24,"./knn":14,"./tensor_to_data_texture":51,"./tsne_optimizer":17}],9:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32239,14 +33125,14 @@ exports.KNNEstimator = _knn.KNNEstimator;
 exports.maximumPerplexity = _tsne.maximumPerplexity;
 exports.tsne = _tsne.tsne;
 exports.TSNEOptimizer = _tsne_optimizer.TSNEOptimizer;
-},{"./knn":14,"./tsne":15,"./tsne_optimizer":16}],41:[function(require,module,exports) {
+},{"./knn":14,"./tsne":13,"./tsne_optimizer":17}],31:[function(require,module,exports) {
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],20:[function(require,module,exports) {
+},{}],18:[function(require,module,exports) {
 var global = (1,eval)("this");
 var process = require("process");
 // Copyright Joyent, Inc. and other Node contributors.
@@ -32793,7 +33679,7 @@ exports._extend = function (origin, add) {
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
-},{"./support/isBuffer":41,"inherits":64,"process":23}],52:[function(require,module,exports) {
+},{"./support/isBuffer":31,"inherits":57,"process":20}],41:[function(require,module,exports) {
 var global = (1,eval)("this");
 'use strict';
 
@@ -33286,7 +34172,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":20}],139:[function(require,module,exports) {
+},{"util/":18}],105:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -33335,7 +34221,7 @@ function ZStream() {
 
 module.exports = ZStream;
 
-},{}],147:[function(require,module,exports) {
+},{}],111:[function(require,module,exports) {
 'use strict';
 
 
@@ -33442,7 +34328,7 @@ exports.setTyped = function (on) {
 
 exports.setTyped(TYPED_OK);
 
-},{}],150:[function(require,module,exports) {
+},{}],118:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -34664,7 +35550,7 @@ exports._tr_flush_block  = _tr_flush_block;
 exports._tr_tally = _tr_tally;
 exports._tr_align = _tr_align;
 
-},{"../utils/common":147}],148:[function(require,module,exports) {
+},{"../utils/common":111}],110:[function(require,module,exports) {
 'use strict';
 
 // Note: adler32 takes 12% for level 0 and 2% for level 6.
@@ -34717,7 +35603,7 @@ function adler32(adler, buf, len, pos) {
 
 module.exports = adler32;
 
-},{}],151:[function(require,module,exports) {
+},{}],109:[function(require,module,exports) {
 'use strict';
 
 // Note: we can't get significant speed boost here.
@@ -34778,7 +35664,7 @@ function crc32(crc, buf, len, pos) {
 
 module.exports = crc32;
 
-},{}],149:[function(require,module,exports) {
+},{}],121:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -34812,7 +35698,7 @@ module.exports = {
   '-6':   'incompatible version' /* Z_VERSION_ERROR (-6) */
 };
 
-},{}],137:[function(require,module,exports) {
+},{}],107:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -36688,7 +37574,7 @@ exports.deflatePrime = deflatePrime;
 exports.deflateTune = deflateTune;
 */
 
-},{"../utils/common":147,"./trees":150,"./adler32":148,"./crc32":151,"./messages":149}],152:[function(require,module,exports) {
+},{"../utils/common":111,"./trees":118,"./adler32":110,"./crc32":109,"./messages":121}],113:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -37035,7 +37921,7 @@ module.exports = function inflate_fast(strm, start) {
   return;
 };
 
-},{}],153:[function(require,module,exports) {
+},{}],112:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -37380,7 +38266,7 @@ module.exports = function inflate_table(type, lens, lens_index, codes, table, ta
   return 0;
 };
 
-},{"../utils/common":147}],140:[function(require,module,exports) {
+},{"../utils/common":111}],106:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -38938,7 +39824,7 @@ exports.inflateSyncPoint = inflateSyncPoint;
 exports.inflateUndermine = inflateUndermine;
 */
 
-},{"../utils/common":147,"./adler32":148,"./crc32":151,"./inffast":152,"./inftrees":153}],138:[function(require,module,exports) {
+},{"../utils/common":111,"./adler32":110,"./crc32":109,"./inffast":113,"./inftrees":112}],108:[function(require,module,exports) {
 'use strict';
 
 // (C) 1995-2013 Jean-loup Gailly and Mark Adler
@@ -39008,7 +39894,7 @@ module.exports = {
   //Z_NULL:                 null // Use -1 or null inline, depending on var type
 };
 
-},{}],54:[function(require,module,exports) {
+},{}],42:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var process = require("process");
 'use strict';
@@ -39420,7 +40306,7 @@ Zlib.prototype._reset = function () {
 };
 
 exports.Zlib = Zlib;
-},{"assert":52,"pako/lib/zlib/zstream":139,"pako/lib/zlib/deflate.js":137,"pako/lib/zlib/inflate.js":140,"pako/lib/zlib/constants":138,"buffer":22,"process":23}],42:[function(require,module,exports) {
+},{"assert":41,"pako/lib/zlib/zstream":105,"pako/lib/zlib/deflate.js":107,"pako/lib/zlib/inflate.js":106,"pako/lib/zlib/constants":108,"buffer":21,"process":20}],30:[function(require,module,exports) {
 
 var process = require("process");
 'use strict';
@@ -40032,7 +40918,7 @@ util.inherits(Gunzip, Zlib);
 util.inherits(DeflateRaw, Zlib);
 util.inherits(InflateRaw, Zlib);
 util.inherits(Unzip, Zlib);
-},{"buffer":22,"stream":21,"./binding":54,"util":20,"assert":52,"process":23}],43:[function(require,module,exports) {
+},{"buffer":21,"stream":19,"./binding":42,"util":18,"assert":41,"process":20}],37:[function(require,module,exports) {
 var process = require("process");
 var Buffer = require("buffer").Buffer;
 'use strict';
@@ -40245,7 +41131,7 @@ ChunkStream.prototype._process = function() {
   }
 };
 
-},{"util":20,"stream":21,"process":23,"buffer":22}],57:[function(require,module,exports) {
+},{"util":18,"stream":19,"process":20,"buffer":21}],45:[function(require,module,exports) {
 'use strict';
 
 // Adam 7
@@ -40333,7 +41219,7 @@ exports.getInterlaceIterator = function(width) {
     return (outerX * 4) + (outerY * width * 4);
   };
 };
-},{}],62:[function(require,module,exports) {
+},{}],52:[function(require,module,exports) {
 'use strict';
 
 module.exports = function paethPredictor(left, above, upLeft) {
@@ -40351,7 +41237,7 @@ module.exports = function paethPredictor(left, above, upLeft) {
   }
   return upLeft;
 };
-},{}],61:[function(require,module,exports) {
+},{}],43:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -40525,7 +41411,7 @@ Filter.prototype._reverseFilterLine = function(rawData) {
   }
 };
 
-},{"./interlace":57,"./paeth-predictor":62,"buffer":22}],44:[function(require,module,exports) {
+},{"./interlace":45,"./paeth-predictor":52,"buffer":21}],33:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -40553,7 +41439,7 @@ var FilterAsync = module.exports = function(bitmapInfo) {
 };
 util.inherits(FilterAsync, ChunkStream);
 
-},{"util":20,"./chunkstream":43,"./filter-parse":61,"buffer":22}],48:[function(require,module,exports) {
+},{"util":18,"./chunkstream":37,"./filter-parse":43,"buffer":21}],32:[function(require,module,exports) {
 'use strict';
 
 
@@ -40589,7 +41475,7 @@ module.exports = {
   GAMMA_DIVISION: 100000
 };
 
-},{}],53:[function(require,module,exports) {
+},{}],47:[function(require,module,exports) {
 'use strict';
 
 var crcTable = [];
@@ -40635,7 +41521,7 @@ CrcCalculator.crc32 = function(buf) {
   return crc ^ -1;
 };
 
-},{}],45:[function(require,module,exports) {
+},{}],34:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -40927,7 +41813,7 @@ Parser.prototype._parseIEND = function(data) {
   }
 };
 
-},{"./constants":48,"./crc":53,"buffer":22}],46:[function(require,module,exports) {
+},{"./constants":32,"./crc":47,"buffer":21}],35:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -41127,7 +42013,7 @@ exports.dataToBitMap = function(data, bitmapInfo) {
   return pxData;
 };
 
-},{"./interlace":57,"buffer":22}],47:[function(require,module,exports) {
+},{"./interlace":45,"buffer":21}],36:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -41219,7 +42105,7 @@ module.exports = function(indata, imageData) {
   return outdata;
 };
 
-},{"buffer":22}],28:[function(require,module,exports) {
+},{"buffer":21}],25:[function(require,module,exports) {
 'use strict';
 
 var util = require('util');
@@ -41375,7 +42261,7 @@ ParserAsync.prototype._complete = function(filteredData) {
   this.emit('parsed', normalisedBitmapData);
 };
 
-},{"util":20,"zlib":42,"./chunkstream":43,"./filter-parse-async":44,"./parser":45,"./bitmapper":46,"./format-normaliser":47}],55:[function(require,module,exports) {
+},{"util":18,"zlib":30,"./chunkstream":37,"./filter-parse-async":33,"./parser":34,"./bitmapper":35,"./format-normaliser":36}],44:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -41512,7 +42398,7 @@ module.exports = function(dataIn, width, height, options) {
   return outData;
 };
 
-},{"./constants":48,"buffer":22}],56:[function(require,module,exports) {
+},{"./constants":32,"buffer":21}],46:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -41703,7 +42589,7 @@ module.exports = function(pxData, width, height, options, bpp) {
   return rawData;
 };
 
-},{"./paeth-predictor":62,"buffer":22}],49:[function(require,module,exports) {
+},{"./paeth-predictor":52,"buffer":21}],38:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -41813,7 +42699,7 @@ Packer.prototype.packIEND = function() {
   return this._packChunk(constants.TYPE_IEND, null);
 };
 
-},{"./constants":48,"./crc":53,"./bitpacker":55,"./filter-pack":56,"zlib":42,"buffer":22}],29:[function(require,module,exports) {
+},{"./constants":32,"./crc":47,"./bitpacker":44,"./filter-pack":46,"zlib":30,"buffer":21}],26:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -41861,7 +42747,7 @@ PackerAsync.prototype.pack = function(data, width, height, gamma) {
   this._deflate.end(filteredData);
 };
 
-},{"util":20,"stream":21,"./constants":48,"./packer":49,"buffer":22}],58:[function(require,module,exports) {
+},{"util":18,"stream":19,"./constants":32,"./packer":38,"buffer":21}],50:[function(require,module,exports) {
 var process = require("process");
 var Buffer = require("buffer").Buffer;
 'use strict';
@@ -42026,7 +42912,7 @@ exports.Inflate = Inflate;
 exports.createInflate = createInflate;
 exports.inflateSync = inflateSync;
 
-},{"assert":52,"zlib":42,"util":20,"buffer":22,"process":23}],59:[function(require,module,exports) {
+},{"assert":41,"zlib":30,"util":18,"buffer":21,"process":20}],48:[function(require,module,exports) {
 'use strict';
 
 var SyncReader = module.exports = function(buffer) {
@@ -42079,7 +42965,7 @@ SyncReader.prototype.process = function() {
 
 };
 
-},{}],60:[function(require,module,exports) {
+},{}],49:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -42105,7 +42991,7 @@ exports.process = function(inBuffer, bitmapInfo) {
 
   return Buffer.concat(outBuffers);
 };
-},{"./sync-reader":59,"./filter-parse":61,"buffer":22}],50:[function(require,module,exports) {
+},{"./sync-reader":48,"./filter-parse":43,"buffer":21}],39:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -42207,7 +43093,7 @@ module.exports = function(buffer, options) {
   return metaData;
 };
 
-},{"zlib":42,"./sync-inflate":58,"./sync-reader":59,"./filter-parse-sync":60,"./parser":45,"./bitmapper":46,"./format-normaliser":47,"buffer":22}],51:[function(require,module,exports) {
+},{"zlib":30,"./sync-inflate":50,"./sync-reader":48,"./filter-parse-sync":49,"./parser":34,"./bitmapper":35,"./format-normaliser":36,"buffer":21}],40:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 'use strict';
 
@@ -42258,7 +43144,7 @@ module.exports = function(metaData, opt) {
   return Buffer.concat(chunks);
 };
 
-},{"zlib":42,"./constants":48,"./packer":49,"buffer":22}],30:[function(require,module,exports) {
+},{"zlib":30,"./constants":32,"./packer":38,"buffer":21}],27:[function(require,module,exports) {
 'use strict';
 
 
@@ -42276,7 +43162,7 @@ exports.write = function(png, options) {
   return pack(png, options);
 };
 
-},{"./parser-sync":50,"./packer-sync":51}],10:[function(require,module,exports) {
+},{"./parser-sync":39,"./packer-sync":40}],15:[function(require,module,exports) {
 var Buffer = require("buffer").Buffer;
 var process = require("process");
 'use strict';
@@ -42453,8 +43339,16 @@ PNG.prototype.adjustGamma = function() {
   PNG.adjustGamma(this);
 };
 
-},{"util":20,"stream":21,"./parser-async":28,"./packer-async":29,"./png-sync":30,"buffer":22,"process":23}],2:[function(require,module,exports) {
+},{"util":18,"stream":19,"./parser-async":25,"./packer-async":26,"./png-sync":27,"buffer":21,"process":20}],3:[function(require,module,exports) {
 'use strict';
+
+var _asyncIterator2 = require('babel-runtime/helpers/asyncIterator');
+
+var _asyncIterator3 = _interopRequireDefault(_asyncIterator2);
+
+var _asyncGenerator2 = require('babel-runtime/helpers/asyncGenerator');
+
+var _asyncGenerator3 = _interopRequireDefault(_asyncGenerator2);
 
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
@@ -42493,14 +43387,13 @@ let loadMnist = (() => {
 })();
 
 /**
- * Get a promist that loads the MNIST label data
+ * Get a promise that loads the MNIST label data
  * @returns {Promise<ArrayBuffer>}
  */
 
 
 let loadMnistLabels = (() => {
   var _ref2 = (0, _asyncToGenerator3.default)(function* () {
-    //const resp = await fetch('../../images/mnist_labels_uint8.bin');
     const resp = yield fetch(MNIST_LABELS_PATH);
     return resp.arrayBuffer();
   });
@@ -42521,55 +43414,176 @@ let loadMnistLabels = (() => {
  * @returns {Promise<void>}
  */
 let runTsne = (() => {
-  var _ref3 = (0, _asyncToGenerator3.default)(function* (plotCtx) {
+  var _ref3 = (0, _asyncToGenerator3.default)(function* () {
     cancel = false;
-    // The MNIST set is preshuffled
+    // The MNIST set is preshuffled just load it.
     const allMnistTensor = tf.tensor(dataSet).reshape([65000, 784]);
+
+    const numberPoints = parseInt(document.getElementById('numPointsSlider').value);
+
     // subset and downsample the images
-    const numberData = 65000;
-    const subTensor = subsampleTensorImages(allMnistTensor, 28, 28, 28, 28, numberData);
+    const subTensor = subsampleTensorImages(allMnistTensor, 28, 28, 28, 28, numberPoints);
+    allMnistTensor.dispose();
+
+    // match the number of labels to the points subset
+    const subLabels = labelSet.slice(0, numberPoints);
+    const labelColors = colToFloatComp([0xFF0000, 0xFF9900, 0xCCFF00, 0x33FF00, 0x00FF66, 0x00FFFF, 0x0066FF, 0x3300FF, 0xCC00FF, 0xFF0099]);
+    const colors = new Float32Array(numberPoints * 3);
+    subLabels.forEach(function (val, idx) {
+      colors[idx * 3] = labelColors[val * 3];
+      colors[idx * 3 + 1] = labelColors[val * 3 + 1];
+      colors[idx * 3 + 2] = labelColors[val * 3 + 2];
+    });
+    initBuffers(numberPoints, colors);
 
     console.log(`calculating on: ${subTensor.shape}`);
 
+    const perplexity = numberPoints < 240 ? Math.floor(numberPoints / 8) : 30;
     const tsneOpt = tf_tsne.tsne(subTensor, {
-      perplexity: 30,
+      perplexity: perplexity,
       verbose: true,
       knnMode: 'auto'
     });
 
     const maxKnnIters = document.getElementById('kNNSlider').value;
     const knnIterations = Math.min(tsneOpt.knnIterations(), maxKnnIters);
-    const knnIterElement = document.getElementById('knnIterCount');
-    for (let i = 0; i < knnIterations; i++) {
-      yield tsneOpt.iterateKnn(1);
-      knnIterElement.innerHTML = 'knn iteration: ' + (i + 1);
-      if (cancel) {
-        cancel = false;
-        return;
-      }
-      yield sleep(1);
-    }
-
-    const tsneIterElement = document.getElementById('tsneIterCount');
-    // get the image data and access the data buffer to overwrite
-    for (let i = 0; i < 1000; i += 1) {
-      yield tsneOpt.iterate(1);
-      const coordData = yield tsneOpt.coordinates().data();
-      plotCoords(numberData, coordData, labelSet, plotCtx);
-      tsneIterElement.innerHTML = 'tsne iteration: ' + (i + 1);
-      // allow time for display
-      if (cancel) {
-        cancel = false;
-        return;
-      }
-      yield sleep(1);
-    }
+    yield runAndDisplayKnn(tsneOpt, knnIterations);
+    yield runAndDisplayTsne(tsneOpt, 1000, numberPoints);
+    cancel = true;
     console.log(`Tsne done`);
     tf.dispose(subTensor);
+    tsneOpt.optimizer.dispose();
   });
 
-  return function runTsne(_x) {
+  return function runTsne() {
     return _ref3.apply(this, arguments);
+  };
+})();
+
+let runAndDisplayKnn = (() => {
+  var _ref4 = (0, _asyncToGenerator3.default)(function* (tsneOpt, nIters) {
+    console.log('started kNN');
+    displayObjects['status'].element.innerHTML = '...running kNN';
+    yield sleep(1);
+    for (let iterCount = 0; iterCount < nIters; iterCount++) {
+      yield tsneOpt.iterateKnn(1);
+      displayObjects['knnIter'].element.innerHTML = 'knn iteration: ' + (iterCount + 1);
+      if (iterCount === 0) {
+        enableViz = true;
+      }
+      yield sleep(1);
+    }
+    displayObjects['status'].element.innerHTML = '';
+  });
+
+  return function runAndDisplayKnn(_x, _x2) {
+    return _ref4.apply(this, arguments);
+  };
+})();
+
+/**
+ * support globals for texture copying
+ */
+
+
+/**
+ * Wrap tsne in an async iterator to decouple from the display.
+ * @param tsneOpt
+ * @param nIterations
+ * @param numPoints
+ * @returns {AsyncIterableIterator<{iteration: number, numPoints: *, coords: WebGLTexture, pointsPerRow: number, minX: number, maxX: number, minY: number, maxY: number, splatTexture: WebGLTexture, splatDiameter}>}
+ */
+let tsneResultGenerator = (() => {
+  var _ref5 = _asyncGenerator3.default.wrap(function* (tsneOpt, nIterations, numPoints) {
+    let count = 0;
+    displayObjects['status'].element.innerHTML = '...running tSNE';
+    while (count < nIterations) {
+      yield _asyncGenerator3.default.await(tsneOpt.iterate(1));
+      if (count === 0) {
+        initTextureCopy();
+      }
+      // Copy  the splat texture in order to display it asynchronously.
+      // It is constantly recreated in the tsne algorithm.
+      if (splatTexCopy) {
+        const gl = backend.getGPGPUContext().gl;
+        gl.deleteTexture(splatTexCopy);
+        splatTexCopy = null;
+      }
+      splatTexCopy = makeTextureCopy(tsneOpt.optimizer.splatTexture, tsneOpt.optimizer.splatTextureDiameter, tsneOpt.optimizer.splatTextureDiameter);
+      if (embeddingClone) {
+        embeddingClone.dispose();
+        embeddingClone = null;
+      }
+      embeddingClone = tf.clone(tsneOpt.optimizer.embedding);
+      lastRenderTime = 0; // force render
+      yield {
+        iteration: count + 1,
+        numPoints: numPoints,
+        coords: backend.getTexture(embeddingClone.dataId),
+        pointsPerRow: tsneOpt.optimizer.numberOfPointsPerRow,
+        minX: tsneOpt.optimizer.minX,
+        maxX: tsneOpt.optimizer.maxX,
+        minY: tsneOpt.optimizer.minY,
+        maxY: tsneOpt.optimizer.maxY,
+        splatTexture: splatTexCopy,
+        diameter: tsneOpt.optimizer.splatTextureDiameter,
+        normalizeTex: Math.sqrt(tsneOpt.optimizer.normalizationQ) * tsneOpt.optimizer.exaggerationAtCurrentIteration
+      };
+      if (cancel) {
+        cancel = false;
+        tsneOpt.optimizer.dispose();
+        break;
+      }
+      count++;
+    }
+    displayObjects['status'].element.innerHTML = '';
+  });
+
+  return function tsneResultGenerator(_x3, _x4, _x5) {
+    return _ref5.apply(this, arguments);
+  };
+})();
+
+/**
+ * Display iteration results in an animation frame
+ */
+
+
+let runAndDisplayTsne = (() => {
+  var _ref6 = (0, _asyncToGenerator3.default)(function* (tsneOpt, nIterations, numPoints) {
+    window.requestAnimationFrame(displayIterInfo);
+    console.log('started RAF');
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = (0, _asyncIterator3.default)(tsneResultGenerator(tsneOpt, nIterations, numPoints)), _step, _value; _step = yield _iterator.next(), _iteratorNormalCompletion = _step.done, _value = yield _step.value, !_iteratorNormalCompletion; _iteratorNormalCompletion = true) {
+        const iterInfo = _value;
+
+        displayObjects['scatterPlot'].data = iterInfo;
+        displayObjects['textureR'].data = iterInfo;
+        displayObjects['textureG'].data = iterInfo;
+        displayObjects['textureB'].data = iterInfo;
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          yield _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  });
+
+  return function runAndDisplayTsne(_x6, _x7, _x8) {
+    return _ref6.apply(this, arguments);
   };
 })();
 
@@ -42582,7 +43596,7 @@ let runTsne = (() => {
 
 
 let digitOnCanvas = (() => {
-  var _ref4 = (0, _asyncToGenerator3.default)(function* (digitCtx, digitData) {
+  var _ref7 = (0, _asyncToGenerator3.default)(function* (digitCtx, digitData) {
     const height = digitCtx.canvas.height;
     const width = digitCtx.canvas.height;
     const dataPix = blankCanvas(digitCtx);
@@ -42596,7 +43610,7 @@ let digitOnCanvas = (() => {
     const resizedArray = yield resizedTensor.data();
     resizedArray.forEach(function (val, idx) {
       const pixOffset = 4 * idx;
-      const pixVal = 255 * val;
+      const pixVal = 255 - 255 * val;
       pixArray[pixOffset] = pixVal;
       pixArray[pixOffset + 1] = pixVal;
       pixArray[pixOffset + 2] = pixVal;
@@ -42604,10 +43618,11 @@ let digitOnCanvas = (() => {
     digitCtx.putImageData(imgData, 0, 0);
   });
 
-  return function digitOnCanvas(_x2, _x3) {
-    return _ref4.apply(this, arguments);
+  return function digitOnCanvas(_x9, _x10) {
+    return _ref7.apply(this, arguments);
   };
 })();
+
 /**
  * Handle the mousemove event to explore the points in the
  * plot canvas.
@@ -42639,15 +43654,16 @@ var _index = require('../../src/index');
 
 var tf_tsne = _interopRequireWildcard(_index);
 
+var _gl_util = require('../../src/gl_util');
+
+var gl_util = _interopRequireWildcard(_gl_util);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const pngReader = require('pngjs').PNG;
 
-const imgSize = 512;
-const plotDigitIndex = new Int32Array(imgSize * imgSize);
-plotDigitIndex.fill(-1);
 function sleep(time) {
   return new _promise2.default(resolve => setTimeout(resolve, time));
 }
@@ -42655,35 +43671,463 @@ function sleep(time) {
 const MNIST_IMAGES_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png';
 const MNIST_LABELS_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8';
 
-const plotIndex = new Uint16Array(imgSize * imgSize);
-// Colors for digits 0-9
-const c0 = 0xFF0000;
-const c1 = 0xFF9900;
-const c2 = 0xCCFF00;
-const c3 = 0x33FF00;
-const c4 = 0x00FF66;
-const c5 = 0x00FFFF;
-const c6 = 0x0066FF;
-const c7 = 0x3300FF;
-const c8 = 0xCC00FF;
-const c9 = 0xFF0099;
-const colArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8, c9];
-
-// 4 levels of color density
-function quantizeColors(cols) {
-  const quantFac = 4;
-  const quantCols = Array(10);
-  cols.forEach((val, i) => {
-    const rd = Math.floor((val >> 16) / quantFac);
-    const gr = Math.floor(((val & 0x00FF00) >> 8) / quantFac);
-    const bl = Math.floor((val & 0x0000FF) / quantFac);
-    const col = (rd << 16) + (gr << 8) + bl;
-    quantCols[i] = col;
-  });
-  return quantCols;
+/**
+ * Get the program uniforms once only
+ * @param gl
+ * @param program
+ * @returns {{point_tex: WebGLUniformLocation, labels_tex: WebGLUniformLocation, col_array: WebGLUniformLocation}}
+ */
+function getUniformLocations(gl, program, locationArray) {
+  let locationTable = {};
+  for (const locName of locationArray) {
+    locationTable[locName] = tf.webgl.webgl_util.getProgramUniformLocationOrThrow(gl, program, locName);
+  }
+  return locationTable;
 }
 
-const quantCols = quantizeColors(colArray);
+function executeHitSampleProgram(x, y) {
+  if (!offscreen_fbo) {
+    return -1;
+  }
+  const gl = backend.getGPGPUContext().gl;
+  gl.bindFramebuffer(gl.FRAMEBUFFER, offscreen_fbo);
+  // retrieve the id data for hit test.
+  const hit_array = new Uint32Array(1);
+  const READ_FRAMEBUFFER = 0x8CA8;
+  gl.bindFramebuffer(READ_FRAMEBUFFER, offscreen_fbo);
+  gl.readBuffer(gl.COLOR_ATTACHMENT0 + 1); // which buffer to read
+  gl.readPixels(x, y, 1, 1, gl.RED_INTEGER, gl.UNSIGNED_INT, hit_array); // read it
+  if (gl.getError() !== gl.NO_ERROR) {
+    console.log('Failed to retrieve hit value');
+    return 0;
+  }
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  return hit_array[0];
+}
+
+function createTextureToQuadProgram(gl) {
+  const vertexShaderSource = `#version 300 es
+     in vec4 a_Position;
+     in vec2 a_TexCoord;
+     out vec2 v_TexCoord;
+     void main() {
+       gl_Position = a_Position;
+       v_TexCoord = a_TexCoord;
+     }`;
+
+  const fragmentShaderSource = `#version 300 es
+     precision highp float;
+     uniform sampler2D u_Sampler;
+     in vec2 v_TexCoord;
+     out vec4 fragColor;
+     void main() {
+       fragColor = texture(u_Sampler, v_TexCoord);
+     }`;
+  return gl_util.createVertexProgram(gl, vertexShaderSource, fragmentShaderSource);
+}
+
+/**
+ * Render an existing texture to a rectangle on the canvas.
+ * Any information at that position is overwritten
+ * @param gpgpu - the backend gpgpu object
+ * @param program - the screen quad drawing program
+ * @param uniforms - an object containing the uniform loactions for the program
+ * @param texture - the texture to be rendered
+ * @param width - the width of canvas rectangle
+ * @param height - the height of the canvas rectangle
+ * @param left - the left edge of the canvas rectangle
+ * @param bottom - the bottom edge of the canvas rectangle
+ * @returns {number}
+ */
+function executeRenderTextureToScreenQuad(gpgpu, program, uniforms, texture, width, height, left, bottom) {
+
+  const gl = gpgpu.gl;
+  //const oldProgram = gpgpu.program;
+  gpgpu.setProgram(program);
+
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.bindFramebuffer(gl.FRAMEBUFFER, null));
+
+  // clear the target with a light grey and blend the render
+  gl.enable(gl.SCISSOR_TEST);
+  gl.enable(gl.DEPTH_TEST);
+  gl.scissor(left, bottom, width, height);
+  gl.viewport(left, bottom, width, height);
+  gl.clearColor(1.0, 1.0, 1.0, 1.);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  // vertex and texture coords in one buffer
+  const vertexCoords = new Float32Array([-1.0, -1.0, 0.0, 0.0, 1.0, -1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 0.0, 1.0]);
+
+  const vertexCoordsBuffer = tf.webgl.webgl_util.createStaticVertexBuffer(gl, vertexCoords);
+
+  const FSIZE = vertexCoords.BYTES_PER_ELEMENT;
+  // position offset = 0
+  tf.webgl.webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'a_Position', vertexCoordsBuffer, 2, FSIZE * 4, 0);
+  // tex coord offset = FSIZE * 2
+  tf.webgl.webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'a_TexCoord', vertexCoordsBuffer, 2, FSIZE * 4, FSIZE * 2);
+
+  gpgpu.setInputMatrixTexture(texture, uniforms.u_Sampler, 0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArrays(gl.TRIANGLES, 0, 6); // Draw the rectangle
+  gl.deleteBuffer(vertexCoordsBuffer);
+  gl.disable(gl.BLEND);
+  gl.disable(gl.SCISSOR_TEST);
+  gl.disable(gl.DEPTH_TEST);
+}
+
+function createTextureDisplayProgram(gl) {
+  var vertexShaderSource = `#version 300 es
+  precision highp float;
+  in vec4 a_position;
+  in vec2 a_texcoord;
+  
+  out vec2 v_texCoord;
+  void main() {
+      // Vertex shader output
+      gl_Position = a_position;
+      v_texCoord = a_texcoord;
+  }`;
+
+  const colorTextureShader = `#version 300 es
+  precision highp float;
+  // Interpolated 0-1 fragment coords from vertex shader
+  in vec2 v_texCoord;
+
+  uniform sampler2D u_image;
+  uniform int comp_idx;
+  uniform float tex_norm;
+  uniform float scale_s_field;
+
+  out vec4 fragmentColor;
+  
+  vec4 scaleRedWhiteBlue(float val) {
+      float red = step(-0.05, val); //slight bias in the values
+      float blue = 1. - red;
+      return mix(
+        vec4(1.,1.,1.,1.), 
+        vec4(1.,0.,0.,1.) * red + vec4(0.,0.,1.,1.) * blue,
+        abs(val)
+      ); 
+  } 
+  
+  vec4 scaleRedWhite(float val) {
+      return mix(
+        vec4(1.,1.,1.,1.), 
+        vec4(1.,0.,0.,1.),
+        val
+      );  
+  } 
+    
+  void main() {
+     float fieldVal;
+     // Look up a color from the texture.
+     switch (comp_idx) {
+     case 0:
+        fieldVal = clamp(scale_s_field * texture(u_image, v_texCoord).r/(tex_norm/3.), 0., 1.);
+        fragmentColor = scaleRedWhite(fieldVal);
+        break;
+     case 1:
+        fieldVal = clamp(texture(u_image, v_texCoord).g/(tex_norm/8.), -1., 1.);
+        fragmentColor = scaleRedWhiteBlue(fieldVal);
+        break;
+     case 2:
+        fieldVal = clamp(texture(u_image, v_texCoord).b/(tex_norm/8.), -1., 1.);
+        fragmentColor = scaleRedWhiteBlue(fieldVal);
+        break;               
+     default:
+        fragmentColor = vec4(0., 0., 0., 1.);
+     }    
+  }`;
+  return gl_util.createVertexProgram(gl, vertexShaderSource, colorTextureShader);
+}
+
+/**
+ *
+ * @param sourceGl - source gl
+ * @param texture - the texture to be rendered
+ * @param format - pixelData format - eg. gl.RGB, gl.RGBA
+ * @param type - pixelData type = eg. gl.FLOAT, gl.UNSIGNED_BYTE
+ * @param targetGl - if null the texture data is rendered on the source gl
+ *                   otherwise texture data is read and copied to the target.
+ */
+function executeTextureDisplayProgram(gpgpu, program, uniforms, texture, textureNorm, numPoints, index, width, height, left, bottom) {
+
+  const gl = gpgpu.gl;
+  //const oldProgram = gpgpu.program;
+  gpgpu.setProgram(program);
+
+  // this is the backend canvas - clear the display window
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.bindFramebuffer(gl.FRAMEBUFFER, null));
+  gl.enable(gl.SCISSOR_TEST);
+  gl.enable(gl.DEPTH_TEST);
+  gl.scissor(left, bottom, width, height);
+  gl.viewport(left, bottom, width, height);
+  gl.clearColor(1., 1., 1., 1.);
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT));
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  const quadVertices = new Float32Array([-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1]);
+
+  // create and load buffers for the geometry vertices and indices
+  const quad_buffer = tf.webgl.webgl_util.createStaticVertexBuffer(gl, quadVertices);
+  tf.webgl.webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'a_position', quad_buffer, 2, 0, 0);
+
+  const texCoord = new Float32Array([0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1]);
+  const texc_buff = tf.webgl.webgl_util.createStaticVertexBuffer(gl, texCoord);
+  tf.webgl.webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'a_texcoord', texc_buff, 2, 0, 0);
+
+  gpgpu.setInputMatrixTexture(texture, uniforms.u_image, 0);
+  gl.uniform1i(uniforms.comp_idx, index);
+  gl.uniform1f(uniforms.tex_norm, textureNorm);
+  let scale_s_field = 1;
+  if (numPoints < 2000) {
+    scale_s_field -= 0.9 * (2000 - numPoints) / 2000;
+  }
+  gl.uniform1f(uniforms.scale_s_field, scale_s_field);
+  // Create the buffer object
+  // Draw the quad
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+  gl.disable(gl.BLEND);
+  gl.disable(gl.SCISSOR_TEST);
+}
+
+/**
+ * Render the points and point ids
+ * to two separate render targets
+ * @param gpgpu
+ * @param numLabels
+ * @returns {WebGLProgram}
+ */
+function createPointsToTexturesProgram(gl) {
+  const vertexShaderSource = `#version 300 es
+    precision highp float;
+    precision highp int;
+    in float vertex_id;
+    in vec3 label_color;
+
+    uniform sampler2D point_tex;
+    uniform float points_per_row;
+    uniform vec2 minV;
+    uniform vec2 maxV;
+    
+    out float p_id;
+    out vec4 color;
+    
+    void main() {
+     
+      int pointNum = int(vertex_id);
+      int row = int(floor(vertex_id/points_per_row));
+      int col = int(mod(vertex_id, points_per_row));
+      float x_pnt = texelFetch(point_tex, ivec2(2 * col + 0, row), 0).r;
+      float y_pnt = texelFetch(point_tex, ivec2(2 * col + 1, row), 0).r;
+
+      // point coord from embedding to -1,-1 space
+      vec2 point_coords = (vec2(x_pnt, y_pnt) - minV)/(maxV - minV); // 0, 1 space
+      point_coords = (point_coords  * 2.0) - 1.0; // -1, -1 space
+      
+      // color lookup based on point label
+      color = vec4(label_color, 1.0);
+   
+      gl_Position = vec4(point_coords, 0, 1);
+      gl_PointSize = 4.;
+      p_id = vertex_id + 1.;
+   
+    }
+  `;
+  const fragmentShaderSource = `#version 300 es
+    precision highp float;
+    precision highp int;
+    layout(location = 0) out vec4 plot_tex;
+    layout(location = 1) out uint id_tex;
+    
+    in vec4 color;
+    in float p_id;
+
+    void main() {
+      float r = 0.0, delta = 0.0, alpha = 1.0;
+      vec2 cxy = 2.0 * gl_PointCoord - 1.0;
+      r = dot(cxy, cxy);
+      delta = fwidth(r);
+      alpha = 1.0 - smoothstep(1.0 - delta, 1.0 + delta, r);
+      plot_tex = vec4(color.rgb, alpha);
+      id_tex = uint(p_id);
+    }
+  `;
+  return gl_util.createVertexProgram(gl, vertexShaderSource, fragmentShaderSource);
+}
+
+/**
+ *
+ * @param gl
+ * @param width
+ * @param height
+ * @param pixels
+ * @returns {WebGLTexture}
+ */
+function createAndConfigureUint32Texture(gl, width, height, pixels) {
+  const texture = tf.webgl.webgl_util.createTexture(gl);
+  // begin texture ops
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.bindTexture(gl.TEXTURE_2D, texture));
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE));
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE));
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST));
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST));
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.texImage2D(gl.TEXTURE_2D, 0, gl.R32UI, width, height, 0, gl.RED_INTEGER, gl.UNSIGNED_INT, pixels));
+  // end texture ops
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.bindTexture(gl.TEXTURE_2D, null));
+  return texture;
+}
+
+let hit_texture = null;
+let plot_tex = null;
+let offscreen_fbo = null;
+
+function initOffscreenState(gl, width, height) {
+  if (offscreen_fbo === null) {
+    offscreen_fbo = gl.createFramebuffer();
+  }
+  gl.bindFramebuffer(gl.FRAMEBUFFER, offscreen_fbo);
+
+  if (plot_tex === null) {
+    plot_tex = gl_util.createAndConfigureTexture(gl, width, height, 4);
+    tf.webgl.webgl_util.callAndCheck(gl, () => gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, plot_tex, 0));
+  }
+
+  if (hit_texture === null) {
+    hit_texture = createAndConfigureUint32Texture(gl, width, height);
+    tf.webgl.webgl_util.callAndCheck(gl, () => gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0 + 1, gl.TEXTURE_2D, hit_texture, 0));
+  }
+}
+
+function clearOffscreenState() {
+  hit_texture = null;
+  plot_tex = null;
+  offscreen_fbo = null;
+}
+
+/**
+ * Render the embedding to a normaf RGB texture and the
+ * @param gpgpu
+ * @param program
+ * @param uniforms
+ * @param pointTex
+ * @param width
+ * @param height
+ * @param left
+ * @param bottom
+ * @param numPoints
+ * @param pointsPerRow
+ * @param minX
+ * @param minY
+ * @param maxX
+ * @param maxY
+ */
+function executeOffscreenPointRender(gpgpu, program, uniforms, pointTex, width, height, numPoints, pointsPerRow, minX, minY, maxX, maxY) {
+  const gl = gpgpu.gl;
+  // aspect-ratio preserving scaling
+  if (maxX - minX > maxY - minY) {
+    maxY = (maxY + minY) / 2 + (maxX - minX) / 2;
+    minY = (maxY + minY) / 2 - (maxX - minX) / 2;
+  } else {
+    maxX = (maxX + minX) / 2 + (maxY - minY) / 2;
+    minX = (maxX + minX) / 2 - (maxY - minY) / 2;
+  }
+
+  // set up attributes and uniforms and render
+  //const oldProgram = gpgpu.program;
+  gpgpu.setProgram(program);
+
+  // create two draw buffer textures
+  initOffscreenState(gl, width, height);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+  // clear both textures
+  let attachBufs = [gl.COLOR_ATTACHMENT0, gl.COLOR_ATTACHMENT0 + 1];
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.drawBuffers(attachBufs));
+
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.clearBufferfv(gl.COLOR, 0, [0.0, 0.0, 0.0, 0.0]));
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.clearBufferuiv(gl.COLOR, 1, [0, 0, 0, 0]));
+
+  gl.viewport(0, 0, width, height);
+
+  tf.webgl.webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'vertex_id', vertexIdBuffer, 1, 0, 0);
+
+  tf.webgl.webgl_util.bindVertexBufferToProgramAttribute(gl, program, 'label_color', labelColorBuffer, 3, 0, 0);
+
+  gpgpu.setInputMatrixTexture(pointTex, uniforms.point_tex, 0);
+
+  gl.uniform1f(uniforms.points_per_row, pointsPerRow);
+
+  gl.uniform2f(uniforms.minV, minX, minY);
+
+  gl.uniform2f(uniforms.maxV, maxX, maxY);
+  tf.webgl.webgl_util.callAndCheck(gl, () => gl.drawArrays(gl.POINTS, 0, numPoints));
+  gl.disable(gl.BLEND);
+}
+
+function clearBackground(gl) {
+  tf.webgl.webgl_util.bindCanvasToFramebuffer(gl);
+  gl.enable(gl.DEPTH_TEST);
+  gl.disable(gl.SCISSOR_TEST);
+  gl.clearColor(1.0, 1.0, 1.0, 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+}
+
+let labelColor;
+let labelColorBuffer;
+
+let vertexId;
+let vertexIdBuffer;
+/**
+ * Set the fixed vertex buffers for this number of points and label colors
+ * @param numPoints
+ * @param colors
+ */
+function initBuffers(numPoints, colors) {
+
+  let gl = backend.getGPGPUContext().gl;
+
+  vertexId = new Float32Array([...Array(numPoints).keys()]);
+  vertexIdBuffer = tf.webgl.webgl_util.createStaticVertexBuffer(gl, vertexId);
+
+  labelColor = colors;
+  labelColorBuffer = tf.webgl.webgl_util.createStaticVertexBuffer(gl, labelColor);
+}
+
+let pointToTexProgram;
+let pointToTexUniforms;
+
+let textureDisplayProgram;
+let textureDisplayUniforms;
+
+let textureToQuadProgram;
+let textureToQuadUniforms;
+/**
+ * Set the WebGL environment used for plotting
+ *
+ * numPoints: number of points in this tsne session
+ * gpgpu: the
+ */
+function initPlotPrograms() {
+  let gpgpu = backend.getGPGPUContext();
+  let gl = gpgpu.gl;
+
+  pointToTexProgram = createPointsToTexturesProgram(gl);
+  const pointToTexUniformList = ['point_tex', 'points_per_row', 'minV', 'maxV'];
+  pointToTexUniforms = getUniformLocations(gl, pointToTexProgram, pointToTexUniformList);
+
+  textureDisplayProgram = createTextureDisplayProgram(gl);
+  const textureUniformsList = ['u_image', 'comp_idx', 'tex_norm', 'scale_s_field'];
+  textureDisplayUniforms = getUniformLocations(gl, textureDisplayProgram, textureUniformsList);
+
+  textureToQuadProgram = createTextureToQuadProgram(gl);
+  const genericUniformsList = ['u_Sampler'];
+  textureToQuadUniforms = getUniformLocations(gl, textureToQuadProgram, genericUniformsList);
+}
 
 // Reduce the MNIST images to newWidth newHeight
 // and take the first numImages
@@ -42692,19 +44136,65 @@ function subsampleTensorImages(tensor, oldWidth, oldHeight, newWidth, newHeight,
   return subSet.resizeBilinear([newHeight, newWidth]).reshape([numImages, newWidth * newHeight]);
 }
 
+let displayObjects = {};
+
+/**
+ * Assemble a list of all the elements where the WebGL plots
+ * and other data will be placed
+ * Plots are placed in divs with a specific width
+ * height and position.
+ */
+function initDisplayObjects() {
+  displayObjects = {};
+  const textPlots = document.getElementsByClassName('texturePlot');
+  for (let element of textPlots) {
+    displayObjects[element.id] = {
+      element: element,
+      uniforms: {},
+      data: null
+    };
+  }
+  const scatterPlot = document.getElementById('scatterPlot');
+  displayObjects['scatterPlot'] = {
+    element: scatterPlot,
+    uniforms: {},
+    data: null
+  };
+
+  displayObjects['knnIter'] = {
+    element: document.getElementById('knnIterCount'),
+    data: null
+  };
+
+  displayObjects['status'] = {
+    element: document.getElementById('displayStatus'),
+    data: null
+  };
+  return displayObjects;
+}
+
+function clearWebglData() {
+  const gl = backend.getGPGPUContext().gl;
+  if (!gl) {
+    return;
+  }
+  gl.deleteTexture(hit_texture);
+  gl.deleteTexture(plot_tex);
+  gl.deleteFramebuffer(offscreen_fbo);
+}
+
 function initCanvas() {
-  const plotCanv = document.getElementById('plotCanv');
+  initDisplayObjects();
+  clearWebglData();
   const digitCanv = document.getElementById('digitCanv');
-  // create drawing canvas of required dimensions
-  const plotCanvCtx = plotCanv.getContext('2d');
   const digitCanvCtx = digitCanv.getContext('2d');
-  blankCanvas(plotCanvCtx);
   blankCanvas(digitCanvCtx);
-  return { plotCanvCtx: plotCanvCtx, digitCanvCtx: digitCanvCtx };
+  clearBackground(backend.getGPGPUContext().gl);
+  return { digitCanvCtx: digitCanvCtx };
 }
 
 /**
- * Set a canvas context to black and return the associated
+ * Set a canvas context to white and return the associated
  * imageData and underlying data buffer for further manipulation.
  * @param ctx
  * @returns {{imgData: ImageData, pixArray: Uint8ClampedArray}}
@@ -42714,89 +44204,249 @@ function blankCanvas(ctx) {
   const pixArray = new Uint8ClampedArray(imgData.data.buffer);
   // zero the buffer for the cumulative plot (black
   const fillArray = new Uint32Array(imgData.data.buffer);
-  fillArray.fill(0xFF000000); //little endian
+  fillArray.fill(0xFFFFFFFF); //little endian
   ctx.putImageData(imgData, 0, 0);
   return { imgData: imgData, pixArray: pixArray };
-}
-
-/**
- * Cumulatively plot points from coordinates into an image context.
- * Points are colored according to labels.
- *
- * @param numberPoints
- * @param coordData
- * @param labelData
- * @param ctx
- */
-function plotCoords(numberPoints, coordData, labelData, ctx) {
-  const dataPix = blankCanvas(ctx);
-  const imgData = dataPix.imgData;
-  const pixArray = dataPix.pixArray;
-  plotDigitIndex.fill(-1);
-  // zero the buffer for the cumulative plot (black
-  for (let i = 0; i < pixArray.byteLength; i++) {
-    i % 4 === 3 ? pixArray[i] = 255 : pixArray[i] = 0;
-  }
-
-  for (let i = 0; i < numberPoints * 2; i += 2) {
-    const xcoord = Math.round(coordData[i] * (imgSize - 1));
-    const ycoord = Math.round(coordData[i + 1] * (imgSize - 1));
-    // ImageData is RGBA
-    const digitIndex = ycoord * ctx.canvas.width + xcoord;
-    plotDigitIndex[digitIndex] = i / 2;
-    const offset = 4 * digitIndex;
-    const label = labelData[i / 2];
-    // Colors are accumulated into the initially black plot pixels
-    // for a pseudo density effect.
-    const col = quantCols[label];
-    pixArray[offset] = pixArray[offset] + (col >> 16);
-    pixArray[offset + 1] = pixArray[offset + 1] + ((col & 0x00FF00) >> 8);
-    pixArray[offset + 2] = pixArray[offset + 2] + (col & 0x0000FF);
-    pixArray[offset + 3] = 255;
-  }
-  //rewrite canvas with new ImageData
-  ctx.putImageData(imgData, 0, 0);
 }
 
 /**
  * MNIST labels are stored as 65000x10 onehot encoding
  * convert this to label number
  * @param labels
- * @returns {Uint8Array}
+ * @returns {Int32Array}
  */
 function oneHotToIndex(labels) {
-  const res = new Uint8Array(labels.length / 10);
-  for (let i = 0; i < labels.length; i += 10) {
-    for (let j = 0; j < 10; j++) {
-      if (labels[i + j] === 1) {
-        res[i / 10] = j;
-        break;
-      }
-    }
-  }
-  return res;
+  return tf.tidy(() => {
+    const oneHotTensor = tf.tensor2d(labels, [65000, 10], 'int32');
+    const labelPosTensor = tf.tensor1d([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'int32');
+    const labelsTensor = oneHotTensor.mul(labelPosTensor).sum(1);
+    return labelsTensor.dataSync();
+  });
 }let dataSet;
 /**
  * A global to hold the MNIST label data
  */
 let labelSet;
+let cancel = false;
+let enableViz = false;
+let backend;
+let maxSize = 0;
 
-let cancel = false;function plotExplore(plotCtx, digitCtx, e) {
-  const x = e.clientX - plotCtx.canvas.offsetLeft;
-  const y = e.clientY - plotCtx.canvas.offsetTop;
-  const digitIndex = plotDigitIndex[y * plotCanv.width + x];
-  if (digitIndex >= 1) {
-    console.log(`digit idx: ${digitIndex}, label: ${labelSet[digitIndex]}`);
-    const digitData = dataSet.slice(digitIndex * 784, (digitIndex + 1) * 784);
-    digitOnCanvas(digitCtx, digitData);
+function clearBackendCanvas() {
+  let gl = backend.getGPGPUContext().gl;
+  tf.webgl.webgl_util.bindCanvasToFramebuffer(gl);
+  gl.clearColor(1, 1, 1, 1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+}
+
+let webGlCanvas;
+/**
+ * Make a page spanning canvas from the backend context.
+ */
+function initBackend() {
+  backend = tf.ENV.findBackend('webgl');
+  // inject backend canvas for drawing
+  webGlCanvas = backend.getCanvas();
+  const bodyList = document.getElementsByTagName('body');
+  const body = bodyList[0];
+  let offset = 0;
+  for (let node of body.childNodes) {
+    if (node.id === 'canvasContainer') {
+      break;
+    }
+    offset++;
+  }
+  body.replaceChild(webGlCanvas, body.childNodes[offset]);
+  webGlCanvas.id = "wholePageCanvas";
+  webGlCanvas.style = "width:100vw; height:100vh; margin-top: 0 !important; margin-left: 0 !important; position:absolute; top:0; display:block;";
+  let gl = backend.getGPGPUContext().gl;
+  gl.getExtension('EXT_float_blend');
+  maxSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+  gl.canvas.width = gl.canvas.offsetWidth;
+  gl.canvas.height = gl.canvas.offsetHeight;
+  gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+
+  clearBackendCanvas();
+}
+
+/**
+ * Resize the canvas if the clientWidth has changed
+ * @param gl
+ */
+function resizeCanvas(gl) {
+  // resize the canvas
+  const cwidth = gl.canvas.clientWidth;
+  const cheight = gl.canvas.clientHeight;
+  if (gl.canvas.width != cwidth || gl.canvas.height != cheight) {
+    gl.canvas.width = cwidth;
+    gl.canvas.height = cheight;
   }
 }
 
-function restart(plotCtx) {
+function getLimits(element, gl) {
+  const rect = element.getBoundingClientRect();
+  if (rect.bottom < 0 || rect.top > gl.canvas.clientHeight || rect.right < 0 || rect.left > gl.canvas.clientWidth) {
+    return [false, -1, -1, -1, -1]; // it's off screen
+  }
+
+  const width = rect.right - rect.left;
+  const height = rect.bottom - rect.top;
+  const left = rect.left;
+  const bottom = gl.canvas.clientHeight - rect.bottom - 1;
+  return [true, width, height, left, bottom];
+}
+
+function displayTextures() {
+  const gl = backend.getGPGPUContext().gl;
+  const textureIds = ['textureR', 'textureG', 'textureB'];
+  let count = 0;
+  textureIds.forEach((id, idx) => {
+    const plotObject = displayObjects[id];
+    const data = plotObject.data;
+    if (!data) {
+      // nothing to render
+      return;
+    }
+    let OK, width, height, left, bottom;
+    [OK, width, height, left, bottom] = getLimits(plotObject.element, gl);
+    if (!OK) {
+      return;
+    }
+    executeTextureDisplayProgram(backend.getGPGPUContext(), textureDisplayProgram, textureDisplayUniforms, data.splatTexture, data.normalizeTex, data.numPoints, idx, width, height, left, bottom);
+    count++;
+  });
+}
+
+let lastRenderTime = 0;
+let lastRenderItern = 0;
+/**
+ * Display the embedding as a scatter plot.
+ *
+ * tsneOpt: instance of tf_tsne.tsne containing coordinates to be plotted
+ * labelsTensor: 1D tensor containing labels 0 to 9 for each point
+ * plotSize: size of (square) plot target
+ */
+function displayScatterPlot(now) {
+  if (!enableViz) {
+    return;
+  }
+  const gpgpu = backend.getGPGPUContext();
+  const gl = gpgpu.gl;
+  resizeCanvas(gl);
+
+  webGlCanvas.style.transform = `translateY(${window.scrollY}px)`;
+  const plotObject = displayObjects['scatterPlot'];
+  const data = plotObject.data;
+  if (!data) {
+    // nothing to render
+    return;
+  }
+
+  const tsneIterElement = document.getElementById('tsneIterCount');
+  tsneIterElement.innerHTML = 'tsne iteration: ' + data.iteration;
+
+  // limit to 5 frames per sec
+  if (now - lastRenderTime < 200) {
+    return;
+  }
+  lastRenderTime = now;
+  clearBackground(gl);
+
+  let OK, width, height, left, bottom;
+  [OK, width, height, left, bottom] = getLimits(plotObject.element, gl);
+  if (!OK) {
+    return;
+  }
+
+  const oldProgram = gpgpu.program;
+
+  if (data.iteration !== lastRenderItern) {
+    lastRenderItern = data.iteration;
+    // Render the embedding points offscreen along with a hit texture.
+    executeOffscreenPointRender(backend.getGPGPUContext(), pointToTexProgram, pointToTexUniforms, data.coords, width, height, data.numPoints, data.pointsPerRow, data.minX, data.minY, data.maxX, data.maxY);
+  }
+
+  executeRenderTextureToScreenQuad(backend.getGPGPUContext(), textureToQuadProgram, textureToQuadUniforms, plot_tex, width, height, left, bottom);
+
+  displayTextures();
+
+  if (oldProgram != null) {
+    gpgpu.setProgram(oldProgram);
+    tf.webgl.gpgpu_util.bindVertexProgramAttributeStreams(gl, oldProgram, gpgpu.vertexBuffer);
+  }
+};
+
+/**
+ * Array o integer RGB colors and make a Float32Array
+ * containing 3 rgb components
+ *
+ * @param colArray
+ */
+function colToFloatComp(colArray) {
+  const nestedComponents = colArray.map(x => [(x >> 16 & 0xFF) / 255, (x >> 8 & 0xFF) / 255, (x & 0xFF) / 255]);
+  // flatten the array of arrays
+  return new Float32Array([].concat.apply([], nestedComponents));
+}let dstFbo;
+let srcFbo;
+let splatTexCopy;
+let embeddingClone = null;
+
+/**
+ * Create the source and destination framebuffer objects once
+ * Setc srcFbo and dstFbo
+ */
+function initTextureCopy() {
+  let gl = backend.getGPGPUContext().gl;
+  dstFbo = gl.createFramebuffer();
+  srcFbo = gl.createFramebuffer();
+}
+
+/**
+ * Blit copy the source text and return the copy
+ * Uses the srcFbo and dstFbo framebuffers created
+ * by initTextureCopy
+ * @param srcTexture
+ * @returns {WebGLTexture}
+ */
+function makeTextureCopy(srcTexture, width, height) {
+  let gl = backend.getGPGPUContext().gl;
+  gl.bindFramebuffer(gl.FRAMEBUFFER, srcFbo);
+  gl.framebufferTexture2D(gl.READ_FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, srcTexture, 0);
+
+  gl.bindFramebuffer(gl.FRAMEBUFFER, dstFbo);
+  const dstTexture = gl_util.createAndConfigureTexture(gl, width, height, 4, null);
+  gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, dstTexture, 0);
+
+  gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, dstFbo);
+  gl.bindFramebuffer(gl.READ_FRAMEBUFFER, srcFbo);
+
+  gl.blitFramebuffer(0, 0, width, height, 0, 0, width, height, gl.COLOR_BUFFER_BIT, gl.NEAREST);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+  return dstTexture;
+}function displayIterInfo() {
+  requestAnimationFrame(displayIterInfo);
+  displayScatterPlot();
+}
+
+function plotExplore(plotCtx, digitCtx, e) {
+  const rect = plotCtx.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const id = executeHitSampleProgram(x, 511 - y);
+  if (id < 1) {
+    return;
+  }
+  const digitData = dataSet.slice((id - 1) * 784, id * 784);
+  digitOnCanvas(digitCtx, digitData);
+}
+
+function restart() {
   cancel = true;
+  enableViz = false;
+  clearOffscreenState();
   setTimeout((0, _asyncToGenerator3.default)(function* () {
     initCanvas();
-    yield runTsne(plotCtx);
+    yield runTsne();
   }), 1000);
 }
 
@@ -42804,21 +44454,31 @@ function stop() {
   cancel = true;
 }
 
-window.onload = (0, _asyncToGenerator3.default)(function* () {
-  const contexts = initCanvas();
-  const plotCtx = contexts.plotCanvCtx;
-  const digitCtx = contexts.digitCanvCtx;
+function updatePoints() {
+  const nPoints = parseInt(document.getElementById('numPointsSlider').value);
+  document.getElementById('pntSliderVal').innerHTML = 'num MNIST points: ' + nPoints.toString().padStart(6, '\u2002');
+}
 
+window.onload = (0, _asyncToGenerator3.default)(function* () {
+  initBackend();
+  const contexts = initCanvas();
+  const digitCtx = contexts.digitCanvCtx;
+  updatePoints();
+  initPlotPrograms();
+  displayObjects['status'].element.innerHTML = '...downloading MNIST data';
   dataSet = yield loadMnist();
   const labelOneHot = new Uint8Array((yield loadMnistLabels()));
   labelSet = oneHotToIndex(labelOneHot);
+  displayObjects['status'].element.innerHTML = '';
 
   document.getElementById('kNNSlider').oninput = function () {
     document.getElementById('sliderVal').innerHTML = 'max kNN iterations: ' + document.getElementById('kNNSlider').value;
   };
-  document.getElementById('plotCanv').addEventListener('mousemove', plotExplore.bind(null, plotCtx, digitCtx));
-  document.getElementById('restartButton').addEventListener('click', restart.bind(null, plotCtx));
+
+  document.getElementById('numPointsSlider').oninput = updatePoints;
+  const plotCtx = document.getElementById('scatterPlot');
+  plotCtx.addEventListener('mousemove', plotExplore.bind(null, plotCtx, digitCtx));
+  document.getElementById('restartButton').addEventListener('click', restart);
   document.getElementById('stopButton').addEventListener('click', stop);
-  yield runTsne(plotCtx);
 });
-},{"babel-runtime/helpers/asyncToGenerator":4,"babel-runtime/core-js/promise":5,"@tensorflow/tfjs-core":12,"../../src/index":8,"pngjs":10}]},{},[2])
+},{"babel-runtime/helpers/asyncIterator":6,"babel-runtime/helpers/asyncGenerator":5,"babel-runtime/helpers/asyncToGenerator":4,"babel-runtime/core-js/promise":7,"@tensorflow/tfjs-core":24,"../../src/index":9,"../../src/gl_util":8,"pngjs":15}]},{},[3])

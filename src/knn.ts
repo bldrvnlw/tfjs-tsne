@@ -272,13 +272,12 @@ export class KNNEstimator {
 
   /**
    * This forces the CPU and GPU to sync (at least I think so...)
-   * Tried gl.finish() etc but they made no difference perhaps the new WebGL2
-   * fenceSync would work?
    */
-  forceFlush() {
+  forceSync() {
       // neither this.gpgpu.gl.flush() or finish() work;
+      //@ts-ignore
       const mat0 = this.downloadTextureToMatrix(this.knnTexture0);
-      console.log(`Flush: ${mat0.length/mat0.length}`);
+      //console.log(`Flush: ${mat0.length/mat0.length}`);
   }
 
   private downloadTextureToMatrix(texture: WebGLTexture): Float32Array {

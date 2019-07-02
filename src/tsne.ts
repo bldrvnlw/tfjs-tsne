@@ -28,6 +28,7 @@ export interface TSNEConfiguration {
   exaggerationIter?: number;      // Default: 300
   exaggerationDecayIter?: number; // Default: 200
   momentum?: number;              // Default: 0.8
+  applyGain?: boolean;            // Default: false
   verbose?: boolean;              // Default: false
   knnMode: 'auto'|'bruteForce';
   // Default: auto
@@ -74,6 +75,7 @@ export class TSNE {
   private initialized: boolean;
   private probabilitiesInitialized: boolean;
   private knnMode: 'auto'|'bruteForce';
+  private appliedPerplexity: number;
 
   constructor(data: tf.Tensor, config?: TSNEConfiguration) {
     this.initialized = false;
@@ -91,6 +93,7 @@ export class TSNE {
 
     // Checking for a valid perplexity value given hardware limitations
     let perplexity = 18;
+
     if (this.config !== undefined) {
       if (this.config.perplexity !== undefined) {
         perplexity = this.config.perplexity;
@@ -101,6 +104,7 @@ export class TSNE {
       throw Error(`computeTSNE: perplexity cannot be greater than` +
                   `${maxPerplexity} on this machine`);
     }
+    this.appliedPerplexity = perplexity;
   }
 
   /**
@@ -112,9 +116,10 @@ export class TSNE {
     // Default parameters
     let perplexity = 18;
     let exaggeration = 4;
-    let exaggerationIter = 300;
-    let exaggerationDecayIter = 200;
-    let momentum = 0.8;
+    let exaggerationIter = 250;
+    let exaggerationDecayIter = 150;
+    let momentum = 0.5;
+    let applyGain = true;
     this.verbose = false;
     this.knnMode = 'auto';
 
@@ -135,6 +140,9 @@ export class TSNE {
       if (this.config.momentum !== undefined) {
         momentum = this.config.momentum;
       }
+      if (this.config.applyGain !== undefined) {
+        applyGain = this.config.applyGain;
+      }
       if (this.config.verbose !== undefined) {
         this.verbose = this.config.verbose;
       }
@@ -142,6 +150,7 @@ export class TSNE {
         this.knnMode = this.config.knnMode;
       }
     }
+    this.appliedPerplexity = perplexity;
 
     // Neighbors must be roughly 3*perplexity and a multiple of 4
     this.numNeighbors = Math.floor((perplexity * 3) / 4) * 4;
@@ -174,11 +183,14 @@ export class TSNE {
 
     this.optimizer.exaggeration = exaggerationPolyline;
     this.optimizer.momentum = momentum;
+    this.optimizer.applyGain = applyGain;
 
     // We set a large step size (ETA) for large embeddings and we decrease it
     // for small embeddings.
-    const maximumEta = 2500;
-    const minimumEta = 250;
+    const maximumEta = 500;
+    const minimumEta = 200;
+    //const maximumEta = 200;
+    //const minimumEta = 200;
     const numPointsMaximumEta = 2000;
     if (this.numPoints > numPointsMaximumEta) {
       this.optimizer.eta = maximumEta;
@@ -187,7 +199,7 @@ export class TSNE {
           (maximumEta - minimumEta) * (this.numPoints / numPointsMaximumEta);
     }
 
-    const spacePerPixel = 0.35 * 10000/this.numPoints;
+    const spacePerPixel = 0.2;
     this.optimizer.spacePerPixel = spacePerPixel;
     this.initialized = true;
   }
@@ -224,17 +236,15 @@ export class TSNE {
     }
     this.probabilitiesInitialized = false;
     for (let iter = 0; iter < iterations; ++iter) {
-      //this.knnEstimator.iterateBruteForce();
-      //const syncCounter = 15;
       this.knnEstimator.iterateKNNDescent();
-      const syncCounter = 10;
-      //this.knnEstimator.iterateRandomSampling();
+      const syncCounter = 5;
       if ((this.knnEstimator.iteration % 100) === 0 && this.verbose) {
         console.log(`Iteration KNN:\t${this.knnEstimator.iteration}`);
       }
-      if (this.knnEstimator.iteration % syncCounter === 0) {
+      if (tf.ENV.get('IS_CHROME') &&
+        this.knnEstimator.iteration % syncCounter === 0) {
         // To ensure stability (in Chrome)
-        await this.knnEstimator.forceFlush();
+        await this.knnEstimator.forceSync();
       }
     }
   }
@@ -328,6 +338,18 @@ export class TSNE {
     return (await sum.data())[0];
   }
 
+  async setKnnData(numPoints: number, numNeighbors: number,
+                   distances: Float32Array,
+                   indices: Uint32Array): Promise<void> {
+    if (!this.initialized) {
+      await this.initialize();
+    }
+    this.probabilitiesInitialized = false;
+    await this.optimizer.initializeNeighborsFromKNNGraph(
+      numPoints, numNeighbors, distances, indices, this.appliedPerplexity);
+    this.probabilitiesInitialized = true;
+  }
+
   /**
    * Initialize the joint probability distribution from the computed KNN graph.
    * It is called in the iterate function if there are updates in the KNN graph
@@ -338,7 +360,9 @@ export class TSNE {
       console.log(`Initializing probabilities`);
     }
     await this.optimizer.initializeNeighborsFromKNNTexture(
-        this.knnEstimator.knnShape, this.knnEstimator.knn());
+        this.knnEstimator.knnShape,
+        this.knnEstimator.knn(),
+        this.appliedPerplexity);
 
     if (this.verbose) {
       console.log(`Initialized probabilities from kNN Texture`);
