@@ -201,7 +201,13 @@ export class TSNE {
 
     const spacePerPixel = 0.2;
     this.optimizer.spacePerPixel = spacePerPixel;
+
     this.initialized = true;
+
+    if (this.verbose) {
+      console.log('initialized');
+    }
+
   }
 
   /**
