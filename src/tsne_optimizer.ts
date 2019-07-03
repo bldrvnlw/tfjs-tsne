@@ -21,7 +21,6 @@ import * as gl_util from './gl_util';
 import {RearrangedData} from './interfaces';
 import * as knn_util from './knn_util';
 import * as tsne_util from './tsne_optimizer_util';
-import XorShift from 'xorshift';
 
 export class TSNEOptimizer {
   // Interactive parameters
@@ -946,43 +945,6 @@ export class TSNEOptimizer {
     else {
       this.log(`Splat diameter: ${this.splatTextureDiameter}`);
     }
-  }
-
-  // Initialize the embedding in javascript using the
-  // pseudo rendom number generator that matches the C++
-  // version.
-  // @ts-ignore
-  private initializeFixedXorEmbeddingPositions(numRows: number,
-                                               pointsPerRow: number,
-                                               numPoints: number) {
-    const xorgen = XorShift.constructor(
-        [0x00000000,0x00000001,0x00000000,0x00000002]);
-    for (let i = 0; i < 9; i++) {
-      xorgen.random();
-    }
-    const embArray = new Float32Array(numRows * pointsPerRow * 2);
-    for (let i = 0; i < numPoints; i++) {
-      let x = 0.0;
-      let y = 0.0;
-      let radius = 0.0;
-      do {
-        x = 2 * xorgen.random() - 1;
-        y = 2 * xorgen.random() - 1;
-        radius = (x * x) + (y * y);
-
-      } while((radius >= 1.0) || (radius === 0.0));
-      radius = Math.sqrt(-2 * Math.log(radius)/radius);
-      x *= radius * 0.1;
-      y *= radius * 0.1;
-      embArray[2*i] = x;
-      embArray[2*i + 1] = y;
-    }
-    // padding
-    for (let i = numPoints; i < numRows * pointsPerRow; i++) {
-      embArray[2*i] = 0.0;
-      embArray[2*i + 1] = 0.0;
-    }
-    return tf.tensor(embArray, [numRows, pointsPerRow * 2]);
   }
 
   // @ts-ignore
